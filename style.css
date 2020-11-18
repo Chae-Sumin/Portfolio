@@ -15,20 +15,20 @@ body{position: relative;}
 #dot.ArrowDown{background-image: url(./img/down.png);}
 #dot.func{background: transparent;}
 #controller{position: fixed; width: 100%; bottom: 0;}
-#controller>button{float: left; margin: 65px 30px 0;}
-#controller>div{float: right; position: relative; width: 150px; height: 150px; margin: 10px;}
+#controller>button{float: right; margin: 65px 0 0 30px;}
+.mob #controller>button{float: left;}
+#controller>div{float: right; position: relative; width: 150px; height: 150px; margin: 10px; }
+.mob #controller>div{background: url(./img/active-on.png) 50% 50% / 35px 35px no-repeat;}
 #controller>div>button{position: absolute;}
-#controller>div>button.ArrowUp{left: 50px;}
-#controller>div>button.ArrowRight{left: 100px; top: 50px;}
-#controller>div>button.ArrowLeft{top: 50px;}
-#controller>div>button.ArrowDown{left: 50px; top: 100px;}
-#controller button{width: 50px; height: 50px; border: none; outline: none; cursor: pointer; background: url(./img/active.png) 50% 50% / cover no-repeat; font-size: 0; text-indent: -999px; overflow: hidden;}
-#controller button.ArrowUp{background-image: url(./img/ArrowUp.png);}
-#controller button.ArrowRight{background-image: url(./img/ArrowRight.png);}
-#controller button.ArrowLeft{background-image: url(./img/ArrowLeft.png);}
-#controller button.ArrowDown{background-image: url(./img/ArrowDown.png);}
-#controller button.on.active{background-image: url(./img/active-on.png);}
-#controller button.on.ArrowUp{background-image: url(./img/ArrowUp-on.png);}
-#controller button.on.ArrowRight{background-image: url(./img/ArrowRight-on.png);}
-#controller button.on.ArrowLeft{background-image: url(./img/ArrowLeft-on.png);}
-#controller button.on.ArrowDown{background-image: url(./img/ArrowDown-on.png);}
+#controller>div>button.ArrowUp{left: 50px; top: 10px;}
+#controller>div>button.ArrowRight{left: 90px; top: 50px;}
+#controller>div>button.ArrowLeft{left: 10px; top: 50px;}
+#controller>div>button.ArrowDown{left: 50px; top: 90px;}
+#controller button{width: 53px; height: 53px; border: none; outline: none; cursor: pointer; background: url(./img/Arrow.png) 50% 50% / cover no-repeat; font-size: 0; text-indent: -999px; overflow: hidden;}
+#controller button.ArrowUp{transform: rotateZ(45deg);}
+#controller button.ArrowRight{transform: rotateZ(135deg);}
+#controller button.ArrowLeft{transform: rotateZ(315deg);}
+#controller button.ArrowDown{transform: rotateZ(225deg);}
+#controller button.active{background: url(./img/active.png) 50% 50% / cover no-repeat;}
+#controller button.btnOn.active{background-image: url(./img/active-on.png);}
+#controller button.btnOn{background-image: url(./img/Arrow-on.png);}

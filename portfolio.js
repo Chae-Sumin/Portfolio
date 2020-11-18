@@ -1,8 +1,11 @@
 window.onload = function(){
+
+
     const MAP = document.getElementById("field");
     const CHAR = document.getElementById("dot");
 
-    const controllBtns = document.querySelectorAll("#controller button");
+    const controllBtns = document.querySelectorAll("#controller button"); 
+    const controllDiv = document.querySelector("#controller>div");
 
     const CHAR_WIDTH = 50; // 캐릭터 너비
     const CHAR_HEIGHT = 50; // 캐릭터 높이
@@ -11,6 +14,7 @@ window.onload = function(){
     const CHAR_MOVE_SPEED = 300; //max(300) 
     const CHAR_MOVE_PX = 2; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
 
+    let isMobile = false
     let screenWidth = window.innerWidth; // 스크린 높이
     let screenHeight = window.innerHeight; // 스크린 너비
     let focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2); // 초점 X값(음수)
@@ -19,7 +23,7 @@ window.onload = function(){
     let keyDownFlag = false; //키 눌려있을 때 true
     let MouseDownFlag = false; //키 눌려있을 때 true
     let keyTimeout = null; // 키 눌렸을때 setTimeOut
-    let pressedKey = ""; // 눌린 키 값
+    let pressedKey = []; // 눌린 키 값
     let limitsZone = [ // 제한 구역
         {
             id : 1,
@@ -54,33 +58,54 @@ window.onload = function(){
         }
     ];
     screenFocus();
+    let mobileDivice = [
+        'iphone', 'ipod',
+        'window ce', 'android',
+        'blackberry', 'nokia',
+        'webos', 'opera mini',
+        'sonyerricsson', 'opera mobi',
+        'iemobile'
+    ];
+    for (let i in mobileDivice) {
+        if (navigator.userAgent.toLowerCase().match(new RegExp(mobileDivice[i]))) {
+            isMobile = true;
+            document.querySelector("body").classList.add("mob");
+        }
+    }
     function trns(key){ // 키가 눌렸을 때 실행
         let centerX = CHAR.offsetLeft + CHAR_WIDTH / 2;
         let centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
         let moveX = CHAR.offsetLeft;
         let moveY = CHAR.offsetTop;
         let space = false;
+        document.getElementsByClassName("btnOn")[0] ? document.getElementsByClassName("btnOn")[0].classList.remove("btnOn") : false;
         switch (key) {
             case "ArrowRight":
                     centerX += CHAR_MOVE_PX;
                     moveX += CHAR_MOVE_PX;
+                    controllBtns[1].classList.add("btnOn");
                 break;
             case "ArrowLeft":
                     centerX -= CHAR_MOVE_PX;
                     moveX -= CHAR_MOVE_PX;
-                break;
+                    controllBtns[2].classList.add("btnOn");
+                    break;
             case "ArrowUp":
                     centerY -= CHAR_MOVE_PX;
                     moveY -= CHAR_MOVE_PX;
-                break;
+                    controllBtns[0].classList.add("btnOn");
+                    break;
             case "ArrowDown":
                     centerY += CHAR_MOVE_PX;
                     moveY += CHAR_MOVE_PX;
-                break;
+                    controllBtns[3].classList.add("btnOn");
+                    break;
             case " ":
                 space = true;
+                controllBtns[4].classList.add("btnOn");
                 break;
             case "active":
+                controllBtns[4].classList.add("btnOn");
                 space = true;
                 break;
             default:
@@ -122,66 +147,107 @@ window.onload = function(){
             return false;
     }
     function keyDown(){ // 키가 눌리면 setTimeOut 루프 시작
-        trns(pressedKey);
-        console.log(pressedKey);
+        trns(pressedKey[0]);
         keyDownFlag = true;
         keyTimeout = setTimeout(keyDown,1000/CHAR_MOVE_SPEED);
     }
     document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
-        pressedKey = e.key;
+        if(pressedKey.indexOf(e.key)===-1){pressedKey.push(e.key);}
         if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
     });
-    document.addEventListener("keyup",function(){ // 키가 떨어지면 루프 종료
+    document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
+        pressedKey.splice(pressedKey.indexOf(e.key),1);
         clearTimeout(keyTimeout);
+        console.log(pressedKey);
+        if(pressedKey.length == 0) {
+        console.log(e);
         keyDownFlag = false;
+        }
     });
     window.addEventListener("resize", function(){ // 창 크기 변경시 
         screenWidth = window.innerWidth;
         screenHeight = window.innerHeight;
         screenFocus();
     });
-    document.addEventListener("mousedown",function(){
-        MouseDownFlag = true;
-    });
-    document.addEventListener("mouseup",function(){
-        MouseDownFlag = false;
-    });
-    for(let i = 0; i < 5; i++){
-        controllBtns[i].addEventListener("mousedown", function(e){
-            pressedKey = e.target.textContent;
-            e.target.classList.add("on");
-            if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
+
+    if(isMobile){
+        controllDiv.addEventListener("mousedown",function(e){
+            e.preventDefault();
+            MouseDownFlag = true;
         });
-        controllBtns[i].addEventListener("mouseover", function(e){
+        controllActive.addEventListener("click",function(e){
+            e.preventDefault();
+            trns("active");
+        });
+        document.addEventListener("mouseup",function(e){
+            MouseDownFlag = false;
+            controllDiv.style.backgroundPosition = "50% 50%";
+            e.target.classList.remove("btnOn");
+            clearTimeout(keyTimeout);
+            keyDownFlag = false;
+        });
+        controllDiv.addEventListener("mousemove",function(e){
             if(MouseDownFlag){
-            pressedKey = e.target.textContent;
-            e.target.classList.add("on");
-            if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
+            let x = ((e.clientX - controllDiv.getBoundingClientRect().left - 75) / 2) + 62.5;
+            let y = ((e.clientY -controllDiv.getBoundingClientRect().top - 75) / 2) + 62.5;
+            controllDiv.style.backgroundPosition = x + "px " + y + "px";
+        }});
+        controllDiv.addEventListener("mouseleave",function(){
+            controllDiv.style.backgroundPosition = "50% 50%";
         });
-        controllBtns[i].addEventListener("mouseup",function(e){ // 키가 떨어지면 루프 종료
-            e.target.classList.remove("on");
-            clearTimeout(keyTimeout);
-            keyDownFlag = false;
+        
+        for(let i = 0; i < 4; i++){
+            controllBtns[i].addEventListener("mouseover", function(e){
+                if(MouseDownFlag){
+                if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
+                e.target.classList.add("btnOn");
+                if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
+            });
+            controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
+                e.preventDefault();
+                e.target.classList.remove("btnOn");
+                controllDiv.style.backgroundPosition = "50% 50%";
+                clearTimeout(keyTimeout);
+                keyDownFlag = false;
+            });
+        }
+    } else {
+        controllDiv.addEventListener("mousedown",function(e){ // 컨트롤 div안에서 마우스 클릭 발생 시 MouseDownFlag = true
+            e.preventDefault();
+            MouseDownFlag = true;
         });
-        controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
-            e.preventDefault();
-            e.target.classList.remove("on");
-            clearTimeout(keyTimeout);
-            keyDownFlag = false;
+        document.addEventListener("mouseup",function(){ //마우스 때면 MouseDownFlag = false 
+            MouseDownFlag = false;
         });
-        controllBtns[i].addEventListener("touchstart",function(e){
-            e.preventDefault();
-            pressedKey = e.target.textContent;
-            e.target.classList.add("on");
-            if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
-        },false);
-        controllBtns[i].addEventListener("touchend",function(e){ // 키가 떨어지면 루프 종료
-            e.preventDefault();
-            e.target.classList.remove("on");
-            clearTimeout(keyTimeout);
-            keyDownFlag = false;
-        },false);
+        for(let i = 0; i < 5; i++){
+            controllBtns[i].addEventListener("mousedown", function(e){ //클릭시 루프 시작
+                if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
+                if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
+            });
+            controllBtns[i].addEventListener("mouseover", function(e){ // div안에서 클릭 후 위로 올라올 경우 루프 시작
+                if(MouseDownFlag){
+                if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
+                if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
+            });
+            controllBtns[i].addEventListener("mouseup",function(e){ // 키가 떨어지면 루프 종료
+                clearTimeout(keyTimeout);
+                keyDownFlag = false;
+            });
+            controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
+                e.preventDefault();
+                clearTimeout(keyTimeout);
+                keyDownFlag = false;
+            });
+        }
     }
+
+
+
+
+
+
+
+
     function screenFocus(){ // 캐릭터에 초점을 맞춰 이동(맵 끝으로 가면 고정)
         focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2);
         focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2);
