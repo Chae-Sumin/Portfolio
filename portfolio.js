@@ -157,11 +157,11 @@ window.onload = function(){
     });
     document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
         pressedKey.splice(pressedKey.indexOf(e.key),1);
-        clearTimeout(keyTimeout);
-        console.log(pressedKey);
+        console.log(pressedKey);   
         if(pressedKey.length == 0) {
-        console.log(e);
-        keyDownFlag = false;
+            clearTimeout(keyTimeout); 
+            console.log(e);
+            keyDownFlag = false;
         }
     });
     window.addEventListener("resize", function(){ // 창 크기 변경시 
