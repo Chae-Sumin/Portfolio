@@ -1,18 +1,23 @@
 window.onload = function(){
-    let field = document.getElementById("field");
-    let CHAR = document.getElementById("dot");
+    const MAP = document.getElementById("field");
+    const CHAR = document.getElementById("dot");
+
+    const controllBtns = document.querySelectorAll("#controller button");
+
     const CHAR_WIDTH = 50; // 캐릭터 너비
     const CHAR_HEIGHT = 50; // 캐릭터 높이
-    const WORLD_WIDTH = 1500; // 맵 전체 너비
-    const WORLD_HEIGHT = 1500; // 맵 전체 높이
+    const MAP_WIDTH = 1500; // 맵 전체 너비
+    const MAP_HEIGHT = 1500; // 맵 전체 높이
     const CHAR_MOVE_SPEED = 300; //max(300) 
     const CHAR_MOVE_PX = 2; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
+
     let screenWidth = window.innerWidth; // 스크린 높이
     let screenHeight = window.innerHeight; // 스크린 너비
     let focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2); // 초점 X값(음수)
     let focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2); //초점 Y값(음수)
     
     let keyDownFlag = false; //키 눌려있을 때 true
+    let MouseDownFlag = false; //키 눌려있을 때 true
     let keyTimeout = null; // 키 눌렸을때 setTimeOut
     let pressedKey = ""; // 눌린 키 값
     let limitsZone = [ // 제한 구역
@@ -47,13 +52,8 @@ window.onload = function(){
             right : 500,
             bottom : 500,
         }
-    ]
+    ];
     screenFocus();
-    window.onresize = function(){ // 창 크기 변경시 
-        screenWidth = window.innerWidth;
-        screenHeight = window.innerHeight;
-        screenFocus();
-    }
     function trns(key){ // 키가 눌렸을 때 실행
         let centerX = CHAR.offsetLeft + CHAR_WIDTH / 2;
         let centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
@@ -80,6 +80,9 @@ window.onload = function(){
             case " ":
                 space = true;
                 break;
+            case "active":
+                space = true;
+                break;
             default:
                 return false;
         }
@@ -96,8 +99,8 @@ window.onload = function(){
             }
         }
         function isEntryPossible(x,y){ // 이동 가능구역인지 확인
-            if(x >= CHAR_WIDTH / 2 && x <= WORLD_WIDTH - CHAR_WIDTH / 2 && 
-            y >= CHAR_HEIGHT / 2 && y <= WORLD_HEIGHT - CHAR_HEIGHT / 2 ){
+            if(x >= CHAR_WIDTH / 2 && x <= MAP_WIDTH - CHAR_WIDTH / 2 && 
+            y >= CHAR_HEIGHT / 2 && y <= MAP_HEIGHT - CHAR_HEIGHT / 2 ){
                 for(let i = 0; i < limitsZone.length; i++){
                     if(x >= limitsZone[i].left && x <= (limitsZone[i].right ) && 
                     y >= limitsZone[i].top && y <= (limitsZone[i].bottom )){
@@ -120,6 +123,7 @@ window.onload = function(){
     }
     function keyDown(){ // 키가 눌리면 setTimeOut 루프 시작
         trns(pressedKey);
+        console.log(pressedKey);
         keyDownFlag = true;
         keyTimeout = setTimeout(keyDown,1000/CHAR_MOVE_SPEED);
     }
@@ -127,16 +131,63 @@ window.onload = function(){
         pressedKey = e.key;
         if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
     });
-    document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
+    document.addEventListener("keyup",function(){ // 키가 떨어지면 루프 종료
         clearTimeout(keyTimeout);
         keyDownFlag = false;
     });
+    window.addEventListener("resize", function(){ // 창 크기 변경시 
+        screenWidth = window.innerWidth;
+        screenHeight = window.innerHeight;
+        screenFocus();
+    });
+    document.addEventListener("mousedown",function(){
+        MouseDownFlag = true;
+    });
+    document.addEventListener("mouseup",function(){
+        MouseDownFlag = false;
+    });
+    for(let i = 0; i < 5; i++){
+        controllBtns[i].addEventListener("mousedown", function(e){
+            pressedKey = e.target.textContent;
+            e.target.classList.add("on");
+            if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
+        });
+        controllBtns[i].addEventListener("mouseover", function(e){
+            if(MouseDownFlag){
+            pressedKey = e.target.textContent;
+            e.target.classList.add("on");
+            if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
+        });
+        controllBtns[i].addEventListener("mouseup",function(e){ // 키가 떨어지면 루프 종료
+            e.target.classList.remove("on");
+            clearTimeout(keyTimeout);
+            keyDownFlag = false;
+        });
+        controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
+            e.preventDefault();
+            e.target.classList.remove("on");
+            clearTimeout(keyTimeout);
+            keyDownFlag = false;
+        });
+        controllBtns[i].addEventListener("touchstart",function(e){
+            e.preventDefault();
+            pressedKey = e.target.textContent;
+            e.target.classList.add("on");
+            if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
+        },false);
+        controllBtns[i].addEventListener("touchend",function(e){ // 키가 떨어지면 루프 종료
+            e.preventDefault();
+            e.target.classList.remove("on");
+            clearTimeout(keyTimeout);
+            keyDownFlag = false;
+        },false);
+    }
     function screenFocus(){ // 캐릭터에 초점을 맞춰 이동(맵 끝으로 가면 고정)
         focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2);
         focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2);
-        focusX = focusX >= 0 ? 0 : focusX <= screenWidth - WORLD_WIDTH ? field.offsetLeft : focusX;
-        focusY = focusY >= 0 ? 0 : focusY <= screenHeight - WORLD_HEIGHT ? field.offsetTop : focusY;
-        field.style.left = focusX + "px";
-        field.style.top = focusY + "px";
+        focusX = focusX >= 0 ? 0 : focusX <= screenWidth - MAP_WIDTH ? MAP.offsetLeft : focusX;
+        focusY = focusY >= 0 ? 0 : focusY <= screenHeight - MAP_HEIGHT ? MAP.offsetTop : focusY;
+        MAP.style.left = focusX + "px";
+        MAP.style.top = focusY + "px";
     }
 }
