@@ -12,6 +12,7 @@ window.onload = function(){
     const MAP_WIDTH = 1500; // 맵 전체 너비
     const MAP_HEIGHT = 1500; // 맵 전체 높이
     const CHAR_MOVE_SPEED = 300; //max(300) 
+    // const CHAR_MOVE_TOUCH_SPEED = 300;
     const CHAR_MOVE_PX = 2; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
 
     let isMobile = false
@@ -20,6 +21,13 @@ window.onload = function(){
     let focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2); // 초점 X값(음수)
     let focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2); //초점 Y값(음수)
     
+    let centerX = CHAR.offsetLeft + CHAR_WIDTH / 2; // 캐릭터 중심 죄표
+    let centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
+    let moveX = CHAR.offsetLeft; // 캐릭터 offset 죄표
+    let moveY = CHAR.offsetTop;
+    let touchX = 0;
+    let touchY = 0;
+
     let keyDownFlag = false; //키 눌려있을 때 true
     let MouseDownFlag = false; //키 눌려있을 때 true
     let keyTimeout = null; // 키 눌렸을때 setTimeOut
@@ -73,10 +81,10 @@ window.onload = function(){
         }
     }
     function trns(key){ // 키가 눌렸을 때 실행
-        let centerX = CHAR.offsetLeft + CHAR_WIDTH / 2;
-        let centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
-        let moveX = CHAR.offsetLeft;
-        let moveY = CHAR.offsetTop;
+        centerX = CHAR.offsetLeft + CHAR_WIDTH / 2;
+        centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
+        moveX = CHAR.offsetLeft;
+        moveY = CHAR.offsetTop;
         let space = false;
         document.getElementsByClassName("btnOn")[0] ? document.getElementsByClassName("btnOn")[0].classList.remove("btnOn") : false;
         switch (key) {
@@ -123,19 +131,6 @@ window.onload = function(){
                 CHAR.classList.add("func");
             }
         }
-        function isEntryPossible(x,y){ // 이동 가능구역인지 확인
-            if(x >= CHAR_WIDTH / 2 && x <= MAP_WIDTH - CHAR_WIDTH / 2 && 
-            y >= CHAR_HEIGHT / 2 && y <= MAP_HEIGHT - CHAR_HEIGHT / 2 ){
-                for(let i = 0; i < limitsZone.length; i++){
-                    if(x >= limitsZone[i].left && x <= (limitsZone[i].right ) && 
-                    y >= limitsZone[i].top && y <= (limitsZone[i].bottom )){
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
-        }
     }
     function isActivePossible(x,y){ // 활성화 구역인지 확인
             for(let i = 0; i < activeZone.length; i++){
@@ -145,6 +140,19 @@ window.onload = function(){
                 }
             }
             return false;
+    }
+    function isEntryPossible(x,y){ // 이동 가능구역인지 확인
+        if(x >= CHAR_WIDTH / 2 && x <= MAP_WIDTH - CHAR_WIDTH / 2 && 
+        y >= CHAR_HEIGHT / 2 && y <= MAP_HEIGHT - CHAR_HEIGHT / 2 ){
+            for(let i = 0; i < limitsZone.length; i++){
+                if(x >= limitsZone[i].left && x <= (limitsZone[i].right ) && 
+                y >= limitsZone[i].top && y <= (limitsZone[i].bottom )){
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
     function keyDown(){ // 키가 눌리면 setTimeOut 루프 시작
         trns(pressedKey[0]);
@@ -169,48 +177,94 @@ window.onload = function(){
         screenHeight = window.innerHeight;
         screenFocus();
     });
-
-    if(isMobile){
-        controllDiv.addEventListener("mousedown",function(e){
-            e.preventDefault();
-            MouseDownFlag = true;
-        });
-        controllActive.addEventListener("click",function(e){
-            e.preventDefault();
-            trns("active");
-        });
-        document.addEventListener("mouseup",function(e){
-            MouseDownFlag = false;
-            controllDiv.style.backgroundPosition = "50% 50%";
-            e.target.classList.remove("btnOn");
-            clearTimeout(keyTimeout);
-            keyDownFlag = false;
-        });
-        controllDiv.addEventListener("mousemove",function(e){
-            if(MouseDownFlag){
-            let x = ((e.clientX - controllDiv.getBoundingClientRect().left - 75) / 2) + 62.5;
-            let y = ((e.clientY -controllDiv.getBoundingClientRect().top - 75) / 2) + 62.5;
-            controllDiv.style.backgroundPosition = x + "px " + y + "px";
-        }});
-        controllDiv.addEventListener("mouseleave",function(){
-            controllDiv.style.backgroundPosition = "50% 50%";
-        });
-        
-        for(let i = 0; i < 4; i++){
-            controllBtns[i].addEventListener("mouseover", function(e){
-                if(MouseDownFlag){
-                if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
-                e.target.classList.add("btnOn");
-                if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
-            });
-            controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
-                e.preventDefault();
-                e.target.classList.remove("btnOn");
-                controllDiv.style.backgroundPosition = "50% 50%";
-                clearTimeout(keyTimeout);
-                keyDownFlag = false;
-            });
+    function touchMove(){
+        centerX = CHAR.offsetLeft + CHAR_WIDTH / 2;
+        centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
+        moveX = CHAR.offsetLeft;
+        moveY = CHAR.offsetTop;
+        let lengthX = Math.abs(centerX - touchX);
+        let lengthY = Math.abs(centerY - touchY);
+        let rateX = Math.sin(Math.atan(lengthX/lengthY));
+        let rateY = Math.cos(Math.atan(lengthX/lengthY));
+        console.log(rateX,rateY);
+        if(centerX > touchX){
+            moveX -= lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
+            centerX -= lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
+        } else if (centerX < touchX){
+            moveX += lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
+            centerX += lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
         }
+        if(centerY > touchY){
+            moveY -= lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
+            centerY -= lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
+        } else if (centerY < touchY){
+            moveY += lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
+            centerY += lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
+        }
+        if(!isEntryPossible(centerX,centerY)) return false;
+        CHAR.style.left = moveX + "px";
+        CHAR.style.top = moveY + "px";
+        keyTimeout = setTimeout(touchMove,1000 / CHAR_MOVE_SPEED);
+        screenFocus();
+    }
+    if(isMobile){
+        document.addEventListener("touchstart",function(e){
+            touchX = e.touches[0].clientX - focusX;
+            touchY = e.touches[0].clientY - focusY;
+            // controllBtns[4].style.left = touchX + "px";
+            // controllBtns[4].style.top = touchY + "px";
+            keyTimeout =setTimeout(touchMove,0);
+        });
+        document.addEventListener("touchmove",function(e){
+            e.preventDefault();
+            clearTimeout(keyTimeout);
+            touchX = e.touches[0].clientX - focusX;
+            touchY = e.touches[0].clientY - focusY;
+            keyTimeout =setTimeout(touchMove,0);
+        });
+        document.addEventListener("touchend",function(e){
+            e.preventDefault();
+            clearTimeout(keyTimeout);
+        });
+        // controllDiv.addEventListener("mousedown",function(e){
+        //     e.preventDefault();
+        //     MouseDownFlag = true;
+        // });
+        // controllActive.addEventListener("click",function(e){
+        //     e.preventDefault();
+        //     trns("active");
+        // });
+        // document.addEventListener("mouseup",function(e){
+        //     MouseDownFlag = false;
+        //     controllDiv.style.backgroundPosition = "50% 50%";
+        //     e.target.classList.remove("btnOn");
+        //     clearTimeout(keyTimeout);
+        //     keyDownFlag = false;
+        // });
+        // controllDiv.addEventListener("mousemove",function(e){
+        //     if(MouseDownFlag){
+        //     let x = ((e.clientX - controllDiv.getBoundingClientRect().left - 75) / 2) + 62.5;
+        //     let y = ((e.clientY -controllDiv.getBoundingClientRect().top - 75) / 2) + 62.5;
+        //     controllDiv.style.backgroundPosition = x + "px " + y + "px";
+        // }});
+        // controllDiv.addEventListener("mouseleave",function(){
+        //     controllDiv.style.backgroundPosition = "50% 50%";
+        // });
+        
+        // for(let i = 0; i < 4; i++){
+        //     controllBtns[i].addEventListener("mouseover", function(e){
+        //         if(MouseDownFlag){
+        //         if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
+        //         e.target.classList.add("btnOn");
+        //         if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
+        //     });
+        //     controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
+        //         e.preventDefault();
+        //         e.target.classList.remove("btnOn");
+        //         controllDiv.style.backgroundPosition = "50% 50%";
+        //         clearTimeout(keyTimeout);
+        //         keyDownFlag = false;
+        //     });
     } else {
         controllDiv.addEventListener("mousedown",function(e){ // 컨트롤 div안에서 마우스 클릭 발생 시 MouseDownFlag = true
             e.preventDefault();
@@ -234,6 +288,7 @@ window.onload = function(){
                 keyDownFlag = false;
             });
             controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
+                pressedKey.splice(pressedKey.indexOf(e.target.textContent),1);
                 e.preventDefault();
                 clearTimeout(keyTimeout);
                 keyDownFlag = false;

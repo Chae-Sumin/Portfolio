@@ -15,10 +15,10 @@ body{position: relative;}
 #dot.ArrowDown{background-image: url(./img/down.png);}
 #dot.func{background: transparent;}
 #controller{position: fixed; width: 100%; bottom: 0;}
-#controller>button{float: right; margin: 65px 0 0 30px;}
+#controller>button{float: right; margin: 65px 0 50px 30px;}
 .mob #controller>button{float: left;}
 #controller>div{float: right; position: relative; width: 150px; height: 150px; margin: 10px; }
-.mob #controller>div{background: url(./img/active-on.png) 50% 50% / 35px 35px no-repeat;}
+.mob #controller>div{display: none;}
 #controller>div>button{position: absolute;}
 #controller>div>button.ArrowUp{left: 50px; top: 10px;}
 #controller>div>button.ArrowRight{left: 90px; top: 50px;}
