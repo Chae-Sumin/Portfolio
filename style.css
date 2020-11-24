@@ -1,18 +1,14 @@
 *{margin: 0; padding: 0;}
 body, html{overflow: hidden; width: 100%; height: 100%; }
 body{position: relative;}
-#field{position: absolute; left: 0; top: 0; width: 1500px; height: 1500px; background: #ccc;}
+#field{position: absolute; left: 0; top: 0; width: 6000px; height: 4000px; background: url(./img/bg1.png) 0 0 no-repeat;}
 #bg{position: absolute; left: 0; right: 0; top: 0; bottom: 0;}
-#bg>section{position: absolute; width: 300px; height: 300px; background-color: #fdd; box-sizing: border-box;}
-#bg>section:nth-child(1){left: 200px; top: 0px;}
-#bg>section:nth-child(2){left: 0; top: 500px;}
-#bg>section:nth-child(3){left: 600px; top: 600px;}
-#bg>section:nth-child(4){left: 400px; top: 400px; width: 100px; height: 100px; background-color: #ddf;}
+#limit_img{position: absolute; z-index: -1;}
 #dot{position: absolute; left: 50px; top: 50px; width: 100px; height: 100px; background: url(./img/right.png) 0 0 / cover no-repeat;}
-#dot._1,#dot._3,#dot._9{background-image: url(./img/up.png);}
+#dot._1,#dot._5,#dot._6{background-image: url(./img/up.png);}
 #dot._2{background-image: url(./img/left.png);}
-#dot._4,#dot._6,#dot._12{background-image: url(./img/down.png);}
-#dot._8{background-image: url(./img/right.png);}
+#dot._3,#dot._7,#dot._8{background-image: url(./img/down.png);}
+#dot._4{background-image: url(./img/right.png);}
 #dot.func{background: transparent;}
 #controller{position: fixed; width: 100%; bottom: 0;}
 #controller>button{float: right; margin: 65px 0 50px 30px;}
@@ -20,15 +16,11 @@ body{position: relative;}
 #controller>div{float: right; position: relative; width: 150px; height: 150px; margin: 10px; }
 .mob #controller>div{display: none;}
 #controller>div>button{position: absolute;}
-#controller>div>button.ArrowUp{left: 50px; top: 10px;}
-#controller>div>button.ArrowRight{left: 90px; top: 50px;}
-#controller>div>button.ArrowLeft{left: 10px; top: 50px;}
-#controller>div>button.ArrowDown{left: 50px; top: 90px;}
+#ArrowUp{left: 50px; top: 10px; transform: rotateZ(45deg);}
+#ArrowRight{left: 90px; top: 50px; transform: rotateZ(135deg);}
+#ArrowLeft{left: 10px; top: 50px; transform: rotateZ(315deg);}
+#ArrowDown{left: 50px; top: 90px; transform: rotateZ(225deg);}
 #controller button{width: 53px; height: 53px; border: none; outline: none; cursor: pointer; background: url(./img/Arrow.png) 50% 50% / cover no-repeat; font-size: 0; text-indent: -999px; overflow: hidden;}
-#controller button.ArrowUp{transform: rotateZ(45deg);}
-#controller button.ArrowRight{transform: rotateZ(135deg);}
-#controller button.ArrowLeft{transform: rotateZ(315deg);}
-#controller button.ArrowDown{transform: rotateZ(225deg);}
-#controller button.active{background: url(./img/active.png) 50% 50% / cover no-repeat;}
-#controller button.btnOn.active{background-image: url(./img/active-on.png);}
+#controller #active{background: url(./img/active.png) 50% 50% / cover no-repeat;}
+#active.btnOn{background-image: url(./img/active-on.png);}
 #controller button.btnOn{background-image: url(./img/Arrow-on.png);}

@@ -57,6 +57,12 @@ window.onload = function(){
             bottom : 900,
         }
     ];
+    let limitImg = document.getElementById('limit_img');
+    console.log(limitImg);
+    let limitCanvas = document.createElement("canvas");
+    limitCanvas.width = limitImg.width;
+    limitCanvas.height = limitImg.height;
+    limitCanvas.getContext('2d').drawImage(limitImg,0,0,limitImg.width,limitImg.height);
     let activeZone = [ // 상호작용 활성화 구역 (func-> 실행할 함수명)
         {
             id : 1,
@@ -94,78 +100,67 @@ window.onload = function(){
             return false;
     }
     function isEntryPossible(x,y){ // 이동 가능구역인지 확인
-        if(x >= CHAR_WIDTH / 2 && x <= MAP_WIDTH - CHAR_WIDTH / 2 && 
-        y >= CHAR_HEIGHT / 2 && y <= MAP_HEIGHT - CHAR_HEIGHT / 2 ){
-            for(let i = 0; i < limitsZone.length; i++){
-                if(x >= limitsZone[i].left && x <= (limitsZone[i].right ) && 
-                y >= limitsZone[i].top && y <= (limitsZone[i].bottom )){
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
+        let alpha = limitCanvas.getContext('2d').getImageData(x,y,1,1).data;
+        return !alpha;
+    }        // if(x >= CHAR_WIDTH / 2 && x <= MAP_WIDTH - CHAR_WIDTH / 2 && 
+    // y >= CHAR_HEIGHT / 2 && y <= MAP_HEIGHT - CHAR_HEIGHT / 2 ){
+    //     for(let i = 0; i < limitsZone.length; i++){
+    //         if(x >= limitsZone[i].left && x <= (limitsZone[i].right ) && 
+    //         y >= limitsZone[i].top && y <= (limitsZone[i].bottom )){
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+    // return false;
     
     function keyfuncs(){
         let moveX = 0;
         let moveY = 0;
         let active = false;
         let keyFlag = false;
-        function keyCodeTransfer(key){
-            switch (key) {
-                case "ArrowUp":
-                    return 1;
-                case "ArrowLeft":
-                    return 2;
-                case "ArrowDown":
-                    return 3;
-                case "ArrowRight":
-                    return 4;
-                case " ":
-                    return -1;
-                default:
-                    return 0;
-            }
-        }
         return {
             presskey : function(key){
-                switch (keyCodeTransfer(key)) {
-                    case -1:
+                switch (key) {
+                    case " ":
                         active = true
                         break;
-                    case 1:
+                    case "ArrowUp":
                         moveY = -1;
                         break;
-                    case 2:
+                    case "ArrowLeft":
                         moveX = -1;
                         break;
-                    case 3:
+                    case "ArrowDown":
                         moveY = 1;
                         break;
-                    case 4:
+                    case "ArrowRight":
                         moveX = 1;
                         break;
+                    default:
+                        return false;
                 }
                 console.log(moveX,moveY);
             },
             removeKey : function(key){
-                switch (keyCodeTransfer(key)) {
-                    case -1:
+                switch (key) {
+                    case " ":
                         active = false
                         break;
-                    case 1:
+                    case "ArrowUp":
                         moveY = moveY == -1 ? 0 : 1;
                         break;
-                    case 2:
+                    case "ArrowLeft":
                         moveX = moveX == -1 ? 0 : 1;
                         break;
-                    case 3:
+                    case "ArrowDown":
                         moveY = moveY == 1 ? 0 : -1;
                         break;
-                    case 4:
+                    case "ArrowRight":
                         moveX = moveX == 1 ? 0 : -1;
                         break;
+                    default:
+                        return false;
                 }
             },
             keyCode : function(){
@@ -193,29 +188,37 @@ window.onload = function(){
     function movefuncs(){
         let moveX = CHAR.offsetLeft;
         let moveY = CHAR.offsetTop;
+        let centerX = function(){return(moveX + CHAR_WIDTH / 2)};
+        let centerY = function(){return(moveY + CHAR_HEIGHT / 2)};
         return{
-            centerX : function(){return(moveX + CHAR_WIDTH / 2)},
-            centerY : function(){return(moveY + CHAR_HEIGHT / 2)},
             moveX : function(){return moveX},
             moveY : function(){return moveY},
             moveTo : function(x,y){
-                if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY +  CHAR_HEIGHT / 2 + y)){
+                // if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY + CHAR_HEIGHT / 2)){
+                //     console.log(1);
+                //     moveX += x;
+                //     CHAR.style.left = moveX + "px";
+                // }
+                // if(isEntryPossible(moveX + CHAR_WIDTH / 2,moveY + CHAR_HEIGHT / 2 + y)){
+                //     console.log(2);
+                //     moveY += y;
+                //     CHAR.style.top = moveY + "px";
+                // }
+                if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY + CHAR_HEIGHT / 2 + y)){
+                    console.log(2);
                     moveX += x;
                     moveY += y;
-                    CHAR.style.left = moveX + "px";
                     CHAR.style.top = moveY + "px";
-                    screenFocus();
+                    CHAR.style.left = moveX + "px";
                 }
+                screenFocus();
             }
         }
     }
-    function setDir(key){
-        CHAR.setAttribute("class","");
-        CHAR.classList.add("_"+key);
-    }
     function keyDown(){ // 키가 눌리면 setTimeOut 루프 시작
         key.flagTrue();
-        document.getElementsByClassName("btnOn")[0] ? document.getElementsByClassName("btnOn")[0].classList.remove("btnOn") : false;
+        let btnOns = document.getElementsByClassName("btnOn");
+        while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
         switch (key.keyCode()) {
             case 1: //up
                 move.moveTo(0,-CHAR_MOVE_PX);
@@ -241,12 +244,12 @@ window.onload = function(){
             case 6: //right up
                 move.moveTo(CHAR_CROSS_PX,-CHAR_CROSS_PX);
                 controllBtns[0].classList.add("btnOn");
-                controllBtns[2].classList.add("btnOn");
+                controllBtns[3].classList.add("btnOn");
                 break;
             case 7: //left down
                 move.moveTo(-CHAR_CROSS_PX,CHAR_CROSS_PX);
                 controllBtns[1].classList.add("btnOn");
-                controllBtns[3].classList.add("btnOn");
+                controllBtns[2].classList.add("btnOn");
                 break;
             case 8: //right down
                 move.moveTo(CHAR_CROSS_PX,CHAR_CROSS_PX);
@@ -255,6 +258,10 @@ window.onload = function(){
                 break;
             case 0:
                 return false;
+        }
+        function setDir(key){
+            CHAR.setAttribute("class","");
+            CHAR.classList.add("_"+key);
         }
         setDir(key.keyCode());
         keyTimeout = setTimeout(keyDown,1000/CHAR_MOVE_SPEED);
@@ -268,9 +275,10 @@ window.onload = function(){
         e.preventDefault();
         key.removeKey(e.key);
         if(!key.keyCode()) {
-            clearTimeout(keyTimeout); 
+            clearTimeout(keyTimeout);
             key.flagFalse();
-            document.getElementsByClassName("btnOn")[0]? document.getElementsByClassName("btnOn")[0].classList.remove("btnOn"):false;
+            let btnOns = document.getElementsByClassName("btnOn");
+            while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
         }
     });
     window.addEventListener("resize", function(){ // 창 크기 변경시 
@@ -313,14 +321,14 @@ window.onload = function(){
             touchY = e.touches[0].clientY - focusY;
             // controllBtns[4].style.left = touchX + "px";
             // controllBtns[4].style.top = touchY + "px";
-            keyTimeout =setTimeout(touchMove,0);
+            keyTimeout = setTimeout(touchMove,0);
         });
         document.addEventListener("touchmove",function(e){
             e.preventDefault();
             clearTimeout(keyTimeout);
             touchX = e.touches[0].clientX - focusX;
             touchY = e.touches[0].clientY - focusY;
-            keyTimeout =setTimeout(touchMove,0);
+            keyTimeout = setTimeout(touchMove,0);
         });
         document.addEventListener("touchend",function(e){
             e.preventDefault();
