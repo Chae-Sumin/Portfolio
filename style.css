@@ -8,11 +8,11 @@ body{position: relative;}
 #bg>section:nth-child(2){left: 0; top: 500px;}
 #bg>section:nth-child(3){left: 600px; top: 600px;}
 #bg>section:nth-child(4){left: 400px; top: 400px; width: 100px; height: 100px; background-color: #ddf;}
-#dot{position: absolute; left: 50px; top: 50px; width: 50px; height: 50px; background: url(./img/right.png) 0 0 / cover no-repeat;}
-#dot.ArrowLeft{background-image: url(./img/left.png);}
-#dot.ArrowRight{background-image: url(./img/right.png);}
-#dot.ArrowUp{background-image: url(./img/up.png);}
-#dot.ArrowDown{background-image: url(./img/down.png);}
+#dot{position: absolute; left: 50px; top: 50px; width: 100px; height: 100px; background: url(./img/right.png) 0 0 / cover no-repeat;}
+#dot._1,#dot._3,#dot._9{background-image: url(./img/up.png);}
+#dot._2{background-image: url(./img/left.png);}
+#dot._4,#dot._6,#dot._12{background-image: url(./img/down.png);}
+#dot._8{background-image: url(./img/right.png);}
 #dot.func{background: transparent;}
 #controller{position: fixed; width: 100%; bottom: 0;}
 #controller>button{float: right; margin: 65px 0 50px 30px;}
