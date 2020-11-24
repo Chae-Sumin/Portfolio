@@ -58,7 +58,6 @@ window.onload = function(){
         }
     ];
     let limitImg = document.getElementById('limit_img');
-    console.log(limitImg);
     let limitCanvas = document.createElement("canvas");
     limitCanvas.width = limitImg.width;
     limitCanvas.height = limitImg.height;
@@ -100,19 +99,8 @@ window.onload = function(){
             return false;
     }
     function isEntryPossible(x,y){ // 이동 가능구역인지 확인
-        let alpha = limitCanvas.getContext('2d').getImageData(x,y,1,1).data;
-        return !alpha;
-    }        // if(x >= CHAR_WIDTH / 2 && x <= MAP_WIDTH - CHAR_WIDTH / 2 && 
-    // y >= CHAR_HEIGHT / 2 && y <= MAP_HEIGHT - CHAR_HEIGHT / 2 ){
-    //     for(let i = 0; i < limitsZone.length; i++){
-    //         if(x >= limitsZone[i].left && x <= (limitsZone[i].right ) && 
-    //         y >= limitsZone[i].top && y <= (limitsZone[i].bottom )){
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
-    // return false;
+        return !(limitCanvas.getContext('2d').getImageData(x,y,1,1).data[3])
+    }
     
     function keyfuncs(){
         let moveX = 0;
@@ -188,28 +176,17 @@ window.onload = function(){
     function movefuncs(){
         let moveX = CHAR.offsetLeft;
         let moveY = CHAR.offsetTop;
-        let centerX = function(){return(moveX + CHAR_WIDTH / 2)};
-        let centerY = function(){return(moveY + CHAR_HEIGHT / 2)};
         return{
-            moveX : function(){return moveX},
-            moveY : function(){return moveY},
             moveTo : function(x,y){
-                // if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY + CHAR_HEIGHT / 2)){
-                //     console.log(1);
-                //     moveX += x;
-                //     CHAR.style.left = moveX + "px";
-                // }
-                // if(isEntryPossible(moveX + CHAR_WIDTH / 2,moveY + CHAR_HEIGHT / 2 + y)){
-                //     console.log(2);
-                //     moveY += y;
-                //     CHAR.style.top = moveY + "px";
-                // }
-                if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY + CHAR_HEIGHT / 2 + y)){
-                    console.log(2);
+                if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY +  CHAR_HEIGHT / 2)){
                     moveX += x;
+                    CHAR.style.left = moveX + "px";
+                    isBlock = false;
+                }
+                if(isEntryPossible(moveX + CHAR_WIDTH / 2,moveY +  CHAR_HEIGHT / 2 + y)){
                     moveY += y;
                     CHAR.style.top = moveY + "px";
-                    CHAR.style.left = moveX + "px";
+                    isBlock = false;
                 }
                 screenFocus();
             }
@@ -321,14 +298,14 @@ window.onload = function(){
             touchY = e.touches[0].clientY - focusY;
             // controllBtns[4].style.left = touchX + "px";
             // controllBtns[4].style.top = touchY + "px";
-            keyTimeout = setTimeout(touchMove,0);
+            keyTimeout =setTimeout(touchMove,0);
         });
         document.addEventListener("touchmove",function(e){
             e.preventDefault();
             clearTimeout(keyTimeout);
             touchX = e.touches[0].clientX - focusX;
             touchY = e.touches[0].clientY - focusY;
-            keyTimeout = setTimeout(touchMove,0);
+            keyTimeout =setTimeout(touchMove,0);
         });
         document.addEventListener("touchend",function(e){
             e.preventDefault();
