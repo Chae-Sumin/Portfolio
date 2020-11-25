@@ -1,14 +1,14 @@
 *{margin: 0; padding: 0;}
 body, html{overflow: hidden; width: 100%; height: 100%; }
 body{position: relative;}
-#field{position: absolute; left: 0; top: 0; width: 6000px; height: 4000px; background: url(./img/bg1.png) 0 0 no-repeat;}
+#field{position: absolute; left: 0; top: 0; width: 6000px; height: 5000px; background: url(./img/map.png) 0 0 no-repeat;}
 #bg{position: absolute; left: 0; right: 0; top: 0; bottom: 0;}
 #limit_img{position: absolute; z-index: -1;}
-#dot{position: absolute; left: 50px; top: 50px; width: 100px; height: 100px; background: url(./img/right.png) 0 0 / cover no-repeat;}
-#dot._1,#dot._5,#dot._6{background-image: url(./img/up.png);}
-#dot._2{background-image: url(./img/left.png);}
-#dot._3,#dot._7,#dot._8{background-image: url(./img/down.png);}
-#dot._4{background-image: url(./img/right.png);}
+#dot{position: absolute; left: 725px; top: 900px; width: 150px; height: 200px; background: url(./img/char.png) 0 0 / cover no-repeat;}
+#dot._1,#dot._5,#dot._6{background-image: url(./img/char.png);}
+#dot._2{background-image: url(./img/char.png);}
+#dot._3,#dot._7,#dot._8{background-image: url(./img/char.png);}
+#dot._4{background-image: url(./img/char.png);}
 #dot.func{background: transparent;}
 #controller{position: fixed; width: 100%; bottom: 0;}
 #controller>button{float: right; margin: 65px 0 50px 30px;}

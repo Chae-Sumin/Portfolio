@@ -6,10 +6,10 @@ window.onload = function(){
     const controllBtns = document.querySelectorAll("#controller button"); 
     const controllDiv = document.querySelector("#controller>div");
 
-    const CHAR_WIDTH = 100; // 캐릭터 너비
-    const CHAR_HEIGHT = 100; // 캐릭터 높이
+    const CHAR_WIDTH = 150; // 캐릭터 너비
+    const CHAR_HEIGHT = 200; // 캐릭터 높이
     const MAP_WIDTH = 6000; // 맵 전체 너비
-    const MAP_HEIGHT = 4000; // 맵 전체 높이
+    const MAP_HEIGHT = 5000; // 맵 전체 높이
     const CHAR_MOVE_SPEED = 200; //max(300) 
     // const CHAR_MOVE_TOUCH_SPEED = 300;
     const CHAR_MOVE_PX = 3; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
@@ -99,7 +99,10 @@ window.onload = function(){
             return false;
     }
     function isEntryPossible(x,y){ // 이동 가능구역인지 확인
-        return !(limitCanvas.getContext('2d').getImageData(x,y,1,1).data[3])
+        if(x > CHAR_WIDTH / 2 && x < MAP_WIDTH - CHAR_WIDTH / 2 && y > CHAR_HEIGHT / 2 && y < MAP_HEIGHT - CHAR_HEIGHT / 2){
+
+            return !(limitCanvas.getContext('2d').getImageData(x,y,1,1).data[3])
+        }else return false
     }
     
     function keyfuncs(){
