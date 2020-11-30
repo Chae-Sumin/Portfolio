@@ -1,0 +1,71 @@
+#char {
+  width: 140px;
+  height: 200px;
+  background: url(./img/character/front1.png) 50% 50%/cover no-repeat;
+  position: absolute;
+  left: 725px;
+  top: 900px; }
+  #char._1, #char._5, #char._6 {
+    animation: backAni 1500ms 0s infinite linear; }
+
+@keyframes backAni {
+  0% {
+    background-image: url(./img/character/back1.png); }
+  25% {
+    background-image: url(./img/character/back2.png); }
+  50% {
+    background-image: url(./img/character/back1.png); }
+  75% {
+    background-image: url(./img/character/back3.png); }
+  100% {
+    background-image: url(./img/character/back1.png); } }
+  #char._3, #char._7, #char._8 {
+    animation: frontAni 1500ms 0s infinite linear; }
+
+@keyframes frontAni {
+  0% {
+    background-image: url(./img/character/front1.png); }
+  25% {
+    background-image: url(./img/character/front2.png); }
+  50% {
+    background-image: url(./img/character/front1.png); }
+  75% {
+    background-image: url(./img/character/front3.png); }
+  100% {
+    background-image: url(./img/character/front1.png); } }
+  #char._2 {
+    animation: leftAni 1500ms 0s infinite linear; }
+
+@keyframes leftAni {
+  0% {
+    background-image: url(./img/character/left1.png); }
+  25% {
+    background-image: url(./img/character/left2.png); }
+  50% {
+    background-image: url(./img/character/left1.png); }
+  75% {
+    background-image: url(./img/character/left3.png); }
+  100% {
+    background-image: url(./img/character/left1.png); } }
+  #char._4 {
+    animation: rightAni 1500ms 0s infinite linear; }
+
+@keyframes rightAni {
+  0% {
+    background-image: url(./img/character/right1.png); }
+  25% {
+    background-image: url(./img/character/right2.png); }
+  50% {
+    background-image: url(./img/character/right1.png); }
+  75% {
+    background-image: url(./img/character/right3.png); }
+  100% {
+    background-image: url(./img/character/right1.png); } }
+  #char.__1, #char.__5, #char.__6 {
+    background-image: url(./img/character/back1.png); }
+  #char.__3, #char.__7, #char.__8 {
+    background-image: url(./img/character/front1.png); }
+  #char.__2 {
+    background-image: url(./img/character/left1.png); }
+  #char.__4 {
+    background-image: url(./img/character/right1.png); }

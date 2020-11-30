@@ -1,7 +1,7 @@
 window.onload = function(){
 
     const MAP = document.getElementById("field");
-    const CHAR = document.getElementById("dot");
+    const CHAR = document.getElementById("char");
 
     const controllBtns = document.querySelectorAll("#controller button"); 
     const controllDiv = document.querySelector("#controller>div");
@@ -255,6 +255,7 @@ window.onload = function(){
         e.preventDefault();
         key.removeKey(e.key);
         if(!key.keyCode()) {
+            CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
             clearTimeout(keyTimeout);
             key.flagFalse();
             let btnOns = document.getElementsByClassName("btnOn");
