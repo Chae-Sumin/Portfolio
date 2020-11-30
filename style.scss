@@ -1,0 +1,37 @@
+@charset "utf-8";
+@import url(./_character.scss);
+$fieldW: 6000px;
+$fieldH: 5000px;
+@mixin posA($x : 0,$y : 0) {
+    position: absolute;
+    left: $x;
+    top: $y;
+}
+body, html{overflow: hidden; width: 100%; height: 100%; }
+body{position: relative;}
+
+h1{display: none;}
+#field{
+    @include posA; 
+    width: $fieldW;
+    height: $fieldH;
+    background: url(./img/map.png) 0 0 / $fieldW $fieldH no-repeat;
+}
+#limit_img{position: absolute; z-index: -1;}
+#object{position: absolute; left: 0; right: 0; top: 0; bottom: 0;}
+.home{position: absolute; left: 250px; top: -100px; width: 800px;}
+.home>img{width: 100%; height: auto;}
+#controller{position: fixed; width: 100%; bottom: 0;}
+#controller>button{float: right; margin: 65px 0 50px 30px;}
+.mob #controller>button{float: left;}
+#controller>div{float: right; position: relative; width: 150px; height: 150px; margin: 10px; }
+.mob #controller>div{display: none;}
+#controller>div>button{position: absolute;}
+#ArrowUp{left: 50px; top: 10px; transform: rotateZ(45deg);}
+#ArrowRight{left: 90px; top: 50px; transform: rotateZ(135deg);}
+#ArrowLeft{left: 10px; top: 50px; transform: rotateZ(315deg);}
+#ArrowDown{left: 50px; top: 90px; transform: rotateZ(225deg);}
+#controller button{width: 53px; height: 53px; border: none; outline: none; cursor: pointer; background: url(./img/Arrow.png) 50% 50% / cover no-repeat; font-size: 0; text-indent: -999px; overflow: hidden;}
+#controller #active{background: url(./img/active.png) 50% 50% / cover no-repeat;}
+#active.btnOn{background-image: url(./img/active-on.png);}
+#controller button.btnOn{background-image: url(./img/Arrow-on.png);}

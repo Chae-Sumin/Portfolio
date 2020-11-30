@@ -247,12 +247,10 @@ window.onload = function(){
         keyTimeout = setTimeout(keyDown,1000/CHAR_MOVE_SPEED);
     }
     document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
-        e.preventDefault();
         key.presskey(e.key);
         (key.flag()) ? false : keyTimeout = setTimeout(keyDown,0);
     });
     document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
-        e.preventDefault();
         key.removeKey(e.key);
         if(!key.keyCode()) {
             CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));

@@ -1,71 +1,71 @@
 #char {
   width: 140px;
   height: 200px;
-  background: url(./img/character/front1.png) 50% 50%/cover no-repeat;
+  background: url(./img/character.png) 0 -200px no-repeat;
   position: absolute;
   left: 725px;
   top: 900px; }
   #char._1, #char._5, #char._6 {
-    animation: backAni 1500ms 0s infinite linear; }
+    animation: backAni 1000ms 0s infinite step-start; }
 
 @keyframes backAni {
   0% {
-    background-image: url(./img/character/back1.png); }
+    background-position: 0 0; }
   25% {
-    background-image: url(./img/character/back2.png); }
+    background-position: -140px 0; }
   50% {
-    background-image: url(./img/character/back1.png); }
+    background-position: 0 0; }
   75% {
-    background-image: url(./img/character/back3.png); }
+    background-position: -280px 0; }
   100% {
-    background-image: url(./img/character/back1.png); } }
+    background-position: 0 0; } }
   #char._3, #char._7, #char._8 {
-    animation: frontAni 1500ms 0s infinite linear; }
+    animation: frontAni 1000ms 0s infinite step-start; }
 
 @keyframes frontAni {
   0% {
-    background-image: url(./img/character/front1.png); }
+    background-position: 0 -200px; }
   25% {
-    background-image: url(./img/character/front2.png); }
+    background-position: -140px -200px; }
   50% {
-    background-image: url(./img/character/front1.png); }
+    background-position: 0 -200px; }
   75% {
-    background-image: url(./img/character/front3.png); }
+    background-position: -280px -200px; }
   100% {
-    background-image: url(./img/character/front1.png); } }
+    background-position: 0 -200px; } }
   #char._2 {
-    animation: leftAni 1500ms 0s infinite linear; }
+    animation: leftAni 1000ms 0s infinite step-start; }
 
 @keyframes leftAni {
   0% {
-    background-image: url(./img/character/left1.png); }
+    background-position: 0 -600px; }
   25% {
-    background-image: url(./img/character/left2.png); }
+    background-position: -140px -600px; }
   50% {
-    background-image: url(./img/character/left1.png); }
+    background-position: 0 -600px; }
   75% {
-    background-image: url(./img/character/left3.png); }
+    background-position: -280px -600px; }
   100% {
-    background-image: url(./img/character/left1.png); } }
+    background-position: 0 -600px; } }
   #char._4 {
-    animation: rightAni 1500ms 0s infinite linear; }
+    animation: rightAni 1000ms 0s infinite step-start; }
 
 @keyframes rightAni {
   0% {
-    background-image: url(./img/character/right1.png); }
+    background-position: 0 -400px; }
   25% {
-    background-image: url(./img/character/right2.png); }
+    background-position: -140px -400px; }
   50% {
-    background-image: url(./img/character/right1.png); }
+    background-position: 0 -400px; }
   75% {
-    background-image: url(./img/character/right3.png); }
+    background-position: -280px -400px; }
   100% {
-    background-image: url(./img/character/right1.png); } }
+    background-position: 0 -400px; } }
   #char.__1, #char.__5, #char.__6 {
-    background-image: url(./img/character/back1.png); }
+    background-position: 0 0; }
   #char.__3, #char.__7, #char.__8 {
-    background-image: url(./img/character/front1.png); }
+    background-position: 0 -200px; }
   #char.__2 {
-    background-image: url(./img/character/left1.png); }
+    background-position: 0 -600px; }
   #char.__4 {
-    background-image: url(./img/character/right1.png); }
+    background-position: 0 -400px; }

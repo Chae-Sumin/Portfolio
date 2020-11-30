@@ -1,0 +1,99 @@
+@charset "utf-8";
+$back1: 0 0;
+$back2: -140px 0;
+$back3: -280px 0;
+$front1: 0 -200px;
+$front2: -140px -200px;
+$front3: -280px -200px;
+$right1: 0 -400px;
+$right2: -140px -400px;
+$right3: -280px -400px;
+$left1: 0 -600px;
+$left2: -140px -600px;
+$left3: -280px -600px;
+
+@mixin charDefualt { // 캐릭터 기본설정
+    width: 140px;
+    height: 200px;
+    background: url(./img/character.png) $front1 no-repeat;
+}
+@mixin startPoint($x,$y) { // 스타트 포인트
+    position: absolute;
+    left: #{$x}px;
+    top: #{$y}px;
+}
+@mixin charAni($dir){ // 움직임 설정
+    @if $dir == back {
+        @keyframes #{$dir}Ani {
+            0%{background-position: $back1;}
+            25%{background-position: $back2;}
+            50%{background-position: $back1;}
+            75%{background-position: $back3;}
+            100%{background-position: $back1;}
+        }
+    } @else if $dir == front {
+        @keyframes #{$dir}Ani {
+            0%{background-position: $front1;}
+            25%{background-position: $front2;}
+            50%{background-position: $front1;}
+            75%{background-position: $front3;}
+            100%{background-position: $front1;}
+        }
+    } @else if $dir == left {
+        @keyframes #{$dir}Ani {
+            0%{background-position: $left1;}
+            25%{background-position: $left2;}
+            50%{background-position: $left1;}
+            75%{background-position: $left3;}
+            100%{background-position: $left1;}
+        }
+    } @else if $dir == right {
+        @keyframes #{$dir}Ani {
+            0%{background-position: $right1;}
+            25%{background-position: $right2;}
+            50%{background-position: $right1;}
+            75%{background-position: $right3;}
+            100%{background-position: $right1;}
+        }
+    }
+    animation: #{$dir}Ani 1000ms 0s infinite step-start;
+}
+@mixin lastDir($dir) { // 이동 멈춤 시 모습
+    @if $dir == back {
+        background-position: $back1;
+    } @else if $dir == front {
+        background-position: $front1;
+    } @else if $dir == left {
+        background-position: $left1;
+    } @else if $dir == right {
+        background-position: $right1;
+    }
+}
+#char{
+    @include charDefualt;
+    @include startPoint(725,900);
+    &._1,&._5,&._6{
+        @include charAni(back);
+    }
+    &._3,&._7,&._8{
+        @include charAni(front);
+    }
+    &._2{
+        @include charAni(left);
+    }
+    &._4{
+        @include charAni(right);
+    }
+    &.__1,&.__5,&.__6{
+        @include lastDir(back);
+    }
+    &.__3,&.__7,&.__8{
+        @include lastDir(front);
+    }
+    &.__2{
+        @include lastDir(left);
+    }
+    &.__4{
+        @include lastDir(right);
+    }
+}
