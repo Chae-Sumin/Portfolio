@@ -1,0 +1,311 @@
+@import url(./reset.css);
+#char {
+  width: 140px;
+  height: 200px;
+  background: url(../img/character.png) 0 -200px no-repeat;
+  z-index: 10;
+  position: absolute;
+  left: 725px;
+  top: 900px; }
+  #char._1, #char._5, #char._6 {
+    animation: backAni 1000ms 0s infinite step-start; }
+
+@keyframes backAni {
+  0% {
+    background-position: 0 0; }
+  25% {
+    background-position: -140px 0; }
+  50% {
+    background-position: 0 0; }
+  75% {
+    background-position: -280px 0; }
+  100% {
+    background-position: 0 0; } }
+  #char._3, #char._7, #char._8 {
+    animation: frontAni 1000ms 0s infinite step-start; }
+
+@keyframes frontAni {
+  0% {
+    background-position: 0 -200px; }
+  25% {
+    background-position: -140px -200px; }
+  50% {
+    background-position: 0 -200px; }
+  75% {
+    background-position: -280px -200px; }
+  100% {
+    background-position: 0 -200px; } }
+  #char._2 {
+    animation: leftAni 1000ms 0s infinite step-start; }
+
+@keyframes leftAni {
+  0% {
+    background-position: 0 -600px; }
+  25% {
+    background-position: -140px -600px; }
+  50% {
+    background-position: 0 -600px; }
+  75% {
+    background-position: -280px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+  #char._4 {
+    animation: rightAni 1000ms 0s infinite step-start; }
+
+@keyframes rightAni {
+  0% {
+    background-position: 0 -400px; }
+  25% {
+    background-position: -140px -400px; }
+  50% {
+    background-position: 0 -400px; }
+  75% {
+    background-position: -280px -400px; }
+  100% {
+    background-position: 0 -400px; } }
+  #char.__1, #char.__5, #char.__6 {
+    background-position: 0 0; }
+  #char.__3, #char.__7, #char.__8 {
+    background-position: 0 -200px; }
+  #char.__2 {
+    background-position: 0 -600px; }
+  #char.__4 {
+    background-position: 0 -400px; }
+
+@keyframes cropsAni {
+  0% {
+    background-position-x: 20px; }
+  25% {
+    background-position-x: -105px; }
+  50% {
+    background-position-x: 20px; }
+  75% {
+    background-position-x: -230px; }
+  100% {
+    background-position-x: 20px; } }
+
+#object {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0; }
+  #object img {
+    width: 100%;
+    height: auto; }
+  #object .home {
+    position: absolute;
+    left: 250px;
+    top: -100px;
+    width: 800px; }
+  #object .crops {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+    #object .crops .carrot {
+      position: absolute;
+      left: 0;
+      top: 2080px;
+      width: 1000px;
+      height: 600px; }
+      #object .crops .carrot li:nth-child(1) {
+        background: url(../img/crops.png) 20px 0 repeat-x;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        width: 100%;
+        height: 150px;
+        z-index: 2080;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .carrot li:nth-child(2) {
+        background: url(../img/crops.png) 20px 0 repeat-x;
+        position: absolute;
+        left: 0;
+        top: 150px;
+        width: 100%;
+        height: 150px;
+        z-index: 2230;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .carrot li:nth-child(3) {
+        background: url(../img/crops.png) 20px 0 repeat-x;
+        position: absolute;
+        left: 0;
+        top: 300px;
+        width: 100%;
+        height: 150px;
+        z-index: 2380;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .carrot li:nth-child(4) {
+        background: url(../img/crops.png) 20px 0 repeat-x;
+        position: absolute;
+        left: 0;
+        top: 450px;
+        width: 100%;
+        height: 150px;
+        z-index: 2530;
+        animation: cropsAni 5s step-start infinite; }
+    #object .crops .corn {
+      position: absolute;
+      left: 0;
+      top: 2910px;
+      width: 1000px;
+      height: 600px; }
+      #object .crops .corn li:nth-child(1) {
+        background: url(../img/crops.png) 20px -150px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        width: 100%;
+        height: 150px;
+        z-index: 2910;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .corn li:nth-child(2) {
+        background: url(../img/crops.png) 20px -150px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 150px;
+        width: 100%;
+        height: 150px;
+        z-index: 3060;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .corn li:nth-child(3) {
+        background: url(../img/crops.png) 20px -150px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 300px;
+        width: 100%;
+        height: 150px;
+        z-index: 3210;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .corn li:nth-child(4) {
+        background: url(../img/crops.png) 20px -150px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 450px;
+        width: 100%;
+        height: 150px;
+        z-index: 3360;
+        animation: cropsAni 5s step-start infinite; }
+    #object .crops .tomato {
+      position: absolute;
+      left: 0;
+      top: 3760px;
+      width: 1000px;
+      height: 600px; }
+      #object .crops .tomato li:nth-child(1) {
+        background: url(../img/crops.png) 20px -300px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        width: 100%;
+        height: 150px;
+        z-index: 3760;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .tomato li:nth-child(2) {
+        background: url(../img/crops.png) 20px -300px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 150px;
+        width: 100%;
+        height: 150px;
+        z-index: 3910;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .tomato li:nth-child(3) {
+        background: url(../img/crops.png) 20px -300px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 300px;
+        width: 100%;
+        height: 150px;
+        z-index: 4060;
+        animation: cropsAni 5s step-start infinite; }
+      #object .crops .tomato li:nth-child(4) {
+        background: url(../img/crops.png) 20px -300px repeat-x;
+        position: absolute;
+        left: 0;
+        top: 450px;
+        width: 100%;
+        height: 150px;
+        z-index: 4210;
+        animation: cropsAni 5s step-start infinite; }
+
+body, html {
+  overflow: hidden;
+  width: 100%;
+  height: 100%; }
+
+body {
+  position: relative; }
+
+h1 {
+  display: none; }
+
+#field {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6000px;
+  height: 5000px;
+  background: url(../img/map2.png) 0 0 no-repeat;
+  background-size: 6000px 5000px; }
+
+#limit_img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1; }
+
+#controller {
+  position: fixed;
+  width: 100%;
+  bottom: 0; }
+  #controller button {
+    width: 53px;
+    height: 53px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: url(../img/Arrow.png) 50% 50%/cover no-repeat;
+    font-size: 0;
+    text-indent: -999px;
+    overflow: hidden; }
+    #controller button#active {
+      float: right;
+      margin: 65px 0 50px 30px;
+      background: url(../img/active.png) 50% 50%/cover no-repeat; }
+      #controller button#active.btnOn {
+        background-image: url(../img/active-on.png); }
+    #controller button.btnOn {
+      background-image: url(../img/Arrow-on.png); }
+  #controller > div {
+    float: right;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 10px; }
+    #controller > div button {
+      position: absolute; }
+      #controller > div button#ArrowUp {
+        left: 50px;
+        top: 10px;
+        transform: rotateZ(45deg); }
+      #controller > div button#ArrowRight {
+        left: 90px;
+        top: 50px;
+        transform: rotateZ(135deg); }
+      #controller > div button#ArrowLeft {
+        left: 10px;
+        top: 50px;
+        transform: rotateZ(315deg); }
+      #controller > div button#ArrowDown {
+        left: 50px;
+        top: 90px;
+        transform: rotateZ(225deg); }
+
+.mob #controller > button {
+  float: left; }
+
+.mob #controller > div {
+  display: none; }

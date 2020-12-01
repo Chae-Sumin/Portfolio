@@ -1,7 +1,7 @@
 window.onload = function(){
 
     const MAP = document.getElementById("field");
-    const CHAR = document.getElementById("dot");
+    const CHAR = document.getElementById("char");
 
     const controllBtns = document.querySelectorAll("#controller button"); 
     const controllDiv = document.querySelector("#controller>div");
@@ -131,7 +131,6 @@ window.onload = function(){
                     default:
                         return false;
                 }
-                console.log(moveX,moveY);
             },
             removeKey : function(key){
                 switch (key) {
@@ -189,6 +188,7 @@ window.onload = function(){
                 if(isEntryPossible(moveX + CHAR_WIDTH / 2,moveY +  CHAR_HEIGHT / 2 + y)){
                     moveY += y;
                     CHAR.style.top = moveY + "px";
+                    CHAR.style.zIndex = parseInt(moveY + CHAR_HEIGHT / 3);
                     isBlock = false;
                 }
                 screenFocus();
@@ -247,14 +247,13 @@ window.onload = function(){
         keyTimeout = setTimeout(keyDown,1000/CHAR_MOVE_SPEED);
     }
     document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
-        e.preventDefault();
         key.presskey(e.key);
         (key.flag()) ? false : keyTimeout = setTimeout(keyDown,0);
     });
     document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
-        e.preventDefault();
         key.removeKey(e.key);
         if(!key.keyCode()) {
+            CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
             clearTimeout(keyTimeout);
             key.flagFalse();
             let btnOns = document.getElementsByClassName("btnOn");
@@ -391,4 +390,5 @@ window.onload = function(){
         MAP.style.left = focusX + "px";
         MAP.style.top = focusY + "px";
     }
+
 }
