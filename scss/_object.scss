@@ -1,0 +1,62 @@
+@mixin box($x : 0, $y : 0, $width : null, $height: null) {
+    position: absolute;
+    left: $x;
+    top: $y;
+    width: $width;
+    height: $height;
+}
+@keyframes cropsAni{
+    $marginL : 20px;
+    0%{background-position-x: $marginL;}
+    25%{background-position-x: $marginL - 125px;}
+    50%{background-position-x: $marginL;}
+    75%{background-position-x: $marginL - 250px;}
+    100%{background-position-x: $marginL;}
+}
+#object{
+    @include box(0,0); 
+    right: 0; bottom: 0;
+    img{
+        width: 100%; height: auto;
+    }
+    .home{
+        @include box(250px,-100px,800px); 
+    }
+    .crops{
+        $cropsH : 150;
+        @include box(0,0,100%,100%); 
+        .carrot{
+            @include box(0,2080px,1000px,600px); 
+            @for $i from 1 through 4{
+                li:nth-child(#{$i}){
+                    background: url(../img/crops.png) 20px 0 repeat-x;
+                    @include box(0,#{$cropsH * ($i - 1)}px,100%,#{$cropsH}px);
+                    z-index: 2080 + $cropsH * ($i - 1);
+                    animation: cropsAni 5s step-start infinite;
+                }
+            }
+        }
+        .corn{
+            @include box(0,2910px,1000px,600px); 
+            @for $i from 1 through 4{
+                li:nth-child(#{$i}){
+                    background: url(../img/crops.png) 20px -#{$cropsH}px repeat-x;
+                    @include box(0,#{$cropsH * ($i - 1)}px,100%,#{$cropsH}px);
+                    z-index: 2910 + $cropsH * ($i - 1);
+                    animation: cropsAni 5s step-start infinite;
+                }
+            }
+        }
+        .tomato{
+            @include box(0,3760px,1000px,600px); 
+            @for $i from 1 through 4{
+                li:nth-child(#{$i}){
+                    background: url(../img/crops.png) 20px -#{$cropsH * 2}px repeat-x;
+                    @include box(0,#{$cropsH * ($i - 1)}px,100%,#{$cropsH}px);
+                    z-index: 3760 + $cropsH * ($i - 1);
+                    animation: cropsAni 5s step-start infinite;
+                }
+            }
+        }
+    }
+}

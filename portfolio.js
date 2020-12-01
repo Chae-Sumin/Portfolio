@@ -131,7 +131,6 @@ window.onload = function(){
                     default:
                         return false;
                 }
-                console.log(moveX,moveY);
             },
             removeKey : function(key){
                 switch (key) {
@@ -189,6 +188,7 @@ window.onload = function(){
                 if(isEntryPossible(moveX + CHAR_WIDTH / 2,moveY +  CHAR_HEIGHT / 2 + y)){
                     moveY += y;
                     CHAR.style.top = moveY + "px";
+                    CHAR.style.zIndex = parseInt(moveY + CHAR_HEIGHT / 3);
                     isBlock = false;
                 }
                 screenFocus();
@@ -390,4 +390,5 @@ window.onload = function(){
         MAP.style.left = focusX + "px";
         MAP.style.top = focusY + "px";
     }
+
 }

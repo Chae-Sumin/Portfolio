@@ -3,18 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="portfolio.js"></script>
 </head>
 <body>
-    <h1>0.01.02</h1>
+    <h1>0.02.01</h1>
     <div id="field">
         <img src="./img/limits.png" alt="limit img" id="limit_img"/>
         <div id="object">
+            <div id="char"></div>
             <div class="home"><img src="./img/houseF.png" alt="start point house"></div>
-            <div class=""></div>
+            <div class="crops">
+                <ul class="carrot">
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                </ul>
+                <ul class="corn">
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                </ul>
+                <ul class="tomato">
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                    <li class="obj"></li>
+                </ul>
+            </div>
         </div>
-        <div id="char"></div>
     </div>
     <div id="controller">
         <div>
@@ -25,5 +44,16 @@
         </div>
         <button type="button" id="active">active</button>
     </div>
+    <script>
+        const imgs = document.images; 
+const allLoad = imgs.length; 
+let loading = 0; 
+for (let i = 0; i < allLoad; i++) { 
+ imgs[i].onload=function() { 
+    loading++; 
+ console.log( loading + "/" +  allLoad );
+ } 
+} 
+    </script>
 </body>
 </html>

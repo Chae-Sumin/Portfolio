@@ -15,7 +15,8 @@ $left3: -280px -600px;
 @mixin charDefualt { // 캐릭터 기본설정
     width: 140px;
     height: 200px;
-    background: url(./img/character.png) $front1 no-repeat;
+    background: url(../img/character.png) $front1 no-repeat;
+    z-index: 10;
 }
 @mixin startPoint($x,$y) { // 스타트 포인트
     position: absolute;
