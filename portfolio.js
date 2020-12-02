@@ -1,80 +1,85 @@
 window.onload = function(){
 
-    const MAP = document.getElementById("field");
-    const CHAR = document.getElementById("char");
-
+    // --------------------돔 구조--------------------
+    const MAP = document.getElementById("field"); //전체 맵
+    const CHAR = document.getElementById("char"); //캐릭터
+    const TREE = document.querySelector("#object>.trees");
     const controllBtns = document.querySelectorAll("#controller button"); 
     const controllDiv = document.querySelector("#controller>div");
-
+    // -------------------- 상수 --------------------
     const CHAR_WIDTH = 150; // 캐릭터 너비
     const CHAR_HEIGHT = 200; // 캐릭터 높이
     const MAP_WIDTH = 6000; // 맵 전체 너비
     const MAP_HEIGHT = 5000; // 맵 전체 높이
     const CHAR_MOVE_SPEED = 200; //max(300) 
-    // const CHAR_MOVE_TOUCH_SPEED = 300;
     const CHAR_MOVE_PX = 3; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
-    const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2);
+    const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
     const key = keyfuncs();
     const move = movefuncs();
-
-    let isMobile = false
-    let screenWidth = window.innerWidth; // 스크린 높이
-    let screenHeight = window.innerHeight; // 스크린 너비
+    // -------------------- 변수 --------------------
+    let isMobile = false //모바일 확인
+    let screenWidth = window.innerWidth; // 스크린 너비
+    let screenHeight = window.innerHeight; // 스크린 높이
     let focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2); // 초점 X값(음수)
     let focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2); //초점 Y값(음수)
     
-    let centerX = CHAR.offsetLeft + CHAR_WIDTH / 2; // 캐릭터 중심 죄표
-    let centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
-    let moveX = CHAR.offsetLeft; // 캐릭터 offset 죄표
-    let moveY = CHAR.offsetTop;
-    let touchX = 0;
-    let touchY = 0;
-
-    let keyDownFlag = false; //키 눌려있을 때 true
-    let MouseDownFlag = false; //키 눌려있을 때 true
-    let keyTimeout = null; // 키 눌렸을때 setTimeOut
-    let pressedKey = []; // 눌린 키 값
-    let limitsZone = [ // 제한 구역
-        {
-            id : 1,
-            left : 200,
-            top : 0,
-            right : 500,
-            bottom : 300,
-        },
-        {
-            id : 2,
-            left : 0,
-            top : 500,
-            right : 300,
-            bottom : 800,
-        },
-        {
-            id : 3,
-            left : 600,
-            top : 600,
-            right : 900,
-            bottom : 900,
-        }
-    ];
+    // --------------------제한구역 이미지 설정--------------------
     let limitImg = document.getElementById('limit_img');
     let limitCanvas = document.createElement("canvas");
     limitCanvas.width = limitImg.width;
     limitCanvas.height = limitImg.height;
     limitCanvas.getContext('2d').drawImage(limitImg,0,0,limitImg.width,limitImg.height);
-    let activeZone = [ // 상호작용 활성화 구역 (func-> 실행할 함수명)
-        {
-            id : 1,
-            func : "func",
-            left : 400,
-            top : 400,
-            right : 500,
-            bottom : 500,
+
+    // --------------------로딩중...--------------------
+    function loading(){
+        let ratioW = (screenWidth - focusX) / MAP_WIDTH
+        for(let i = 0; i < 43; i++){ // 나무 생성
+            let tree = document.createElement("span");
+            tree.setAttribute("class","tree");
+            TREE.appendChild(tree);
         }
-    ];
-    
-    screenFocus();
-    let mobileDivice = [
+        const mapImg = document.createElement("img"); // 메인 배경
+        mapImg.setAttribute("src", "./img/map2.png");
+        mapImg.setAttribute("alt", "배경 이미지");
+        mapImg.setAttribute("id", "mapImg");
+        MAP.appendChild(mapImg);
+        MAP.style.transformOrigin = -focusX + "px " + -focusY + "px";
+        mapImg.onload = function(){
+            screenFocus();
+            MAP.style.animation = "load"+parseInt((ratioW) * 100)+"Ani 5s ease";
+            document.getElementById("beforeLoad").classList.add("load");
+            let loadTime = setTimeout(function(){
+                afterLoad(); //로딩이 끝난 뒤 호출
+                clearTimeout(loadTime);
+            },5000);
+        }
+    }
+    loading();
+    function afterLoad(){
+        document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
+            key.presskey(e.key);
+            (key.flag()) ? false : key.setKeyTimer(keyDown,0);
+        });
+        document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
+            key.removeKey(e.key);
+            if(!key.keyCode()) {
+                CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
+                key.clearKeyTimer();
+                key.flagFalse();
+                let btnOns = document.getElementsByClassName("btnOn");
+                while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
+            }
+        });
+        window.addEventListener("resize", function(){ // 창 크기 변경시 
+            screenWidth = window.innerWidth;
+            screenHeight = window.innerHeight;
+            screenFocus();
+        });
+    }
+
+
+    // -------------------- 각종 함수 --------------------
+    let mobileDivice = [ // 모바일 기기 종류
         'iphone', 'ipod',
         'window ce', 'android',
         'blackberry', 'nokia',
@@ -82,34 +87,26 @@ window.onload = function(){
         'sonyerricsson', 'opera mobi',
         'iemobile'
     ];
-    for (let i in mobileDivice) {
+    for (let i in mobileDivice) { // 모바일 기기 확인
         if (navigator.userAgent.toLowerCase().match(new RegExp(mobileDivice[i]))) {
             isMobile = true;
             document.querySelector("body").classList.add("mob");
         }
     }
 
-    function isActivePossible(x,y){ // 활성화 구역인지 확인
-            for(let i = 0; i < activeZone.length; i++){
-                if(x >= activeZone[i].left && x <= (activeZone[i].right ) && 
-                y >= activeZone[i].top && y <= (activeZone[i].bottom )){
-                    return activeZone[i].func;
-                }
-            }
-            return false;
-    }
     function isEntryPossible(x,y){ // 이동 가능구역인지 확인
-        if(x > CHAR_WIDTH / 2 && x < MAP_WIDTH - CHAR_WIDTH / 2 && y > CHAR_HEIGHT / 2 && y < MAP_HEIGHT - CHAR_HEIGHT / 2){
+        if(x > CHAR_WIDTH / 2 && x < MAP_WIDTH - CHAR_WIDTH / 2 && y > CHAR_HEIGHT && y < MAP_HEIGHT){
 
             return !(limitCanvas.getContext('2d').getImageData(x,y,1,1).data[3])
         }else return false
     }
     
-    function keyfuncs(){
+    function keyfuncs(){ // 키보드 관련 클로져
         let moveX = 0;
         let moveY = 0;
         let active = false;
         let keyFlag = false;
+        let keyTimer = null;
         return {
             presskey : function(key){
                 switch (key) {
@@ -173,25 +170,73 @@ window.onload = function(){
                 return keyFlag},
             flagTrue : function(){keyFlag = true; 
                 return keyFlag},
+            setKeyTimer: function(func,time){
+                keyTimer = setTimeout(func,time);
+            },
+            clearKeyTimer: function(){
+                clearTimeout(keyTimer);
+            }
         }
     }
-    function movefuncs(){
+    function movefuncs(){ // 움직임 관련 클로져
         let moveX = CHAR.offsetLeft;
         let moveY = CHAR.offsetTop;
         return{
-            moveTo : function(x,y){
-                if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY +  CHAR_HEIGHT / 2)){
+            moveTo : function(_x,_y){
+                let x = _x;
+                let y = _y;
+                let isBlock = true;
+                let count = 0;
+                if(x&&isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY +  CHAR_HEIGHT)){
                     moveX += x;
                     CHAR.style.left = moveX + "px";
                     isBlock = false;
                 }
-                if(isEntryPossible(moveX + CHAR_WIDTH / 2,moveY +  CHAR_HEIGHT / 2 + y)){
+                if(y&&isEntryPossible(moveX + CHAR_WIDTH / 2,moveY +  CHAR_HEIGHT + y)){
                     moveY += y;
                     CHAR.style.top = moveY + "px";
                     CHAR.style.zIndex = parseInt(moveY + CHAR_HEIGHT / 3);
                     isBlock = false;
                 }
+                while (isBlock && count < 5) {
+                    count += 2;
+                    isBlock = this.moveSmooth(_x,_y,count);
+                } 
                 screenFocus();
+            },
+            moveSmooth : function(x,y,count){
+                let dir = [];
+                if(x === 0){
+                    dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 - CHAR_CROSS_PX * count,moveY +  CHAR_HEIGHT + y));
+                    dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 + CHAR_CROSS_PX * count,moveY +  CHAR_HEIGHT + y));
+                    if(dir[0]^dir[1]){
+                        x = dir[0] ? -CHAR_CROSS_PX : CHAR_CROSS_PX;
+                        y = y > 0 ? CHAR_CROSS_PX : -CHAR_CROSS_PX;
+                        this.moveTo(x,y);
+                        return false;
+                    }
+                } else if(y === 0){
+                    dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 + x, moveY +  CHAR_HEIGHT - CHAR_CROSS_PX * count));
+                    dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 + x, moveY +  CHAR_HEIGHT + CHAR_CROSS_PX * count));
+                    if(dir[0]^dir[1]){
+                        y = dir[0] ? -CHAR_CROSS_PX : CHAR_CROSS_PX;
+                        x = x > 0 ? CHAR_CROSS_PX : -CHAR_CROSS_PX;
+                        this.moveTo(x,y)
+                        return false;
+                    }
+                } else{
+                    dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 - x * count, moveY + CHAR_HEIGHT + y * count));
+                    dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 + x * count, moveY + CHAR_HEIGHT - y * count));
+                    if(dir[0]^dir[1]){
+                        if(dir[0]){
+                            this.moveTo(-x,y);
+                            return false;
+                        } else{
+                            this.moveTo(x,-y);
+                            return false;
+                        }
+                    }
+                } return true;
             }
         }
     }
@@ -244,144 +289,9 @@ window.onload = function(){
             CHAR.classList.add("_"+key);
         }
         setDir(key.keyCode());
-        keyTimeout = setTimeout(keyDown,1000/CHAR_MOVE_SPEED);
+        key.setKeyTimer(keyDown,1000/CHAR_MOVE_SPEED);
     }
-    document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
-        key.presskey(e.key);
-        (key.flag()) ? false : keyTimeout = setTimeout(keyDown,0);
-    });
-    document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
-        key.removeKey(e.key);
-        if(!key.keyCode()) {
-            CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
-            clearTimeout(keyTimeout);
-            key.flagFalse();
-            let btnOns = document.getElementsByClassName("btnOn");
-            while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
-        }
-    });
-    window.addEventListener("resize", function(){ // 창 크기 변경시 
-        screenWidth = window.innerWidth;
-        screenHeight = window.innerHeight;
-        screenFocus();
-    });
-    function touchMove(){
-        centerX = CHAR.offsetLeft + CHAR_WIDTH / 2;
-        centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
-        moveX = CHAR.offsetLeft;
-        moveY = CHAR.offsetTop;
-        let lengthX = Math.abs(centerX - touchX);
-        let lengthY = Math.abs(centerY - touchY);
-        let rateX = Math.sin(Math.atan(lengthX/lengthY));
-        let rateY = Math.cos(Math.atan(lengthX/lengthY));
-        if(centerX > touchX){
-            moveX -= lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
-            centerX -= lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
-        } else if (centerX < touchX){
-            moveX += lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
-            centerX += lengthX > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateX : 0;
-        }
-        if(centerY > touchY){
-            moveY -= lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
-            centerY -= lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
-        } else if (centerY < touchY){
-            moveY += lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
-            centerY += lengthY > CHAR_MOVE_PX ? CHAR_MOVE_PX * rateY : 0;
-        }
-        if(!isEntryPossible(centerX,centerY)) return false;
-        CHAR.style.left = moveX + "px";
-        CHAR.style.top = moveY + "px";
-        keyTimeout = setTimeout(touchMove,1000 / CHAR_MOVE_SPEED);
-        screenFocus();
-    }
-    if(isMobile){
-        document.addEventListener("touchstart",function(e){
-            touchX = e.touches[0].clientX - focusX;
-            touchY = e.touches[0].clientY - focusY;
-            // controllBtns[4].style.left = touchX + "px";
-            // controllBtns[4].style.top = touchY + "px";
-            keyTimeout =setTimeout(touchMove,0);
-        });
-        document.addEventListener("touchmove",function(e){
-            e.preventDefault();
-            clearTimeout(keyTimeout);
-            touchX = e.touches[0].clientX - focusX;
-            touchY = e.touches[0].clientY - focusY;
-            keyTimeout =setTimeout(touchMove,0);
-        });
-        document.addEventListener("touchend",function(e){
-            e.preventDefault();
-            clearTimeout(keyTimeout);
-        });
-        // controllDiv.addEventListener("mousedown",function(e){
-        //     e.preventDefault();
-        //     MouseDownFlag = true;
-        // });
-        // controllActive.addEventListener("click",function(e){
-        //     e.preventDefault();
-        //     trns("active");
-        // });
-        // document.addEventListener("mouseup",function(e){
-        //     MouseDownFlag = false;
-        //     controllDiv.style.backgroundPosition = "50% 50%";
-        //     e.target.classList.remove("btnOn");
-        //     clearTimeout(keyTimeout);
-        //     keyDownFlag = false;
-        // });
-        // controllDiv.addEventListener("mousemove",function(e){
-        //     if(MouseDownFlag){
-        //     let x = ((e.clientX - controllDiv.getBoundingClientRect().left - 75) / 2) + 62.5;
-        //     let y = ((e.clientY -controllDiv.getBoundingClientRect().top - 75) / 2) + 62.5;
-        //     controllDiv.style.backgroundPosition = x + "px " + y + "px";
-        // }});
-        // controllDiv.addEventListener("mouseleave",function(){
-        //     controllDiv.style.backgroundPosition = "50% 50%";
-        // });
-        
-        // for(let i = 0; i < 4; i++){
-        //     controllBtns[i].addEventListener("mouseover", function(e){
-        //         if(MouseDownFlag){
-        //         if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
-        //         e.target.classList.add("btnOn");
-        //         if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
-        //     });
-        //     controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
-        //         e.preventDefault();
-        //         e.target.classList.remove("btnOn");
-        //         controllDiv.style.backgroundPosition = "50% 50%";
-        //         clearTimeout(keyTimeout);
-        //         keyDownFlag = false;
-        //     });
-    } else {
-        controllDiv.addEventListener("mousedown",function(e){ // 컨트롤 div안에서 마우스 클릭 발생 시 MouseDownFlag = true
-            e.preventDefault();
-            MouseDownFlag = true;
-        });
-        document.addEventListener("mouseup",function(){ //마우스 때면 MouseDownFlag = false 
-            MouseDownFlag = false;
-        });
-        for(let i = 0; i < 5; i++){
-            controllBtns[i].addEventListener("mousedown", function(e){ //클릭시 루프 시작
-                if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
-                if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }
-            });
-            controllBtns[i].addEventListener("mouseover", function(e){ // div안에서 클릭 후 위로 올라올 경우 루프 시작
-                if(MouseDownFlag){
-                if(pressedKey.indexOf(e.target.textContent)===-1){pressedKey.push(e.target.textContent);}
-                if(!keyDownFlag){ keyTimeout = setTimeout(keyDown, 0); }}
-            });
-            controllBtns[i].addEventListener("mouseup",function(e){ // 키가 떨어지면 루프 종료
-                clearTimeout(keyTimeout);
-                keyDownFlag = false;
-            });
-            controllBtns[i].addEventListener("mouseleave",function(e){ // 키가 떨어지면 루프 종료
-                pressedKey.splice(pressedKey.indexOf(e.target.textContent),1);
-                e.preventDefault();
-                clearTimeout(keyTimeout);
-                keyDownFlag = false;
-            });
-        }
-    }
+    
     function screenFocus(){ // 캐릭터에 초점을 맞춰 이동(맵 끝으로 가면 고정)
         focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2);
         focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2);
@@ -390,5 +300,4 @@ window.onload = function(){
         MAP.style.left = focusX + "px";
         MAP.style.top = focusY + "px";
     }
-
 }
