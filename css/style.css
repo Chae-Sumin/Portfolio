@@ -233,1409 +233,837 @@
         animation: cropsAni 5s step-start infinite; }
 
 #beforeLoad {
-  z-index: 9999; }
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  transition: z-index 0s 3s; }
   #beforeLoad .cloud {
-    display: none;
+    display: block;
     position: absolute;
-    box-shadow: 0 0 30px #0003; }
+    transition: all 3s linear, opacity 2s 500ms linear; }
     #beforeLoad .cloud.c1 {
-      left: -50vw;
-      top: -50vh; }
+      left: -25%;
+      top: -25%; }
     #beforeLoad .cloud.c2 {
-      left: 50vw;
-      top: -50vh; }
+      left: 25%;
+      top: -25%; }
     #beforeLoad .cloud.c3 {
-      left: -50vw;
-      top: 50vh; }
+      left: -25%;
+      top: 25%; }
     #beforeLoad .cloud.c4 {
-      left: 50vw;
-      top: 50vh; }
+      left: 25%;
+      top: 25%; }
+  #beforeLoad.load {
+    z-index: -1; }
+    #beforeLoad.load .cloud {
+      opacity: 0; }
+      #beforeLoad.load .cloud.c1 {
+        left: -225%;
+        top: -225%; }
+      #beforeLoad.load .cloud.c2 {
+        left: 225%;
+        top: -225%; }
+      #beforeLoad.load .cloud.c3 {
+        left: -225%;
+        top: 225%; }
+      #beforeLoad.load .cloud.c4 {
+        left: 225%;
+        top: 225%; }
 
 @keyframes load1Ani {
   0% {
-    transform: scale(0.01);
-    left: 0;
-    top: 0; }
+    transform: scale(0.01); }
   30% {
-    transform: scale(0.01);
-    left: 0;
-    top: 0; }
+    transform: scale(0.01); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load2Ani {
   0% {
-    transform: scale(0.02);
-    left: 0;
-    top: 0; }
+    transform: scale(0.02); }
   30% {
-    transform: scale(0.02);
-    left: 0;
-    top: 0; }
+    transform: scale(0.02); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load3Ani {
   0% {
-    transform: scale(0.03);
-    left: 0;
-    top: 0; }
+    transform: scale(0.03); }
   30% {
-    transform: scale(0.03);
-    left: 0;
-    top: 0; }
+    transform: scale(0.03); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load4Ani {
   0% {
-    transform: scale(0.04);
-    left: 0;
-    top: 0; }
+    transform: scale(0.04); }
   30% {
-    transform: scale(0.04);
-    left: 0;
-    top: 0; }
+    transform: scale(0.04); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load5Ani {
   0% {
-    transform: scale(0.05);
-    left: 0;
-    top: 0; }
+    transform: scale(0.05); }
   30% {
-    transform: scale(0.05);
-    left: 0;
-    top: 0; }
+    transform: scale(0.05); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load6Ani {
   0% {
-    transform: scale(0.06);
-    left: 0;
-    top: 0; }
+    transform: scale(0.06); }
   30% {
-    transform: scale(0.06);
-    left: 0;
-    top: 0; }
+    transform: scale(0.06); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load7Ani {
   0% {
-    transform: scale(0.07);
-    left: 0;
-    top: 0; }
+    transform: scale(0.07); }
   30% {
-    transform: scale(0.07);
-    left: 0;
-    top: 0; }
+    transform: scale(0.07); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load8Ani {
   0% {
-    transform: scale(0.08);
-    left: 0;
-    top: 0; }
+    transform: scale(0.08); }
   30% {
-    transform: scale(0.08);
-    left: 0;
-    top: 0; }
+    transform: scale(0.08); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load9Ani {
   0% {
-    transform: scale(0.09);
-    left: 0;
-    top: 0; }
+    transform: scale(0.09); }
   30% {
-    transform: scale(0.09);
-    left: 0;
-    top: 0; }
+    transform: scale(0.09); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load10Ani {
   0% {
-    transform: scale(0.1);
-    left: 0;
-    top: 0; }
+    transform: scale(0.1); }
   30% {
-    transform: scale(0.1);
-    left: 0;
-    top: 0; }
+    transform: scale(0.1); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load11Ani {
   0% {
-    transform: scale(0.11);
-    left: 0;
-    top: 0; }
+    transform: scale(0.11); }
   30% {
-    transform: scale(0.11);
-    left: 0;
-    top: 0; }
+    transform: scale(0.11); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load12Ani {
   0% {
-    transform: scale(0.12);
-    left: 0;
-    top: 0; }
+    transform: scale(0.12); }
   30% {
-    transform: scale(0.12);
-    left: 0;
-    top: 0; }
+    transform: scale(0.12); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load13Ani {
   0% {
-    transform: scale(0.13);
-    left: 0;
-    top: 0; }
+    transform: scale(0.13); }
   30% {
-    transform: scale(0.13);
-    left: 0;
-    top: 0; }
+    transform: scale(0.13); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load14Ani {
   0% {
-    transform: scale(0.14);
-    left: 0;
-    top: 0; }
+    transform: scale(0.14); }
   30% {
-    transform: scale(0.14);
-    left: 0;
-    top: 0; }
+    transform: scale(0.14); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load15Ani {
   0% {
-    transform: scale(0.15);
-    left: 0;
-    top: 0; }
+    transform: scale(0.15); }
   30% {
-    transform: scale(0.15);
-    left: 0;
-    top: 0; }
+    transform: scale(0.15); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load16Ani {
   0% {
-    transform: scale(0.16);
-    left: 0;
-    top: 0; }
+    transform: scale(0.16); }
   30% {
-    transform: scale(0.16);
-    left: 0;
-    top: 0; }
+    transform: scale(0.16); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load17Ani {
   0% {
-    transform: scale(0.17);
-    left: 0;
-    top: 0; }
+    transform: scale(0.17); }
   30% {
-    transform: scale(0.17);
-    left: 0;
-    top: 0; }
+    transform: scale(0.17); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load18Ani {
   0% {
-    transform: scale(0.18);
-    left: 0;
-    top: 0; }
+    transform: scale(0.18); }
   30% {
-    transform: scale(0.18);
-    left: 0;
-    top: 0; }
+    transform: scale(0.18); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load19Ani {
   0% {
-    transform: scale(0.19);
-    left: 0;
-    top: 0; }
+    transform: scale(0.19); }
   30% {
-    transform: scale(0.19);
-    left: 0;
-    top: 0; }
+    transform: scale(0.19); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load20Ani {
   0% {
-    transform: scale(0.2);
-    left: 0;
-    top: 0; }
+    transform: scale(0.2); }
   30% {
-    transform: scale(0.2);
-    left: 0;
-    top: 0; }
+    transform: scale(0.2); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load21Ani {
   0% {
-    transform: scale(0.21);
-    left: 0;
-    top: 0; }
+    transform: scale(0.21); }
   30% {
-    transform: scale(0.21);
-    left: 0;
-    top: 0; }
+    transform: scale(0.21); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load22Ani {
   0% {
-    transform: scale(0.22);
-    left: 0;
-    top: 0; }
+    transform: scale(0.22); }
   30% {
-    transform: scale(0.22);
-    left: 0;
-    top: 0; }
+    transform: scale(0.22); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load23Ani {
   0% {
-    transform: scale(0.23);
-    left: 0;
-    top: 0; }
+    transform: scale(0.23); }
   30% {
-    transform: scale(0.23);
-    left: 0;
-    top: 0; }
+    transform: scale(0.23); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load24Ani {
   0% {
-    transform: scale(0.24);
-    left: 0;
-    top: 0; }
+    transform: scale(0.24); }
   30% {
-    transform: scale(0.24);
-    left: 0;
-    top: 0; }
+    transform: scale(0.24); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load25Ani {
   0% {
-    transform: scale(0.25);
-    left: 0;
-    top: 0; }
+    transform: scale(0.25); }
   30% {
-    transform: scale(0.25);
-    left: 0;
-    top: 0; }
+    transform: scale(0.25); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load26Ani {
   0% {
-    transform: scale(0.26);
-    left: 0;
-    top: 0; }
+    transform: scale(0.26); }
   30% {
-    transform: scale(0.26);
-    left: 0;
-    top: 0; }
+    transform: scale(0.26); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load27Ani {
   0% {
-    transform: scale(0.27);
-    left: 0;
-    top: 0; }
+    transform: scale(0.27); }
   30% {
-    transform: scale(0.27);
-    left: 0;
-    top: 0; }
+    transform: scale(0.27); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load28Ani {
   0% {
-    transform: scale(0.28);
-    left: 0;
-    top: 0; }
+    transform: scale(0.28); }
   30% {
-    transform: scale(0.28);
-    left: 0;
-    top: 0; }
+    transform: scale(0.28); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load29Ani {
   0% {
-    transform: scale(0.29);
-    left: 0;
-    top: 0; }
+    transform: scale(0.29); }
   30% {
-    transform: scale(0.29);
-    left: 0;
-    top: 0; }
+    transform: scale(0.29); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load30Ani {
   0% {
-    transform: scale(0.3);
-    left: 0;
-    top: 0; }
+    transform: scale(0.3); }
   30% {
-    transform: scale(0.3);
-    left: 0;
-    top: 0; }
+    transform: scale(0.3); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load31Ani {
   0% {
-    transform: scale(0.31);
-    left: 0;
-    top: 0; }
+    transform: scale(0.31); }
   30% {
-    transform: scale(0.31);
-    left: 0;
-    top: 0; }
+    transform: scale(0.31); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load32Ani {
   0% {
-    transform: scale(0.32);
-    left: 0;
-    top: 0; }
+    transform: scale(0.32); }
   30% {
-    transform: scale(0.32);
-    left: 0;
-    top: 0; }
+    transform: scale(0.32); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load33Ani {
   0% {
-    transform: scale(0.33);
-    left: 0;
-    top: 0; }
+    transform: scale(0.33); }
   30% {
-    transform: scale(0.33);
-    left: 0;
-    top: 0; }
+    transform: scale(0.33); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load34Ani {
   0% {
-    transform: scale(0.34);
-    left: 0;
-    top: 0; }
+    transform: scale(0.34); }
   30% {
-    transform: scale(0.34);
-    left: 0;
-    top: 0; }
+    transform: scale(0.34); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load35Ani {
   0% {
-    transform: scale(0.35);
-    left: 0;
-    top: 0; }
+    transform: scale(0.35); }
   30% {
-    transform: scale(0.35);
-    left: 0;
-    top: 0; }
+    transform: scale(0.35); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load36Ani {
   0% {
-    transform: scale(0.36);
-    left: 0;
-    top: 0; }
+    transform: scale(0.36); }
   30% {
-    transform: scale(0.36);
-    left: 0;
-    top: 0; }
+    transform: scale(0.36); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load37Ani {
   0% {
-    transform: scale(0.37);
-    left: 0;
-    top: 0; }
+    transform: scale(0.37); }
   30% {
-    transform: scale(0.37);
-    left: 0;
-    top: 0; }
+    transform: scale(0.37); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load38Ani {
   0% {
-    transform: scale(0.38);
-    left: 0;
-    top: 0; }
+    transform: scale(0.38); }
   30% {
-    transform: scale(0.38);
-    left: 0;
-    top: 0; }
+    transform: scale(0.38); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load39Ani {
   0% {
-    transform: scale(0.39);
-    left: 0;
-    top: 0; }
+    transform: scale(0.39); }
   30% {
-    transform: scale(0.39);
-    left: 0;
-    top: 0; }
+    transform: scale(0.39); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load40Ani {
   0% {
-    transform: scale(0.4);
-    left: 0;
-    top: 0; }
+    transform: scale(0.4); }
   30% {
-    transform: scale(0.4);
-    left: 0;
-    top: 0; }
+    transform: scale(0.4); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load41Ani {
   0% {
-    transform: scale(0.41);
-    left: 0;
-    top: 0; }
+    transform: scale(0.41); }
   30% {
-    transform: scale(0.41);
-    left: 0;
-    top: 0; }
+    transform: scale(0.41); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load42Ani {
   0% {
-    transform: scale(0.42);
-    left: 0;
-    top: 0; }
+    transform: scale(0.42); }
   30% {
-    transform: scale(0.42);
-    left: 0;
-    top: 0; }
+    transform: scale(0.42); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load43Ani {
   0% {
-    transform: scale(0.43);
-    left: 0;
-    top: 0; }
+    transform: scale(0.43); }
   30% {
-    transform: scale(0.43);
-    left: 0;
-    top: 0; }
+    transform: scale(0.43); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load44Ani {
   0% {
-    transform: scale(0.44);
-    left: 0;
-    top: 0; }
+    transform: scale(0.44); }
   30% {
-    transform: scale(0.44);
-    left: 0;
-    top: 0; }
+    transform: scale(0.44); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load45Ani {
   0% {
-    transform: scale(0.45);
-    left: 0;
-    top: 0; }
+    transform: scale(0.45); }
   30% {
-    transform: scale(0.45);
-    left: 0;
-    top: 0; }
+    transform: scale(0.45); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load46Ani {
   0% {
-    transform: scale(0.46);
-    left: 0;
-    top: 0; }
+    transform: scale(0.46); }
   30% {
-    transform: scale(0.46);
-    left: 0;
-    top: 0; }
+    transform: scale(0.46); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load47Ani {
   0% {
-    transform: scale(0.47);
-    left: 0;
-    top: 0; }
+    transform: scale(0.47); }
   30% {
-    transform: scale(0.47);
-    left: 0;
-    top: 0; }
+    transform: scale(0.47); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load48Ani {
   0% {
-    transform: scale(0.48);
-    left: 0;
-    top: 0; }
+    transform: scale(0.48); }
   30% {
-    transform: scale(0.48);
-    left: 0;
-    top: 0; }
+    transform: scale(0.48); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load49Ani {
   0% {
-    transform: scale(0.49);
-    left: 0;
-    top: 0; }
+    transform: scale(0.49); }
   30% {
-    transform: scale(0.49);
-    left: 0;
-    top: 0; }
+    transform: scale(0.49); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load50Ani {
   0% {
-    transform: scale(0.5);
-    left: 0;
-    top: 0; }
+    transform: scale(0.5); }
   30% {
-    transform: scale(0.5);
-    left: 0;
-    top: 0; }
+    transform: scale(0.5); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load51Ani {
   0% {
-    transform: scale(0.51);
-    left: 0;
-    top: 0; }
+    transform: scale(0.51); }
   30% {
-    transform: scale(0.51);
-    left: 0;
-    top: 0; }
+    transform: scale(0.51); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load52Ani {
   0% {
-    transform: scale(0.52);
-    left: 0;
-    top: 0; }
+    transform: scale(0.52); }
   30% {
-    transform: scale(0.52);
-    left: 0;
-    top: 0; }
+    transform: scale(0.52); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load53Ani {
   0% {
-    transform: scale(0.53);
-    left: 0;
-    top: 0; }
+    transform: scale(0.53); }
   30% {
-    transform: scale(0.53);
-    left: 0;
-    top: 0; }
+    transform: scale(0.53); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load54Ani {
   0% {
-    transform: scale(0.54);
-    left: 0;
-    top: 0; }
+    transform: scale(0.54); }
   30% {
-    transform: scale(0.54);
-    left: 0;
-    top: 0; }
+    transform: scale(0.54); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load55Ani {
   0% {
-    transform: scale(0.55);
-    left: 0;
-    top: 0; }
+    transform: scale(0.55); }
   30% {
-    transform: scale(0.55);
-    left: 0;
-    top: 0; }
+    transform: scale(0.55); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load56Ani {
   0% {
-    transform: scale(0.56);
-    left: 0;
-    top: 0; }
+    transform: scale(0.56); }
   30% {
-    transform: scale(0.56);
-    left: 0;
-    top: 0; }
+    transform: scale(0.56); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load57Ani {
   0% {
-    transform: scale(0.57);
-    left: 0;
-    top: 0; }
+    transform: scale(0.57); }
   30% {
-    transform: scale(0.57);
-    left: 0;
-    top: 0; }
+    transform: scale(0.57); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load58Ani {
   0% {
-    transform: scale(0.58);
-    left: 0;
-    top: 0; }
+    transform: scale(0.58); }
   30% {
-    transform: scale(0.58);
-    left: 0;
-    top: 0; }
+    transform: scale(0.58); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load59Ani {
   0% {
-    transform: scale(0.59);
-    left: 0;
-    top: 0; }
+    transform: scale(0.59); }
   30% {
-    transform: scale(0.59);
-    left: 0;
-    top: 0; }
+    transform: scale(0.59); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load60Ani {
   0% {
-    transform: scale(0.6);
-    left: 0;
-    top: 0; }
+    transform: scale(0.6); }
   30% {
-    transform: scale(0.6);
-    left: 0;
-    top: 0; }
+    transform: scale(0.6); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load61Ani {
   0% {
-    transform: scale(0.61);
-    left: 0;
-    top: 0; }
+    transform: scale(0.61); }
   30% {
-    transform: scale(0.61);
-    left: 0;
-    top: 0; }
+    transform: scale(0.61); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load62Ani {
   0% {
-    transform: scale(0.62);
-    left: 0;
-    top: 0; }
+    transform: scale(0.62); }
   30% {
-    transform: scale(0.62);
-    left: 0;
-    top: 0; }
+    transform: scale(0.62); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load63Ani {
   0% {
-    transform: scale(0.63);
-    left: 0;
-    top: 0; }
+    transform: scale(0.63); }
   30% {
-    transform: scale(0.63);
-    left: 0;
-    top: 0; }
+    transform: scale(0.63); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load64Ani {
   0% {
-    transform: scale(0.64);
-    left: 0;
-    top: 0; }
+    transform: scale(0.64); }
   30% {
-    transform: scale(0.64);
-    left: 0;
-    top: 0; }
+    transform: scale(0.64); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load65Ani {
   0% {
-    transform: scale(0.65);
-    left: 0;
-    top: 0; }
+    transform: scale(0.65); }
   30% {
-    transform: scale(0.65);
-    left: 0;
-    top: 0; }
+    transform: scale(0.65); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load66Ani {
   0% {
-    transform: scale(0.66);
-    left: 0;
-    top: 0; }
+    transform: scale(0.66); }
   30% {
-    transform: scale(0.66);
-    left: 0;
-    top: 0; }
+    transform: scale(0.66); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load67Ani {
   0% {
-    transform: scale(0.67);
-    left: 0;
-    top: 0; }
+    transform: scale(0.67); }
   30% {
-    transform: scale(0.67);
-    left: 0;
-    top: 0; }
+    transform: scale(0.67); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load68Ani {
   0% {
-    transform: scale(0.68);
-    left: 0;
-    top: 0; }
+    transform: scale(0.68); }
   30% {
-    transform: scale(0.68);
-    left: 0;
-    top: 0; }
+    transform: scale(0.68); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load69Ani {
   0% {
-    transform: scale(0.69);
-    left: 0;
-    top: 0; }
+    transform: scale(0.69); }
   30% {
-    transform: scale(0.69);
-    left: 0;
-    top: 0; }
+    transform: scale(0.69); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load70Ani {
   0% {
-    transform: scale(0.7);
-    left: 0;
-    top: 0; }
+    transform: scale(0.7); }
   30% {
-    transform: scale(0.7);
-    left: 0;
-    top: 0; }
+    transform: scale(0.7); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load71Ani {
   0% {
-    transform: scale(0.71);
-    left: 0;
-    top: 0; }
+    transform: scale(0.71); }
   30% {
-    transform: scale(0.71);
-    left: 0;
-    top: 0; }
+    transform: scale(0.71); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load72Ani {
   0% {
-    transform: scale(0.72);
-    left: 0;
-    top: 0; }
+    transform: scale(0.72); }
   30% {
-    transform: scale(0.72);
-    left: 0;
-    top: 0; }
+    transform: scale(0.72); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load73Ani {
   0% {
-    transform: scale(0.73);
-    left: 0;
-    top: 0; }
+    transform: scale(0.73); }
   30% {
-    transform: scale(0.73);
-    left: 0;
-    top: 0; }
+    transform: scale(0.73); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load74Ani {
   0% {
-    transform: scale(0.74);
-    left: 0;
-    top: 0; }
+    transform: scale(0.74); }
   30% {
-    transform: scale(0.74);
-    left: 0;
-    top: 0; }
+    transform: scale(0.74); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load75Ani {
   0% {
-    transform: scale(0.75);
-    left: 0;
-    top: 0; }
+    transform: scale(0.75); }
   30% {
-    transform: scale(0.75);
-    left: 0;
-    top: 0; }
+    transform: scale(0.75); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load76Ani {
   0% {
-    transform: scale(0.76);
-    left: 0;
-    top: 0; }
+    transform: scale(0.76); }
   30% {
-    transform: scale(0.76);
-    left: 0;
-    top: 0; }
+    transform: scale(0.76); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load77Ani {
   0% {
-    transform: scale(0.77);
-    left: 0;
-    top: 0; }
+    transform: scale(0.77); }
   30% {
-    transform: scale(0.77);
-    left: 0;
-    top: 0; }
+    transform: scale(0.77); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load78Ani {
   0% {
-    transform: scale(0.78);
-    left: 0;
-    top: 0; }
+    transform: scale(0.78); }
   30% {
-    transform: scale(0.78);
-    left: 0;
-    top: 0; }
+    transform: scale(0.78); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load79Ani {
   0% {
-    transform: scale(0.79);
-    left: 0;
-    top: 0; }
+    transform: scale(0.79); }
   30% {
-    transform: scale(0.79);
-    left: 0;
-    top: 0; }
+    transform: scale(0.79); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load80Ani {
   0% {
-    transform: scale(0.8);
-    left: 0;
-    top: 0; }
+    transform: scale(0.8); }
   30% {
-    transform: scale(0.8);
-    left: 0;
-    top: 0; }
+    transform: scale(0.8); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load81Ani {
   0% {
-    transform: scale(0.81);
-    left: 0;
-    top: 0; }
+    transform: scale(0.81); }
   30% {
-    transform: scale(0.81);
-    left: 0;
-    top: 0; }
+    transform: scale(0.81); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load82Ani {
   0% {
-    transform: scale(0.82);
-    left: 0;
-    top: 0; }
+    transform: scale(0.82); }
   30% {
-    transform: scale(0.82);
-    left: 0;
-    top: 0; }
+    transform: scale(0.82); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load83Ani {
   0% {
-    transform: scale(0.83);
-    left: 0;
-    top: 0; }
+    transform: scale(0.83); }
   30% {
-    transform: scale(0.83);
-    left: 0;
-    top: 0; }
+    transform: scale(0.83); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load84Ani {
   0% {
-    transform: scale(0.84);
-    left: 0;
-    top: 0; }
+    transform: scale(0.84); }
   30% {
-    transform: scale(0.84);
-    left: 0;
-    top: 0; }
+    transform: scale(0.84); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load85Ani {
   0% {
-    transform: scale(0.85);
-    left: 0;
-    top: 0; }
+    transform: scale(0.85); }
   30% {
-    transform: scale(0.85);
-    left: 0;
-    top: 0; }
+    transform: scale(0.85); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load86Ani {
   0% {
-    transform: scale(0.86);
-    left: 0;
-    top: 0; }
+    transform: scale(0.86); }
   30% {
-    transform: scale(0.86);
-    left: 0;
-    top: 0; }
+    transform: scale(0.86); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load87Ani {
   0% {
-    transform: scale(0.87);
-    left: 0;
-    top: 0; }
+    transform: scale(0.87); }
   30% {
-    transform: scale(0.87);
-    left: 0;
-    top: 0; }
+    transform: scale(0.87); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load88Ani {
   0% {
-    transform: scale(0.88);
-    left: 0;
-    top: 0; }
+    transform: scale(0.88); }
   30% {
-    transform: scale(0.88);
-    left: 0;
-    top: 0; }
+    transform: scale(0.88); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load89Ani {
   0% {
-    transform: scale(0.89);
-    left: 0;
-    top: 0; }
+    transform: scale(0.89); }
   30% {
-    transform: scale(0.89);
-    left: 0;
-    top: 0; }
+    transform: scale(0.89); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load90Ani {
   0% {
-    transform: scale(0.9);
-    left: 0;
-    top: 0; }
+    transform: scale(0.9); }
   30% {
-    transform: scale(0.9);
-    left: 0;
-    top: 0; }
+    transform: scale(0.9); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load91Ani {
   0% {
-    transform: scale(0.91);
-    left: 0;
-    top: 0; }
+    transform: scale(0.91); }
   30% {
-    transform: scale(0.91);
-    left: 0;
-    top: 0; }
+    transform: scale(0.91); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load92Ani {
   0% {
-    transform: scale(0.92);
-    left: 0;
-    top: 0; }
+    transform: scale(0.92); }
   30% {
-    transform: scale(0.92);
-    left: 0;
-    top: 0; }
+    transform: scale(0.92); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load93Ani {
   0% {
-    transform: scale(0.93);
-    left: 0;
-    top: 0; }
+    transform: scale(0.93); }
   30% {
-    transform: scale(0.93);
-    left: 0;
-    top: 0; }
+    transform: scale(0.93); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load94Ani {
   0% {
-    transform: scale(0.94);
-    left: 0;
-    top: 0; }
+    transform: scale(0.94); }
   30% {
-    transform: scale(0.94);
-    left: 0;
-    top: 0; }
+    transform: scale(0.94); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load95Ani {
   0% {
-    transform: scale(0.95);
-    left: 0;
-    top: 0; }
+    transform: scale(0.95); }
   30% {
-    transform: scale(0.95);
-    left: 0;
-    top: 0; }
+    transform: scale(0.95); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load96Ani {
   0% {
-    transform: scale(0.96);
-    left: 0;
-    top: 0; }
+    transform: scale(0.96); }
   30% {
-    transform: scale(0.96);
-    left: 0;
-    top: 0; }
+    transform: scale(0.96); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load97Ani {
   0% {
-    transform: scale(0.97);
-    left: 0;
-    top: 0; }
+    transform: scale(0.97); }
   30% {
-    transform: scale(0.97);
-    left: 0;
-    top: 0; }
+    transform: scale(0.97); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load98Ani {
   0% {
-    transform: scale(0.98);
-    left: 0;
-    top: 0; }
+    transform: scale(0.98); }
   30% {
-    transform: scale(0.98);
-    left: 0;
-    top: 0; }
+    transform: scale(0.98); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 @keyframes load99Ani {
   0% {
-    transform: scale(0.99);
-    left: 0;
-    top: 0; }
+    transform: scale(0.99); }
   30% {
-    transform: scale(0.99);
-    left: 0;
-    top: 0; }
+    transform: scale(0.99); }
   100% {
-    transform: scale(1);
-    left: -152.5px;
-    top: -623px; } }
+    transform: scale(1); } }
 
 body, html {
   overflow: hidden;
@@ -1644,13 +1072,6 @@ body, html {
 
 body {
   position: relative; }
-
-#beforeLoad {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 6000px;
-  height: 5000px; }
 
 h1 {
   display: none; }

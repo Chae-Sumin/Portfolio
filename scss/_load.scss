@@ -1,36 +1,63 @@
 @charset "utf-8";
 
 //load 관련 스타일입니다
-
 #beforeLoad{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     z-index: 9999;
+    transition: z-index 0s 3s;
     .cloud{
-        display: none;
+        display: block;
         position: absolute;
-        box-shadow: 0 0 30px #0003;
+        transition: all 3s linear, opacity 2s 500ms linear;
         &.c1{
-            left: -50vw;
-            top: -50vh;
+            left: -25%;
+            top: -25%;
         }
         &.c2{
-            left: 50vw;
-            top: -50vh;
+            left: 25%;
+            top: -25%;
         }
         &.c3{
-            left: -50vw;
-            top: 50vh;
+            left: -25%;
+            top: 25%;
         }
         &.c4{
-            left: 50vw;
-            top: 50vh;
+            left: 25%;
+            top: 25%;
+        }
+    }
+    &.load{
+        z-index: -1;
+        .cloud{
+            opacity: 0;
+            &.c1{
+                left: -225%;
+                top: -225%;
+            }
+            &.c2{
+                left: 225%;
+                top: -225%;
+            }
+            &.c3{
+                left: -225%;
+                top: 225%;
+            }
+            &.c4{
+                left: 225%;
+                top: 225%;
+            }
         }
     }
 }
 
 @for $i from 1 to 100{
     @keyframes load#{$i}Ani{
-        0%{transform: scale(#{$i / 100}); left: 0; top: 0;}
-        30%{transform: scale(#{$i / 100}); left: 0; top: 0;}
-        100%{transform: scale(1); left: -152.5px; top: -623px;}
+        0%{transform: scale(#{$i / 100});}
+        30%{transform: scale(#{$i / 100});}
+        100%{transform: scale(1);}
     }
 }

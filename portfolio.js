@@ -45,9 +45,12 @@ window.onload = function(){
         mapImg.setAttribute("alt", "배경 이미지");
         mapImg.setAttribute("id", "mapImg");
         MAP.appendChild(mapImg);
+        MAP.style.transformOrigin = -focusX + "px " + -focusY + "px";
         mapImg.onload = function(){
-            MAP.style.animation = "load"+parseInt((ratioW > ratioH ? ratioW : ratioH) * 100)+"Ani 4s ease"
-            timer = setTimeout(screenFocus,4000)
+            console.log(ratioW,ratioH);
+            screenFocus();
+            MAP.style.animation = "load"+parseInt((ratioW) * 100)+"Ani 5s ease";
+            document.getElementById("beforeLoad").classList.add("load");
             afterLoad();
         }
     }
