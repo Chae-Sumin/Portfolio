@@ -21,6 +21,7 @@
     }
     .home{
         @include box(250px,-100px,800px); 
+        z-index: 300;
     }
     .crops{
         $cropsH : 150;

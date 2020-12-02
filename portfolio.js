@@ -1,5 +1,7 @@
+let loadCount = 0;
 window.onload = function(){
-
+    loadCount++;
+    console.log(loadCount);
     const MAP = document.getElementById("field");
     const CHAR = document.getElementById("char");
 
@@ -18,8 +20,8 @@ window.onload = function(){
     const move = movefuncs();
 
     let isMobile = false
-    let screenWidth = window.innerWidth; // 스크린 높이
-    let screenHeight = window.innerHeight; // 스크린 너비
+    let screenWidth = window.innerWidth; // 스크린 너비
+    let screenHeight = window.innerHeight; // 스크린 높이
     let focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2); // 초점 X값(음수)
     let focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2); //초점 Y값(음수)
     
@@ -34,29 +36,44 @@ window.onload = function(){
     let MouseDownFlag = false; //키 눌려있을 때 true
     let keyTimeout = null; // 키 눌렸을때 setTimeOut
     let pressedKey = []; // 눌린 키 값
-    let limitsZone = [ // 제한 구역
-        {
-            id : 1,
-            left : 200,
-            top : 0,
-            right : 500,
-            bottom : 300,
-        },
-        {
-            id : 2,
-            left : 0,
-            top : 500,
-            right : 300,
-            bottom : 800,
-        },
-        {
-            id : 3,
-            left : 600,
-            top : 600,
-            right : 900,
-            bottom : 900,
+    let timer = null;
+    function loading(){
+        let ratioW = (screenWidth - focusX) / MAP_WIDTH
+        let ratioH = (screenHeight - focusY) / MAP_HEIGHT
+        const mapImg = document.createElement("img");
+        mapImg.setAttribute("src", "./img/map2.png");
+        mapImg.setAttribute("alt", "배경 이미지");
+        mapImg.setAttribute("id", "mapImg");
+        MAP.appendChild(mapImg);
+        mapImg.onload = function(){
+            MAP.style.animation = "load"+parseInt((ratioW > ratioH ? ratioW : ratioH) * 100)+"Ani 4s ease"
+            timer = setTimeout(screenFocus,4000)
+            afterLoad();
         }
-    ];
+    }
+    loading();
+    function afterLoad(){
+        document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
+            key.presskey(e.key);
+            (key.flag()) ? false : keyTimeout = setTimeout(keyDown,0);
+        });
+        document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
+            key.removeKey(e.key);
+            if(!key.keyCode()) {
+                CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
+                clearTimeout(keyTimeout);
+                key.flagFalse();
+                let btnOns = document.getElementsByClassName("btnOn");
+                while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
+            }
+        });
+        window.addEventListener("resize", function(){ // 창 크기 변경시 
+            screenWidth = window.innerWidth;
+            screenHeight = window.innerHeight;
+            screenFocus();
+        });
+    }
+
     let limitImg = document.getElementById('limit_img');
     let limitCanvas = document.createElement("canvas");
     limitCanvas.width = limitImg.width;
@@ -73,7 +90,7 @@ window.onload = function(){
         }
     ];
     
-    screenFocus();
+    // screenFocus();
     let mobileDivice = [
         'iphone', 'ipod',
         'window ce', 'android',
@@ -183,13 +200,11 @@ window.onload = function(){
                 if(isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY +  CHAR_HEIGHT / 2)){
                     moveX += x;
                     CHAR.style.left = moveX + "px";
-                    isBlock = false;
                 }
                 if(isEntryPossible(moveX + CHAR_WIDTH / 2,moveY +  CHAR_HEIGHT / 2 + y)){
                     moveY += y;
                     CHAR.style.top = moveY + "px";
                     CHAR.style.zIndex = parseInt(moveY + CHAR_HEIGHT / 3);
-                    isBlock = false;
                 }
                 screenFocus();
             }
@@ -246,25 +261,7 @@ window.onload = function(){
         setDir(key.keyCode());
         keyTimeout = setTimeout(keyDown,1000/CHAR_MOVE_SPEED);
     }
-    document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
-        key.presskey(e.key);
-        (key.flag()) ? false : keyTimeout = setTimeout(keyDown,0);
-    });
-    document.addEventListener("keyup",function(e){ // 키가 떨어지면 루프 종료
-        key.removeKey(e.key);
-        if(!key.keyCode()) {
-            CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
-            clearTimeout(keyTimeout);
-            key.flagFalse();
-            let btnOns = document.getElementsByClassName("btnOn");
-            while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
-        }
-    });
-    window.addEventListener("resize", function(){ // 창 크기 변경시 
-        screenWidth = window.innerWidth;
-        screenHeight = window.innerHeight;
-        screenFocus();
-    });
+    
     function touchMove(){
         centerX = CHAR.offsetLeft + CHAR_WIDTH / 2;
         centerY = CHAR.offsetTop + CHAR_HEIGHT / 2;
