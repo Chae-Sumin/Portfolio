@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="./portfolio.js"></script>
+    <script src="./portfolio.js"></script>
 </head>
 <body>
-    <h1>0.02.02</h1>
+    <h1>0.03.01</h1>
     <div id="beforeLoad">
         <img src="./img/cloud.png" alt="구름" class="cloud c1"/>
         <img src="./img/cloud.png" alt="구름" class="cloud c2"/>
@@ -18,26 +18,58 @@
         <img src="./img/limits.png" alt="limit img" id="limit_img"/>
         <div id="object">
             <div id="char"></div>
-            <div class="home"><img src="./img/houseF.png" alt="start point house"></div>
+            <div class="home">
+                <span class="flower"></span>
+                <span class="flower"></span>
+                <span class="flower"></span>
+                <span class="flower"></span>
+            </div>
             <div class="crops">
                 <ul class="carrot">
-                    <li class="obj"></li>
-                    <li class="obj"></li>
-                    <li class="obj"></li>
-                    <li class="obj"></li>
+                    <li class="obj"></li><li class="obj"></li><li class="obj"></li><li class="obj"></li>
                 </ul>
                 <ul class="corn">
-                    <li class="obj"></li>
-                    <li class="obj"></li>
-                    <li class="obj"></li>
-                    <li class="obj"></li>
+                    <li class="obj"></li><li class="obj"></li><li class="obj"></li><li class="obj"></li>
                 </ul>
                 <ul class="tomato">
-                    <li class="obj"></li>
-                    <li class="obj"></li>
-                    <li class="obj"></li>
-                    <li class="obj"></li>
+                    <li class="obj"></li><li class="obj"></li><li class="obj"></li><li class="obj"></li>
                 </ul>
+            </div>
+            <div class="animals">
+                <div class="geeseCage">
+                    <ul class="cage">
+                        <li class="row1"></li>
+                        <li class="row2"></li>
+                        <li class="col1"></li>
+                        <li class="col2"></li>
+                    </ul>
+                </div>
+                <div class="pigsCage">
+                    <ul class="cage">
+                        <li class="row1"></li>
+                        <li class="row2"></li>
+                        <li class="col1"></li>
+                        <li class="col2"></li>
+                    </ul>
+                </div>
+                <div class="cowCage">
+                    <ul class="cage">
+                        <li class="row1"></li>
+                        <li class="row2"></li>
+                        <li class="col1"></li>
+                        <li class="col2"></li>
+                    </ul>
+                </div>
+                <div class="sheepCage">
+                    <ul class="cage">
+                        <li class="row1"></li>
+                        <li class="row2"></li>
+                        <li class="col1"></li>
+                        <li class="col2"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="trees">
             </div>
         </div>
     </div>
@@ -50,16 +82,5 @@
         </div>
         <button type="button" id="active">active</button>
     </div>
-    <script>
-        const imgs = document.images; 
-const allLoad = imgs.length; 
-let loading = 0; 
-for (let i = 0; i < allLoad; i++) { 
- imgs[i].onload=function() { 
-    loading++; 
- console.log( loading + "/" +  allLoad );
- } 
-} 
-    </script>
 </body>
 </html>

@@ -98,7 +98,64 @@
     left: 250px;
     top: -100px;
     width: 800px;
-    z-index: 300; }
+    height: 900px;
+    z-index: 300;
+    background: url(../img/houseF.png) 50% 50%/cover no-repeat; }
+    #object .home .flower {
+      background: url(../img/Flower.png) 50% 50%/cover no-repeat;
+      transform-origin: center bottom; }
+
+@keyframes flower1Ani {
+  from {
+    transform: rotateZ(-3deg); }
+  to {
+    transform: rotateZ(3deg); } }
+
+@keyframes flower2Ani {
+  from {
+    transform: rotateZ(3deg); }
+  to {
+    transform: rotateZ(-3deg); } }
+
+@keyframes flower3Ani {
+  from {
+    transform: rotateZ(-3deg); }
+  to {
+    transform: rotateZ(3deg); } }
+
+@keyframes flower4Ani {
+  from {
+    transform: rotateZ(3deg); }
+  to {
+    transform: rotateZ(-3deg); } }
+      #object .home .flower:nth-child(1) {
+        position: absolute;
+        left: 150px;
+        top: 718px;
+        width: 120px;
+        height: 137px;
+        animation: flower1Ani 3s 0.9164s infinite alternate; }
+      #object .home .flower:nth-child(2) {
+        position: absolute;
+        left: 80px;
+        top: 726px;
+        width: 120px;
+        height: 137px;
+        animation: flower2Ani 3s 0.1017s infinite alternate; }
+      #object .home .flower:nth-child(3) {
+        position: absolute;
+        left: 610px;
+        top: 724px;
+        width: 120px;
+        height: 137px;
+        animation: flower3Ani 3s 0.75104s infinite alternate; }
+      #object .home .flower:nth-child(4) {
+        position: absolute;
+        left: 540px;
+        top: 706px;
+        width: 120px;
+        height: 137px;
+        animation: flower4Ani 3s 0.57729s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -231,6 +288,265 @@
         height: 150px;
         z-index: 4210;
         animation: cropsAni 5s step-start infinite; }
+  #object .animals {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+    #object .animals .geeseCage {
+      position: absolute;
+      left: 1200px;
+      top: 0;
+      width: 1200px;
+      height: 700px; }
+    #object .animals .pigsCage {
+      position: absolute;
+      left: 5200px;
+      top: 2800px;
+      width: 800px;
+      height: 700px; }
+    #object .animals .cowCage {
+      position: absolute;
+      left: 5200px;
+      top: 2000px;
+      width: 800px;
+      height: 700px; }
+    #object .animals .sheepCage {
+      position: absolute;
+      left: 5200px;
+      top: 1200px;
+      width: 800px;
+      height: 700px; }
+    #object .animals .cage {
+      position: relative;
+      width: 100%;
+      height: 100%; }
+      #object .animals .cage .row1 {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: calc(100% - 100px);
+        height: 150px;
+        transform: translate(-50%, 0);
+        background: url(../img/fence_front2.png) 0 0 repeat-x;
+        z-index: 10; }
+      #object .animals .cage .row2 {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: calc(100% - 100px);
+        height: 150px;
+        transform: translate(-50%, 0);
+        top: unset;
+        bottom: 0;
+        background: url(../img/fence_front2.png) 0 0 repeat-x;
+        z-index: 12; }
+      #object .animals .cage .col1 {
+        position: absolute;
+        left: 30px;
+        top: 50%;
+        width: 50px;
+        height: calc(100% - 100px);
+        transform: translate(0, -50%);
+        background: url(../img/fence_side2.png) 0 0 repeat-y;
+        z-index: 11; }
+      #object .animals .cage .col2 {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 50px;
+        height: calc(100% - 100px);
+        transform: translate(0, -50%);
+        left: unset;
+        right: 30px;
+        background: url(../img/fence_side2.png) 0 0 repeat-y;
+        z-index: 11; }
+  #object .trees {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+    #object .trees .tree {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 350px;
+      height: 480px;
+      background: url(../img/tree.png) 0 0/350px 480px no-repeat; }
+      #object .trees .tree:nth-child(1) {
+        left: -15px;
+        top: 210px;
+        z-index: 510; }
+      #object .trees .tree:nth-child(2) {
+        left: 190px;
+        top: 828px;
+        z-index: 1128; }
+      #object .trees .tree:nth-child(3) {
+        left: 1690px;
+        top: 843px;
+        z-index: 1143; }
+      #object .trees .tree:nth-child(4) {
+        left: 2015px;
+        top: 623px;
+        z-index: 923; }
+      #object .trees .tree:nth-child(5) {
+        left: 274px;
+        top: 4341px;
+        z-index: 4641; }
+      #object .trees .tree:nth-child(6) {
+        left: 1570px;
+        top: 2364px;
+        z-index: 2664; }
+      #object .trees .tree:nth-child(7) {
+        left: 1865px;
+        top: 2794px;
+        z-index: 3094; }
+      #object .trees .tree:nth-child(8) {
+        left: 1570px;
+        top: 3660px;
+        z-index: 3960; }
+      #object .trees .tree:nth-child(9) {
+        left: 2525px;
+        top: 3500px;
+        z-index: 3800; }
+      #object .trees .tree:nth-child(10) {
+        left: 3529px;
+        top: 3757px;
+        z-index: 4057; }
+      #object .trees .tree:nth-child(11) {
+        left: 4242px;
+        top: 3931px;
+        z-index: 4231; }
+      #object .trees .tree:nth-child(12) {
+        left: 3567px;
+        top: -15px;
+        z-index: 285; }
+      #object .trees .tree:nth-child(13) {
+        left: 3221px;
+        top: 143px;
+        z-index: 443; }
+      #object .trees .tree:nth-child(14) {
+        left: 3571px;
+        top: 383px;
+        z-index: 683; }
+      #object .trees .tree:nth-child(15) {
+        left: 3282px;
+        top: 536px;
+        z-index: 836; }
+      #object .trees .tree:nth-child(16) {
+        left: 3549px;
+        top: 835px;
+        z-index: 1135; }
+      #object .trees .tree:nth-child(17) {
+        left: 3167px;
+        top: 946px;
+        z-index: 1246; }
+      #object .trees .tree:nth-child(18) {
+        left: 4273px;
+        top: 988px;
+        z-index: 1288; }
+      #object .trees .tree:nth-child(19) {
+        left: 3904px;
+        top: 1043px;
+        z-index: 1343; }
+      #object .trees .tree:nth-child(20) {
+        left: 2060px;
+        top: 1576px;
+        z-index: 1876; }
+      #object .trees .tree:nth-child(21) {
+        left: 2365px;
+        top: 1840px;
+        z-index: 2140; }
+      #object .trees .tree:nth-child(22) {
+        left: 2615px;
+        top: 1576px;
+        z-index: 1876; }
+      #object .trees .tree:nth-child(23) {
+        left: 2727px;
+        top: 1976px;
+        z-index: 2276; }
+      #object .trees .tree:nth-child(24) {
+        left: 2969px;
+        top: 1556px;
+        z-index: 1856; }
+      #object .trees .tree:nth-child(25) {
+        left: 3464px;
+        top: 1216px;
+        z-index: 1516; }
+      #object .trees .tree:nth-child(26) {
+        left: 4579px;
+        top: 1220px;
+        z-index: 1520; }
+      #object .trees .tree:nth-child(27) {
+        left: 3255px;
+        top: 1496px;
+        z-index: 1796; }
+      #object .trees .tree:nth-child(28) {
+        left: 3082px;
+        top: 2006px;
+        z-index: 2306; }
+      #object .trees .tree:nth-child(29) {
+        left: 3392px;
+        top: 1910px;
+        z-index: 2210; }
+      #object .trees .tree:nth-child(30) {
+        left: 3797px;
+        top: 1336px;
+        z-index: 1636; }
+      #object .trees .tree:nth-child(31) {
+        left: 4188px;
+        top: 1496px;
+        z-index: 1796; }
+      #object .trees .tree:nth-child(32) {
+        left: 4458px;
+        top: 1620px;
+        z-index: 1920; }
+      #object .trees .tree:nth-child(33) {
+        left: 3617px;
+        top: 1686px;
+        z-index: 1986; }
+      #object .trees .tree:nth-child(34) {
+        left: 3935px;
+        top: 1750px;
+        z-index: 2050; }
+      #object .trees .tree:nth-child(35) {
+        left: 4279px;
+        top: 2000px;
+        z-index: 2300; }
+      #object .trees .tree:nth-child(36) {
+        left: 3879px;
+        top: 2116px;
+        z-index: 2416; }
+      #object .trees .tree:nth-child(37) {
+        left: 3639px;
+        top: 2260px;
+        z-index: 2560; }
+      #object .trees .tree:nth-child(38) {
+        left: 4543px;
+        top: 2166px;
+        z-index: 2466; }
+      #object .trees .tree:nth-child(39) {
+        left: 3969px;
+        top: 2457px;
+        z-index: 2757; }
+      #object .trees .tree:nth-child(40) {
+        left: 4327px;
+        top: 2481px;
+        z-index: 2781; }
+      #object .trees .tree:nth-child(41) {
+        left: 3729px;
+        top: 2740px;
+        z-index: 3040; }
+      #object .trees .tree:nth-child(42) {
+        left: 4144px;
+        top: 2860px;
+        z-index: 3160; }
+      #object .trees .tree:nth-child(43) {
+        left: 4494px;
+        top: 2844px;
+        z-index: 3144; }
 
 #beforeLoad {
   position: fixed;
@@ -239,25 +555,27 @@
   width: 100%;
   height: 100%;
   z-index: 9999;
-  transition: z-index 0s 3s; }
+  transition: z-index 0s 3s;
+  background: #ffff; }
   #beforeLoad .cloud {
     display: block;
     position: absolute;
     transition: all 3s linear, opacity 2s 500ms linear; }
     #beforeLoad .cloud.c1 {
-      left: -25%;
-      top: -25%; }
+      left: -23%;
+      top: -23%; }
     #beforeLoad .cloud.c2 {
-      left: 25%;
-      top: -25%; }
+      left: 23%;
+      top: -23%; }
     #beforeLoad .cloud.c3 {
-      left: -25%;
-      top: 25%; }
+      left: -23%;
+      top: 23%; }
     #beforeLoad .cloud.c4 {
-      left: 25%;
-      top: 25%; }
+      left: 23%;
+      top: 23%; }
   #beforeLoad.load {
-    z-index: -1; }
+    z-index: -1;
+    background: #fff0; }
     #beforeLoad.load .cloud {
       opacity: 0; }
       #beforeLoad.load .cloud.c1 {

@@ -9,29 +9,31 @@
     height: 100%;
     z-index: 9999;
     transition: z-index 0s 3s;
+    background: #ffff;
     .cloud{
         display: block;
         position: absolute;
         transition: all 3s linear, opacity 2s 500ms linear;
         &.c1{
-            left: -25%;
-            top: -25%;
+            left: -23%;
+            top: -23%;
         }
         &.c2{
-            left: 25%;
-            top: -25%;
+            left: 23%;
+            top: -23%;
         }
         &.c3{
-            left: -25%;
-            top: 25%;
+            left: -23%;
+            top: 23%;
         }
         &.c4{
-            left: 25%;
-            top: 25%;
+            left: 23%;
+            top: 23%;
         }
     }
     &.load{
         z-index: -1;
+        background: #fff0;
         .cloud{
             opacity: 0;
             &.c1{

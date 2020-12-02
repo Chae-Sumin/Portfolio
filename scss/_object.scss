@@ -20,8 +20,37 @@
         width: 100%; height: auto;
     }
     .home{
-        @include box(250px,-100px,800px); 
+        @include box(250px,-100px,800px,900px); 
         z-index: 300;
+        background: url(../img/houseF.png) 50% 50% / cover no-repeat;
+        .flower{
+            background: url(../img/Flower.png) 50% 50%  / cover no-repeat;
+            transform-origin: center bottom;
+            @keyframes flower1Ani {
+                from{transform: rotateZ(-3deg);}
+                to{transform: rotateZ(3deg);}
+            }
+            @keyframes flower2Ani {
+                from{transform: rotateZ(3deg);}
+                to{transform: rotateZ(-3deg);}
+            }
+            @keyframes flower3Ani {
+                from{transform: rotateZ(-3deg);}
+                to{transform: rotateZ(3deg);}
+            }
+            @keyframes flower4Ani {
+                from{transform: rotateZ(3deg);}
+                to{transform: rotateZ(-3deg);}
+            }
+            @for $i from 1 through 4{
+                &:nth-child(#{$i}){
+                    $term : 0px;
+                    @if $i > 2 {$term : 600px}
+                    @include box(220px + $term - (140px * ($i / 2)),#{(700 + random(30))+"px"},120px,137px);
+                    animation: flower#{$i}Ani 3s #{random()+"s"} infinite alternate;
+                }
+            }
+        }
     }
     .crops{
         $cropsH : 150;
@@ -56,6 +85,71 @@
                     @include box(0,#{$cropsH * ($i - 1)}px,100%,#{$cropsH}px);
                     z-index: 3760 + $cropsH * ($i - 1);
                     animation: cropsAni 5s step-start infinite;
+                }
+            }
+        }
+    }
+    .animals{
+        @include box(0,0,100%,100%);
+        .geeseCage{
+            @include box(1200px,0,1200px,700px);
+        }
+        .pigsCage{
+            @include box(5200px,2800px,800px,700px);
+        }
+        .cowCage{
+            @include box(5200px,2000px,800px,700px);
+        }
+        .sheepCage{
+            @include box(5200px,1200px,800px,700px);
+        }
+        .cage{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            .row1{
+                @include box(50%,0,calc(100% - 100px),150px);
+                transform: translate(-50%,0);
+                background: url(../img/fence_front2.png) 0 0 repeat-x;
+                z-index: 10;
+            }
+            .row2{
+                @include box(50%,0,calc(100% - 100px),150px);
+                transform: translate(-50%,0);
+                top: unset;
+                bottom: 0;
+                background: url(../img/fence_front2.png) 0 0 repeat-x;
+                z-index: 12;
+            }
+            .col1{
+                @include box(30px,50%,50px,calc(100% - 100px));
+                transform: translate(0,-50%);
+                background: url(../img/fence_side2.png) 0 0 repeat-y;
+                z-index: 11;
+            }
+            .col2{
+                @include box(0,50%,50px,calc(100% - 100px));
+                transform: translate(0,-50%);
+                left: unset;
+                right: 30px;
+                background: url(../img/fence_side2.png) 0 0 repeat-y;
+                z-index: 11;
+            }
+        }
+    }
+    .trees{
+        $treeZ : 300;
+        $treeX : (-15 190 1690 2015 274 1570 1865 1570 2525 3529 4242 3567 3221 3571 3282 3549 3167 4273 3904 2060 2365 2615 2727 2969 3464 4579 3255 3082 3392 3797 4188 4458 3617 3935 4279 3879 3639 4543 3969 4327 3729 4144 4494);
+        $treeY : (210 828 843 623 4341 2364 2794 3660 3500 3757 3931 -15 143 383 536 835 946 988 1043 1576 1840 1576 1976 1556 1216 1220 1496 2006 1910 1336 1496 1620 1686 1750 2000 2116 2260 2166 2457 2481 2740 2860 2844);
+        @include box(0,0,100%,100%); 
+        .tree{
+            @include box(0,0,350px,480px);
+            background: url(../img/tree.png) 0 0 / 350px 480px no-repeat;
+            @for $i from 1 through length($treeX){
+                &:nth-child(#{$i}){
+                    left: #{nth($treeX,$i) + "px"};
+                    top: #{nth($treeY,$i) + "px"};
+                    z-index: $treeZ + nth($treeY,$i);
                 }
             }
         }
