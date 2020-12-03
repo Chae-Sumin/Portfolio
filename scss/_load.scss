@@ -10,7 +10,9 @@
     z-index: 9999;
     transition: z-index 0s 3s;
     background: #ffff;
-    .cloud{
+    .cloud{ //구름 장막
+        max-width: unset;
+        max-height: 150%;
         display: block;
         position: absolute;
         transition: all 3s linear, opacity 2s 500ms linear;
@@ -30,8 +32,36 @@
             left: 23%;
             top: 23%;
         }
+        
     }
-    &.load{
+    span{ // 로딩 중 표시
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -17.5px 0 0 -50px;
+        width: 100px;
+        height: 70px;
+        font-size: 24px;
+        font-weight: 900;
+        text-align: center;
+        color: #707070;
+        transition: opacity 1s 500ms linear;
+        svg{
+            width: 32px;
+            height: 32px;
+            circle{
+                stroke-dasharray: 35 55;
+                stroke-dashoffset: 0;
+                animation: circleAni 1500ms linear infinite;
+                @keyframes circleAni {
+                    0%{stroke-dashoffset: 90;}
+                    100%{stroke-dashoffset: 0;}
+                }
+            }
+        }
+    }
+    &.load{ // 로딩 완료
         z-index: -1;
         background: #fff0;
         .cloud{
@@ -53,6 +83,7 @@
                 top: 225%;
             }
         }
+        span{opacity: 0;}
     }
 }
 
@@ -60,6 +91,5 @@
     @keyframes load#{$i}Ani{
         0%{transform: scale(#{$i / 100});}
         30%{transform: scale(#{$i / 100});}
-        100%{transform: scale(1);}
     }
 }

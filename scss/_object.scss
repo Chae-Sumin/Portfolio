@@ -13,6 +13,12 @@
     75%{background-position-x: $marginL - 250px;}
     100%{background-position-x: $marginL;}
 }
+#goose{
+    @include box(1100px, 700px, 150px, 150px);
+    background: #aaa;
+    z-index: 9000;
+    font-size: 60px; font-weight: bold; line-height: 150px; text-align: center;
+}
 #object{
     @include box(0,0); 
     right: 0; bottom: 0;

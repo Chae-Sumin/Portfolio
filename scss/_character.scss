@@ -25,6 +25,7 @@ $left3: -280px -600px;
     position: absolute;
     left: #{$x}px;
     top: #{$y}px;
+    z-index: $y;
 }
 @mixin charAni($dir){ // 움직임 설정
     @if $dir == back {
@@ -75,7 +76,7 @@ $left3: -280px -600px;
 }
 #char{
     @include charDefualt;
-    @include startPoint(725,900);
+    @include startPoint(570,700);
     &._1,&._5,&._6{
         @include charAni(back);
     }

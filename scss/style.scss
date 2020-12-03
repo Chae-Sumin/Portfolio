@@ -19,8 +19,9 @@ h1{display: none;}
     @include posA; 
     width: $fieldW;
     height: $fieldH;
-    transform-origin: left top;
+    transform-origin: 0 0;
     z-index: 1;
+    transform: scale(0.7); //  ---------------------
 }
 #mapImg{
     @include posA; 

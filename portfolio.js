@@ -3,6 +3,7 @@ window.onload = function(){
     // --------------------돔 구조--------------------
     const MAP = document.getElementById("field"); //전체 맵
     const CHAR = document.getElementById("char"); //캐릭터
+    const GOOSE = document.getElementById("goose"); //메인거위
     const TREE = document.querySelector("#object>.trees");
     const controllBtns = document.querySelectorAll("#controller button"); 
     const controllDiv = document.querySelector("#controller>div");
@@ -12,10 +13,13 @@ window.onload = function(){
     const MAP_WIDTH = 6000; // 맵 전체 너비
     const MAP_HEIGHT = 5000; // 맵 전체 높이
     const CHAR_MOVE_SPEED = 200; //max(300) 
-    const CHAR_MOVE_PX = 3; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
+    const CHAR_MOVE_PX = 3.5; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
     const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
+    const GOOSE_MOVE_PX = CHAR_MOVE_PX * 1.3;
+    const RATIO_MAP = 0.7;
     const key = keyfuncs();
     const move = movefuncs();
+    const goose = gooseFunc();
     // -------------------- 변수 --------------------
     let isMobile = false //모바일 확인
     let screenWidth = window.innerWidth; // 스크린 너비
@@ -32,7 +36,7 @@ window.onload = function(){
 
     // --------------------로딩중...--------------------
     function loading(){
-        let ratioW = (screenWidth - focusX) / MAP_WIDTH
+        let ratioW = screenWidth / MAP_WIDTH
         for(let i = 0; i < 43; i++){ // 나무 생성
             let tree = document.createElement("span");
             tree.setAttribute("class","tree");
@@ -43,10 +47,10 @@ window.onload = function(){
         mapImg.setAttribute("alt", "배경 이미지");
         mapImg.setAttribute("id", "mapImg");
         MAP.appendChild(mapImg);
-        MAP.style.transformOrigin = -focusX + "px " + -focusY + "px";
+        // MAP.style.transformOrigin = -focusX + "px " + -focusY + "px";
         mapImg.onload = function(){
             screenFocus();
-            MAP.style.animation = "load"+parseInt((ratioW) * 100)+"Ani 5s ease";
+            MAP.style.animation = "load"+parseInt((ratioW) * 100 + 1)+"Ani 5s ease";
             document.getElementById("beforeLoad").classList.add("load");
             let loadTime = setTimeout(function(){
                 afterLoad(); //로딩이 끝난 뒤 호출
@@ -109,20 +113,32 @@ window.onload = function(){
         let keyTimer = null;
         return {
             presskey : function(key){
-                switch (key) {
+                switch (key.toLowerCase()) {
                     case " ":
                         active = true
                         break;
-                    case "ArrowUp":
+                    case "arrowup":
                         moveY = -1;
                         break;
-                    case "ArrowLeft":
+                    case "arrowleft":
                         moveX = -1;
                         break;
-                    case "ArrowDown":
+                    case "arrowdown":
                         moveY = 1;
                         break;
-                    case "ArrowRight":
+                    case "arrowright":
+                        moveX = 1;
+                        break;
+                    case "w":
+                        moveY = -1;
+                        break;
+                    case "a":
+                        moveX = -1;
+                        break;
+                    case "s":
+                        moveY = 1;
+                        break;
+                    case "d":
                         moveX = 1;
                         break;
                     default:
@@ -130,20 +146,32 @@ window.onload = function(){
                 }
             },
             removeKey : function(key){
-                switch (key) {
+                switch (key.toLowerCase()) {
                     case " ":
                         active = false
                         break;
-                    case "ArrowUp":
+                    case "arrowup":
                         moveY = moveY == -1 ? 0 : 1;
                         break;
-                    case "ArrowLeft":
+                    case "arrowleft":
                         moveX = moveX == -1 ? 0 : 1;
                         break;
-                    case "ArrowDown":
+                    case "arrowdown":
                         moveY = moveY == 1 ? 0 : -1;
                         break;
-                    case "ArrowRight":
+                    case "arrowright":
+                        moveX = moveX == 1 ? 0 : -1;
+                        break;
+                    case "w":
+                        moveY = moveY == -1 ? 0 : 1;
+                        break;
+                    case "a":
+                        moveX = moveX == -1 ? 0 : 1;
+                        break;
+                    case "s":
+                        moveY = moveY == 1 ? 0 : -1;
+                        break;
+                    case "d":
                         moveX = moveX == 1 ? 0 : -1;
                         break;
                     default:
@@ -182,9 +210,7 @@ window.onload = function(){
         let moveX = CHAR.offsetLeft;
         let moveY = CHAR.offsetTop;
         return{
-            moveTo : function(_x,_y){
-                let x = _x;
-                let y = _y;
+            moveTo : function(x,y){
                 let isBlock = true;
                 let count = 0;
                 if(x&&isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY +  CHAR_HEIGHT)){
@@ -200,9 +226,10 @@ window.onload = function(){
                 }
                 while (isBlock && count < 5) {
                     count += 2;
-                    isBlock = this.moveSmooth(_x,_y,count);
+                    isBlock = this.moveSmooth(x,y,count);
                 } 
                 screenFocus();
+                goose.sensor(moveX,moveY);
             },
             moveSmooth : function(x,y,count){
                 let dir = [];
@@ -238,6 +265,93 @@ window.onload = function(){
                     }
                 } return true;
             }
+        }
+    }
+    function gooseFunc(){
+        const senserLength = 300;
+        let goosePosX = GOOSE.offsetLeft;
+        let goosePosY = GOOSE.offsetTop;
+        let gooseBox = [goosePosX - senserLength,goosePosX + senserLength, goosePosY - senserLength, goosePosY + senserLength];
+        let gooseLevel = 1;
+        let isMoving = false;
+        return{
+            moveTo : function(x,y){
+                isMoving = true;
+                goosePosX = GOOSE.offsetLeft;
+                goosePosY = GOOSE.offsetTop;
+                const _x = Math.abs(x - goosePosX);
+                const _y = Math.abs(y - goosePosY);
+                const moveTimes = Math.sqrt(_x*_x + _y*_y) / GOOSE_MOVE_PX;
+                const speedX = Math.sin(Math.atan(_x/_y))*GOOSE_MOVE_PX;
+                const speedY = Math.cos(Math.atan(_x/_y))*GOOSE_MOVE_PX;
+                let count = 0;
+                let timer = setTimeout(movement, 0);
+                function movement(){
+                    count++
+                    GOOSE.style.left = (speedX * Math.sign(x-goosePosX) + GOOSE.offsetLeft)+ "px";
+                    GOOSE.style.top = (speedY * Math.sign(y-goosePosY) + GOOSE.offsetTop) + "px";
+                    GOOSE.style.zIndex = parseInt(y);
+                    if(count < parseInt(moveTimes)){timer = setTimeout(movement, 1000 / CHAR_MOVE_SPEED);}
+                    else{
+                        isMoving = false;
+                        clearTimeout(timer);
+                    };
+                }
+            },
+            sensor : function(x,y){
+                goosePosX = GOOSE.offsetLeft;
+                goosePosY = GOOSE.offsetTop;
+                gooseBox = [goosePosX - senserLength,goosePosX + senserLength, goosePosY - senserLength, goosePosY + senserLength];
+                if(isMoving){return false;}
+                if( gooseBox[0] < x && gooseBox[1] > x && gooseBox[2] < y && gooseBox[3] > y){
+                    this.level();
+                    return true;
+                } else return false;
+            },
+            level : function(){
+                switch (gooseLevel){
+                    case  1 :
+                        this.moveTo(1340,2000);
+                        break;
+                    case  2 :
+                        this.moveTo(500,2500);
+                        break;
+                    case  3 :
+                        this.moveTo(500,3500);
+                        break;
+                    case  4 :
+                        this.moveTo(2000,4500);
+                        break;
+                    case  5 :
+                        this.moveTo(4000,4600);
+                        break;
+                    case  6 :
+                        this.moveTo(5000,4000);
+                        break;
+                    case  7 :
+                        this.moveTo(5500,3100);
+                        break;
+                    case  8 :
+                        this.moveTo(5700,2200);
+                        break;
+                    case  9 :
+                        this.moveTo(5500,1900);
+                        this.moveTo(4000,1800);
+                        break;
+                    case  10 :
+                        this.moveTo(3500,1000);
+                        break;
+                    case  11 :
+                        this.moveTo(5000,400);
+                        break;
+                    case  12 :
+                        this.moveTo(1100,700);
+                        gooseLevel = 0;
+                        break;
+                    default : break;
+                }
+                gooseLevel++;
+            },
         }
     }
     function keyDown(){ // 키가 눌리면 setTimeOut 루프 시작
@@ -293,11 +407,11 @@ window.onload = function(){
     }
     
     function screenFocus(){ // 캐릭터에 초점을 맞춰 이동(맵 끝으로 가면 고정)
-        focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2);
-        focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2);
-        focusX = focusX >= 0 ? 0 : focusX <= screenWidth - MAP_WIDTH ? MAP.offsetLeft : focusX;
-        focusY = focusY >= 0 ? 0 : focusY <= screenHeight - MAP_HEIGHT ? MAP.offsetTop : focusY;
-        MAP.style.left = focusX + "px";
+        focusX = screenWidth / 2 - CHAR.offsetLeft * RATIO_MAP - (CHAR_WIDTH / 2);
+        focusY = screenHeight / 2 - CHAR.offsetTop * RATIO_MAP - (CHAR_HEIGHT / 2);
+        focusX = focusX >= 0 ? 0 : focusX <= screenWidth - MAP_WIDTH * RATIO_MAP ? MAP.offsetLeft : focusX;
+        focusY = focusY >= 0 ? 0 : focusY <= screenHeight - MAP_HEIGHT * RATIO_MAP ? MAP.offsetTop : focusY;
+        MAP.style.left = focusX  + "px";
         MAP.style.top = focusY + "px";
     }
 }
