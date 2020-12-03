@@ -149,6 +149,7 @@
         $treeY : (210 828 843 623 4341 2364 2794 3660 3500 3757 3931 -15 143 383 536 835 946 988 1043 1576 1840 1576 1976 1556 1216 1220 1496 2006 1910 1336 1496 1620 1686 1750 2000 2116 2260 2166 2457 2481 2740 2860 2844);
         @include box(0,0,100%,100%); 
         .tree{
+            $fruit : (apple blueberry lemon orange peach);
             @include box(0,0,350px,480px);
             background: url(../img/tree.png) 0 0 / 350px 480px no-repeat;
             @for $i from 1 through length($treeX){
@@ -157,6 +158,36 @@
                     top: #{nth($treeY,$i) + "px"};
                     z-index: $treeZ + nth($treeY,$i);
                 }
+            }
+            li{
+                @include box(0,0,84px,84px);
+                &:nth-child(1){
+                    left: 130px;
+                    top: 20px;
+                }
+                &:nth-child(2){
+                    left: 50px;
+                    top: 120px;
+                }
+                &:nth-child(3){
+                    left: 200px;
+                    top: 140px;
+                }
+            }
+            &.apple>li{
+                background: url(../img/fruit.png) 50% 0 / 84px auto no-repeat;
+            }
+            &.blueberry>li{
+                background: url(../img/fruit.png) 50% -84px / 84px auto no-repeat;
+            }
+            &.lemon>li{
+                background: url(../img/fruit.png) 50% -168px / 84px auto no-repeat;
+            }
+            &.orange>li{
+                background: url(../img/fruit.png) 50% -252px / 84px auto no-repeat;
+            }
+            &.peach>li{
+                background: url(../img/fruit.png) 50% -336px / 84px auto no-repeat;
             }
         }
     }

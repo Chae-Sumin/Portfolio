@@ -38,8 +38,31 @@ window.onload = function(){
     function loading(){
         let ratioW = screenWidth / MAP_WIDTH
         for(let i = 0; i < 43; i++){ // 나무 생성
-            let tree = document.createElement("span");
+            let tree = document.createElement("ul");
+            for(let j = 0; j < 3; j++){
+                let fruits = document.createElement("li");
+                tree.appendChild(fruits);
+            }
             tree.setAttribute("class","tree");
+            switch (Math.floor(Math.random()*6)) {
+                case 0:
+                    tree.classList.add("apple");
+                    break;
+                case 1:
+                    tree.classList.add("blueberry");
+                    break;
+                case 2:
+                    tree.classList.add("lemon");
+                    break;
+                case 3:
+                    tree.classList.add("orange");
+                    break;
+                case 4:
+                    tree.classList.add("peach");
+                    break;
+                default:
+                    break;
+            } 
             TREE.appendChild(tree);
         }
         const mapImg = document.createElement("img"); // 메인 배경

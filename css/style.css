@@ -145,31 +145,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 720px;
+        top: 712px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.0895s infinite alternate; }
+        animation: flower1Ani 3s 0.55823s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 701px;
-        width: 120px;
-        height: 137px;
-        animation: flower2Ani 3s 0.7505s infinite alternate; }
-      #object .home .flower:nth-child(3) {
-        position: absolute;
-        left: 610px;
         top: 705px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.3221s infinite alternate; }
+        animation: flower2Ani 3s 0.71257s infinite alternate; }
+      #object .home .flower:nth-child(3) {
+        position: absolute;
+        left: 610px;
+        top: 727px;
+        width: 120px;
+        height: 137px;
+        animation: flower3Ani 3s 0.62714s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 710px;
+        top: 708px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.6736s infinite alternate; }
+        animation: flower4Ani 3s 0.09035s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -561,6 +561,31 @@
         left: 4494px;
         top: 2844px;
         z-index: 3144; }
+      #object .trees .tree li {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 84px;
+        height: 84px; }
+        #object .trees .tree li:nth-child(1) {
+          left: 130px;
+          top: 20px; }
+        #object .trees .tree li:nth-child(2) {
+          left: 50px;
+          top: 120px; }
+        #object .trees .tree li:nth-child(3) {
+          left: 200px;
+          top: 140px; }
+      #object .trees .tree.apple > li {
+        background: url(../img/fruit.png) 50% 0/84px auto no-repeat; }
+      #object .trees .tree.blueberry > li {
+        background: url(../img/fruit.png) 50% -84px/84px auto no-repeat; }
+      #object .trees .tree.lemon > li {
+        background: url(../img/fruit.png) 50% -168px/84px auto no-repeat; }
+      #object .trees .tree.orange > li {
+        background: url(../img/fruit.png) 50% -252px/84px auto no-repeat; }
+      #object .trees .tree.peach > li {
+        background: url(../img/fruit.png) 50% -336px/84px auto no-repeat; }
 
 #beforeLoad {
   position: fixed;
@@ -639,793 +664,595 @@
   0% {
     transform: scale(0.01); }
   30% {
-    transform: scale(0.01); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.01); } }
 
 @keyframes load2Ani {
   0% {
     transform: scale(0.02); }
   30% {
-    transform: scale(0.02); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.02); } }
 
 @keyframes load3Ani {
   0% {
     transform: scale(0.03); }
   30% {
-    transform: scale(0.03); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.03); } }
 
 @keyframes load4Ani {
   0% {
     transform: scale(0.04); }
   30% {
-    transform: scale(0.04); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.04); } }
 
 @keyframes load5Ani {
   0% {
     transform: scale(0.05); }
   30% {
-    transform: scale(0.05); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.05); } }
 
 @keyframes load6Ani {
   0% {
     transform: scale(0.06); }
   30% {
-    transform: scale(0.06); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.06); } }
 
 @keyframes load7Ani {
   0% {
     transform: scale(0.07); }
   30% {
-    transform: scale(0.07); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.07); } }
 
 @keyframes load8Ani {
   0% {
     transform: scale(0.08); }
   30% {
-    transform: scale(0.08); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.08); } }
 
 @keyframes load9Ani {
   0% {
     transform: scale(0.09); }
   30% {
-    transform: scale(0.09); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.09); } }
 
 @keyframes load10Ani {
   0% {
     transform: scale(0.1); }
   30% {
-    transform: scale(0.1); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.1); } }
 
 @keyframes load11Ani {
   0% {
     transform: scale(0.11); }
   30% {
-    transform: scale(0.11); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.11); } }
 
 @keyframes load12Ani {
   0% {
     transform: scale(0.12); }
   30% {
-    transform: scale(0.12); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.12); } }
 
 @keyframes load13Ani {
   0% {
     transform: scale(0.13); }
   30% {
-    transform: scale(0.13); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.13); } }
 
 @keyframes load14Ani {
   0% {
     transform: scale(0.14); }
   30% {
-    transform: scale(0.14); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.14); } }
 
 @keyframes load15Ani {
   0% {
     transform: scale(0.15); }
   30% {
-    transform: scale(0.15); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.15); } }
 
 @keyframes load16Ani {
   0% {
     transform: scale(0.16); }
   30% {
-    transform: scale(0.16); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.16); } }
 
 @keyframes load17Ani {
   0% {
     transform: scale(0.17); }
   30% {
-    transform: scale(0.17); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.17); } }
 
 @keyframes load18Ani {
   0% {
     transform: scale(0.18); }
   30% {
-    transform: scale(0.18); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.18); } }
 
 @keyframes load19Ani {
   0% {
     transform: scale(0.19); }
   30% {
-    transform: scale(0.19); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.19); } }
 
 @keyframes load20Ani {
   0% {
     transform: scale(0.2); }
   30% {
-    transform: scale(0.2); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.2); } }
 
 @keyframes load21Ani {
   0% {
     transform: scale(0.21); }
   30% {
-    transform: scale(0.21); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.21); } }
 
 @keyframes load22Ani {
   0% {
     transform: scale(0.22); }
   30% {
-    transform: scale(0.22); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.22); } }
 
 @keyframes load23Ani {
   0% {
     transform: scale(0.23); }
   30% {
-    transform: scale(0.23); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.23); } }
 
 @keyframes load24Ani {
   0% {
     transform: scale(0.24); }
   30% {
-    transform: scale(0.24); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.24); } }
 
 @keyframes load25Ani {
   0% {
     transform: scale(0.25); }
   30% {
-    transform: scale(0.25); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.25); } }
 
 @keyframes load26Ani {
   0% {
     transform: scale(0.26); }
   30% {
-    transform: scale(0.26); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.26); } }
 
 @keyframes load27Ani {
   0% {
     transform: scale(0.27); }
   30% {
-    transform: scale(0.27); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.27); } }
 
 @keyframes load28Ani {
   0% {
     transform: scale(0.28); }
   30% {
-    transform: scale(0.28); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.28); } }
 
 @keyframes load29Ani {
   0% {
     transform: scale(0.29); }
   30% {
-    transform: scale(0.29); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.29); } }
 
 @keyframes load30Ani {
   0% {
     transform: scale(0.3); }
   30% {
-    transform: scale(0.3); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.3); } }
 
 @keyframes load31Ani {
   0% {
     transform: scale(0.31); }
   30% {
-    transform: scale(0.31); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.31); } }
 
 @keyframes load32Ani {
   0% {
     transform: scale(0.32); }
   30% {
-    transform: scale(0.32); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.32); } }
 
 @keyframes load33Ani {
   0% {
     transform: scale(0.33); }
   30% {
-    transform: scale(0.33); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.33); } }
 
 @keyframes load34Ani {
   0% {
     transform: scale(0.34); }
   30% {
-    transform: scale(0.34); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.34); } }
 
 @keyframes load35Ani {
   0% {
     transform: scale(0.35); }
   30% {
-    transform: scale(0.35); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.35); } }
 
 @keyframes load36Ani {
   0% {
     transform: scale(0.36); }
   30% {
-    transform: scale(0.36); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.36); } }
 
 @keyframes load37Ani {
   0% {
     transform: scale(0.37); }
   30% {
-    transform: scale(0.37); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.37); } }
 
 @keyframes load38Ani {
   0% {
     transform: scale(0.38); }
   30% {
-    transform: scale(0.38); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.38); } }
 
 @keyframes load39Ani {
   0% {
     transform: scale(0.39); }
   30% {
-    transform: scale(0.39); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.39); } }
 
 @keyframes load40Ani {
   0% {
     transform: scale(0.4); }
   30% {
-    transform: scale(0.4); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.4); } }
 
 @keyframes load41Ani {
   0% {
     transform: scale(0.41); }
   30% {
-    transform: scale(0.41); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.41); } }
 
 @keyframes load42Ani {
   0% {
     transform: scale(0.42); }
   30% {
-    transform: scale(0.42); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.42); } }
 
 @keyframes load43Ani {
   0% {
     transform: scale(0.43); }
   30% {
-    transform: scale(0.43); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.43); } }
 
 @keyframes load44Ani {
   0% {
     transform: scale(0.44); }
   30% {
-    transform: scale(0.44); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.44); } }
 
 @keyframes load45Ani {
   0% {
     transform: scale(0.45); }
   30% {
-    transform: scale(0.45); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.45); } }
 
 @keyframes load46Ani {
   0% {
     transform: scale(0.46); }
   30% {
-    transform: scale(0.46); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.46); } }
 
 @keyframes load47Ani {
   0% {
     transform: scale(0.47); }
   30% {
-    transform: scale(0.47); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.47); } }
 
 @keyframes load48Ani {
   0% {
     transform: scale(0.48); }
   30% {
-    transform: scale(0.48); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.48); } }
 
 @keyframes load49Ani {
   0% {
     transform: scale(0.49); }
   30% {
-    transform: scale(0.49); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.49); } }
 
 @keyframes load50Ani {
   0% {
     transform: scale(0.5); }
   30% {
-    transform: scale(0.5); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.5); } }
 
 @keyframes load51Ani {
   0% {
     transform: scale(0.51); }
   30% {
-    transform: scale(0.51); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.51); } }
 
 @keyframes load52Ani {
   0% {
     transform: scale(0.52); }
   30% {
-    transform: scale(0.52); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.52); } }
 
 @keyframes load53Ani {
   0% {
     transform: scale(0.53); }
   30% {
-    transform: scale(0.53); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.53); } }
 
 @keyframes load54Ani {
   0% {
     transform: scale(0.54); }
   30% {
-    transform: scale(0.54); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.54); } }
 
 @keyframes load55Ani {
   0% {
     transform: scale(0.55); }
   30% {
-    transform: scale(0.55); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.55); } }
 
 @keyframes load56Ani {
   0% {
     transform: scale(0.56); }
   30% {
-    transform: scale(0.56); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.56); } }
 
 @keyframes load57Ani {
   0% {
     transform: scale(0.57); }
   30% {
-    transform: scale(0.57); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.57); } }
 
 @keyframes load58Ani {
   0% {
     transform: scale(0.58); }
   30% {
-    transform: scale(0.58); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.58); } }
 
 @keyframes load59Ani {
   0% {
     transform: scale(0.59); }
   30% {
-    transform: scale(0.59); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.59); } }
 
 @keyframes load60Ani {
   0% {
     transform: scale(0.6); }
   30% {
-    transform: scale(0.6); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.6); } }
 
 @keyframes load61Ani {
   0% {
     transform: scale(0.61); }
   30% {
-    transform: scale(0.61); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.61); } }
 
 @keyframes load62Ani {
   0% {
     transform: scale(0.62); }
   30% {
-    transform: scale(0.62); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.62); } }
 
 @keyframes load63Ani {
   0% {
     transform: scale(0.63); }
   30% {
-    transform: scale(0.63); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.63); } }
 
 @keyframes load64Ani {
   0% {
     transform: scale(0.64); }
   30% {
-    transform: scale(0.64); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.64); } }
 
 @keyframes load65Ani {
   0% {
     transform: scale(0.65); }
   30% {
-    transform: scale(0.65); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.65); } }
 
 @keyframes load66Ani {
   0% {
     transform: scale(0.66); }
   30% {
-    transform: scale(0.66); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.66); } }
 
 @keyframes load67Ani {
   0% {
     transform: scale(0.67); }
   30% {
-    transform: scale(0.67); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.67); } }
 
 @keyframes load68Ani {
   0% {
     transform: scale(0.68); }
   30% {
-    transform: scale(0.68); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.68); } }
 
 @keyframes load69Ani {
   0% {
     transform: scale(0.69); }
   30% {
-    transform: scale(0.69); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.69); } }
 
 @keyframes load70Ani {
   0% {
     transform: scale(0.7); }
   30% {
-    transform: scale(0.7); }
-  100% {
     transform: scale(0.7); } }
 
 @keyframes load71Ani {
   0% {
     transform: scale(0.71); }
   30% {
-    transform: scale(0.71); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.71); } }
 
 @keyframes load72Ani {
   0% {
     transform: scale(0.72); }
   30% {
-    transform: scale(0.72); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.72); } }
 
 @keyframes load73Ani {
   0% {
     transform: scale(0.73); }
   30% {
-    transform: scale(0.73); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.73); } }
 
 @keyframes load74Ani {
   0% {
     transform: scale(0.74); }
   30% {
-    transform: scale(0.74); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.74); } }
 
 @keyframes load75Ani {
   0% {
     transform: scale(0.75); }
   30% {
-    transform: scale(0.75); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.75); } }
 
 @keyframes load76Ani {
   0% {
     transform: scale(0.76); }
   30% {
-    transform: scale(0.76); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.76); } }
 
 @keyframes load77Ani {
   0% {
     transform: scale(0.77); }
   30% {
-    transform: scale(0.77); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.77); } }
 
 @keyframes load78Ani {
   0% {
     transform: scale(0.78); }
   30% {
-    transform: scale(0.78); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.78); } }
 
 @keyframes load79Ani {
   0% {
     transform: scale(0.79); }
   30% {
-    transform: scale(0.79); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.79); } }
 
 @keyframes load80Ani {
   0% {
     transform: scale(0.8); }
   30% {
-    transform: scale(0.8); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.8); } }
 
 @keyframes load81Ani {
   0% {
     transform: scale(0.81); }
   30% {
-    transform: scale(0.81); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.81); } }
 
 @keyframes load82Ani {
   0% {
     transform: scale(0.82); }
   30% {
-    transform: scale(0.82); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.82); } }
 
 @keyframes load83Ani {
   0% {
     transform: scale(0.83); }
   30% {
-    transform: scale(0.83); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.83); } }
 
 @keyframes load84Ani {
   0% {
     transform: scale(0.84); }
   30% {
-    transform: scale(0.84); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.84); } }
 
 @keyframes load85Ani {
   0% {
     transform: scale(0.85); }
   30% {
-    transform: scale(0.85); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.85); } }
 
 @keyframes load86Ani {
   0% {
     transform: scale(0.86); }
   30% {
-    transform: scale(0.86); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.86); } }
 
 @keyframes load87Ani {
   0% {
     transform: scale(0.87); }
   30% {
-    transform: scale(0.87); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.87); } }
 
 @keyframes load88Ani {
   0% {
     transform: scale(0.88); }
   30% {
-    transform: scale(0.88); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.88); } }
 
 @keyframes load89Ani {
   0% {
     transform: scale(0.89); }
   30% {
-    transform: scale(0.89); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.89); } }
 
 @keyframes load90Ani {
   0% {
     transform: scale(0.9); }
   30% {
-    transform: scale(0.9); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.9); } }
 
 @keyframes load91Ani {
   0% {
     transform: scale(0.91); }
   30% {
-    transform: scale(0.91); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.91); } }
 
 @keyframes load92Ani {
   0% {
     transform: scale(0.92); }
   30% {
-    transform: scale(0.92); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.92); } }
 
 @keyframes load93Ani {
   0% {
     transform: scale(0.93); }
   30% {
-    transform: scale(0.93); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.93); } }
 
 @keyframes load94Ani {
   0% {
     transform: scale(0.94); }
   30% {
-    transform: scale(0.94); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.94); } }
 
 @keyframes load95Ani {
   0% {
     transform: scale(0.95); }
   30% {
-    transform: scale(0.95); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.95); } }
 
 @keyframes load96Ani {
   0% {
     transform: scale(0.96); }
   30% {
-    transform: scale(0.96); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.96); } }
 
 @keyframes load97Ani {
   0% {
     transform: scale(0.97); }
   30% {
-    transform: scale(0.97); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.97); } }
 
 @keyframes load98Ani {
   0% {
     transform: scale(0.98); }
   30% {
-    transform: scale(0.98); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.98); } }
 
 @keyframes load99Ani {
   0% {
     transform: scale(0.99); }
   30% {
-    transform: scale(0.99); }
-  100% {
-    transform: scale(0.7); } }
+    transform: scale(0.99); } }
 
 body, html {
   overflow: hidden;
