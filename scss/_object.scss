@@ -5,27 +5,20 @@
     width: $width;
     height: $height;
 }
-@keyframes cropsAni{
-    $marginL : 20px;
-    0%{background-position-x: $marginL;}
-    25%{background-position-x: $marginL - 125px;}
-    50%{background-position-x: $marginL;}
-    75%{background-position-x: $marginL - 250px;}
-    100%{background-position-x: $marginL;}
-}
-#goose{
+
+#goose{ //메인 거위!
     @include box(1100px, 700px, 150px, 150px);
     background: #aaa;
     z-index: 9000;
     font-size: 60px; font-weight: bold; line-height: 150px; text-align: center;
 }
-#object{
+#object{ // 기타 오브젝트
     @include box(0,0); 
     right: 0; bottom: 0;
     img{
         width: 100%; height: auto;
     }
-    .home{
+    .home{ // 집
         @include box(250px,-100px,800px,900px); 
         z-index: 300;
         background: url(../img/houseF.png) 50% 50% / cover no-repeat;
@@ -58,7 +51,7 @@
             }
         }
     }
-    .crops{
+    .crops{ // 작물들
         $cropsH : 150;
         @include box(0,0,100%,100%); 
         .carrot{
@@ -70,6 +63,14 @@
                     z-index: 2080 + $cropsH * ($i - 1);
                     animation: cropsAni 5s step-start infinite;
                 }
+            }
+            @keyframes cropsAni{ // 
+                $marginL : 20px;
+                0%{background-position-x: $marginL;}
+                25%{background-position-x: $marginL - 125px;}
+                50%{background-position-x: $marginL;}
+                75%{background-position-x: $marginL - 250px;}
+                100%{background-position-x: $marginL;}
             }
         }
         .corn{
@@ -95,7 +96,7 @@
             }
         }
     }
-    .animals{
+    .animals{ //동물들(+우리)
         @include box(0,0,100%,100%);
         .geeseCage{
             @include box(1200px,0,1200px,700px);
@@ -143,7 +144,7 @@
             }
         }
     }
-    .trees{
+    .trees{ //나무들
         $treeZ : 300;
         $treeX : (-15 190 1690 2015 274 1570 1865 1570 2525 3529 4242 3567 3221 3571 3282 3549 3167 4273 3904 2060 2365 2615 2727 2969 3464 4579 3255 3082 3392 3797 4188 4458 3617 3935 4279 3879 3639 4543 3969 4327 3729 4144 4494);
         $treeY : (210 828 843 623 4341 2364 2794 3660 3500 3757 3931 -15 143 383 536 835 946 988 1043 1576 1840 1576 1976 1556 1216 1220 1496 2006 1910 1336 1496 1620 1686 1750 2000 2116 2260 2166 2457 2481 2740 2860 2844);

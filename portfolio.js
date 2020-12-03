@@ -1,5 +1,4 @@
 window.onload = function(){
-
     // --------------------돔 구조--------------------
     const MAP = document.getElementById("field"); //전체 맵
     const CHAR = document.getElementById("char"); //캐릭터
@@ -16,7 +15,7 @@ window.onload = function(){
     const CHAR_MOVE_PX = 3.5; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
     const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
     const GOOSE_MOVE_PX = CHAR_MOVE_PX * 1.3;
-    const RATIO_MAP = 0.7;
+    const MAP_RATIO = 0.7; // 맵 비율
     const key = keyfuncs();
     const move = movefuncs();
     const goose = gooseFunc();
@@ -44,7 +43,7 @@ window.onload = function(){
                 tree.appendChild(fruits);
             }
             tree.setAttribute("class","tree");
-            switch (Math.floor(Math.random()*6)) {
+            switch (Math.floor(Math.random()*6)) { // 과일 랜덤 생성
                 case 0:
                     tree.classList.add("apple");
                     break;
@@ -60,29 +59,34 @@ window.onload = function(){
                 case 4:
                     tree.classList.add("peach");
                     break;
-                default:
+                default: // 그냥 나무
                     break;
             } 
             TREE.appendChild(tree);
         }
         const mapImg = document.createElement("img"); // 메인 배경
-        mapImg.setAttribute("src", "./img/map2.png");
+        mapImg.setAttribute("src", "./img/map.png");
         mapImg.setAttribute("alt", "배경 이미지");
         mapImg.setAttribute("id", "mapImg");
         MAP.appendChild(mapImg);
         // MAP.style.transformOrigin = -focusX + "px " + -focusY + "px";
-        mapImg.onload = function(){
-            screenFocus();
+        mapImg.onload = function(){ // --------------------------------------------------------------로딩완료
             MAP.style.animation = "load"+parseInt((ratioW) * 100 + 1)+"Ani 5s ease";
             document.getElementById("beforeLoad").classList.add("load");
+            let aniTime = setTimeout(function(){
+                MAP.style.transition = "2s";
+                screenFocus();
+            },3000)
             let loadTime = setTimeout(function(){
-                afterLoad(); //로딩이 끝난 뒤 호출
+                afterLoad(); //로딩이 끝난 뒤 호출할 함수
+                MAP.style.transition = "none";
+                clearTimeout(aniTime);
                 clearTimeout(loadTime);
             },5000);
         }
     }
     loading();
-    function afterLoad(){
+    function afterLoad(){ //-----------------------------------------------------------로딩 완료까지 호출 x
         document.addEventListener("keydown",function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
             key.presskey(e.key);
             (key.flag()) ? false : key.setKeyTimer(keyDown,0);
@@ -233,7 +237,7 @@ window.onload = function(){
         let moveX = CHAR.offsetLeft;
         let moveY = CHAR.offsetTop;
         return{
-            moveTo : function(x,y){
+            moveTo : function(x,y){ // x,y만큼 이동
                 let isBlock = true;
                 let count = 0;
                 if(x&&isEntryPossible(moveX + CHAR_WIDTH / 2 + x,moveY +  CHAR_HEIGHT)){
@@ -247,14 +251,14 @@ window.onload = function(){
                     CHAR.style.zIndex = parseInt(moveY + CHAR_HEIGHT / 3);
                     isBlock = false;
                 }
-                while (isBlock && count < 5) {
+                while (isBlock && count < 5) { // 막힐 때 부드러운 움직임
                     count += 2;
                     isBlock = this.moveSmooth(x,y,count);
                 } 
                 screenFocus();
-                goose.sensor(moveX,moveY);
+                goose.sensor(moveX,moveY); //거위센서 온
             },
-            moveSmooth : function(x,y,count){
+            moveSmooth : function(x,y,count){ // 방해물에 막혔을 때 
                 let dir = [];
                 if(x === 0){
                     dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 - CHAR_CROSS_PX * count,moveY +  CHAR_HEIGHT + y));
@@ -290,7 +294,7 @@ window.onload = function(){
             }
         }
     }
-    function gooseFunc(){
+    function gooseFunc(){ // 거위 동작 클로져
         const senserLength = 300;
         let goosePosX = GOOSE.offsetLeft;
         let goosePosY = GOOSE.offsetTop;
@@ -298,7 +302,7 @@ window.onload = function(){
         let gooseLevel = 1;
         let isMoving = false;
         return{
-            moveTo : function(x,y){
+            moveTo : function(x,y){ // 좌표로 이동
                 isMoving = true;
                 goosePosX = GOOSE.offsetLeft;
                 goosePosY = GOOSE.offsetTop;
@@ -321,7 +325,7 @@ window.onload = function(){
                     };
                 }
             },
-            sensor : function(x,y){
+            sensor : function(x,y){ // 거위근처로 갔나?
                 goosePosX = GOOSE.offsetLeft;
                 goosePosY = GOOSE.offsetTop;
                 gooseBox = [goosePosX - senserLength,goosePosX + senserLength, goosePosY - senserLength, goosePosY + senserLength];
@@ -331,7 +335,7 @@ window.onload = function(){
                     return true;
                 } else return false;
             },
-            level : function(){
+            level : function(){ // 거위 근처로 가면 순서대로 작동
                 switch (gooseLevel){
                     case  1 :
                         this.moveTo(1340,2000);
@@ -430,10 +434,10 @@ window.onload = function(){
     }
     
     function screenFocus(){ // 캐릭터에 초점을 맞춰 이동(맵 끝으로 가면 고정)
-        focusX = screenWidth / 2 - CHAR.offsetLeft * RATIO_MAP - (CHAR_WIDTH / 2);
-        focusY = screenHeight / 2 - CHAR.offsetTop * RATIO_MAP - (CHAR_HEIGHT / 2);
-        focusX = focusX >= 0 ? 0 : focusX <= screenWidth - MAP_WIDTH * RATIO_MAP ? MAP.offsetLeft : focusX;
-        focusY = focusY >= 0 ? 0 : focusY <= screenHeight - MAP_HEIGHT * RATIO_MAP ? MAP.offsetTop : focusY;
+        focusX = screenWidth / 2 - CHAR.offsetLeft * MAP_RATIO - (CHAR_WIDTH / 2);
+        focusY = screenHeight / 2 - CHAR.offsetTop * MAP_RATIO - (CHAR_HEIGHT / 2);
+        focusX = focusX >= 0 ? 0 : focusX <= screenWidth - MAP_WIDTH * MAP_RATIO ? MAP.offsetLeft : focusX;
+        focusY = focusY >= 0 ? 0 : focusY <= screenHeight - MAP_HEIGHT * MAP_RATIO ? MAP.offsetTop : focusY;
         MAP.style.left = focusX  + "px";
         MAP.style.top = focusY + "px";
     }

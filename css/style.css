@@ -73,18 +73,6 @@
   #char.__4 {
     background-position: 0 -400px; }
 
-@keyframes cropsAni {
-  0% {
-    background-position-x: 20px; }
-  25% {
-    background-position-x: -105px; }
-  50% {
-    background-position-x: 20px; }
-  75% {
-    background-position-x: -230px; }
-  100% {
-    background-position-x: 20px; } }
-
 #goose {
   position: absolute;
   left: 1100px;
@@ -145,31 +133,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 712px;
+        top: 719px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.55823s infinite alternate; }
+        animation: flower1Ani 3s 0.99879s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 705px;
+        top: 717px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.71257s infinite alternate; }
+        animation: flower2Ani 3s 0.72681s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 727px;
+        top: 701px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.62714s infinite alternate; }
+        animation: flower3Ani 3s 0.61336s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 708px;
+        top: 710px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.09035s infinite alternate; }
+        animation: flower4Ani 3s 0.81459s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -218,6 +206,18 @@
         height: 150px;
         z-index: 2530;
         animation: cropsAni 5s step-start infinite; }
+
+@keyframes cropsAni {
+  0% {
+    background-position-x: 20px; }
+  25% {
+    background-position-x: -105px; }
+  50% {
+    background-position-x: 20px; }
+  75% {
+    background-position-x: -230px; }
+  100% {
+    background-position-x: 20px; } }
     #object .crops .corn {
       position: absolute;
       left: 0;
@@ -1272,6 +1272,7 @@ h1 {
   width: 6000px;
   height: 5000px;
   transform-origin: 0 0;
+  transition: 1s;
   z-index: 1;
   transform: scale(0.7); }
 
