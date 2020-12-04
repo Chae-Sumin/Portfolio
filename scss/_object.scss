@@ -5,13 +5,30 @@
     width: $width;
     height: $height;
 }
-
 #goose{ //메인 거위!
     @include box(1100px, 700px, 150px, 150px);
-    background: #aaa;
+    background: url(../img/goose.png) 0 0 no-repeat;
     z-index: 9000;
-    font-size: 60px; font-weight: bold; line-height: 150px; text-align: center;
 }
+$dir : (front, back, left, right);
+@for $i from 1 through 4{
+    @keyframes goose#{nth($dir,$i)}Ani {
+        0%{background-position: 0 -#{150*($i - 1)}px;}
+        25%{background-position: -150px -#{150*($i - 1)}px;}
+        50%{background-position: 0 -#{150*($i - 1)}px;}
+        75%{background-position: -300px -#{150*($i - 1)}px;}
+        100%{background-position: 0 -#{150*($i - 1)}px;}
+    }
+    #goose,.goose{
+        &.#{nth($dir,$i)}{
+            animation: goose#{nth($dir,$i)}Ani 1s infinite step-start;
+        }
+        &._#{nth($dir,$i)}{
+            background-position: 0 -#{150*($i - 1)}px;
+        }
+    }
+}
+
 #object{ // 기타 오브젝트
     @include box(0,0); 
     right: 0; bottom: 0;
@@ -189,6 +206,26 @@
             }
             &.peach>li{
                 background: url(../img/fruit.png) 50% -336px / 84px auto no-repeat;
+            }
+        }
+    }
+    .bridges{ // 다리
+        @include box(0,0,100%,100%); 
+        .lake{
+            @include box(2260px,4150px,1401px,844px);
+            .bridge{
+                @include box(0,0,1401px,844px);
+                background: url(../img/bridge.png) 0 0 no-repeat;
+                z-index: 1000;
+            }
+            .railing{
+                content: "";
+                display: block;
+                @include box(0,0,1401px,844px);
+                background: url(../img/bridge_railing.png) 0 0 no-repeat;
+                &:nth-of-type(2){top: -320px; z-index: 4360;background: url(../img/bridge_railing2.png) 0 0 no-repeat}
+                &:nth-of-type(3){top: -320px; z-index: 4000;}
+                &:nth-of-type(4){top: -40px; z-index: 5000;}
             }
         }
     }

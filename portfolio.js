@@ -5,8 +5,6 @@ window.onload = function(){
     const GOOSE = document.getElementById("goose"); //메인거위
     const TREE = document.querySelector("#object>.trees");
     const controller = document.getElementById("controller");
-    const ctrlBtns = document.querySelectorAll("#controller button"); 
-    const ctrlDiv = document.querySelector("#controller>div");
     const ctrlActive = document.getElementById("active");
     const ctrlTouch = document.querySelector("#controller>.touch")
     // -------------------- 상수 --------------------
@@ -14,11 +12,12 @@ window.onload = function(){
     const CHAR_HEIGHT = 200; // 캐릭터 높이
     const MAP_WIDTH = 6000; // 맵 전체 너비
     const MAP_HEIGHT = 5000; // 맵 전체 높이
-    const CHAR_MOVE_SPEED = 200; //max(300) 
-    const CHAR_MOVE_PX = 3.5; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
+    const CHAR_MOVE_SPEED = 150; //max(300) 
+    const CHAR_MOVE_PX = 4; //(CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
     const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
-    const GOOSE_MOVE_PX = CHAR_MOVE_PX * 1.3;
-    const MAP_RATIO = 0.7; // 맵 비율
+    const GOOSE_MOVE_SPEED = 300; //max(300) 
+    const GOOSE_MOVE_PX = 3;
+    const MAP_RATIO = 0.8; // 맵 비율
     const key = keyfuncs();
     const move = movefuncs();
     const goose = gooseFunc();
@@ -126,19 +125,42 @@ window.onload = function(){
                 let _y = e.targetTouches[0].clientY - y;
                 let dir = {x : Math.cos(Math.atan2(_y,_x)), y : Math.sin(Math.atan2(_y,_x)), deg : Math.atan2(_y,_x) * 180 / Math.PI};
                 touch.stop();
-                console.log(dir.deg);
                 touch.move(dir);
             }
         });
         controller.addEventListener("touchend",function(e){
             e.preventDefault();
             if(e.touches.length === 0){
+                ctrlTouch.children[0].style.left = 0;
+                ctrlTouch.children[0].style.top = 0;
                 CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
                 touch.stop();
                 touch.setFlag(false);
                 touch.setTouch(0,0,null);
                 ctrlTouch.classList.remove("on");
             } else if(e.touches[0].identifier !== id){
+                ctrlTouch.children[0].style.left = 0;
+                ctrlTouch.children[0].style.top = 0;
+                CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
+                touch.stop();
+                touch.setFlag(false);
+                touch.setTouch(0,0,null);
+                ctrlTouch.classList.remove("on");
+            }
+        },false);
+        controller.addEventListener("touchcancel",function(e){
+            e.preventDefault();
+            if(e.touches.length === 0){
+                ctrlTouch.children[0].style.left = 0;
+                ctrlTouch.children[0].style.top = 0;
+                CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
+                touch.stop();
+                touch.setFlag(false);
+                touch.setTouch(0,0,null);
+                ctrlTouch.classList.remove("on");
+            } else if(e.touches[0].identifier !== id){
+                ctrlTouch.children[0].style.left = 0;
+                ctrlTouch.children[0].style.top = 0;
                 CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
                 touch.stop();
                 touch.setFlag(false);
@@ -350,22 +372,36 @@ window.onload = function(){
                 isMoving = true;
                 goosePosX = GOOSE.offsetLeft;
                 goosePosY = GOOSE.offsetTop;
-                const _x = x - goosePosX;
-                const _y = y - goosePosY;
-                const moveTimes = Math.sqrt(_x*_x + _y*_y) / GOOSE_MOVE_PX;
-                const speedX = Math.cos(Math.atan2(_y,_x))*GOOSE_MOVE_PX;
-                const speedY = Math.sin(Math.atan2(_y,_x))*GOOSE_MOVE_PX;
+                let speedX = Math.cos(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
+                let speedY = Math.sin(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
+                let moveTimes = (x - goosePosX)/speedX;
+                let deg = Math.atan2((y - goosePosY),(x - goosePosX))*180 / Math.PI;
                 let count = 0;
                 let timer = setTimeout(movement, 0);
+                if(deg + 180 >= 45 && deg + 180 < 135){
+                    GOOSE.setAttribute("class","back");
+                } else if(deg + 180 >= 135 && deg + 180 < 225){
+                    GOOSE.setAttribute("class","right");
+                } else if(deg + 180 >= 225 && deg + 180 < 315){
+                    GOOSE.setAttribute("class","front");
+                } else {
+                    GOOSE.setAttribute("class","left");
+                }
                 function movement(){
+                    goosePosX = GOOSE.offsetLeft;
+                    goosePosY = GOOSE.offsetTop;
+                    speedX = Math.cos(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
+                    speedY = Math.sin(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
                     count++
                     GOOSE.style.left = (speedX + GOOSE.offsetLeft)+ "px";
                     GOOSE.style.top = (speedY + GOOSE.offsetTop) + "px";
                     GOOSE.style.zIndex = parseInt(y);
-                    if(count < parseInt(moveTimes)){timer = setTimeout(movement, 1000 / CHAR_MOVE_SPEED);}
+                    if(count < Math.ceil(moveTimes)){timer = setTimeout(movement, 1000 / GOOSE_MOVE_SPEED);}
                     else{
                         isMoving = false;
                         clearTimeout(timer);
+                        GOOSE.setAttribute("class", "_"+GOOSE.getAttribute("class"));
+                        console.log(GOOSE.offsetLeft,GOOSE.offsetTop);
                     };
                 }
             },
@@ -380,44 +416,49 @@ window.onload = function(){
                 } else return false;
             },
             level : function(){ // 거위 근처로 가면 순서대로 작동
+                let moveTime = null;
                 switch (gooseLevel){
                     case  1 :
-                        this.moveTo(1340,2000);
+                        this.moveTo(1250,1300);
                         break;
                     case  2 :
-                        this.moveTo(500,2500);
+                        this.moveTo(1250,2000);
                         break;
                     case  3 :
-                        this.moveTo(500,3500);
+                        this.moveTo(500,2500);
                         break;
                     case  4 :
-                        this.moveTo(2000,4500);
+                        this.moveTo(500,3500);
                         break;
                     case  5 :
-                        this.moveTo(4000,4600);
+                        this .moveTo(1100,4500);
                         break;
                     case  6 :
-                        this.moveTo(5000,4000);
+                        this.moveTo(2900,4450);
                         break;
                     case  7 :
-                        this.moveTo(5500,3100);
+                        this.moveTo(4500,4600);
                         break;
                     case  8 :
-                        this.moveTo(5700,2200);
+                        this.moveTo(5000,4000);
                         break;
                     case  9 :
-                        this.moveTo(5500,1900);
-                        this.moveTo(4000,1800);
+                        this.moveTo(5000,3000);
                         break;
                     case  10 :
-                        this.moveTo(3500,1000);
+                        this.moveTo(5700,2700);
                         break;
                     case  11 :
-                        this.moveTo(5000,400);
+                        this.moveTo(5300,1900);
                         break;
                     case  12 :
-                        this.moveTo(1100,700);
-                        gooseLevel = 0;
+                        this.moveTo(4500,1500);
+                        break;
+                    case  13 :
+                        this.moveTo(3800,1200);
+                        break;
+                    case  14 :
+                        this.moveTo(5000,500);
                         break;
                     default : break;
                 }
@@ -432,39 +473,27 @@ window.onload = function(){
         switch (key.keyCode()) {
             case 1: //up
                 move.moveTo(0,-CHAR_MOVE_PX);
-                ctrlBtns[0].classList.add("btnOn");
                 break;
             case 2: //left
                 move.moveTo(-CHAR_MOVE_PX,0);
-                ctrlBtns[1].classList.add("btnOn");
                 break;
             case 3: //down
                 move.moveTo(0,CHAR_MOVE_PX);
-                ctrlBtns[2].classList.add("btnOn");
                 break;
             case 4: //right
                 move.moveTo(CHAR_MOVE_PX,0);
-                ctrlBtns[3].classList.add("btnOn");
                 break;
             case 5: //left up
                 move.moveTo(-CHAR_CROSS_PX,-CHAR_CROSS_PX);
-                ctrlBtns[0].classList.add("btnOn");
-                ctrlBtns[1].classList.add("btnOn");
                 break;
             case 6: //right up
                 move.moveTo(CHAR_CROSS_PX,-CHAR_CROSS_PX);
-                ctrlBtns[0].classList.add("btnOn");
-                ctrlBtns[3].classList.add("btnOn");
                 break;
             case 7: //left down
                 move.moveTo(-CHAR_CROSS_PX,CHAR_CROSS_PX);
-                ctrlBtns[1].classList.add("btnOn");
-                ctrlBtns[2].classList.add("btnOn");
                 break;
             case 8: //right down
                 move.moveTo(CHAR_CROSS_PX,CHAR_CROSS_PX);
-                ctrlBtns[2].classList.add("btnOn");
-                ctrlBtns[3].classList.add("btnOn");
                 break;
             case 0:
                 return false;
