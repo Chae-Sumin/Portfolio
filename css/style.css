@@ -133,31 +133,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 719px;
+        top: 704px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.99879s infinite alternate; }
+        animation: flower1Ani 3s 0.9647s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 717px;
+        top: 706px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.72681s infinite alternate; }
+        animation: flower2Ani 3s 0.96679s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 701px;
+        top: 704px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.61336s infinite alternate; }
+        animation: flower3Ani 3s 0.85145s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 710px;
+        top: 712px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.81459s infinite alternate; }
+        animation: flower4Ani 3s 0.42036s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -1313,33 +1313,60 @@ h1 {
         background-image: url(../img/active-on.png); }
     #controller button.btnOn {
       background-image: url(../img/Arrow-on.png); }
-  #controller > div {
+  #controller .move {
     float: right;
     position: relative;
     width: 150px;
     height: 150px;
     margin: 10px; }
-    #controller > div button {
+    #controller .move button {
       position: absolute; }
-      #controller > div button#ArrowUp {
+      #controller .move button#ArrowUp {
         left: 50px;
         top: 10px;
         transform: rotateZ(45deg); }
-      #controller > div button#ArrowRight {
+      #controller .move button#ArrowRight {
         left: 90px;
         top: 50px;
         transform: rotateZ(135deg); }
-      #controller > div button#ArrowLeft {
+      #controller .move button#ArrowLeft {
         left: 10px;
         top: 50px;
         transform: rotateZ(315deg); }
-      #controller > div button#ArrowDown {
+      #controller .move button#ArrowDown {
         left: 50px;
         top: 90px;
         transform: rotateZ(225deg); }
+  #controller .touch {
+    display: none; }
 
-.mob #controller > button {
-  float: left; }
-
-.mob #controller > div {
-  display: none; }
+.mob #controller {
+  width: 100vw;
+  height: 100vh; }
+  .mob #controller #active {
+    position: absolute;
+    margin: 0;
+    left: 10vh;
+    bottom: 10vh; }
+  .mob #controller .move {
+    display: none; }
+  .mob #controller .touch {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; }
+    .mob #controller .touch span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      margin: -10px 0 0 -10px;
+      border-radius: 50%; }
+    .mob #controller .touch.on {
+      background-color: #5557; }
+      .mob #controller .touch.on span {
+        background-color: #3337; }

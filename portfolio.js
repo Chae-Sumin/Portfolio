@@ -4,8 +4,11 @@ window.onload = function(){
     const CHAR = document.getElementById("char"); //캐릭터
     const GOOSE = document.getElementById("goose"); //메인거위
     const TREE = document.querySelector("#object>.trees");
-    const controllBtns = document.querySelectorAll("#controller button"); 
-    const controllDiv = document.querySelector("#controller>div");
+    const controller = document.getElementById("controller");
+    const ctrlBtns = document.querySelectorAll("#controller button"); 
+    const ctrlDiv = document.querySelector("#controller>div");
+    const ctrlActive = document.getElementById("active");
+    const ctrlTouch = document.querySelector("#controller>.touch")
     // -------------------- 상수 --------------------
     const CHAR_WIDTH = 150; // 캐릭터 너비
     const CHAR_HEIGHT = 200; // 캐릭터 높이
@@ -19,6 +22,7 @@ window.onload = function(){
     const key = keyfuncs();
     const move = movefuncs();
     const goose = gooseFunc();
+    const touch = touchFunc();
     // -------------------- 변수 --------------------
     let isMobile = false //모바일 확인
     let screenWidth = window.innerWidth; // 스크린 너비
@@ -101,11 +105,47 @@ window.onload = function(){
                 while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
             }
         });
-        window.addEventListener("resize", function(){ // 창 크기 변경시 
-            screenWidth = window.innerWidth;
-            screenHeight = window.innerHeight;
-            screenFocus();
+        
+        controller.addEventListener("touchstart",function(e){
+            e.preventDefault();
+            if(e.target == ctrlActive){
+                console.log(e.target);
+            }
+            else if(!touch.getFlag()){
+                touch.setFlag(true);
+                ctrlTouch.classList.add("on");
+                ctrlTouch.style.left = e.targetTouches[0].clientX - 15 + "px";
+                ctrlTouch.style.top = e.targetTouches[0].clientY - 15 + "px";
+                touch.setTouch(e.targetTouches[0].clientX,e.targetTouches[0].clientY,e.targetTouches[0].identifier);
+            }
+        },false);
+        controller.addEventListener("touchmove",function(e){
+            let {x,y,id} = touch.getTouch();
+            if(e.targetTouches[0].identifier === id){
+                let _x = e.targetTouches[0].clientX - x;
+                let _y = e.targetTouches[0].clientY - y;
+                let dir = {x : Math.cos(Math.atan2(_y,_x)), y : Math.sin(Math.atan2(_y,_x)), deg : Math.atan2(_y,_x) * 180 / Math.PI};
+                touch.stop();
+                console.log(dir.deg);
+                touch.move(dir);
+            }
         });
+        controller.addEventListener("touchend",function(e){
+            e.preventDefault();
+            if(e.touches.length === 0){
+                CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
+                touch.stop();
+                touch.setFlag(false);
+                touch.setTouch(0,0,null);
+                ctrlTouch.classList.remove("on");
+            } else if(e.touches[0].identifier !== id){
+                CHAR.setAttribute("class","_"+CHAR.getAttribute("class"));
+                touch.stop();
+                touch.setFlag(false);
+                touch.setTouch(0,0,null);
+                ctrlTouch.classList.remove("on");
+            }
+        },false);
     }
 
 
@@ -131,7 +171,11 @@ window.onload = function(){
             return !(limitCanvas.getContext('2d').getImageData(x,y,1,1).data[3])
         }else return false
     }
-    
+    window.addEventListener("resize", function(){ // 창 크기 변경시 
+        screenWidth = window.innerWidth;
+        screenHeight = window.innerHeight;
+        screenFocus();
+    });
     function keyfuncs(){ // 키보드 관련 클로져
         let moveX = 0;
         let moveY = 0;
@@ -306,17 +350,17 @@ window.onload = function(){
                 isMoving = true;
                 goosePosX = GOOSE.offsetLeft;
                 goosePosY = GOOSE.offsetTop;
-                const _x = Math.abs(x - goosePosX);
-                const _y = Math.abs(y - goosePosY);
+                const _x = x - goosePosX;
+                const _y = y - goosePosY;
                 const moveTimes = Math.sqrt(_x*_x + _y*_y) / GOOSE_MOVE_PX;
-                const speedX = Math.sin(Math.atan(_x/_y))*GOOSE_MOVE_PX;
-                const speedY = Math.cos(Math.atan(_x/_y))*GOOSE_MOVE_PX;
+                const speedX = Math.cos(Math.atan2(_y,_x))*GOOSE_MOVE_PX;
+                const speedY = Math.sin(Math.atan2(_y,_x))*GOOSE_MOVE_PX;
                 let count = 0;
                 let timer = setTimeout(movement, 0);
                 function movement(){
                     count++
-                    GOOSE.style.left = (speedX * Math.sign(x-goosePosX) + GOOSE.offsetLeft)+ "px";
-                    GOOSE.style.top = (speedY * Math.sign(y-goosePosY) + GOOSE.offsetTop) + "px";
+                    GOOSE.style.left = (speedX + GOOSE.offsetLeft)+ "px";
+                    GOOSE.style.top = (speedY + GOOSE.offsetTop) + "px";
                     GOOSE.style.zIndex = parseInt(y);
                     if(count < parseInt(moveTimes)){timer = setTimeout(movement, 1000 / CHAR_MOVE_SPEED);}
                     else{
@@ -388,39 +432,39 @@ window.onload = function(){
         switch (key.keyCode()) {
             case 1: //up
                 move.moveTo(0,-CHAR_MOVE_PX);
-                controllBtns[0].classList.add("btnOn");
+                ctrlBtns[0].classList.add("btnOn");
                 break;
             case 2: //left
                 move.moveTo(-CHAR_MOVE_PX,0);
-                controllBtns[1].classList.add("btnOn");
+                ctrlBtns[1].classList.add("btnOn");
                 break;
             case 3: //down
                 move.moveTo(0,CHAR_MOVE_PX);
-                controllBtns[2].classList.add("btnOn");
+                ctrlBtns[2].classList.add("btnOn");
                 break;
             case 4: //right
                 move.moveTo(CHAR_MOVE_PX,0);
-                controllBtns[3].classList.add("btnOn");
+                ctrlBtns[3].classList.add("btnOn");
                 break;
             case 5: //left up
                 move.moveTo(-CHAR_CROSS_PX,-CHAR_CROSS_PX);
-                controllBtns[0].classList.add("btnOn");
-                controllBtns[1].classList.add("btnOn");
+                ctrlBtns[0].classList.add("btnOn");
+                ctrlBtns[1].classList.add("btnOn");
                 break;
             case 6: //right up
                 move.moveTo(CHAR_CROSS_PX,-CHAR_CROSS_PX);
-                controllBtns[0].classList.add("btnOn");
-                controllBtns[3].classList.add("btnOn");
+                ctrlBtns[0].classList.add("btnOn");
+                ctrlBtns[3].classList.add("btnOn");
                 break;
             case 7: //left down
                 move.moveTo(-CHAR_CROSS_PX,CHAR_CROSS_PX);
-                controllBtns[1].classList.add("btnOn");
-                controllBtns[2].classList.add("btnOn");
+                ctrlBtns[1].classList.add("btnOn");
+                ctrlBtns[2].classList.add("btnOn");
                 break;
             case 8: //right down
                 move.moveTo(CHAR_CROSS_PX,CHAR_CROSS_PX);
-                controllBtns[2].classList.add("btnOn");
-                controllBtns[3].classList.add("btnOn");
+                ctrlBtns[2].classList.add("btnOn");
+                ctrlBtns[3].classList.add("btnOn");
                 break;
             case 0:
                 return false;
@@ -432,7 +476,40 @@ window.onload = function(){
         setDir(key.keyCode());
         key.setKeyTimer(keyDown,1000/CHAR_MOVE_SPEED);
     }
-    
+    function touchFunc(){ //터치관련 클로저
+        let touchId = null;
+        let x = 0;
+        let y = 0;
+        let touchStart = false;
+        let moveTimeout = null;
+        return{
+            setFlag : function(set){touchStart = set;},
+            getFlag : function(){return touchStart},
+            setTouch : function(_x,_y,id){x = _x; y = _y; touchId = id;},
+            getTouch : function(){return {x: x, y: y, id : touchId}},
+            move : function({x,y,deg}){
+                moveTimeout = setTimeout(repeatMove,0)
+                function repeatMove(){
+                    move.moveTo(x*CHAR_MOVE_PX,y*CHAR_MOVE_PX);
+                    ctrlTouch.children[0].style.left = x*20 + "px";
+                    ctrlTouch.children[0].style.top = y*20 + "px";
+                    moveTimeout = setTimeout(repeatMove,1000 / CHAR_MOVE_SPEED);
+                    if(deg + 180 >= 45 && deg + 180 < 135){
+                        CHAR.setAttribute("class","_1");
+                    } else if(deg + 180 >= 135 && deg + 180 < 225){
+                        CHAR.setAttribute("class","_4");
+                    } else if(deg + 180 >= 225 && deg + 180 < 315){
+                        CHAR.setAttribute("class","_3");
+                    } else {
+                        CHAR.setAttribute("class","_2");
+                    }
+                }
+            },
+            stop : function(){
+                clearTimeout(moveTimeout);
+            }
+        }
+    }
     function screenFocus(){ // 캐릭터에 초점을 맞춰 이동(맵 끝으로 가면 고정)
         focusX = screenWidth / 2 - CHAR.offsetLeft * MAP_RATIO - (CHAR_WIDTH / 2);
         focusY = screenHeight / 2 - CHAR.offsetTop * MAP_RATIO - (CHAR_HEIGHT / 2);

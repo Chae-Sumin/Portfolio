@@ -60,7 +60,7 @@ h1{display: none;}
             background-image: url(../img/Arrow-on.png);
         }
     }
-    >div{
+    .move{
         float: right; 
         position: relative; 
         width: 150px; 
@@ -74,14 +74,48 @@ h1{display: none;}
             &#ArrowDown{left: 50px; top: 90px; transform: rotateZ(225deg);}
         }
     }
+    .touch{
+        display: none;
+    }
 }
 .mob{
     #controller{
-        &>button{
-            float: left;
+        width: 100vw;
+        height: 100vh;
+
+        #active{
+            position: absolute;
+            margin: 0;
+            left: 10vh;
+            bottom: 10vh;
         }
-        &>div{
+        .move{
             display: none;
         }
+        .touch{
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            span{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 50px;
+                height: 50px;
+                margin: -10px 0 0 -10px;
+                border-radius: 50%;
+            }
+            &.on{
+                background-color: #5557;
+                span{
+                    background-color: #3337;
+                }
+            }
+        }
     }
+
 }
