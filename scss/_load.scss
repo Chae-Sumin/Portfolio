@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 //load 관련 스타일입니다
-#beforeLoad{
+#load{
     position: fixed;
     left: 0;
     top: 0;
@@ -60,6 +60,110 @@
                 }
             }
         }
+        &.on{opacity: 0;}
+    }
+    section{
+        opacity: 0;
+        transition: opacity 1s linear;
+        h1{
+            width: 80%; height: 50%;
+            margin: 0 auto;
+            svg{
+                padding-top: 10%;
+                width: 100%;
+                @keyframes h1svg1 {
+                    from{stroke-dasharray: 1168; stroke-dashoffset: 1168;}
+                    to{stroke-dasharray: 1168; stroke-dashoffset: 0;}
+                }
+                @keyframes h1svg2 {
+                    from{stroke-dasharray: 68; stroke-dashoffset: 68;}
+                    to{stroke-dasharray: 68; stroke-dashoffset: 0;}
+                }
+                @keyframes h1svg3 {
+                    from{stroke-dasharray: 127; stroke-dashoffset: 127;}
+                    to{stroke-dasharray: 127; stroke-dashoffset: 0;}
+                }
+                @keyframes h1svg4 {
+                    from{stroke-dasharray: 634; stroke-dashoffset: 634;}
+                    to{stroke-dasharray: 634; stroke-dashoffset: 0;}
+                }
+                @keyframes h1svg5 {
+                    from{stroke-dasharray: 1973; stroke-dashoffset: 1973;}
+                    to{stroke-dasharray: 1973; stroke-dashoffset: 0;}
+                }
+                @keyframes h1svg6 {
+                    from{stroke-dasharray: 36; stroke-dashoffset: 36;}
+                    to{stroke-dasharray: 36; stroke-dashoffset: 0;}
+                }
+            }
+        }
+        &.on{
+            opacity: 1;
+            display: block;
+            position: absolute; left: 10vw; top: 10vh; z-index: 1;
+            width: 80vw; height: 80vh;
+            background: #fffe;
+            box-shadow: 0 0 30px 30px #fffe;
+            h1{
+                svg{
+                    g:nth-of-type(1){animation: h1svg1 linear 800ms 500ms forwards;stroke-dasharray: 1168; stroke-dashoffset: 1168;}
+                    g:nth-of-type(2){animation: h1svg2 linear 50ms 1300ms forwards;stroke-dasharray: 68; stroke-dashoffset: 68;}
+                    g:nth-of-type(3){animation: h1svg3 linear 100ms 1350ms forwards;stroke-dasharray: 127; stroke-dashoffset: 127;}
+                    g:nth-of-type(4){animation: h1svg4 linear 500ms 1450ms forwards;stroke-dasharray: 634; stroke-dashoffset: 634;}
+                    g:nth-of-type(5){animation: h1svg5 linear 1500ms 1950ms forwards;stroke-dasharray: 1973; stroke-dashoffset: 1973;}
+                    g:nth-of-type(6){animation: h1svg6 linear 150ms 3450ms forwards;stroke-dasharray: 36; stroke-dashoffset: 36;}
+                }
+            }
+            ul{
+                display: flex; 
+                width: 100%; height: 50%;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                li{
+                    button{
+                        position: relative;
+                        width: 200px;
+                        height: 50px;
+                        cursor: pointer;
+                        background-color: #fff;
+                        border: 2px solid #000;
+                        border-radius: 10px;
+                        &:hover{
+                            background-color: #eee;
+                        }
+                        &::after{
+                            position: absolute;
+                            top: -30px;
+                            right: -80px;
+                            display: block;
+                            width: 160px;
+                            height: 40px;
+                            background: #fffa;
+                            border: 2px solid #000;
+                            border-radius: 10px;
+                            transform-origin: 90% bottom;
+                            transform: scale(0) rotate(0);
+                            transition: 300ms;
+                        }
+                        &:hover::after{
+                            transform: scale(1) rotate(10deg);
+                        }
+                        &.start::after{
+                            line-height: 36px;
+                            content: "처음이라면 클릭하세요!";
+                        }
+                        &.cheat::after{
+                            content: "작업물을 빠르게 확인하고 싶다면 클릭하세요";
+                        }
+                    }
+                }
+            }
+            
+        }
+        &.off{
+            z-index: -1;
+        }
     }
     &.load{ // 로딩 완료
         z-index: -1;
@@ -83,7 +187,6 @@
                 top: 225%;
             }
         }
-        span{opacity: 0;}
     }
 }
 

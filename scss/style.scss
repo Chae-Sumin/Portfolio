@@ -14,7 +14,7 @@ $fieldH: 5000px;
 }
 body, html{overflow: hidden; width: 100%; height: 100%; }
 body{position: relative;}
-h1{display: none;}
+body>p{display: none;}
 #field{ // 메인 맵
     @include posA; 
     width: $fieldW;
@@ -37,15 +37,15 @@ h1{display: none;}
 #controller{ //컨트롤러
     position: fixed; 
     z-index: 2;
-    width: 100%; 
-    height: 100%; 
+    width: 1%; 
+    height: 1%; 
     left: 0;
     top: 0;
     #active{
         position: absolute;
         margin: 0;
         left: 10vh;
-        bottom: 10vh;
+        top: 80vh;
         width: 53px; 
         height: 53px; 
         border: none; 

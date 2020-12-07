@@ -1,4 +1,9 @@
+@charset "UTF-8";
 @import url(./reset.css);
+/*  up => 1             down => 3
+    left => 2           right => 4
+    left up => 5        right up => 6
+    left down => 7      right down => 8    */
 #char {
   width: 140px;
   height: 200px;
@@ -8,7 +13,7 @@
   left: 570px;
   top: 700px;
   z-index: 700; }
-  #char._1, #char._5, #char._6 {
+  #char._1 {
     animation: backAni 1000ms 0s infinite step-start; }
 
 @keyframes backAni {
@@ -22,20 +27,6 @@
     background-position: -280px 0; }
   100% {
     background-position: 0 0; } }
-  #char._3, #char._7, #char._8 {
-    animation: frontAni 1000ms 0s infinite step-start; }
-
-@keyframes frontAni {
-  0% {
-    background-position: 0 -200px; }
-  25% {
-    background-position: -140px -200px; }
-  50% {
-    background-position: 0 -200px; }
-  75% {
-    background-position: -280px -200px; }
-  100% {
-    background-position: 0 -200px; } }
   #char._2 {
     animation: leftAni 1000ms 0s infinite step-start; }
 
@@ -50,6 +41,20 @@
     background-position: -280px -600px; }
   100% {
     background-position: 0 -600px; } }
+  #char._3 {
+    animation: frontAni 1000ms 0s infinite step-start; }
+
+@keyframes frontAni {
+  0% {
+    background-position: 0 -200px; }
+  25% {
+    background-position: -140px -200px; }
+  50% {
+    background-position: 0 -200px; }
+  75% {
+    background-position: -280px -200px; }
+  100% {
+    background-position: 0 -200px; } }
   #char._4 {
     animation: rightAni 1000ms 0s infinite step-start; }
 
@@ -64,13 +69,77 @@
     background-position: -280px -400px; }
   100% {
     background-position: 0 -400px; } }
-  #char.__1, #char.__5, #char.__6 {
+  #char._5 {
+    animation: leftAni 1000ms 0s infinite step-start; }
+
+@keyframes leftAni {
+  0% {
+    background-position: 0 -600px; }
+  25% {
+    background-position: -140px -600px; }
+  50% {
+    background-position: 0 -600px; }
+  75% {
+    background-position: -280px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+  #char._6 {
+    animation: rightAni 1000ms 0s infinite step-start; }
+
+@keyframes rightAni {
+  0% {
+    background-position: 0 -400px; }
+  25% {
+    background-position: -140px -400px; }
+  50% {
+    background-position: 0 -400px; }
+  75% {
+    background-position: -280px -400px; }
+  100% {
+    background-position: 0 -400px; } }
+  #char._7 {
+    animation: leftAni 1000ms 0s infinite step-start; }
+
+@keyframes leftAni {
+  0% {
+    background-position: 0 -600px; }
+  25% {
+    background-position: -140px -600px; }
+  50% {
+    background-position: 0 -600px; }
+  75% {
+    background-position: -280px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+  #char._8 {
+    animation: rightAni 1000ms 0s infinite step-start; }
+
+@keyframes rightAni {
+  0% {
+    background-position: 0 -400px; }
+  25% {
+    background-position: -140px -400px; }
+  50% {
+    background-position: 0 -400px; }
+  75% {
+    background-position: -280px -400px; }
+  100% {
+    background-position: 0 -400px; } }
+  #char.__1 {
     background-position: 0 0; }
-  #char.__3, #char.__7, #char.__8 {
-    background-position: 0 -200px; }
   #char.__2 {
     background-position: 0 -600px; }
+  #char.__3 {
+    background-position: 0 -200px; }
   #char.__4 {
+    background-position: 0 -400px; }
+  #char.__5 {
+    background-position: 0 -600px; }
+  #char.__6 {
+    background-position: 0 -400px; }
+  #char.__7 {
+    background-position: 0 -600px; }
+  #char.__8 {
     background-position: 0 -400px; }
 
 #goose {
@@ -94,11 +163,24 @@
   100% {
     background-position: 0 -0px; } }
 
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+
 #goose.front, .goose.front {
   animation: goosefrontAni 1s infinite step-start; }
 
 #goose._front, .goose._front {
   background-position: 0 -0px; }
+
+#goose.fly.back, .goose.fly.back {
+  width: 200px;
+  animation: flyBackAni 500ms infinite step-start;
+  z-index: 6000 !important; }
 
 @keyframes goosebackAni {
   0% {
@@ -112,11 +194,24 @@
   100% {
     background-position: 0 -150px; } }
 
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+
 #goose.back, .goose.back {
   animation: goosebackAni 1s infinite step-start; }
 
 #goose._back, .goose._back {
   background-position: 0 -150px; }
+
+#goose.fly.back, .goose.fly.back {
+  width: 200px;
+  animation: flyBackAni 500ms infinite step-start;
+  z-index: 6000 !important; }
 
 @keyframes gooseleftAni {
   0% {
@@ -130,11 +225,24 @@
   100% {
     background-position: 0 -300px; } }
 
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+
 #goose.left, .goose.left {
   animation: gooseleftAni 1s infinite step-start; }
 
 #goose._left, .goose._left {
   background-position: 0 -300px; }
+
+#goose.fly.back, .goose.fly.back {
+  width: 200px;
+  animation: flyBackAni 500ms infinite step-start;
+  z-index: 6000 !important; }
 
 @keyframes gooserightAni {
   0% {
@@ -148,11 +256,24 @@
   100% {
     background-position: 0 -450px; } }
 
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+
 #goose.right, .goose.right {
   animation: gooserightAni 1s infinite step-start; }
 
 #goose._right, .goose._right {
   background-position: 0 -450px; }
+
+#goose.fly.back, .goose.fly.back {
+  width: 200px;
+  animation: flyBackAni 500ms infinite step-start;
+  z-index: 6000 !important; }
 
 #object {
   position: absolute;
@@ -201,31 +322,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 727px;
+        top: 722px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.2765s infinite alternate; }
+        animation: flower1Ani 3s 0.66778s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
         top: 714px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.0777s infinite alternate; }
+        animation: flower2Ani 3s 0.6978s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 715px;
+        top: 728px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.53444s infinite alternate; }
+        animation: flower3Ani 3s 0.3108s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 721px;
+        top: 708px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.36868s infinite alternate; }
+        animation: flower4Ani 3s 0.60053s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -376,30 +497,6 @@
     top: 0;
     width: 100%;
     height: 100%; }
-    #object .animals .geeseCage {
-      position: absolute;
-      left: 1200px;
-      top: 0;
-      width: 1200px;
-      height: 700px; }
-    #object .animals .pigsCage {
-      position: absolute;
-      left: 5200px;
-      top: 2800px;
-      width: 800px;
-      height: 700px; }
-    #object .animals .cowCage {
-      position: absolute;
-      left: 5200px;
-      top: 2000px;
-      width: 800px;
-      height: 700px; }
-    #object .animals .sheepCage {
-      position: absolute;
-      left: 5200px;
-      top: 1200px;
-      width: 800px;
-      height: 700px; }
     #object .animals .cage {
       position: relative;
       width: 100%;
@@ -411,7 +508,7 @@
         width: calc(100% - 100px);
         height: 150px;
         transform: translate(-50%, 0);
-        background: url(../img/fence_front2.png) 0 0 repeat-x;
+        background: url(../img/fence_front2.png) 0 0/auto 150px repeat-x;
         z-index: 10; }
       #object .animals .cage .row2 {
         position: absolute;
@@ -422,28 +519,84 @@
         transform: translate(-50%, 0);
         top: unset;
         bottom: 0;
-        background: url(../img/fence_front2.png) 0 0 repeat-x;
+        background: url(../img/fence_front2.png) 0 0/auto 150px repeat-x;
         z-index: 12; }
       #object .animals .cage .col1 {
         position: absolute;
         left: 30px;
         top: 50%;
-        width: 50px;
-        height: calc(100% - 100px);
+        width: 40px;
+        height: 100%;
         transform: translate(0, -50%);
-        background: url(../img/fence_side2.png) 0 0 repeat-y;
+        background: url(../img/fence_side2.png) 0 35px no-repeat;
         z-index: 11; }
       #object .animals .cage .col2 {
         position: absolute;
         left: 0;
         top: 50%;
-        width: 50px;
-        height: calc(100% - 100px);
+        width: 40px;
+        height: 100%;
         transform: translate(0, -50%);
         left: unset;
         right: 30px;
-        background: url(../img/fence_side2.png) 0 0 repeat-y;
+        background: url(../img/fence_side2.png) 0 35px no-repeat;
         z-index: 11; }
+    #object .animals .geeseCage {
+      position: absolute;
+      left: 1200px;
+      top: 0;
+      width: 1200px;
+      height: 700px; }
+      #object .animals .geeseCage .cage .row1 {
+        z-index: 10; }
+      #object .animals .geeseCage .cage .row2 {
+        z-index: 560; }
+      #object .animals .geeseCage .cage .col1 {
+        z-index: 11; }
+      #object .animals .geeseCage .cage .col2 {
+        z-index: 11; }
+    #object .animals .pigsCage {
+      position: absolute;
+      left: 5200px;
+      top: 2800px;
+      width: 800px;
+      height: 700px; }
+      #object .animals .pigsCage .cage .row1 {
+        z-index: 2800; }
+      #object .animals .pigsCage .cage .row2 {
+        z-index: 3350; }
+      #object .animals .pigsCage .cage .col1 {
+        z-index: 2801; }
+      #object .animals .pigsCage .cage .col2 {
+        z-index: 2801; }
+    #object .animals .cowCage {
+      position: absolute;
+      left: 5200px;
+      top: 2000px;
+      width: 800px;
+      height: 700px; }
+      #object .animals .cowCage .cage .row1 {
+        z-index: 2000; }
+      #object .animals .cowCage .cage .row2 {
+        z-index: 2550; }
+      #object .animals .cowCage .cage .col1 {
+        z-index: 2001; }
+      #object .animals .cowCage .cage .col2 {
+        z-index: 2001; }
+    #object .animals .sheepCage {
+      position: absolute;
+      left: 5200px;
+      top: 1200px;
+      width: 800px;
+      height: 700px; }
+      #object .animals .sheepCage .cage .row1 {
+        z-index: 1200; }
+      #object .animals .sheepCage .cage .row2 {
+        z-index: 1750; }
+      #object .animals .sheepCage .cage .col1 {
+        z-index: 1201; }
+      #object .animals .sheepCage .cage .col2 {
+        z-index: 1201; }
   #object .trees {
     position: absolute;
     left: 0;
@@ -693,8 +846,98 @@
         #object .bridges .lake .railing:nth-of-type(4) {
           top: -40px;
           z-index: 5000; }
+    #object .bridges .river {
+      position: absolute;
+      left: 1130px;
+      top: 1300px;
+      width: 376px;
+      height: 610px;
+      background: url(../img/bridge_r.png); }
+      #object .bridges .river.r1 {
+        z-index: 1300; }
+      #object .bridges .river.r2 {
+        left: 4870px;
+        top: 3450px;
+        z-index: 3450; }
+  #object .eggs {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+    #object .eggs .goldenEgg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 48px;
+      height: 66px;
+      display: block;
+      outline: none;
+      border: none;
+      background: url(../img/egg.png) 50% 50%/48px 66px;
+      cursor: pointer;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; }
+      #object .eggs .goldenEgg.disapear {
+        animation: disapear 1500ms 0s 1 forwards; }
 
-#beforeLoad {
+@keyframes disapear {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 211, 50, 0), 0 0 0 0 inset rgba(73, 62, 19, 0);
+    transform: scale(1); }
+  60% {
+    box-shadow: 0 0 30px 10px rgba(255, 211, 50, 0.76), 0 0 30px 10px inset rgba(255, 211, 50, 0.5);
+    transform: scale(1); }
+  90% {
+    box-shadow: 0 0 30px 3px rgba(255, 211, 50, 0.76), 0 0 30px 10px inset rgba(255, 211, 50, 0.5);
+    transform: scale(1); }
+  100% {
+    box-shadow: 0 0 30px 3px rgba(255, 211, 50, 0.76), 0 0 30px 10px inset rgba(255, 211, 50, 0.5);
+    transform: scale(0); } }
+
+#controller .eggPlate {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px; }
+  #controller .eggPlate li {
+    position: relative;
+    width: 72px;
+    height: 99px; }
+    #controller .eggPlate li:first-child .goldenEgg {
+      padding-top: 40px; }
+    #controller .eggPlate li .goldenEgg {
+      animation: eggAni 500ms 0s 1 forwards;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 72px;
+      height: 59px;
+      display: block;
+      outline: none;
+      border: none;
+      background: url(../img/egg.png) 50% 0 no-repeat;
+      cursor: pointer;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      text-align: center;
+      padding-top: 50px;
+      font-weight: bold;
+      transition: box-shadow 300ms; }
+      #controller .eggPlate li .goldenEgg:hover {
+        text-decoration: none;
+        box-shadow: 0 0 30px 10px rgba(255, 211, 50, 0.76), 0 0 30px 10px inset rgba(255, 211, 50, 0.5); }
+
+@keyframes eggAni {
+  from {
+    transform: scale(0); }
+  to {
+    transform: scale(1); } }
+
+#load {
   position: fixed;
   left: 0;
   top: 0;
@@ -703,25 +946,25 @@
   z-index: 9999;
   transition: z-index 0s 3s;
   background: #ffff; }
-  #beforeLoad .cloud {
+  #load .cloud {
     max-width: unset;
     max-height: 150%;
     display: block;
     position: absolute;
     transition: all 3s linear, opacity 2s 500ms linear; }
-    #beforeLoad .cloud.c1 {
+    #load .cloud.c1 {
       left: -23%;
       top: -23%; }
-    #beforeLoad .cloud.c2 {
+    #load .cloud.c2 {
       left: 23%;
       top: -23%; }
-    #beforeLoad .cloud.c3 {
+    #load .cloud.c3 {
       left: -23%;
       top: 23%; }
-    #beforeLoad .cloud.c4 {
+    #load .cloud.c4 {
       left: 23%;
       top: 23%; }
-  #beforeLoad span {
+  #load span {
     display: block;
     position: absolute;
     left: 50%;
@@ -734,10 +977,10 @@
     text-align: center;
     color: #707070;
     transition: opacity 1s 500ms linear; }
-    #beforeLoad span svg {
+    #load span svg {
       width: 32px;
       height: 32px; }
-      #beforeLoad span svg circle {
+      #load span svg circle {
         stroke-dasharray: 35 55;
         stroke-dashoffset: 0;
         animation: circleAni 1500ms linear infinite; }
@@ -747,25 +990,157 @@
     stroke-dashoffset: 90; }
   100% {
     stroke-dashoffset: 0; } }
-  #beforeLoad.load {
+    #load span.on {
+      opacity: 0; }
+  #load section {
+    opacity: 0;
+    transition: opacity 1s linear; }
+    #load section h1 {
+      width: 80%;
+      height: 50%;
+      margin: 0 auto; }
+      #load section h1 svg {
+        padding-top: 10%;
+        width: 100%; }
+
+@keyframes h1svg1 {
+  from {
+    stroke-dasharray: 1168;
+    stroke-dashoffset: 1168; }
+  to {
+    stroke-dasharray: 1168;
+    stroke-dashoffset: 0; } }
+
+@keyframes h1svg2 {
+  from {
+    stroke-dasharray: 68;
+    stroke-dashoffset: 68; }
+  to {
+    stroke-dasharray: 68;
+    stroke-dashoffset: 0; } }
+
+@keyframes h1svg3 {
+  from {
+    stroke-dasharray: 127;
+    stroke-dashoffset: 127; }
+  to {
+    stroke-dasharray: 127;
+    stroke-dashoffset: 0; } }
+
+@keyframes h1svg4 {
+  from {
+    stroke-dasharray: 634;
+    stroke-dashoffset: 634; }
+  to {
+    stroke-dasharray: 634;
+    stroke-dashoffset: 0; } }
+
+@keyframes h1svg5 {
+  from {
+    stroke-dasharray: 1973;
+    stroke-dashoffset: 1973; }
+  to {
+    stroke-dasharray: 1973;
+    stroke-dashoffset: 0; } }
+
+@keyframes h1svg6 {
+  from {
+    stroke-dasharray: 36;
+    stroke-dashoffset: 36; }
+  to {
+    stroke-dasharray: 36;
+    stroke-dashoffset: 0; } }
+    #load section.on {
+      opacity: 1;
+      display: block;
+      position: absolute;
+      left: 10vw;
+      top: 10vh;
+      z-index: 1;
+      width: 80vw;
+      height: 80vh;
+      background: #fffe;
+      box-shadow: 0 0 30px 30px #fffe; }
+      #load section.on h1 svg g:nth-of-type(1) {
+        animation: h1svg1 linear 800ms 500ms forwards;
+        stroke-dasharray: 1168;
+        stroke-dashoffset: 1168; }
+      #load section.on h1 svg g:nth-of-type(2) {
+        animation: h1svg2 linear 50ms 1300ms forwards;
+        stroke-dasharray: 68;
+        stroke-dashoffset: 68; }
+      #load section.on h1 svg g:nth-of-type(3) {
+        animation: h1svg3 linear 100ms 1350ms forwards;
+        stroke-dasharray: 127;
+        stroke-dashoffset: 127; }
+      #load section.on h1 svg g:nth-of-type(4) {
+        animation: h1svg4 linear 500ms 1450ms forwards;
+        stroke-dasharray: 634;
+        stroke-dashoffset: 634; }
+      #load section.on h1 svg g:nth-of-type(5) {
+        animation: h1svg5 linear 1500ms 1950ms forwards;
+        stroke-dasharray: 1973;
+        stroke-dashoffset: 1973; }
+      #load section.on h1 svg g:nth-of-type(6) {
+        animation: h1svg6 linear 150ms 3450ms forwards;
+        stroke-dasharray: 36;
+        stroke-dashoffset: 36; }
+      #load section.on ul {
+        display: flex;
+        width: 100%;
+        height: 50%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center; }
+        #load section.on ul li button {
+          position: relative;
+          width: 200px;
+          height: 50px;
+          cursor: pointer;
+          background-color: #fff;
+          border: 2px solid #000;
+          border-radius: 10px; }
+          #load section.on ul li button:hover {
+            background-color: #eee; }
+          #load section.on ul li button::after {
+            position: absolute;
+            top: -30px;
+            right: -80px;
+            display: block;
+            width: 160px;
+            height: 40px;
+            background: #fffa;
+            border: 2px solid #000;
+            border-radius: 10px;
+            transform-origin: 90% bottom;
+            transform: scale(0) rotate(0);
+            transition: 300ms; }
+          #load section.on ul li button:hover::after {
+            transform: scale(1) rotate(10deg); }
+          #load section.on ul li button.start::after {
+            line-height: 36px;
+            content: "처음이라면 클릭하세요!"; }
+          #load section.on ul li button.cheat::after {
+            content: "작업물을 빠르게 확인하고 싶다면 클릭하세요"; }
+    #load section.off {
+      z-index: -1; }
+  #load.load {
     z-index: -1;
     background: #fff0; }
-    #beforeLoad.load .cloud {
+    #load.load .cloud {
       opacity: 0; }
-      #beforeLoad.load .cloud.c1 {
+      #load.load .cloud.c1 {
         left: -225%;
         top: -225%; }
-      #beforeLoad.load .cloud.c2 {
+      #load.load .cloud.c2 {
         left: 225%;
         top: -225%; }
-      #beforeLoad.load .cloud.c3 {
+      #load.load .cloud.c3 {
         left: -225%;
         top: 225%; }
-      #beforeLoad.load .cloud.c4 {
+      #load.load .cloud.c4 {
         left: 225%;
         top: 225%; }
-    #beforeLoad.load span {
-      opacity: 0; }
 
 @keyframes load1Ani {
   0% {
@@ -1369,7 +1744,7 @@ body, html {
 body {
   position: relative; }
 
-h1 {
+body > p {
   display: none; }
 
 #field {
@@ -1400,15 +1775,15 @@ h1 {
 #controller {
   position: fixed;
   z-index: 2;
-  width: 100%;
-  height: 100%;
+  width: 1%;
+  height: 1%;
   left: 0;
   top: 0; }
   #controller #active {
     position: absolute;
     margin: 0;
     left: 10vh;
-    bottom: 10vh;
+    top: 80vh;
     width: 53px;
     height: 53px;
     border: none;

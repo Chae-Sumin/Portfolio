@@ -5,6 +5,22 @@
     width: $width;
     height: $height;
 }
+@mixin cageZIndex($z) {
+    .cage{
+        .row1{
+            z-index: $z;
+        }
+        .row2{
+            z-index: $z + 550;
+        }
+        .col1{
+            z-index: $z + 1;
+        }
+        .col2{
+            z-index: $z + 1;
+        }
+    }
+}
 #goose{ //메인 거위!
     @include box(1100px, 700px, 150px, 150px);
     background: url(../img/goose.png) 0 0 no-repeat;
@@ -19,12 +35,22 @@ $dir : (front, back, left, right);
         75%{background-position: -300px -#{150*($i - 1)}px;}
         100%{background-position: 0 -#{150*($i - 1)}px;}
     }
+    @keyframes flyBackAni {
+        0%{background-position: 0 -600px;}
+        50%{background-position: -200px -600px;}
+        100%{background-position: 0 -600px;}
+    }
     #goose,.goose{
         &.#{nth($dir,$i)}{
             animation: goose#{nth($dir,$i)}Ani 1s infinite step-start;
         }
         &._#{nth($dir,$i)}{
             background-position: 0 -#{150*($i - 1)}px;
+        }
+        &.fly.back{
+            width: 200px;
+            animation: flyBackAni 500ms infinite step-start;
+            z-index: 6000 !important;
         }
     }
 }
@@ -115,18 +141,6 @@ $dir : (front, back, left, right);
     }
     .animals{ //동물들(+우리)
         @include box(0,0,100%,100%);
-        .geeseCage{
-            @include box(1200px,0,1200px,700px);
-        }
-        .pigsCage{
-            @include box(5200px,2800px,800px,700px);
-        }
-        .cowCage{
-            @include box(5200px,2000px,800px,700px);
-        }
-        .sheepCage{
-            @include box(5200px,1200px,800px,700px);
-        }
         .cage{
             position: relative;
             width: 100%;
@@ -134,7 +148,7 @@ $dir : (front, back, left, right);
             .row1{
                 @include box(50%,0,calc(100% - 100px),150px);
                 transform: translate(-50%,0);
-                background: url(../img/fence_front2.png) 0 0 repeat-x;
+                background: url(../img/fence_front2.png) 0 0 / auto 150px repeat-x;
                 z-index: 10;
             }
             .row2{
@@ -142,23 +156,39 @@ $dir : (front, back, left, right);
                 transform: translate(-50%,0);
                 top: unset;
                 bottom: 0;
-                background: url(../img/fence_front2.png) 0 0 repeat-x;
+                background: url(../img/fence_front2.png) 0 0 / auto 150px repeat-x;
                 z-index: 12;
             }
             .col1{
-                @include box(30px,50%,50px,calc(100% - 100px));
+                @include box(30px,50%,40px,100%);
                 transform: translate(0,-50%);
-                background: url(../img/fence_side2.png) 0 0 repeat-y;
+                background: url(../img/fence_side2.png) 0 35px no-repeat;
                 z-index: 11;
             }
             .col2{
-                @include box(0,50%,50px,calc(100% - 100px));
+                @include box(0,50%,40px,100%);
                 transform: translate(0,-50%);
                 left: unset;
                 right: 30px;
-                background: url(../img/fence_side2.png) 0 0 repeat-y;
+                background: url(../img/fence_side2.png) 0 35px no-repeat;
                 z-index: 11;
             }
+        }
+        .geeseCage{
+            @include box(1200px,0,1200px,700px);
+            @include cageZIndex(10);
+        }
+        .pigsCage{
+            @include box(5200px,2800px,800px,700px);
+            @include cageZIndex(2800);
+        }
+        .cowCage{
+            @include box(5200px,2000px,800px,700px);
+            @include cageZIndex(2000);
+        }
+        .sheepCage{
+            @include box(5200px,1200px,800px,700px);
+            @include cageZIndex(1200);
         }
     }
     .trees{ //나무들
@@ -226,6 +256,72 @@ $dir : (front, back, left, right);
                 &:nth-of-type(2){top: -320px; z-index: 4360;background: url(../img/bridge_railing2.png) 0 0 no-repeat}
                 &:nth-of-type(3){top: -320px; z-index: 4000;}
                 &:nth-of-type(4){top: -40px; z-index: 5000;}
+            }
+        }
+        .river{
+            @include box(1130px, 1300px, 376px, 610px);
+            background: url(../img/bridge_r.png);
+            &.r1{z-index: 1300;}
+            &.r2{left: 4870px; top: 3450px; z-index: 3450;}
+        }
+    }
+    .eggs{
+        @include box(0,0,100%,100%); 
+        .goldenEgg{
+            @include box(0,0,48px,66px);
+            display: block;
+            outline: none;
+            border: none;
+            background: url(../img/egg.png) 50% 50% / 48px 66px;
+            cursor: pointer;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            &.disapear{
+                animation: disapear 1500ms 0s 1 forwards;
+            }
+            @keyframes disapear {
+                0%{box-shadow: 0 0 0 0 rgba(255,211,50,0),0 0 0 0 inset rgba(73, 62, 19, 0); transform: scale(1);}
+                60%{box-shadow: 0 0 30px 10px rgba(255,211,50,0.76),0 0 30px 10px inset rgba(255,211,50,0.5); transform: scale(1);}
+                90%{box-shadow: 0 0 30px 3px rgba(255,211,50,0.76),0 0 30px 10px inset rgba(255,211,50,0.5); transform: scale(1);}
+                100%{box-shadow: 0 0 30px 3px rgba(255,211,50,0.76),0 0 30px 10px inset rgba(255,211,50,0.5); transform: scale(0);}
+            }
+        }
+    }
+}
+#controller{
+    .eggPlate{
+        @include box(0,0,100vw,100px); 
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 20px;
+        li{
+            position: relative;
+            width: 72px;
+            height: 99px;
+            &:first-child .goldenEgg{
+                padding-top: 40px;
+            }
+            .goldenEgg{
+                animation: eggAni 500ms 0s 1 forwards;
+                @include box(0,0,72px,59px);
+                display: block;
+                outline: none;
+                border: none;
+                background: url(../img/egg.png) 50% 0 no-repeat;
+                cursor: pointer;
+                border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+                text-align: center;
+                padding-top: 50px;
+                font-weight: bold;
+                transition: box-shadow 300ms;
+                &:hover{
+                    text-decoration: none;
+                    box-shadow: 0 0 30px 10px rgba(255,211,50,0.76),0 0 30px 10px inset rgba(255,211,50,0.5);
+                }
+                @keyframes eggAni {
+                    from{transform: scale(0);}
+                    to{transform: scale(1);}
+                }
             }
         }
     }
