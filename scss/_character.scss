@@ -25,6 +25,7 @@ $left3: -280px -600px;
     position: absolute;
     left: #{$x}px;
     top: #{$y}px;
+    z-index: $y;
 }
 @mixin charAni($dir){ // 움직임 설정
     @if $dir == back {
@@ -73,31 +74,29 @@ $left3: -280px -600px;
         background-position: $right1;
     }
 }
+/*  up => 1             down => 3
+    left => 2           right => 4
+    left up => 5        right up => 6
+    left down => 7      right down => 8    */
 #char{
     @include charDefualt;
-    @include startPoint(725,900);
-    &._1,&._5,&._6{
-        @include charAni(back);
-    }
-    &._3,&._7,&._8{
-        @include charAni(front);
-    }
-    &._2{
-        @include charAni(left);
-    }
-    &._4{
-        @include charAni(right);
-    }
-    &.__1,&.__5,&.__6{
-        @include lastDir(back);
-    }
-    &.__3,&.__7,&.__8{
-        @include lastDir(front);
-    }
-    &.__2{
-        @include lastDir(left);
-    }
-    &.__4{
-        @include lastDir(right);
-    }
+    @include startPoint(570,700);
+    //동작
+    &._1{@include charAni(back);}
+    &._2{@include charAni(left);}
+    &._3{@include charAni(front);}
+    &._4{@include charAni(right);}
+    &._5{@include charAni(left);}
+    &._6{@include charAni(right);}
+    &._7{@include charAni(left);}
+    &._8{@include charAni(right);}
+    //정지
+    &.__1{@include lastDir(back);}
+    &.__2{@include lastDir(left);}
+    &.__3{@include lastDir(front);}
+    &.__4{@include lastDir(right);}
+    &.__5{@include lastDir(left);}
+    &.__6{@include lastDir(right);}
+    &.__7{@include lastDir(left);}
+    &.__8{@include lastDir(right);}
 }

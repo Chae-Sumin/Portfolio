@@ -14,72 +14,72 @@ $fieldH: 5000px;
 }
 body, html{overflow: hidden; width: 100%; height: 100%; }
 body{position: relative;}
-h1{display: none;}
-#field{
+body>p{display: none;}
+#field{ // 메인 맵
     @include posA; 
     width: $fieldW;
     height: $fieldH;
-    transform-origin: left top;
+    transform-origin: 0 0;
+    transition: 1s;
     z-index: 1;
+    transform: scale(0.8); //  맵 배율 --> 스크립트에 비율값 조정 필요
 }
-#mapImg{
+#mapImg{ // 메인 맵 배경
     @include posA; 
     width: $fieldW;
     height: $fieldH;
     z-index: 1;
 }
-#limit_img{
+#limit_img{ // 이동 제한 구역
     @include posA; 
     z-index: -1;
 }
-#controller{
+#controller{ //컨트롤러
     position: fixed; 
     z-index: 2;
-    width: 100%; 
-    bottom: 0;
-    button{
+    width: 1%; 
+    height: 1%; 
+    left: 0;
+    top: 0;
+    #active{
+        position: absolute;
+        margin: 0;
+        left: 10vh;
+        top: 80vh;
         width: 53px; 
         height: 53px; 
         border: none; 
         outline: none; 
         cursor: pointer; 
-        background: url(../img/Arrow.png) 50% 50% / cover no-repeat; font-size: 0; 
-        text-indent: -999px; 
-        overflow: hidden;
-        &#active{
-            float: right; 
-            margin: 65px 0 50px 30px;
-            background: url(../img/active.png) 50% 50% / cover no-repeat;
-            &.btnOn{
-                background-image: url(../img/active-on.png);
-            }
-        }
-        &.btnOn{
-            background-image: url(../img/Arrow-on.png);
-        }
-    }
-    >div{
         float: right; 
-        position: relative; 
-        width: 150px; 
-        height: 150px; 
-        margin: 10px; 
-        button{
-            position: absolute;
-            &#ArrowUp{left: 50px; top: 10px; transform: rotateZ(45deg);}
-            &#ArrowRight{left: 90px; top: 50px; transform: rotateZ(135deg);}
-            &#ArrowLeft{left: 10px; top: 50px; transform: rotateZ(315deg);}
-            &#ArrowDown{left: 50px; top: 90px; transform: rotateZ(225deg);}
+        margin: 65px 0 50px 30px;
+        background: url(../img/active.png) 50% 50% / cover no-repeat;
+        &.btnOn{
+            background-image: url(../img/active-on.png);
         }
     }
-}
-.mob{
-    #controller{
-        &>button{
-            float: left;
+    .touch{
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        span{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            margin: -10px 0 0 -10px;
+            border-radius: 50%;
         }
-        &>div{
-            display: none;
+        &.on{
+            background-color: #5557;
+            span{
+                background-color: #3337;
+            }
         }
     }
 }
