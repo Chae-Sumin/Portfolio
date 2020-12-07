@@ -322,31 +322,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 722px;
+        top: 721px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.66778s infinite alternate; }
+        animation: flower1Ani 3s 0.72615s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 714px;
+        top: 722px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.6978s infinite alternate; }
+        animation: flower2Ani 3s 0.61521s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 728px;
+        top: 718px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.3108s infinite alternate; }
+        animation: flower3Ani 3s 0.28009s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 708px;
+        top: 717px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.60053s infinite alternate; }
+        animation: flower4Ani 3s 0.41024s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -908,8 +908,8 @@
     position: relative;
     width: 72px;
     height: 99px; }
-    #controller .eggPlate li:first-child .goldenEgg {
-      padding-top: 40px; }
+    #controller .eggPlate li:not(:first-child) .goldenEgg {
+      line-height: 40px; }
     #controller .eggPlate li .goldenEgg {
       animation: eggAni 500ms 0s 1 forwards;
       position: absolute;
@@ -924,7 +924,7 @@
       cursor: pointer;
       border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
       text-align: center;
-      padding-top: 50px;
+      padding-top: 40px;
       font-weight: bold;
       transition: box-shadow 300ms; }
       #controller .eggPlate li .goldenEgg:hover {
@@ -1099,6 +1099,7 @@
           cursor: pointer;
           background-color: #fff;
           border: 2px solid #000;
+          outline: none;
           border-radius: 10px; }
           #load section.on ul li button:hover {
             background-color: #eee; }

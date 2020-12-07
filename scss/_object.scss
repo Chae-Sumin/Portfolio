@@ -298,8 +298,8 @@ $dir : (front, back, left, right);
             position: relative;
             width: 72px;
             height: 99px;
-            &:first-child .goldenEgg{
-                padding-top: 40px;
+            &:not(:first-child) .goldenEgg{
+                line-height: 40px;
             }
             .goldenEgg{
                 animation: eggAni 500ms 0s 1 forwards;
@@ -311,7 +311,7 @@ $dir : (front, back, left, right);
                 cursor: pointer;
                 border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
                 text-align: center;
-                padding-top: 50px;
+                padding-top: 40px;
                 font-weight: bold;
                 transition: box-shadow 300ms;
                 &:hover{

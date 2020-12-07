@@ -121,14 +121,14 @@ window.onload = function(){
     function afterLoad(){ //-----------------------------------------------------------로딩 완료까지 호출 x
         document.addEventListener("keydown", function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
             key.presskey(e.key);
-            (key.flag()) ? false : key.setKeyTimer(keyDown,0);
             if(key.active()){ egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop); }
+            (key.flag()) ? false : key.setKeyTimer(keyDown,0);
         });
         document.addEventListener("keyup", function(e){ // 키가 떨어지면 루프 종료
             key.removeKey(e.key);
             if(!key.keyCode()) {
                 if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
-                key.clearKeyTimer();
+                key.reset();
                 key.flagFalse();
                 let btnOns = document.getElementsByClassName("btnOn");
                 while(btnOns.length){ btnOns[0].classList.remove("btnOn"); }
@@ -310,7 +310,10 @@ window.onload = function(){
             setKeyTimer: function(func,time){
                 keyTimer = setTimeout(func,time);
             },
-            clearKeyTimer: function(){
+            reset : function(){
+                moveX = 0;
+                moveY = 0;
+                active = false;
                 clearTimeout(keyTimer);
             }
         }
