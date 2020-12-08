@@ -25,6 +25,7 @@
     @include box(1100px, 700px, 150px, 150px);
     background: url(../img/goose.png) 0 0 no-repeat;
     z-index: 9000;
+    &.click{cursor: pointer;}
 }
 $dir : (front, back, left, right);
 @for $i from 1 through 4{

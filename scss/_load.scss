@@ -7,9 +7,9 @@
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
-    transition: z-index 0s 3s;
+    z-index: 6000;
     background: #ffff;
+    transition: background 3s;
     .cloud{ //구름 장막
         max-width: unset;
         max-height: 150%;
@@ -32,9 +32,8 @@
             left: 23%;
             top: 23%;
         }
-        
     }
-    span{ // 로딩 중 표시
+    >span{ // 로딩 중 표시
         display: block;
         position: absolute;
         left: 50%;
@@ -71,7 +70,7 @@
         box-shadow: 0 0 30px 30px #fffe;
         transition: opacity 1s linear;
         h1{
-            width: 80%; height: 50%;
+            width: 70%; height: 50%;
             margin: 0 auto;
             svg{
                 padding-top: 10%;
@@ -105,21 +104,42 @@
         ul{
             display: flex; 
             width: 100%; height: 50%;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: space-evenly;
             align-items: center;
             li{
                 button{
                     position: relative;
-                    width: 200px;
-                    height: 50px;
+                    width: 140px;
+                    height: 200px;
                     cursor: pointer;
-                    background-color: #fff;
-                    border: 2px solid #000;
+                    background: url(../img/character.png) 0 -200px no-repeat;
+                    border: none;
                     outline: none;
                     border-radius: 10px;
+                    span{
+                        position: absolute;
+                        display: block;
+                        bottom: -50px;
+                        width: 100%;
+                        height: 40px;
+                        text-align: center;
+                        text-indent: 10px;
+                    }
                     &:hover{
-                        background-color: #eee;
+                        animation: frontAni 1000ms 0s infinite step-start;
+                    }
+                    &.cheat{
+                        width: 150px;
+                        height: 150px;
+                        margin-top: 40px;
+                        background: url(../img/goose.png) 0 0 no-repeat;
+                        span{
+                            text-indent: 0;
+                        }
+                    }
+                    &.cheat:hover{
+                        animation: goosefrontAni 1s infinite step-start;
                     }
                     &::after{
                         position: absolute;
@@ -167,8 +187,12 @@
         }
     }
     &.load{ // 로딩 완료
-        z-index: -1;
         background: #fff0;
+        animation: zIndex 0s 3s forwards;
+        @keyframes zIndex {
+            from{z-index: 6000;}
+            to{z-index: -1;}
+        }
         .cloud{
             opacity: 0;
             &.c1{
@@ -195,5 +219,11 @@
     @keyframes load#{$i}Ani{
         0%{transform: scale(#{$i / 100});}
         30%{transform: scale(#{$i / 100});}
+    }
+}
+@for $i from 1 to 100{
+    @keyframes end#{$i}Ani{
+        70%{transform: scale(#{$i / 100});}
+        100%{transform: scale(#{$i / 100});}
     }
 }

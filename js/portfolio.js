@@ -9,6 +9,7 @@ window.onload = function(){
     const ctrlActive = document.getElementById("active");
     const ctrlTouch = document.querySelector("#controller>.touch");
     const loadSection = document.querySelector("#load>.before_start");
+    const endingSection = document.querySelector(".ending");
     // -------------------- 상수 --------------------
     const CHAR_WIDTH = 150; // 캐릭터 너비
     const CHAR_HEIGHT = 200; // 캐릭터 높이
@@ -39,6 +40,95 @@ window.onload = function(){
     limitCanvas.height = limitImg.height;
     limitCanvas.getContext('2d').drawImage(limitImg,0,0,limitImg.width,limitImg.height);
 
+    // --------------------이벤트 리스너 함수들--------------------
+    const moveKey1 = ["arrowup","arrowleft","arrowdown","arrowright"];
+    const moveKey2 = ["w","a","s","d"];
+    const activeKey = [" ","f"];
+    const keydown = function (e) {
+        const mk1 = moveKey1.indexOf(e.key.toLowerCase());
+        const mk2 = moveKey2.indexOf(e.key.toLowerCase());
+        const ac = activeKey.indexOf(e.key.toLowerCase());
+        if(ac !== -1){
+            e.preventDefault();
+            if(!key.active()){
+                egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
+                goose.gooseActive(CHAR.offsetLeft,CHAR.offsetTop);
+                key.activeTrue();
+            }
+        }
+        if(key.move(mk1) === false){
+            key.presskey(mk1);
+        } else if(key.move(mk2) === false){
+            key.presskey(mk2);
+        }
+        (key.flag()) ? false : key.setKeyTimer(keyDown,0);
+    }
+    const keyup = function (e) {
+        const mk1 = moveKey1.indexOf(e.key.toLowerCase());
+        const mk2 = moveKey2.indexOf(e.key.toLowerCase());
+        const ac = activeKey.indexOf(e.key.toLowerCase());
+        if(ac !== -1){
+            key.activeFalse();
+        }
+        if(key.move(mk1) === true){
+            key.removeKey(mk1);
+        } else if(key.move(mk2) === true){
+            key.removeKey(mk2);
+        }
+        if(!key.keyCode()) {
+            if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
+            key.reset();
+            key.flagFalse();
+        }
+    }
+    const touchstart = function (e) {
+        if(e.target === ctrlActive){
+            egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
+            goose.gooseActive(CHAR.offsetLeft,CHAR.offsetTop);
+        }
+        else if(ElementIndex(EGGS.children,e.target)){
+            egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
+            goose.gooseActive(CHAR.offsetLeft,CHAR.offsetTop);
+            
+        }
+        else if(!touch.getFlag()){
+            touch.setFlag(true);
+            ctrlTouch.classList.add("on");
+            ctrlTouch.style.left = e.targetTouches[0].clientX - 15 + "px";
+            ctrlTouch.style.top = e.targetTouches[0].clientY - 15 + "px";
+            touch.setTouch(e.targetTouches[0].clientX,e.targetTouches[0].clientY,e.targetTouches[0].identifier);
+        }
+    }
+    const tocuhmove = function(e){
+        if(e.cancelable) e.preventDefault();
+        let {x,y,id} = touch.getTouch();
+        if(e.targetTouches[0].identifier === id){
+            let _x = e.targetTouches[0].clientX - x;
+            let _y = e.targetTouches[0].clientY - y;
+            let dir = {x : Math.cos(Math.atan2(_y,_x)), y : Math.sin(Math.atan2(_y,_x)), deg : Math.atan2(_y,_x) * 180 / Math.PI};
+            touch.stop();
+            touch.move(dir);
+        }
+    }
+    const touchend = function (e) {
+        if(e.touches.length === 0){
+            ctrlTouch.children[0].style.left = 0;
+            ctrlTouch.children[0].style.top = 0;
+            if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
+            touch.stop();
+            touch.setFlag(false);
+            touch.setTouch(0,0,null);
+            ctrlTouch.classList.remove("on");
+        } else if(e.touches[0].identifier !== id){
+            ctrlTouch.children[0].style.left = 0;
+            ctrlTouch.children[0].style.top = 0;
+            if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
+            touch.stop();
+            touch.setFlag(false);
+            touch.setTouch(0,0,null);
+            ctrlTouch.classList.remove("on");
+        }
+    }
     // --------------------로딩중...--------------------
     main();
     function main(){
@@ -99,6 +189,7 @@ window.onload = function(){
             MAP.style.transition = "none";
             clearTimeout(aniTime);
             clearTimeout(loadTime);
+            goose.end();
         },2500);
     }
     function load(){
@@ -119,112 +210,14 @@ window.onload = function(){
         },5000);
     }
     function afterLoad(){ //-----------------------------------------------------------로딩 완료까지 호출 x
-        const moveKey1 = ["arrowup","arrowleft","arrowdown","arrowright"];
-        const moveKey2 = ["w","a","s","d"];
-        const activeKey = [" ","f"];
-        document.addEventListener("keydown", function(e){ // 키가 눌려있는 중에는 setTimeOut 호출 X
-            const mk1 = moveKey1.indexOf(e.key.toLowerCase());
-            const mk2 = moveKey2.indexOf(e.key.toLowerCase());
-            const ac = activeKey.indexOf(e.key.toLowerCase());
-            if(ac !== -1){
-                e.preventDefault();
-                if(!key.active()){
-                    egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
-                    key.activeTrue();
-                }
-            }
-            if(key.move(mk1) === false){
-                key.presskey(mk1);
-            } else if(key.move(mk2) === false){
-                key.presskey(mk2);
-            }
-            (key.flag()) ? false : key.setKeyTimer(keyDown,0);
-        });
-        document.addEventListener("keyup", function(e){ // 키가 떨어지면 루프 종료
-            const mk1 = moveKey1.indexOf(e.key.toLowerCase());
-            const mk2 = moveKey2.indexOf(e.key.toLowerCase());
-            const ac = activeKey.indexOf(e.key.toLowerCase());
-            if(ac !== -1){
-                key.activeFalse();
-            }
-            if(key.move(mk1) === true){
-                key.removeKey(mk1);
-            } else if(key.move(mk2) === true){
-                key.removeKey(mk2);
-            }
-            if(!key.keyCode()) {
-                if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
-                key.reset();
-                key.flagFalse();
-            }
-        });
+
+        document.addEventListener("keydown",keydown,false);
+        document.addEventListener("keyup", keyup,false);
         
-        document.addEventListener("touchstart",function(e){
-            if(e.target === ctrlActive){
-                egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
-            }
-            else if(ElementIndex(EGGS.children,e.target)){
-                egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
-                
-            }
-            else if(!touch.getFlag()){
-                touch.setFlag(true);
-                ctrlTouch.classList.add("on");
-                ctrlTouch.style.left = e.targetTouches[0].clientX - 15 + "px";
-                ctrlTouch.style.top = e.targetTouches[0].clientY - 15 + "px";
-                touch.setTouch(e.targetTouches[0].clientX,e.targetTouches[0].clientY,e.targetTouches[0].identifier);
-            }
-        },false);
-        document.addEventListener("touchmove",function(e){
-            if(e.cancelable) e.preventDefault();
-            let {x,y,id} = touch.getTouch();
-            if(e.targetTouches[0].identifier === id){
-                let _x = e.targetTouches[0].clientX - x;
-                let _y = e.targetTouches[0].clientY - y;
-                let dir = {x : Math.cos(Math.atan2(_y,_x)), y : Math.sin(Math.atan2(_y,_x)), deg : Math.atan2(_y,_x) * 180 / Math.PI};
-                touch.stop();
-                touch.move(dir);
-            }
-        });
-        document.addEventListener("touchend",function(e){
-            if(e.touches.length === 0){
-                ctrlTouch.children[0].style.left = 0;
-                ctrlTouch.children[0].style.top = 0;
-                if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
-                touch.stop();
-                touch.setFlag(false);
-                touch.setTouch(0,0,null);
-                ctrlTouch.classList.remove("on");
-            } else if(e.touches[0].identifier !== id){
-                ctrlTouch.children[0].style.left = 0;
-                ctrlTouch.children[0].style.top = 0;
-                if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
-                touch.stop();
-                touch.setFlag(false);
-                touch.setTouch(0,0,null);
-                ctrlTouch.classList.remove("on");
-            }
-        },false);
-        document.addEventListener("touchcancel",function(e){
-            if(e.cancelable) e.preventDefault();
-            if(e.touches.length === 0){
-                ctrlTouch.children[0].style.left = 0;
-                ctrlTouch.children[0].style.top = 0;
-                if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
-                touch.stop();
-                touch.setFlag(false);
-                touch.setTouch(0,0,null);
-                ctrlTouch.classList.remove("on");
-            } else if(e.touches[0].identifier !== id){
-                ctrlTouch.children[0].style.left = 0;
-                ctrlTouch.children[0].style.top = 0;
-                if(CHAR.getAttribute("class") ? CHAR.getAttribute("class").indexOf("__") === -1 : false){CHAR.setAttribute("class", "_" + CHAR.getAttribute("class"));}
-                touch.stop();
-                touch.setFlag(false);
-                touch.setTouch(0,0,null);
-                ctrlTouch.classList.remove("on");
-            }
-        },false);
+        document.addEventListener("touchstart",touchstart,false);
+        document.addEventListener("touchmove",tocuhmove,false);
+        document.addEventListener("touchend",touchend,false);
+        document.addEventListener("touchcancel",touchend,false);
     }
 
     function isEntryPossible(x,y){ // 이동 가능구역인지 확인
@@ -352,11 +345,7 @@ window.onload = function(){
         let gooseBox = [goosePosX - senserLength,goosePosX + senserLength, goosePosY - senserLength, goosePosY + senserLength];
         let gooseLevel = 1;
         let isMoving = false;
-        function gooseEvent(){
-            GOOSE.addEventListener("click",function(){
-                document.getElementById("load").classList.remove("load")
-            });
-        }
+        let isEnd = false;
         return{
             moveTo : function(x,y,fly){ // 좌표로 이동
                 isMoving = true;
@@ -455,16 +444,43 @@ window.onload = function(){
                         break;
                     case  14 : //엔딩 포인트
                         this.moveTo(5000,500,true);
-                        gooseEvent();
+                        this.end();
                         break;
                     default : break;
                 }
                 gooseLevel++;
             },
+            end : function () {
+                gooseLevel = 15;
+                let that = this;
+                GOOSE.classList.add("click");
+                GOOSE.addEventListener("click",function() {
+                    that.gooseActive(GOOSE.offsetLeft,GOOSE.offsetTop);
+                },false);   
+                isEnd = true;
+            },
+            gooseActive : function (x,y) {
+                if(isEnd){
+                    let box = [GOOSE.offsetLeft - CHAR.offsetWidth, GOOSE.offsetLeft + GOOSE.offsetWidth, GOOSE.offsetTop - CHAR.offsetHeight, GOOSE.offsetTop + GOOSE.offsetHeight]
+                    console.log(box);
+                    console.log(GOOSE.offsetLeft,GOOSE.offsetLeft);
+                    if(x > box[0] && x < box[1] && y > box[2] && y < box[3]){
+                        endingSection.classList.add("on"); 
+                        document.getElementById("load").classList.remove("load");
+                        document.removeEventListener("keydown",keydown);
+                        document.removeEventListener("keyup", keyup);
+                        document.removeEventListener("touchstart",touchstart);
+                        document.removeEventListener("touchmove",tocuhmove);
+                        document.removeEventListener("touchend",touchend);
+                        document.removeEventListener("touchcancel",touchend);
+                        MAP.style.animation = "end" + parseInt((screenWidth / MAP_WIDTH) * 100 + 1) + "Ani 3000ms ease";
+                    }
+                }
+            }
         }
     }
     function eggFunc(){
-        let eggs = [
+        let eggs = [ // 알 정보들!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             {
                 id : 1,
                 title : "웹 표준, 접근성, 호환성 준수 새창에서 열기",

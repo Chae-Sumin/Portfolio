@@ -150,6 +150,8 @@
   height: 150px;
   background: url(../img/goose.png) 0 0 no-repeat;
   z-index: 9000; }
+  #goose.click {
+    cursor: pointer; }
 
 @keyframes goosefrontAni {
   0% {
@@ -322,31 +324,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 729px;
+        top: 707px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.81574s infinite alternate; }
+        animation: flower1Ani 3s 0.96573s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 729px;
+        top: 706px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.38455s infinite alternate; }
+        animation: flower2Ani 3s 0.94853s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 704px;
+        top: 702px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.17132s infinite alternate; }
+        animation: flower3Ani 3s 0.60613s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 726px;
+        top: 702px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.12396s infinite alternate; }
+        animation: flower4Ani 3s 0.96552s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -943,9 +945,9 @@
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
-  transition: z-index 0s 3s;
-  background: #ffff; }
+  z-index: 6000;
+  background: #ffff;
+  transition: background 3s; }
   #load .cloud {
     max-width: unset;
     max-height: 150%;
@@ -964,7 +966,7 @@
     #load .cloud.c4 {
       left: 23%;
       top: 23%; }
-  #load span {
+  #load > span {
     display: block;
     position: absolute;
     left: 50%;
@@ -977,10 +979,10 @@
     text-align: center;
     color: #707070;
     transition: opacity 1s 500ms linear; }
-    #load span svg {
+    #load > span svg {
       width: 32px;
       height: 32px; }
-      #load span svg circle {
+      #load > span svg circle {
         stroke-dasharray: 35 55;
         stroke-dashoffset: 0;
         animation: circleAni 1500ms linear infinite; }
@@ -990,7 +992,7 @@
     stroke-dashoffset: 90; }
   100% {
     stroke-dashoffset: 0; } }
-    #load span.on {
+    #load > span.on {
       opacity: 0; }
   #load .before_start {
     opacity: 0;
@@ -1005,7 +1007,7 @@
     box-shadow: 0 0 30px 30px #fffe;
     transition: opacity 1s linear; }
     #load .before_start h1 {
-      width: 80%;
+      width: 70%;
       height: 50%;
       margin: 0 auto; }
       #load .before_start h1 svg {
@@ -1063,20 +1065,37 @@
       display: flex;
       width: 100%;
       height: 50%;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-evenly;
       align-items: center; }
       #load .before_start ul li button {
         position: relative;
-        width: 200px;
-        height: 50px;
+        width: 140px;
+        height: 200px;
         cursor: pointer;
-        background-color: #fff;
-        border: 2px solid #000;
+        background: url(../img/character.png) 0 -200px no-repeat;
+        border: none;
         outline: none;
         border-radius: 10px; }
+        #load .before_start ul li button span {
+          position: absolute;
+          display: block;
+          bottom: -50px;
+          width: 100%;
+          height: 40px;
+          text-align: center;
+          text-indent: 10px; }
         #load .before_start ul li button:hover {
-          background-color: #eee; }
+          animation: frontAni 1000ms 0s infinite step-start; }
+        #load .before_start ul li button.cheat {
+          width: 150px;
+          height: 150px;
+          margin-top: 40px;
+          background: url(../img/goose.png) 0 0 no-repeat; }
+          #load .before_start ul li button.cheat span {
+            text-indent: 0; }
+        #load .before_start ul li button.cheat:hover {
+          animation: goosefrontAni 1s infinite step-start; }
         #load .before_start ul li button::after {
           position: absolute;
           top: -30px;
@@ -1127,8 +1146,14 @@
     #load .before_start.off {
       z-index: -1; }
   #load.load {
-    z-index: -1;
-    background: #fff0; }
+    background: #fff0;
+    animation: zIndex 0s 3s forwards; }
+
+@keyframes zIndex {
+  from {
+    z-index: 6000; }
+  to {
+    z-index: -1; } }
     #load.load .cloud {
       opacity: 0; }
       #load.load .cloud.c1 {
@@ -1738,13 +1763,1240 @@
   30% {
     transform: scale(0.99); } }
 
+@keyframes end1Ani {
+  70% {
+    transform: scale(0.01); }
+  100% {
+    transform: scale(0.01); } }
+
+@keyframes end2Ani {
+  70% {
+    transform: scale(0.02); }
+  100% {
+    transform: scale(0.02); } }
+
+@keyframes end3Ani {
+  70% {
+    transform: scale(0.03); }
+  100% {
+    transform: scale(0.03); } }
+
+@keyframes end4Ani {
+  70% {
+    transform: scale(0.04); }
+  100% {
+    transform: scale(0.04); } }
+
+@keyframes end5Ani {
+  70% {
+    transform: scale(0.05); }
+  100% {
+    transform: scale(0.05); } }
+
+@keyframes end6Ani {
+  70% {
+    transform: scale(0.06); }
+  100% {
+    transform: scale(0.06); } }
+
+@keyframes end7Ani {
+  70% {
+    transform: scale(0.07); }
+  100% {
+    transform: scale(0.07); } }
+
+@keyframes end8Ani {
+  70% {
+    transform: scale(0.08); }
+  100% {
+    transform: scale(0.08); } }
+
+@keyframes end9Ani {
+  70% {
+    transform: scale(0.09); }
+  100% {
+    transform: scale(0.09); } }
+
+@keyframes end10Ani {
+  70% {
+    transform: scale(0.1); }
+  100% {
+    transform: scale(0.1); } }
+
+@keyframes end11Ani {
+  70% {
+    transform: scale(0.11); }
+  100% {
+    transform: scale(0.11); } }
+
+@keyframes end12Ani {
+  70% {
+    transform: scale(0.12); }
+  100% {
+    transform: scale(0.12); } }
+
+@keyframes end13Ani {
+  70% {
+    transform: scale(0.13); }
+  100% {
+    transform: scale(0.13); } }
+
+@keyframes end14Ani {
+  70% {
+    transform: scale(0.14); }
+  100% {
+    transform: scale(0.14); } }
+
+@keyframes end15Ani {
+  70% {
+    transform: scale(0.15); }
+  100% {
+    transform: scale(0.15); } }
+
+@keyframes end16Ani {
+  70% {
+    transform: scale(0.16); }
+  100% {
+    transform: scale(0.16); } }
+
+@keyframes end17Ani {
+  70% {
+    transform: scale(0.17); }
+  100% {
+    transform: scale(0.17); } }
+
+@keyframes end18Ani {
+  70% {
+    transform: scale(0.18); }
+  100% {
+    transform: scale(0.18); } }
+
+@keyframes end19Ani {
+  70% {
+    transform: scale(0.19); }
+  100% {
+    transform: scale(0.19); } }
+
+@keyframes end20Ani {
+  70% {
+    transform: scale(0.2); }
+  100% {
+    transform: scale(0.2); } }
+
+@keyframes end21Ani {
+  70% {
+    transform: scale(0.21); }
+  100% {
+    transform: scale(0.21); } }
+
+@keyframes end22Ani {
+  70% {
+    transform: scale(0.22); }
+  100% {
+    transform: scale(0.22); } }
+
+@keyframes end23Ani {
+  70% {
+    transform: scale(0.23); }
+  100% {
+    transform: scale(0.23); } }
+
+@keyframes end24Ani {
+  70% {
+    transform: scale(0.24); }
+  100% {
+    transform: scale(0.24); } }
+
+@keyframes end25Ani {
+  70% {
+    transform: scale(0.25); }
+  100% {
+    transform: scale(0.25); } }
+
+@keyframes end26Ani {
+  70% {
+    transform: scale(0.26); }
+  100% {
+    transform: scale(0.26); } }
+
+@keyframes end27Ani {
+  70% {
+    transform: scale(0.27); }
+  100% {
+    transform: scale(0.27); } }
+
+@keyframes end28Ani {
+  70% {
+    transform: scale(0.28); }
+  100% {
+    transform: scale(0.28); } }
+
+@keyframes end29Ani {
+  70% {
+    transform: scale(0.29); }
+  100% {
+    transform: scale(0.29); } }
+
+@keyframes end30Ani {
+  70% {
+    transform: scale(0.3); }
+  100% {
+    transform: scale(0.3); } }
+
+@keyframes end31Ani {
+  70% {
+    transform: scale(0.31); }
+  100% {
+    transform: scale(0.31); } }
+
+@keyframes end32Ani {
+  70% {
+    transform: scale(0.32); }
+  100% {
+    transform: scale(0.32); } }
+
+@keyframes end33Ani {
+  70% {
+    transform: scale(0.33); }
+  100% {
+    transform: scale(0.33); } }
+
+@keyframes end34Ani {
+  70% {
+    transform: scale(0.34); }
+  100% {
+    transform: scale(0.34); } }
+
+@keyframes end35Ani {
+  70% {
+    transform: scale(0.35); }
+  100% {
+    transform: scale(0.35); } }
+
+@keyframes end36Ani {
+  70% {
+    transform: scale(0.36); }
+  100% {
+    transform: scale(0.36); } }
+
+@keyframes end37Ani {
+  70% {
+    transform: scale(0.37); }
+  100% {
+    transform: scale(0.37); } }
+
+@keyframes end38Ani {
+  70% {
+    transform: scale(0.38); }
+  100% {
+    transform: scale(0.38); } }
+
+@keyframes end39Ani {
+  70% {
+    transform: scale(0.39); }
+  100% {
+    transform: scale(0.39); } }
+
+@keyframes end40Ani {
+  70% {
+    transform: scale(0.4); }
+  100% {
+    transform: scale(0.4); } }
+
+@keyframes end41Ani {
+  70% {
+    transform: scale(0.41); }
+  100% {
+    transform: scale(0.41); } }
+
+@keyframes end42Ani {
+  70% {
+    transform: scale(0.42); }
+  100% {
+    transform: scale(0.42); } }
+
+@keyframes end43Ani {
+  70% {
+    transform: scale(0.43); }
+  100% {
+    transform: scale(0.43); } }
+
+@keyframes end44Ani {
+  70% {
+    transform: scale(0.44); }
+  100% {
+    transform: scale(0.44); } }
+
+@keyframes end45Ani {
+  70% {
+    transform: scale(0.45); }
+  100% {
+    transform: scale(0.45); } }
+
+@keyframes end46Ani {
+  70% {
+    transform: scale(0.46); }
+  100% {
+    transform: scale(0.46); } }
+
+@keyframes end47Ani {
+  70% {
+    transform: scale(0.47); }
+  100% {
+    transform: scale(0.47); } }
+
+@keyframes end48Ani {
+  70% {
+    transform: scale(0.48); }
+  100% {
+    transform: scale(0.48); } }
+
+@keyframes end49Ani {
+  70% {
+    transform: scale(0.49); }
+  100% {
+    transform: scale(0.49); } }
+
+@keyframes end50Ani {
+  70% {
+    transform: scale(0.5); }
+  100% {
+    transform: scale(0.5); } }
+
+@keyframes end51Ani {
+  70% {
+    transform: scale(0.51); }
+  100% {
+    transform: scale(0.51); } }
+
+@keyframes end52Ani {
+  70% {
+    transform: scale(0.52); }
+  100% {
+    transform: scale(0.52); } }
+
+@keyframes end53Ani {
+  70% {
+    transform: scale(0.53); }
+  100% {
+    transform: scale(0.53); } }
+
+@keyframes end54Ani {
+  70% {
+    transform: scale(0.54); }
+  100% {
+    transform: scale(0.54); } }
+
+@keyframes end55Ani {
+  70% {
+    transform: scale(0.55); }
+  100% {
+    transform: scale(0.55); } }
+
+@keyframes end56Ani {
+  70% {
+    transform: scale(0.56); }
+  100% {
+    transform: scale(0.56); } }
+
+@keyframes end57Ani {
+  70% {
+    transform: scale(0.57); }
+  100% {
+    transform: scale(0.57); } }
+
+@keyframes end58Ani {
+  70% {
+    transform: scale(0.58); }
+  100% {
+    transform: scale(0.58); } }
+
+@keyframes end59Ani {
+  70% {
+    transform: scale(0.59); }
+  100% {
+    transform: scale(0.59); } }
+
+@keyframes end60Ani {
+  70% {
+    transform: scale(0.6); }
+  100% {
+    transform: scale(0.6); } }
+
+@keyframes end61Ani {
+  70% {
+    transform: scale(0.61); }
+  100% {
+    transform: scale(0.61); } }
+
+@keyframes end62Ani {
+  70% {
+    transform: scale(0.62); }
+  100% {
+    transform: scale(0.62); } }
+
+@keyframes end63Ani {
+  70% {
+    transform: scale(0.63); }
+  100% {
+    transform: scale(0.63); } }
+
+@keyframes end64Ani {
+  70% {
+    transform: scale(0.64); }
+  100% {
+    transform: scale(0.64); } }
+
+@keyframes end65Ani {
+  70% {
+    transform: scale(0.65); }
+  100% {
+    transform: scale(0.65); } }
+
+@keyframes end66Ani {
+  70% {
+    transform: scale(0.66); }
+  100% {
+    transform: scale(0.66); } }
+
+@keyframes end67Ani {
+  70% {
+    transform: scale(0.67); }
+  100% {
+    transform: scale(0.67); } }
+
+@keyframes end68Ani {
+  70% {
+    transform: scale(0.68); }
+  100% {
+    transform: scale(0.68); } }
+
+@keyframes end69Ani {
+  70% {
+    transform: scale(0.69); }
+  100% {
+    transform: scale(0.69); } }
+
+@keyframes end70Ani {
+  70% {
+    transform: scale(0.7); }
+  100% {
+    transform: scale(0.7); } }
+
+@keyframes end71Ani {
+  70% {
+    transform: scale(0.71); }
+  100% {
+    transform: scale(0.71); } }
+
+@keyframes end72Ani {
+  70% {
+    transform: scale(0.72); }
+  100% {
+    transform: scale(0.72); } }
+
+@keyframes end73Ani {
+  70% {
+    transform: scale(0.73); }
+  100% {
+    transform: scale(0.73); } }
+
+@keyframes end74Ani {
+  70% {
+    transform: scale(0.74); }
+  100% {
+    transform: scale(0.74); } }
+
+@keyframes end75Ani {
+  70% {
+    transform: scale(0.75); }
+  100% {
+    transform: scale(0.75); } }
+
+@keyframes end76Ani {
+  70% {
+    transform: scale(0.76); }
+  100% {
+    transform: scale(0.76); } }
+
+@keyframes end77Ani {
+  70% {
+    transform: scale(0.77); }
+  100% {
+    transform: scale(0.77); } }
+
+@keyframes end78Ani {
+  70% {
+    transform: scale(0.78); }
+  100% {
+    transform: scale(0.78); } }
+
+@keyframes end79Ani {
+  70% {
+    transform: scale(0.79); }
+  100% {
+    transform: scale(0.79); } }
+
+@keyframes end80Ani {
+  70% {
+    transform: scale(0.8); }
+  100% {
+    transform: scale(0.8); } }
+
+@keyframes end81Ani {
+  70% {
+    transform: scale(0.81); }
+  100% {
+    transform: scale(0.81); } }
+
+@keyframes end82Ani {
+  70% {
+    transform: scale(0.82); }
+  100% {
+    transform: scale(0.82); } }
+
+@keyframes end83Ani {
+  70% {
+    transform: scale(0.83); }
+  100% {
+    transform: scale(0.83); } }
+
+@keyframes end84Ani {
+  70% {
+    transform: scale(0.84); }
+  100% {
+    transform: scale(0.84); } }
+
+@keyframes end85Ani {
+  70% {
+    transform: scale(0.85); }
+  100% {
+    transform: scale(0.85); } }
+
+@keyframes end86Ani {
+  70% {
+    transform: scale(0.86); }
+  100% {
+    transform: scale(0.86); } }
+
+@keyframes end87Ani {
+  70% {
+    transform: scale(0.87); }
+  100% {
+    transform: scale(0.87); } }
+
+@keyframes end88Ani {
+  70% {
+    transform: scale(0.88); }
+  100% {
+    transform: scale(0.88); } }
+
+@keyframes end89Ani {
+  70% {
+    transform: scale(0.89); }
+  100% {
+    transform: scale(0.89); } }
+
+@keyframes end90Ani {
+  70% {
+    transform: scale(0.9); }
+  100% {
+    transform: scale(0.9); } }
+
+@keyframes end91Ani {
+  70% {
+    transform: scale(0.91); }
+  100% {
+    transform: scale(0.91); } }
+
+@keyframes end92Ani {
+  70% {
+    transform: scale(0.92); }
+  100% {
+    transform: scale(0.92); } }
+
+@keyframes end93Ani {
+  70% {
+    transform: scale(0.93); }
+  100% {
+    transform: scale(0.93); } }
+
+@keyframes end94Ani {
+  70% {
+    transform: scale(0.94); }
+  100% {
+    transform: scale(0.94); } }
+
+@keyframes end95Ani {
+  70% {
+    transform: scale(0.95); }
+  100% {
+    transform: scale(0.95); } }
+
+@keyframes end96Ani {
+  70% {
+    transform: scale(0.96); }
+  100% {
+    transform: scale(0.96); } }
+
+@keyframes end97Ani {
+  70% {
+    transform: scale(0.97); }
+  100% {
+    transform: scale(0.97); } }
+
+@keyframes end98Ani {
+  70% {
+    transform: scale(0.98); }
+  100% {
+    transform: scale(0.98); } }
+
+@keyframes end99Ani {
+  70% {
+    transform: scale(0.99); }
+  100% {
+    transform: scale(0.99); } }
+
+.ending {
+  opacity: 0;
+  z-index: -1;
+  display: none;
+  position: absolute;
+  left: 10vw;
+  top: 10vh;
+  z-index: 1;
+  width: 80vw;
+  height: 80vh;
+  background: #fffe;
+  box-shadow: 0 0 30px 30px #fffe;
+  transition: opacity 1s linear;
+  text-align: center; }
+  .ending h3 {
+    height: 20vh;
+    padding-top: 10vh;
+    line-height: 20vh;
+    font-size: 50px; }
+  .ending p {
+    height: 40%;
+    font-size: 30px; }
+  .ending .emoji_list {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .ending .emoji_list li {
+      width: calc(100% / 5); }
+    .ending .emoji_list button {
+      transform-origin: center center;
+      transform: scale(0.7);
+      outline: none; }
+    .ending .emoji_list button:hover.emoji_like .emoji_hand {
+      animation: hands-up 2s linear infinite; }
+      .ending .emoji_list button:hover.emoji_like .emoji_hand .emoji_thumb {
+        animation: thumbs-up 2s linear infinite; }
+    .ending .emoji_list button:hover.emoji_love .emoji_heart {
+      animation: heart-beat 2s linear infinite alternate; }
+    .ending .emoji_list button:hover.emoji_haha .emoji_face {
+      animation: haha-face 2s linear infinite; }
+    .ending .emoji_list button:hover.emoji_haha .emoji_mouth {
+      animation: haha-mouth 2s linear infinite; }
+    .ending .emoji_list button:hover.emoji_yay .emoji_face {
+      animation: yay-face 1s linear infinite alternate; }
+    .ending .emoji_list button:hover.emoji_wow .emoji_face {
+      animation: wow-face 3s linear infinite; }
+    .ending .emoji_list button:hover.emoji_wow .emoji_eyebrows {
+      animation: wow-brow 3s linear infinite; }
+    .ending .emoji_list button:hover.emoji_wow .emoji_tougue {
+      animation: wow-tongue 3s infinite linear; }
+    .ending .emoji_list button:hover.emoji_sad .emoji_face {
+      animation: sad-face 2s ease-in infinite; }
+    .ending .emoji_list button:hover.emoji_sad .emoji_eyes:after {
+      animation: tear-drop 2s ease-in infinite; }
+    .ending .emoji_list button:hover.emoji_sad .emoji_mouth {
+      animation: sad-mouth 2s ease-in infinite; }
+    .ending .emoji_list button:hover.emoji_angry {
+      animation: angry 2s ease-in infinite; }
+      .ending .emoji_list button:hover.emoji_angry .emoji_face {
+        animation: angry-face 2s ease-in infinite; }
+      .ending .emoji_list button:hover.emoji_angry .emoji_mouth {
+        animation: angry-mouth 2s ease-in infinite; }
+  .ending.on {
+    opacity: 1;
+    z-index: 9000;
+    display: block; }
+
+.emoji_list {
+  /* 1. like */
+  /* love */
+  /* haha */
+  /* yay */
+  /* wow */
+  /* sad */
+  /* angry */ }
+  .emoji_list .emoji {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    margin: 15px 15px 40px;
+    border-radius: 50%;
+    border: none;
+    background: #ffda6a; }
+  .emoji_list .emoji:after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    left: calc(50% - 30px);
+    width: 60px;
+    font-size: 18px;
+    color: #8a8a8a; }
+  .emoji_list .emoji_like {
+    background-color: #548dff; }
+  .emoji_list .emoji_like:after {
+    content: "Like"; }
+  .emoji_list .emoji_like .emoji_hand {
+    position: absolute;
+    left: 25px;
+    bottom: 30px;
+    z-index: 0;
+    width: 20px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 5px; }
+
+@keyframes hands-up {
+  25% {
+    transform: rotate(15deg); }
+  50% {
+    transform: rotate(-15deg) translateY(-10px); }
+  75%, 100% {
+    transform: rotate(0deg); } }
+  .emoji_list .emoji_like .emoji_hand:before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    bottom: 5px;
+    width: 40px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 2px 10px 10px 2px;
+    box-shadow: 1px -9px 0 1px #fff,2px -19px 0 2px #fff, 3px -29px 0 3px #fff; }
+  .emoji_list .emoji_like .emoji_hand .emoji_thumb {
+    position: absolute;
+    right: -25px;
+    top: -25px;
+    z-index: 2;
+    border-bottom: 20px solid #fff;
+    border-left: 20px solid transparent;
+    transform: rotate(5deg);
+    transform-origin: 0 100%; }
+
+@keyframes thumbs-up {
+  25% {
+    transform: rotate(20deg); }
+  50%, 100% {
+    transform: rotate(5deg); } }
+  .emoji_list .emoji_like .emoji_hand .emoji_thumb:before {
+    content: "";
+    position: absolute;
+    left: -9.7px;
+    top: -9px;
+    width: 10px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50% 50% 0 0;
+    box-shadow: -1px 4px 0 -1px #fff;
+    transform: rotate(-14deg);
+    transform-origin: 100% 100%; }
+  .emoji_list .emoji_love {
+    background-color: #f55064; }
+  .emoji_list .emoji_love:after {
+    content: "Love"; }
+  .emoji_list .emoji_love .emoji_heart {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px; }
+
+@keyframes heart-beat {
+  20% {
+    transform: scale(1.1); }
+  75% {
+    transform: scale(0.6); } }
+  .emoji_list .emoji_love .emoji_heart:before, .emoji_list .emoji_love .emoji_heart:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 40px;
+    height: 64px;
+    margin-left: -20px;
+    margin-top: -32px;
+    background-color: #fff;
+    border-radius: 20px 20px 0 0; }
+  .emoji_list .emoji_love .emoji_heart:before {
+    transform: translate(20px) rotate(-45deg);
+    transform-origin: 0% 100%; }
+  .emoji_list .emoji_love .emoji_heart:after {
+    transform: translate(-20px) rotate(45deg);
+    transform-origin: 100% 100%; }
+  .emoji_list .emoji_haha:after {
+    content: "Haha"; }
+  .emoji_list .emoji_haha .emoji_face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: inherit; }
+
+@keyframes haha-face {
+  10% {
+    transform: translateY(25px); }
+  20% {
+    transform: translateY(15px); }
+  30% {
+    transform: translateY(25px); }
+  40% {
+    transform: translateY(15px); }
+  50% {
+    transform: translateY(25px); }
+  60% {
+    transform: translateY(0); }
+  70% {
+    transform: translateY(-10px); }
+  80% {
+    transform: translateY(0); }
+  90% {
+    transform: translateY(-10px); } }
+  .emoji_list .emoji_haha .emoji_eyes {
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    width: 26px;
+    height: 6px;
+    margin-left: -13px;
+    border-radius: 2px;
+    box-shadow: -25px 5px 0 0 #000, 25px -5px 0 0 #000;
+    transform: rotate(20deg); }
+  .emoji_list .emoji_haha .emoji_eyes:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 26px;
+    height: 6px;
+    border-radius: 2px;
+    box-shadow: -25px -5px 0 0 #000, 25px 5px 0 0 #000;
+    transform: rotate(-40deg); }
+  .emoji_list .emoji_haha .emoji_mouth {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 80px;
+    height: 40px;
+    margin-left: -40px;
+    background-color: #000;
+    border-radius: 0 0 40px 40px;
+    overflow: hidden; }
+
+@keyframes haha-mouth {
+  10% {
+    transform: scale(0.6);
+    top: 45%; }
+  20% {
+    transform: scale(0.8);
+    top: 45%; }
+  30% {
+    transform: scale(0.6);
+    top: 45%; }
+  40% {
+    transform: scale(0.8);
+    top: 45%; }
+  50% {
+    transform: scale(0.6);
+    top: 45%; }
+  60% {
+    transform: scale(1);
+    top: 50%; }
+  70% {
+    transform: scale(1.2);
+    top: 50%; }
+  80% {
+    transform: scale(1);
+    top: 50%; }
+  90% {
+    transform: scale(1.2);
+    top: 50%; } }
+  .emoji_list .emoji_haha .emoji_tougue {
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 70px;
+    height: 30px;
+    margin-left: -35px;
+    border-radius: 50%;
+    background-color: #f55064; }
+  .emoji_list .emoji_yay:after {
+    content: "Yay"; }
+  .emoji_list .emoji_yay .emoji_face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: inherit; }
+
+@keyframes yay-face {
+  25% {
+    transform: rotate(15deg); }
+  75% {
+    transform: rotate(-15deg); } }
+  .emoji_list .emoji_yay .emoji_eyebrows {
+    position: absolute;
+    left: calc(50% - 3px);
+    top: 30px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    box-shadow: -6px 0 0 0 #000,-36px 0 0 0 #000,6px 0 0 0 #000,36px 0 0 0 #000; }
+  .emoji_list .emoji_yay .emoji_eyebrows:before, .emoji_list .emoji_yay .emoji_eyebrows:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 18px);
+    bottom: 3px;
+    width: 36px;
+    height: 18px;
+    border-radius: 60px 60px 0 0;
+    border: 6px solid #000;
+    border-bottom: none;
+    box-sizing: border-box; }
+  .emoji_list .emoji_yay .emoji_eyebrows:before {
+    margin-left: -21px; }
+  .emoji_list .emoji_yay .emoji_eyebrows:after {
+    margin-left: 21px; }
+  .emoji_list .emoji_yay .emoji_mouth {
+    position: absolute;
+    left: calc(50% - 3px);
+    top: 60px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: -25px 0 0 0 #000, 25px 0 0 0 #000, -35px -2px 30px 10px #d5234c, 35px -2px 30px 10px #d5234c; }
+  .emoji_list .emoji_yay .emoji_mouth:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 40px);
+    top: -64px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: transparent;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    box-sizing: border-box; }
+  .emoji_list .emoji_wow:after {
+    content: "Wow"; }
+  .emoji_list .emoji_wow .emoji_face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: inherit; }
+
+@keyframes wow-face {
+  15%, 25% {
+    transform: rotate(20deg) translateX(-25px); }
+  45%, 65% {
+    transform: rotate(-20deg) translateX(25px); }
+  75%, 100% {
+    transform: rotate(0) translateX(0); } }
+  .emoji_list .emoji_wow .emoji_eyebrows {
+    position: absolute;
+    left: calc(50% - 3px);
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: -18px 0 0 0 #000, -33px 0 0 0 #000, 18px 0 0 0 #000, 33px 0 0 0 #000; }
+
+@keyframes wow-brow {
+  15%, 65% {
+    top: 25px; }
+  0%, 75%, 100% {
+    top: 15px; } }
+  .emoji_list .emoji_wow .emoji_eyebrows:before, .emoji_list .emoji_wow .emoji_eyebrows:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 12px);
+    top: -3px;
+    width: 24px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 6px solid #000;
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent; }
+  .emoji_list .emoji_wow .emoji_eyebrows:before {
+    margin-left: -25px; }
+  .emoji_list .emoji_wow .emoji_eyebrows:after {
+    margin-left: 25px; }
+  .emoji_list .emoji_wow .emoji_eyes {
+    position: absolute;
+    left: calc(50% - 8px);
+    top: 35px;
+    width: 16px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: 25px 0 0 0 #000, -25px 0 0 0 #000; }
+  .emoji_list .emoji_wow .emoji_tougue {
+    position: absolute;
+    left: calc(50% - 15px);
+    top: 50%;
+    width: 30px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #000; }
+
+@keyframes wow-tongue {
+  10%, 30% {
+    width: 20px;
+    height: 20px;
+    left: calc(50% - 10px); }
+  50%, 70% {
+    width: 30px;
+    height: 40px;
+    left: calc(50% - 15px); }
+  75%, 100% {
+    height: 50px; } }
+  .emoji_list .emoji_sad:after {
+    content: "Sad"; }
+  .emoji_list .emoji_sad .emoji_face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: inherit; }
+
+@keyframes sad-face {
+  25%, 35% {
+    top: -15px; }
+  55%, 95% {
+    top: 10px; }
+  100%, 0% {
+    top: 0; } }
+  .emoji_list .emoji_sad .emoji_eyebrows {
+    position: absolute;
+    left: calc(50% - 3px);
+    top: 35px;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: -40px 9px 0 0 #000, -25px 0 0 0 #000, 25px 0 0 0 #000, 40px 9px 0 0 #000; }
+  .emoji_list .emoji_sad .emoji_eyebrows:before, .emoji_list .emoji_sad .emoji_eyebrows:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 15px);
+    top: 2px;
+    width: 30px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 6px solid #000;
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent; }
+  .emoji_list .emoji_sad .emoji_eyebrows:before {
+    margin-left: -30px;
+    transform: rotate(-30deg); }
+  .emoji_list .emoji_sad .emoji_eyebrows:after {
+    margin-left: 30px;
+    transform: rotate(30deg); }
+  .emoji_list .emoji_sad .emoji_eyes {
+    position: absolute;
+    left: calc(50% - 7px);
+    top: 50px;
+    width: 14px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: 25px 0 0 0 #000, -25px 0 0 0 #000; }
+  .emoji_list .emoji_sad .emoji_eyes:after {
+    content: "";
+    position: absolute;
+    background-color: #548dff;
+    width: 12px;
+    height: 12px;
+    margin-left: 6px;
+    border-radius: 0 100% 40% 50% / 0 50% 40% 100%;
+    transform-origin: 0 0;
+    transform: scale(0); }
+
+@keyframes tear-drop {
+  0%, 100% {
+    display: block;
+    left: 35px;
+    top: 15px;
+    transform: rotate(45deg) scale(0); }
+  25% {
+    display: block;
+    left: 35px;
+    transform: rotate(45deg) scale(2); }
+  49.9% {
+    display: block;
+    left: 35px;
+    top: 65px;
+    transform: rotate(45deg) scale(0); }
+  50% {
+    display: block;
+    left: -35px;
+    top: 15px;
+    transform: rotate(45deg) scale(0); }
+  75% {
+    display: block;
+    left: -35px;
+    transform: rotate(45deg) scale(2); }
+  99.9% {
+    display: block;
+    left: -35px;
+    top: 65px;
+    transform: rotate(45deg) scale(0); } }
+  .emoji_list .emoji_sad .emoji_mouth {
+    position: absolute;
+    left: calc(50% - 30px);
+    top: 80px;
+    width: 60px;
+    height: 80px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent; }
+
+@keyframes sad-mouth {
+  25%, 35% {
+    transform: scale(0.85);
+    top: 70%; }
+  55%, 100%, 0% {
+    transform: scale(1);
+    top: 80px; } }
+  .emoji_list .emoji_sad .emoji_mouth:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 3px);
+    top: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    box-shadow: -18px 0 0 0 #000, 18px 0 0 0 #000; }
+  .emoji_list .emoji_angry {
+    background: linear-gradient(#d5234c -10%, #ffda6a); }
+
+@keyframes angry {
+  45%, 60% {
+    background-size: 250%; }
+  85%, 100%, 0% {
+    background-size: 100%; } }
+  .emoji_list .emoji_angry::after {
+    content: "Angry"; }
+  .emoji_list .emoji_angry .emoji_face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: inherit; }
+
+@keyframes angry-face {
+  35%, 60% {
+    transform: translate(0, 10px) scale(0.9); }
+  40% {
+    transform: translate(-5px, 10px) scale(0.9); }
+  45% {
+    transform: translate(5px, 10px) scale(0.9); }
+  50% {
+    transform: translate(-5px, 10px) scale(0.9); }
+  55% {
+    transform: translate(5px, 10px) scale(0.9); } }
+  .emoji_list .emoji_angry .emoji_eyebrows {
+    position: absolute;
+    left: calc(50% - 3px);
+    top: 55px;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: -44px 5px 0 0 #000,-7px 16px 0 0 #000,7px 16px 0 0 #000,44px 5px 0 0 #000; }
+  .emoji_list .emoji_angry .emoji_eyebrows:before, .emoji_list .emoji_angry .emoji_eyebrows:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - 25px);
+    top: 0;
+    width: 50px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 6px solid #000;
+    border-radius: 50%;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent; }
+  .emoji_list .emoji_angry .emoji_eyebrows:before {
+    margin-left: -25px;
+    transform: rotate(15deg); }
+  .emoji_list .emoji_angry .emoji_eyebrows:after {
+    margin-left: 25px;
+    transform: rotate(-15deg); }
+  .emoji_list .emoji_angry .emoji_eyes {
+    position: absolute;
+    left: calc(50% - 6px);
+    top: 70px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: 25px 0 0 0 #000, -25px 0 0 0 #000; }
+  .emoji_list .emoji_angry .emoji_mouth {
+    position: absolute;
+    left: calc(50% - 18px);
+    bottom: 15px;
+    width: 36px;
+    height: 18px;
+    background-color: #000;
+    border-radius: 50%; }
+
+@keyframes angry-mouth {
+  25%, 50% {
+    height: 6px;
+    bottom: 25px; } }
+
+@font-face {
+  font-family: 'CookieRun-Regular';
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
 body, html {
   overflow: hidden;
   width: 100%;
   height: 100%; }
 
 body {
-  position: relative; }
+  position: relative;
+  font-family: "CookieRun-Regular"; }
+
+body * {
+  font-family: inherit; }
 
 body > p {
   display: none; }
