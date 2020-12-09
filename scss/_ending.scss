@@ -1,4 +1,10 @@
 @charset "utf-8";
+@for $i from 1 to 100{ //앤딩 애니메이션
+    @keyframes end#{$i}Ani{
+        70%{transform: scale(#{$i / 100});}
+        100%{transform: scale(#{$i / 100});}
+    }
+}
 .ending{
     opacity: 0;
     z-index: -1;
@@ -9,56 +15,61 @@
     box-shadow: 0 0 30px 30px #fffe;
     transition: opacity 1s linear;
     text-align: center;
-    h3{
-        height: 20vh;
-        padding-top: 10vh;
-        line-height: 20vh;
-        font-size: 50px;
-    }
-    p{
-        height: 40%;
-        font-size: 30px;
-    }
-
-    .emoji_list{
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 30%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        li{width: calc(100% / 5);}
-        button{transform-origin: center center; transform: scale(0.7); outline: none;}
-        button:hover{
-            &.emoji_like .emoji_hand{
-                animation: hands-up 2s linear infinite;
-                .emoji_thumb{animation: thumbs-up 2s linear infinite;}
-            }
-            &.emoji_love .emoji_heart{animation: heart-beat 2s linear infinite alternate;}
-            &.emoji_haha{
-                .emoji_face{animation: haha-face 2s linear infinite;}
-                .emoji_mouth{animation: haha-mouth 2s linear infinite;}
-            }
-            &.emoji_yay .emoji_face{animation: yay-face 1s linear infinite alternate;} 
-            &.emoji_wow{
-                .emoji_face{animation: wow-face 3s linear infinite;}
-                .emoji_eyebrows{animation: wow-brow 3s linear infinite;}
-                .emoji_tougue{animation: wow-tongue 3s infinite linear;}
-            }
-            &.emoji_sad{
-                .emoji_face{animation: sad-face 2s ease-in infinite;}
-                .emoji_eyes:after{animation: tear-drop 2s ease-in infinite;}
-                .emoji_mouth{animation: sad-mouth 2s ease-in infinite;}
-            }
-            &.emoji_angry{
-                animation: angry 2s ease-in infinite;
-                .emoji_face{animation: angry-face 2s ease-in infinite;}
-                .emoji_mouth{animation: angry-mouth 2s ease-in infinite;}
+    .contect{
+        position: absolute; top: 0; left: 0;
+        height: 100%; width: 100%;
+        h3{
+            height: 20vh;
+            padding-top: 10vh;
+            line-height: 20vh;
+            font-size: 50px;
+        }
+        p{
+            height: 40%;
+            font-size: 30px;
+        }
+    
+        .emoji_list{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            li{width: calc(100% / 5);}
+            button{transform-origin: center center; transform: scale(0.7); outline: none;}
+            button:hover{
+                &.emoji_like .emoji_hand{
+                    animation: hands-up 2s linear infinite;
+                    .emoji_thumb{animation: thumbs-up 2s linear infinite;}
+                }
+                &.emoji_love .emoji_heart{animation: heart-beat 2s linear infinite alternate;}
+                &.emoji_haha{
+                    .emoji_face{animation: haha-face 2s linear infinite;}
+                    .emoji_mouth{animation: haha-mouth 2s linear infinite;}
+                }
+                &.emoji_yay .emoji_face{animation: yay-face 1s linear infinite alternate;} 
+                &.emoji_wow{
+                    .emoji_face{animation: wow-face 3s linear infinite;}
+                    .emoji_eyebrows{animation: wow-brow 3s linear infinite;}
+                    .emoji_tougue{animation: wow-tongue 3s infinite linear;}
+                }
+                &.emoji_sad{
+                    .emoji_face{animation: sad-face 2s ease-in infinite;}
+                    .emoji_eyes:after{animation: tear-drop 2s ease-in infinite;}
+                    .emoji_mouth{animation: sad-mouth 2s ease-in infinite;}
+                }
+                &.emoji_angry{
+                    animation: angry 2s ease-in infinite;
+                    .emoji_face{animation: angry-face 2s ease-in infinite;}
+                    .emoji_mouth{animation: angry-mouth 2s ease-in infinite;}
+                }
             }
         }
     }
+    
     &.on{
         opacity: 1;
         z-index: 9000;

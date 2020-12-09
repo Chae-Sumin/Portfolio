@@ -142,15 +142,15 @@
   #char.__12 {
     background-position: 0 -400px; }
 
-#goose {
+#goose, .geese > li {
   position: absolute;
   left: 1100px;
   top: 700px;
   width: 150px;
   height: 150px;
   background: url(../img/goose.png) 0 0 no-repeat;
-  z-index: 9000; }
-  #goose.click {
+  z-index: 6000; }
+  #goose.click, .geese > li.click {
     cursor: pointer; }
 
 @keyframes goosefrontAni {
@@ -173,13 +173,13 @@
   100% {
     background-position: 0 -600px; } }
 
-#goose.front, .goose.front {
+#goose.front, .geese > li.front {
   animation: goosefrontAni 1s infinite step-start; }
 
-#goose._front, .goose._front {
+#goose._front, .geese > li._front {
   background-position: 0 -0px; }
 
-#goose.fly.back, .goose.fly.back {
+#goose.fly, .geese > li.fly {
   width: 200px;
   animation: flyBackAni 500ms infinite step-start;
   z-index: 6000 !important; }
@@ -204,13 +204,13 @@
   100% {
     background-position: 0 -600px; } }
 
-#goose.back, .goose.back {
+#goose.back, .geese > li.back {
   animation: goosebackAni 1s infinite step-start; }
 
-#goose._back, .goose._back {
+#goose._back, .geese > li._back {
   background-position: 0 -150px; }
 
-#goose.fly.back, .goose.fly.back {
+#goose.fly, .geese > li.fly {
   width: 200px;
   animation: flyBackAni 500ms infinite step-start;
   z-index: 6000 !important; }
@@ -235,13 +235,13 @@
   100% {
     background-position: 0 -600px; } }
 
-#goose.left, .goose.left {
+#goose.left, .geese > li.left {
   animation: gooseleftAni 1s infinite step-start; }
 
-#goose._left, .goose._left {
+#goose._left, .geese > li._left {
   background-position: 0 -300px; }
 
-#goose.fly.back, .goose.fly.back {
+#goose.fly, .geese > li.fly {
   width: 200px;
   animation: flyBackAni 500ms infinite step-start;
   z-index: 6000 !important; }
@@ -266,13 +266,13 @@
   100% {
     background-position: 0 -600px; } }
 
-#goose.right, .goose.right {
+#goose.right, .geese > li.right {
   animation: gooserightAni 1s infinite step-start; }
 
-#goose._right, .goose._right {
+#goose._right, .geese > li._right {
   background-position: 0 -450px; }
 
-#goose.fly.back, .goose.fly.back {
+#goose.fly, .geese > li.fly {
   width: 200px;
   animation: flyBackAni 500ms infinite step-start;
   z-index: 6000 !important; }
@@ -324,31 +324,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 707px;
-        width: 120px;
-        height: 137px;
-        animation: flower1Ani 3s 0.96573s infinite alternate; }
-      #object .home .flower:nth-child(2) {
-        position: absolute;
-        left: 80px;
         top: 706px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.94853s infinite alternate; }
+        animation: flower1Ani 3s 0.39409s infinite alternate; }
+      #object .home .flower:nth-child(2) {
+        position: absolute;
+        left: 80px;
+        top: 718px;
+        width: 120px;
+        height: 137px;
+        animation: flower2Ani 3s 0.01714s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 702px;
+        top: 715px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.60613s infinite alternate; }
+        animation: flower3Ani 3s 0.55301s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 702px;
+        top: 728px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.96552s infinite alternate; }
+        animation: flower4Ani 3s 0.49771s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -557,6 +557,18 @@
         z-index: 11; }
       #object .animals .geeseCage .cage .col2 {
         z-index: 11; }
+      #object .animals .geeseCage .geese li:nth-child(1) {
+        left: 20%;
+        top: calc(50% - 75px); }
+      #object .animals .geeseCage .geese li:nth-child(2) {
+        left: 35%;
+        top: calc(50% - 75px); }
+      #object .animals .geeseCage .geese li:nth-child(3) {
+        left: 50%;
+        top: calc(50% - 75px); }
+      #object .animals .geeseCage .geese li:nth-child(4) {
+        left: 65%;
+        top: calc(50% - 75px); }
     #object .animals .pigsCage {
       position: absolute;
       left: 5200px;
@@ -571,6 +583,202 @@
         z-index: 2801; }
       #object .animals .pigsCage .cage .col2 {
         z-index: 2801; }
+      #object .animals .pigsCage .pigs li {
+        z-index: 100;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 180px;
+        height: 150px;
+        background: url(../img/pig.png) 0 0 no-repeat; }
+        #object .animals .pigsCage .pigs li:nth-child(1) {
+          left: 20%;
+          top: calc(50% - 75px); }
+
+@keyframes pigfrontAni {
+  0% {
+    background-position: 0 -0px; }
+  25% {
+    background-position: -180px -0px; }
+  50% {
+    background-position: 0 -0px; }
+  75% {
+    background-position: -360px -0px; }
+  100% {
+    background-position: 0 -0px; } }
+        #object .animals .pigsCage .pigs li.front {
+          animation: pigfrontAni 1s infinite step-start; }
+        #object .animals .pigsCage .pigs li._front {
+          background-position: 0 -0px; }
+        #object .animals .pigsCage .pigs li:nth-child(2) {
+          left: 35%;
+          top: calc(50% - 75px); }
+
+@keyframes pigbackAni {
+  0% {
+    background-position: 0 -150px; }
+  25% {
+    background-position: -180px -150px; }
+  50% {
+    background-position: 0 -150px; }
+  75% {
+    background-position: -360px -150px; }
+  100% {
+    background-position: 0 -150px; } }
+        #object .animals .pigsCage .pigs li.back {
+          animation: pigbackAni 1s infinite step-start; }
+        #object .animals .pigsCage .pigs li._back {
+          background-position: 0 -150px; }
+        #object .animals .pigsCage .pigs li:nth-child(3) {
+          left: 50%;
+          top: calc(50% - 75px); }
+
+@keyframes pigleftAni {
+  0% {
+    background-position: 0 -300px; }
+  25% {
+    background-position: -180px -300px; }
+  50% {
+    background-position: 0 -300px; }
+  75% {
+    background-position: -360px -300px; }
+  100% {
+    background-position: 0 -300px; } }
+        #object .animals .pigsCage .pigs li.left {
+          animation: pigleftAni 1s infinite step-start; }
+        #object .animals .pigsCage .pigs li._left {
+          background-position: 0 -300px; }
+        #object .animals .pigsCage .pigs li:nth-child(4) {
+          left: 65%;
+          top: calc(50% - 75px); }
+
+@keyframes pigrightAni {
+  0% {
+    background-position: 0 -450px; }
+  25% {
+    background-position: -180px -450px; }
+  50% {
+    background-position: 0 -450px; }
+  75% {
+    background-position: -360px -450px; }
+  100% {
+    background-position: 0 -450px; } }
+        #object .animals .pigsCage .pigs li.right {
+          animation: pigrightAni 1s infinite step-start; }
+        #object .animals .pigsCage .pigs li._right {
+          background-position: 0 -450px; }
+
+@keyframes goosefrontAni {
+  0% {
+    background-position: 0 -0px; }
+  25% {
+    background-position: -150px -0px; }
+  50% {
+    background-position: 0 -0px; }
+  75% {
+    background-position: -300px -0px; }
+  100% {
+    background-position: 0 -0px; } }
+
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+      #object .animals .pigsCage .pigs #goose.front, #object .animals .pigsCage .pigs .geese > li.front {
+        animation: goosefrontAni 1s infinite step-start; }
+      #object .animals .pigsCage .pigs #goose._front, #object .animals .pigsCage .pigs .geese > li._front {
+        background-position: 0 -0px; }
+      #object .animals .pigsCage .pigs #goose.fly.back, #object .animals .pigsCage .pigs .geese > li.fly.back {
+        width: 200px;
+        animation: flyBackAni 500ms infinite step-start;
+        z-index: 6000 !important; }
+
+@keyframes goosebackAni {
+  0% {
+    background-position: 0 -150px; }
+  25% {
+    background-position: -150px -150px; }
+  50% {
+    background-position: 0 -150px; }
+  75% {
+    background-position: -300px -150px; }
+  100% {
+    background-position: 0 -150px; } }
+
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+      #object .animals .pigsCage .pigs #goose.back, #object .animals .pigsCage .pigs .geese > li.back {
+        animation: goosebackAni 1s infinite step-start; }
+      #object .animals .pigsCage .pigs #goose._back, #object .animals .pigsCage .pigs .geese > li._back {
+        background-position: 0 -150px; }
+      #object .animals .pigsCage .pigs #goose.fly.back, #object .animals .pigsCage .pigs .geese > li.fly.back {
+        width: 200px;
+        animation: flyBackAni 500ms infinite step-start;
+        z-index: 6000 !important; }
+
+@keyframes gooseleftAni {
+  0% {
+    background-position: 0 -300px; }
+  25% {
+    background-position: -150px -300px; }
+  50% {
+    background-position: 0 -300px; }
+  75% {
+    background-position: -300px -300px; }
+  100% {
+    background-position: 0 -300px; } }
+
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+      #object .animals .pigsCage .pigs #goose.left, #object .animals .pigsCage .pigs .geese > li.left {
+        animation: gooseleftAni 1s infinite step-start; }
+      #object .animals .pigsCage .pigs #goose._left, #object .animals .pigsCage .pigs .geese > li._left {
+        background-position: 0 -300px; }
+      #object .animals .pigsCage .pigs #goose.fly.back, #object .animals .pigsCage .pigs .geese > li.fly.back {
+        width: 200px;
+        animation: flyBackAni 500ms infinite step-start;
+        z-index: 6000 !important; }
+
+@keyframes gooserightAni {
+  0% {
+    background-position: 0 -450px; }
+  25% {
+    background-position: -150px -450px; }
+  50% {
+    background-position: 0 -450px; }
+  75% {
+    background-position: -300px -450px; }
+  100% {
+    background-position: 0 -450px; } }
+
+@keyframes flyBackAni {
+  0% {
+    background-position: 0 -600px; }
+  50% {
+    background-position: -200px -600px; }
+  100% {
+    background-position: 0 -600px; } }
+      #object .animals .pigsCage .pigs #goose.right, #object .animals .pigsCage .pigs .geese > li.right {
+        animation: gooserightAni 1s infinite step-start; }
+      #object .animals .pigsCage .pigs #goose._right, #object .animals .pigsCage .pigs .geese > li._right {
+        background-position: 0 -450px; }
+      #object .animals .pigsCage .pigs #goose.fly.back, #object .animals .pigsCage .pigs .geese > li.fly.back {
+        width: 200px;
+        animation: flyBackAni 500ms infinite step-start;
+        z-index: 6000 !important; }
     #object .animals .cowCage {
       position: absolute;
       left: 5200px;
@@ -1168,6 +1376,110 @@
       #load.load .cloud.c4 {
         left: 225%;
         top: 225%; }
+
+.explain {
+  opacity: 1;
+  z-index: -1;
+  display: block;
+  position: absolute;
+  left: 10vw;
+  top: 10vh;
+  overflow: hidden;
+  width: 80vw;
+  height: 80vh;
+  background: #fffe;
+  box-shadow: 0 0 30px 30px #fffe;
+  transition: opacity 1s linear, left 500ms; }
+  .explain > section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 5vw;
+    box-sizing: border-box; }
+    .explain > section h3 {
+      font-size: 40px; }
+      .explain > section h3 small {
+        font-size: 0.6em; }
+    .explain > section img {
+      padding: 10% 1% 0 3vh; }
+    .explain > section p {
+      font-size: 24px;
+      padding: 2% 0 0 3vh; }
+    .explain > section .prev {
+      cursor: pointer;
+      display: block;
+      width: 30px;
+      height: 70px;
+      position: absolute;
+      left: 0;
+      top: calc(50% - 35px);
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 50px; }
+    .explain > section .next {
+      cursor: pointer;
+      display: block;
+      width: 30px;
+      height: 70px;
+      position: absolute;
+      right: 0;
+      top: calc(50% - 35px);
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 50px;
+      font-family: inherit; }
+    .explain > section .close {
+      cursor: pointer;
+      display: block;
+      position: absolute;
+      right: 3%;
+      top: 0;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 50px;
+      font-family: inherit; }
+  .explain .ex-pc {
+    left: 0;
+    top: 0; }
+  .explain .ex-mt {
+    left: 100%;
+    top: 0; }
+    .explain .ex-mt p:first-of-type {
+      padding-bottom: 5%; }
+  .explain .story {
+    left: 200%;
+    top: 0; }
+    .explain .story p {
+      text-align: center;
+      padding: 10%;
+      line-height: 40px; }
+  .explain.on1 {
+    z-index: 3000; }
+    .explain.on1 .ex-pc {
+      left: 0%; }
+    .explain.on1 .ex-mt {
+      left: 100%; }
+    .explain.on1 .story {
+      left: 200%; }
+  .explain.on2 {
+    z-index: 3000; }
+    .explain.on2 .ex-pc {
+      left: -100%; }
+    .explain.on2 .ex-mt {
+      left: 0; }
+    .explain.on2 .story {
+      left: 100%; }
+  .explain.on3 {
+    z-index: 3000; }
+    .explain.on3 .ex-pc {
+      left: -200%; }
+    .explain.on3 .ex-mt {
+      left: -100%; }
+    .explain.on3 .story {
+      left: 0%; }
 
 @keyframes load1Ani {
   0% {
@@ -2371,59 +2683,65 @@
   box-shadow: 0 0 30px 30px #fffe;
   transition: opacity 1s linear;
   text-align: center; }
-  .ending h3 {
-    height: 20vh;
-    padding-top: 10vh;
-    line-height: 20vh;
-    font-size: 50px; }
-  .ending p {
-    height: 40%;
-    font-size: 30px; }
-  .ending .emoji_list {
+  .ending .contect {
     position: absolute;
+    top: 0;
     left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 30%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; }
-    .ending .emoji_list li {
-      width: calc(100% / 5); }
-    .ending .emoji_list button {
-      transform-origin: center center;
-      transform: scale(0.7);
-      outline: none; }
-    .ending .emoji_list button:hover.emoji_like .emoji_hand {
-      animation: hands-up 2s linear infinite; }
-      .ending .emoji_list button:hover.emoji_like .emoji_hand .emoji_thumb {
-        animation: thumbs-up 2s linear infinite; }
-    .ending .emoji_list button:hover.emoji_love .emoji_heart {
-      animation: heart-beat 2s linear infinite alternate; }
-    .ending .emoji_list button:hover.emoji_haha .emoji_face {
-      animation: haha-face 2s linear infinite; }
-    .ending .emoji_list button:hover.emoji_haha .emoji_mouth {
-      animation: haha-mouth 2s linear infinite; }
-    .ending .emoji_list button:hover.emoji_yay .emoji_face {
-      animation: yay-face 1s linear infinite alternate; }
-    .ending .emoji_list button:hover.emoji_wow .emoji_face {
-      animation: wow-face 3s linear infinite; }
-    .ending .emoji_list button:hover.emoji_wow .emoji_eyebrows {
-      animation: wow-brow 3s linear infinite; }
-    .ending .emoji_list button:hover.emoji_wow .emoji_tougue {
-      animation: wow-tongue 3s infinite linear; }
-    .ending .emoji_list button:hover.emoji_sad .emoji_face {
-      animation: sad-face 2s ease-in infinite; }
-    .ending .emoji_list button:hover.emoji_sad .emoji_eyes:after {
-      animation: tear-drop 2s ease-in infinite; }
-    .ending .emoji_list button:hover.emoji_sad .emoji_mouth {
-      animation: sad-mouth 2s ease-in infinite; }
-    .ending .emoji_list button:hover.emoji_angry {
-      animation: angry 2s ease-in infinite; }
-      .ending .emoji_list button:hover.emoji_angry .emoji_face {
-        animation: angry-face 2s ease-in infinite; }
-      .ending .emoji_list button:hover.emoji_angry .emoji_mouth {
-        animation: angry-mouth 2s ease-in infinite; }
+    height: 100%;
+    width: 100%; }
+    .ending .contect h3 {
+      height: 20vh;
+      padding-top: 10vh;
+      line-height: 20vh;
+      font-size: 50px; }
+    .ending .contect p {
+      height: 40%;
+      font-size: 30px; }
+    .ending .contect .emoji_list {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 30%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .ending .contect .emoji_list li {
+        width: calc(100% / 5); }
+      .ending .contect .emoji_list button {
+        transform-origin: center center;
+        transform: scale(0.7);
+        outline: none; }
+      .ending .contect .emoji_list button:hover.emoji_like .emoji_hand {
+        animation: hands-up 2s linear infinite; }
+        .ending .contect .emoji_list button:hover.emoji_like .emoji_hand .emoji_thumb {
+          animation: thumbs-up 2s linear infinite; }
+      .ending .contect .emoji_list button:hover.emoji_love .emoji_heart {
+        animation: heart-beat 2s linear infinite alternate; }
+      .ending .contect .emoji_list button:hover.emoji_haha .emoji_face {
+        animation: haha-face 2s linear infinite; }
+      .ending .contect .emoji_list button:hover.emoji_haha .emoji_mouth {
+        animation: haha-mouth 2s linear infinite; }
+      .ending .contect .emoji_list button:hover.emoji_yay .emoji_face {
+        animation: yay-face 1s linear infinite alternate; }
+      .ending .contect .emoji_list button:hover.emoji_wow .emoji_face {
+        animation: wow-face 3s linear infinite; }
+      .ending .contect .emoji_list button:hover.emoji_wow .emoji_eyebrows {
+        animation: wow-brow 3s linear infinite; }
+      .ending .contect .emoji_list button:hover.emoji_wow .emoji_tougue {
+        animation: wow-tongue 3s infinite linear; }
+      .ending .contect .emoji_list button:hover.emoji_sad .emoji_face {
+        animation: sad-face 2s ease-in infinite; }
+      .ending .contect .emoji_list button:hover.emoji_sad .emoji_eyes:after {
+        animation: tear-drop 2s ease-in infinite; }
+      .ending .contect .emoji_list button:hover.emoji_sad .emoji_mouth {
+        animation: sad-mouth 2s ease-in infinite; }
+      .ending .contect .emoji_list button:hover.emoji_angry {
+        animation: angry 2s ease-in infinite; }
+        .ending .contect .emoji_list button:hover.emoji_angry .emoji_face {
+          animation: angry-face 2s ease-in infinite; }
+        .ending .contect .emoji_list button:hover.emoji_angry .emoji_mouth {
+          animation: angry-mouth 2s ease-in infinite; }
   .ending.on {
     opacity: 1;
     z-index: 9000;

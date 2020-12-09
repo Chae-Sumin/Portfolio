@@ -9,6 +9,7 @@ window.onload = function(){
     const ctrlActive = document.getElementById("active");
     const ctrlTouch = document.querySelector("#controller>.touch");
     const loadSection = document.querySelector("#load>.before_start");
+    const explainSection = document.querySelectorAll(".explain>section");
     const endingSection = document.querySelector(".ending");
     // -------------------- 상수 --------------------
     const CHAR_WIDTH = 150; // 캐릭터 너비
@@ -20,10 +21,21 @@ window.onload = function(){
     const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
     const GOOSE_MOVE_FPS = 60; //max(300) 
     const GOOSE_MOVE_PX = 11;
+    const ANI_MOVE_PX = 8;
     const MAP_RATIO = 0.8; // 맵 비율
     const key = keyFuncs();
     const move = moveFuncs();
-    const goose = gooseFunc();
+    const goose = animalFunc(GOOSE,GOOSE_MOVE_PX);
+    const geese = Array(4);
+    for(let i = 0; i < 4; i++){
+        geese[i] = animalFunc(document.querySelectorAll(".geese>li")[i],ANI_MOVE_PX)
+        geese[i].creatureMove(1200,700);
+    }
+    const pigs = Array(4);
+    for(let i = 0; i < 4; i++){
+        pigs[i] = animalFunc(document.querySelectorAll(".pigs>li")[i],ANI_MOVE_PX)
+        pigs[i].creatureMove(800,700);
+    }
     const touch = touchFunc();
     const egg = eggFunc();
     // -------------------- 변수 --------------------
@@ -106,7 +118,6 @@ window.onload = function(){
             let _x = e.targetTouches[0].clientX - x;
             let _y = e.targetTouches[0].clientY - y;
             let dir = {x : Math.cos(Math.atan2(_y,_x)), y : Math.sin(Math.atan2(_y,_x)), deg : Math.atan2(_y,_x) * 180 / Math.PI};
-            touch.stop();
             touch.move(dir);
         }
     }
@@ -193,6 +204,7 @@ window.onload = function(){
         },2500);
     }
     function load(){
+        explain();
         loadSection.classList.remove("on");
         loadSection.classList.add("off");
         let ratioW = screenWidth / MAP_WIDTH
@@ -338,60 +350,60 @@ window.onload = function(){
             }
         }
     }
-    function gooseFunc(){ // 거위 동작 클로져
+    function animalFunc(animalElement,ANI_MOVE_PX){ // 거위 동작 클로져
         const senserLength = 300;
-        let goosePosX = GOOSE.offsetLeft;
-        let goosePosY = GOOSE.offsetTop;
-        let gooseBox = [goosePosX - senserLength,goosePosX + senserLength, goosePosY - senserLength, goosePosY + senserLength];
+        let posX = animalElement.offsetLeft;
+        let posY = animalElement.offsetTop;
+        let posBox = [posX - senserLength,posX + senserLength, posY - senserLength, posY + senserLength];
         let gooseLevel = 1;
         let isMoving = false;
         let isEnd = false;
         return{
             moveTo : function(x,y,fly){ // 좌표로 이동
                 isMoving = true;
-                goosePosX = GOOSE.offsetLeft;
-                goosePosY = GOOSE.offsetTop;
-                let speedX = Math.cos(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
-                let speedY = Math.sin(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
-                let moveTimes = (x - goosePosX)/speedX;
-                let deg = Math.atan2((y - goosePosY),(x - goosePosX))*180 / Math.PI;
+                posX = animalElement.offsetLeft;
+                posY = animalElement.offsetTop;
+                let speedX = Math.cos(Math.atan2((y - posY),(x - posX)))*ANI_MOVE_PX;
+                let speedY = Math.sin(Math.atan2((y - posY),(x - posX)))*ANI_MOVE_PX;
+                let moveTimes = (x - posX)/speedX;
+                let deg = Math.atan2((y - posY),(x - posX))*180 / Math.PI;
                 let count = 0;
                 let timer = setTimeout(movement, 0);
                 if(deg + 180 >= 45 && deg + 180 < 135){
-                    GOOSE.setAttribute("class","back");
+                    animalElement.setAttribute("class","back");
                 } else if(deg + 180 >= 135 && deg + 180 < 225){
-                    GOOSE.setAttribute("class","right");
+                    animalElement.setAttribute("class","right");
                 } else if(deg + 180 >= 225 && deg + 180 < 315){
-                    GOOSE.setAttribute("class","front");
+                    animalElement.setAttribute("class","front");
                 } else {
-                    GOOSE.setAttribute("class","left");
+                    animalElement.setAttribute("class","left");
                 }
-                if(fly){GOOSE.classList.add("fly");}
+                if(fly){animalElement.classList.add("fly");}
                 function movement(){
-                    goosePosX = GOOSE.offsetLeft;
-                    goosePosY = GOOSE.offsetTop;
-                    speedX = Math.cos(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
-                    speedY = Math.sin(Math.atan2((y - goosePosY),(x - goosePosX)))*GOOSE_MOVE_PX;
+                    posX = animalElement.offsetLeft;
+                    posY = animalElement.offsetTop;
+                    speedX = Math.cos(Math.atan2((y - posY),(x - posX)))*ANI_MOVE_PX;
+                    speedY = Math.sin(Math.atan2((y - posY),(x - posX)))*ANI_MOVE_PX;
                     count++
-                    GOOSE.style.left = (speedX + GOOSE.offsetLeft)+ "px";
-                    GOOSE.style.top = (speedY + GOOSE.offsetTop) + "px";
-                    GOOSE.style.zIndex = parseInt(y) + 10;
+                    animalElement.style.left = (speedX + animalElement.offsetLeft)+ "px";
+                    animalElement.style.top = (speedY + animalElement.offsetTop) + "px";
+                    animalElement.style.zIndex = parseInt(y) + 10;
                     if(count < Math.ceil(moveTimes)){timer = setTimeout(movement, 1000 / GOOSE_MOVE_FPS);}
                     else{
-                        console.log(goosePosX,goosePosY);
                         isMoving = false;
                         clearTimeout(timer);
-                        GOOSE.classList.remove("fly");
-                        GOOSE.setAttribute("class", "_"+GOOSE.getAttribute("class"));
+                        animalElement.classList.remove("fly");
+                        animalElement.setAttribute("class", "_"+animalElement.getAttribute("class"));
                     };
                 }
+                return true
             },
             sensor : function(x,y){ // 거위근처로 갔나?
-                goosePosX = GOOSE.offsetLeft;
-                goosePosY = GOOSE.offsetTop;
-                gooseBox = [goosePosX - senserLength,goosePosX + senserLength, goosePosY - senserLength, goosePosY + senserLength];
+                posX = animalElement.offsetLeft;
+                posY = animalElement.offsetTop;
+                posBox = [posX - senserLength,posX + senserLength, posY - senserLength, posY + senserLength];
                 if(isMoving){return false;}
-                if( gooseBox[0] < x && gooseBox[1] > x && gooseBox[2] < y && gooseBox[3] > y){
+                if( posBox[0] < x && posBox[1] > x && posBox[2] < y && posBox[3] > y){
                     this.level();
                     return true;
                 } else return false;
@@ -400,7 +412,7 @@ window.onload = function(){
                 switch (gooseLevel){
                     case  1 : //스타트 -> 다리 앞
                         this.moveTo(1250,1300,false);
-                        egg.fieldGen(GOOSE.offsetLeft + 51,GOOSE.offsetTop + 84,1);
+                        egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,1);
                         break;
                     case  2 : //다리 건너기
                         this.moveTo(1250,2000,false);
@@ -409,7 +421,7 @@ window.onload = function(){
                         this.moveTo(500,2500,false);
                         break;
                     case  4 : //밭1에서 밭3
-                        egg.fieldGen(GOOSE.offsetLeft + 51,GOOSE.offsetTop + 84,2);
+                        egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,2);
                         this.moveTo(500,3500,false);
                         break;
                     case  5 : //밭3에서 호수 앞
@@ -420,7 +432,7 @@ window.onload = function(){
                         break;
                     case  7 : //호수 건너기
                         this.moveTo(4500,4600,false);
-                        egg.fieldGen(GOOSE.offsetLeft + 51,GOOSE.offsetTop + 84,3);
+                        egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,3);
                         break;
                     case  8 : //강 다리 2 앞
                         this.moveTo(5000,4000,false);
@@ -433,14 +445,14 @@ window.onload = function(){
                         break;
                     case  11 : //외양간 건너
                         this.moveTo(5300,1900,true);
-                        egg.fieldGen(GOOSE.offsetLeft + 51,GOOSE.offsetTop + 84,4);
+                        egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,4);
                         break;
                     case  12 : //숲 속 진입
                         this.moveTo(4500,1500,false);
                         break;
                     case  13 : //더 깊은 곳으로
                         this.moveTo(3800,1200,false);
-                        egg.fieldGen(GOOSE.offsetLeft + 51,GOOSE.offsetTop + 84,5);
+                        egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,5);
                         break;
                     case  14 : //엔딩 포인트
                         this.moveTo(5000,500,true);
@@ -453,17 +465,15 @@ window.onload = function(){
             end : function () {
                 gooseLevel = 15;
                 let that = this;
-                GOOSE.classList.add("click");
-                GOOSE.addEventListener("click",function() {
-                    that.gooseActive(GOOSE.offsetLeft,GOOSE.offsetTop);
+                animalElement.classList.add("click");
+                animalElement.addEventListener("click",function() {
+                    that.gooseActive(animalElement.offsetLeft,animalElement.offsetTop);
                 },false);   
                 isEnd = true;
             },
             gooseActive : function (x,y) {
                 if(isEnd){
-                    let box = [GOOSE.offsetLeft - CHAR.offsetWidth, GOOSE.offsetLeft + GOOSE.offsetWidth, GOOSE.offsetTop - CHAR.offsetHeight, GOOSE.offsetTop + GOOSE.offsetHeight]
-                    console.log(box);
-                    console.log(GOOSE.offsetLeft,GOOSE.offsetLeft);
+                    let box = [animalElement.offsetLeft - CHAR.offsetWidth, animalElement.offsetLeft + animalElement.offsetWidth, animalElement.offsetTop - CHAR.offsetHeight, animalElement.offsetTop + animalElement.offsetHeight]
                     if(x > box[0] && x < box[1] && y > box[2] && y < box[3]){
                         endingSection.classList.add("on"); 
                         document.getElementById("load").classList.remove("load");
@@ -473,7 +483,24 @@ window.onload = function(){
                         document.removeEventListener("touchmove",tocuhmove);
                         document.removeEventListener("touchend",touchend);
                         document.removeEventListener("touchcancel",touchend);
+                        MAP.style.left = 0;
+                        MAP.style.top = 0;
                         MAP.style.animation = "end" + parseInt((screenWidth / MAP_WIDTH) * 100 + 1) + "Ani 3000ms ease";
+                    }
+                }
+            },
+            creatureMove : function(w,h){
+                let moveTimer = null;
+                let that = this;
+                moveTimer = setTimeout(moveRand,0);
+                async function moveRand(){
+                    let isMove = false;
+                    let randX = Math.floor(Math.random()*(w - 400)) + 200;
+                    let randY = Math.floor(Math.random()*(h - 400)) + 200;
+                    let randT = Math.floor(Math.random()*3000) + 2000;
+                    isMove = await that.moveTo(randX,randY,false);
+                    if(isMove){
+                        moveTimer = setTimeout(moveRand,randT);
                     }
                 }
             }
@@ -614,12 +641,13 @@ window.onload = function(){
             setTouch : function(_x,_y,id){x = _x; y = _y; touchId = id;},
             getTouch : function(){return {x: x, y: y, id : touchId}},
             move : function({x,y,deg}){
-                moveTimeout = setTimeout(repeatMove,0)
+                clearTimeout(moveTimeout);
+                moveTimeout = setTimeout(repeatMove,0);
                 function repeatMove(){
-                    move.moveTo(x*CHAR_MOVE_PX,y*CHAR_MOVE_PX);
+                    move.moveTo(x*CHAR_MOVE_PX/2,y*CHAR_MOVE_PX/2);
                     ctrlTouch.children[0].style.left = x*20 + "px";
                     ctrlTouch.children[0].style.top = y*20 + "px";
-                    moveTimeout = setTimeout(repeatMove,1000 / CHAR_MOVE_FPS);
+                    moveTimeout = setTimeout(repeatMove,500 / CHAR_MOVE_FPS);
                     if(deg + 180 >= 45 && deg + 180 < 135){
                         CHAR.setAttribute("class","_1");
                     } else if(deg + 180 >= 135 && deg + 180 < 225){
@@ -649,5 +677,24 @@ window.onload = function(){
             if(eles[i] == ele){return i;}
         }
         return false
+    }
+    function explain(){
+        console.log(explainSection[0].getElementsByTagName("button")[0]);
+        explainSection[0].parentNode.setAttribute("class","explain on1");
+        explainSection[0].getElementsByTagName("button")[0].addEventListener("click",function(){
+            explainSection[0].parentNode.setAttribute("class","explain on2");
+        },false);
+        explainSection[1].getElementsByTagName("button")[0].addEventListener("click",function(){
+            explainSection[0].parentNode.setAttribute("class","explain on1");
+        },false);
+        explainSection[1].getElementsByTagName("button")[1].addEventListener("click",function(){
+            explainSection[0].parentNode.setAttribute("class","explain on3");
+        },false);
+        explainSection[2].getElementsByTagName("button")[0].addEventListener("click",function(){
+            explainSection[0].parentNode.setAttribute("class","explain on2");
+        },false);
+        explainSection[2].getElementsByTagName("button")[1].addEventListener("click",function(){
+            explainSection[0].parentNode.setAttribute("class","explain off");
+        },false);
     }
 }

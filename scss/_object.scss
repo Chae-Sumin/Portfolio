@@ -21,10 +21,10 @@
         }
     }
 }
-#goose{ //메인 거위!
+#goose, .geese>li{ //메인 거위!
     @include box(1100px, 700px, 150px, 150px);
     background: url(../img/goose.png) 0 0 no-repeat;
-    z-index: 9000;
+    z-index: 6000;
     &.click{cursor: pointer;}
 }
 $dir : (front, back, left, right);
@@ -41,14 +41,14 @@ $dir : (front, back, left, right);
         50%{background-position: -200px -600px;}
         100%{background-position: 0 -600px;}
     }
-    #goose,.goose{
+    #goose,.geese>li{
         &.#{nth($dir,$i)}{
             animation: goose#{nth($dir,$i)}Ani 1s infinite step-start;
         }
         &._#{nth($dir,$i)}{
             background-position: 0 -#{150*($i - 1)}px;
         }
-        &.fly.back{
+        &.fly{
             width: 200px;
             animation: flyBackAni 500ms infinite step-start;
             z-index: 6000 !important;
@@ -178,10 +178,73 @@ $dir : (front, back, left, right);
         .geeseCage{
             @include box(1200px,0,1200px,700px);
             @include cageZIndex(10);
+            .geese{
+                li{
+                    @for $i from 1 through 4{
+                        &:nth-child(#{$i}){
+                            left: #{5% + $i * 15%};
+                            top : calc(50% - 75px);
+                        }
+                    }
+                }
+            }
         }
         .pigsCage{
             @include box(5200px,2800px,800px,700px);
             @include cageZIndex(2800);
+            .pigs{
+                li{
+                    z-index: 100;
+                    @include box(0,0, 180px, 150px);
+                    background: url(../img/pig.png) 0 0 no-repeat;
+                    @for $i from 1 through 4{
+                        &:nth-child(#{$i}){
+                            left: #{5% + $i * 15%};
+                            top : calc(50% - 75px);
+                        }
+                        @keyframes pig#{nth($dir,$i)}Ani {
+                            0%{background-position: 0 -#{150*($i - 1)}px;}
+                            25%{background-position: -180px -#{150*($i - 1)}px;}
+                            50%{background-position: 0 -#{150*($i - 1)}px;}
+                            75%{background-position: -360px -#{150*($i - 1)}px;}
+                            100%{background-position: 0 -#{150*($i - 1)}px;}
+                        }
+                        &.#{nth($dir,$i)}{
+                            animation: pig#{nth($dir,$i)}Ani 1s infinite step-start;
+                        }
+                        &._#{nth($dir,$i)}{
+                            background-position: 0 -#{150*($i - 1)}px;
+                        }
+                    }
+                }
+                @for $i from 1 through 4{
+    @keyframes goose#{nth($dir,$i)}Ani {
+        0%{background-position: 0 -#{150*($i - 1)}px;}
+        25%{background-position: -150px -#{150*($i - 1)}px;}
+        50%{background-position: 0 -#{150*($i - 1)}px;}
+        75%{background-position: -300px -#{150*($i - 1)}px;}
+        100%{background-position: 0 -#{150*($i - 1)}px;}
+    }
+    @keyframes flyBackAni {
+        0%{background-position: 0 -600px;}
+        50%{background-position: -200px -600px;}
+        100%{background-position: 0 -600px;}
+    }
+    #goose,.geese>li{
+        &.#{nth($dir,$i)}{
+            animation: goose#{nth($dir,$i)}Ani 1s infinite step-start;
+        }
+        &._#{nth($dir,$i)}{
+            background-position: 0 -#{150*($i - 1)}px;
+        }
+        &.fly.back{
+            width: 200px;
+            animation: flyBackAni 500ms infinite step-start;
+            z-index: 6000 !important;
+        }
+    }
+}
+            }
         }
         .cowCage{
             @include box(5200px,2000px,800px,700px);

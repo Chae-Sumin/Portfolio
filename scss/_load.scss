@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-//load 관련 스타일입니다
+//load 관련 스타일입니다 + 설명페이지
 #load{
     position: fixed;
     left: 0;
@@ -214,16 +214,107 @@
         }
     }
 }
-
+.explain{
+    opacity: 1;
+    z-index: -1;
+    display: block;
+    position: absolute; left: 10vw; top: 10vh;
+    overflow: hidden;
+    width: 80vw; height: 80vh;
+    background: #fffe;
+    box-shadow: 0 0 30px 30px #fffe;
+    transition: opacity 1s linear, left 500ms;
+    >section{
+        position: absolute;
+        width: 100%; height: 100%;
+        padding: 5vw;
+        box-sizing: border-box;;
+        h3{
+            font-size: 40px;
+            small{
+                font-size: 0.6em;
+            }
+        }
+        img{padding: 10% 1% 0 3vh;}
+        p{
+            font-size: 24px;
+            padding: 2% 0 0 3vh;
+        }
+        .prev{
+            cursor: pointer;
+            display: block; width: 30px; height: 70px;
+            position: absolute;
+            left: 0;
+            top: calc(50% - 35px);
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 50px;
+        }
+        .next{
+            cursor: pointer;
+            display: block; width: 30px; height: 70px;
+            position: absolute;
+            right: 0;
+            top: calc(50% - 35px);
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 50px;
+            font-family: inherit;
+        }
+        .close{
+            cursor: pointer;
+            display: block; 
+            position: absolute;
+            right: 3%;
+            top: 0;
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 50px;
+            font-family: inherit;
+        }
+    }
+    .ex-pc{
+        left: 0; top: 0;
+    }
+    .ex-mt{
+        left: 100%; top: 0;
+        p:first-of-type{
+            padding-bottom: 5%;
+        }
+    }
+    .story{
+        left: 200%; top: 0;
+        p{
+            text-align: center;
+            padding: 10%;
+            line-height: 40px;
+        };
+    }
+    &.on1{
+        z-index: 3000;
+        .ex-pc{left: 0%;}
+        .ex-mt{left: 100%;}
+        .story{left: 200%;}
+    }
+    &.on2{
+        z-index: 3000;
+        .ex-pc{left: -100%;}
+        .ex-mt{left: 0;}
+        .story{left: 100%;}
+    }
+    &.on3{
+        z-index: 3000;
+        .ex-pc{left: -200%;}
+        .ex-mt{left: -100%;}
+        .story{left: 0%;}
+    }
+}
 @for $i from 1 to 100{
     @keyframes load#{$i}Ani{
         0%{transform: scale(#{$i / 100});}
         30%{transform: scale(#{$i / 100});}
-    }
-}
-@for $i from 1 to 100{
-    @keyframes end#{$i}Ani{
-        70%{transform: scale(#{$i / 100});}
-        100%{transform: scale(#{$i / 100});}
     }
 }
