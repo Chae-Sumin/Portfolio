@@ -27,14 +27,20 @@ window.onload = function(){
     const move = moveFuncs();
     const goose = animalFunc(GOOSE,GOOSE_MOVE_PX);
     const geese = Array(4);
-    for(let i = 0; i < 4; i++){
-        geese[i] = animalFunc(document.querySelectorAll(".geese>li")[i],ANI_MOVE_PX)
-        geese[i].creatureMove(1200,700);
-    }
     const pigs = Array(4);
+    const cows = Array(2);
+    const babycows = Array(2);
     for(let i = 0; i < 4; i++){
-        pigs[i] = animalFunc(document.querySelectorAll(".pigs>li")[i],ANI_MOVE_PX)
+        geese[i] = animalFunc(document.querySelectorAll(".geese>li")[i],ANI_MOVE_PX);
+        geese[i].creatureMove(1200,700);
+        pigs[i] = animalFunc(document.querySelectorAll(".pigs>li")[i],ANI_MOVE_PX);
         pigs[i].creatureMove(800,700);
+    }
+    for(let i = 0; i < 2; i++){
+        cows[i] = animalFunc(document.querySelectorAll(".cows>li")[i],ANI_MOVE_PX);
+        cows[i].creatureMove(800,700);
+        babycows[i] = animalFunc(document.querySelectorAll(".babycows>li")[i],ANI_MOVE_PX);
+        babycows[i].creatureMove(800,700);
     }
     const touch = touchFunc();
     const egg = eggFunc();
@@ -200,8 +206,9 @@ window.onload = function(){
             MAP.style.transition = "none";
             clearTimeout(aniTime);
             clearTimeout(loadTime);
+            goose.level();
             goose.end();
-        },2500);
+        },2000);
     }
     function load(){
         explain();
@@ -350,12 +357,12 @@ window.onload = function(){
             }
         }
     }
-    function animalFunc(animalElement,ANI_MOVE_PX){ // 거위 동작 클로져
+    function animalFunc(animalElement,ANI_MOVE_PX){ // 동물 동작 클로져
         const senserLength = 300;
         let posX = animalElement.offsetLeft;
         let posY = animalElement.offsetTop;
         let posBox = [posX - senserLength,posX + senserLength, posY - senserLength, posY + senserLength];
-        let gooseLevel = 1;
+        let gooseLevel = 0;
         let isMoving = false;
         let isEnd = false;
         return{
@@ -410,6 +417,9 @@ window.onload = function(){
             },
             level : function(){ // 거위 근처로 가면 순서대로 작동
                 switch (gooseLevel){
+                    case  0 : //스타트
+                        this.moveTo(1100,700,true);
+                        break;
                     case  1 : //스타트 -> 다리 앞
                         this.moveTo(1250,1300,false);
                         egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,1);
@@ -475,7 +485,7 @@ window.onload = function(){
                 if(isEnd){
                     let box = [animalElement.offsetLeft - CHAR.offsetWidth, animalElement.offsetLeft + animalElement.offsetWidth, animalElement.offsetTop - CHAR.offsetHeight, animalElement.offsetTop + animalElement.offsetHeight]
                     if(x > box[0] && x < box[1] && y > box[2] && y < box[3]){
-                        endingSection.classList.add("on"); 
+                        ending();
                         document.getElementById("load").classList.remove("load");
                         document.removeEventListener("keydown",keydown);
                         document.removeEventListener("keyup", keyup);
@@ -695,6 +705,16 @@ window.onload = function(){
         },false);
         explainSection[2].getElementsByTagName("button")[1].addEventListener("click",function(){
             explainSection[0].parentNode.setAttribute("class","explain off");
+            goose.level();
+        },false);
+    }
+    function ending(){
+        endingSection.classList.add("on"); 
+        endingSection.getElementsByClassName("next")[0].addEventListener("click",function(){
+            endingSection.setAttribute("class","ending on c");
+        },false);
+        endingSection.getElementsByClassName("prev")[0].addEventListener("click",function(){
+            endingSection.setAttribute("class","ending on p");
         },false);
     }
 }

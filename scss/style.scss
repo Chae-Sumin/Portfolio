@@ -52,18 +52,14 @@ body>p{display: none;}
         position: absolute;
         margin: 0;
         left: 10vh;
-        top: 80vh;
+        top: calc(90vh - 53px);
         width: 53px; 
         height: 53px; 
         border: none; 
         outline: none; 
         cursor: pointer; 
         float: right; 
-        margin: 65px 0 50px 30px;
         background: url(../img/active.png) 50% 50% / cover no-repeat;
-        &.btnOn{
-            background-image: url(../img/active-on.png);
-        }
     }
     .touch{
         display: block;

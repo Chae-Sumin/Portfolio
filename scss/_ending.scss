@@ -10,14 +10,128 @@
     z-index: -1;
     display: none;
     position: absolute; left: 10vw; top: 10vh; z-index: 1;
+    overflow: hidden;
     width: 80vw; height: 80vh;
     background: #fffe;
     box-shadow: 0 0 30px 30px #fffe;
-    transition: opacity 1s linear;
     text-align: center;
+    >section{
+        position: absolute;
+        width: 100%; height: 100%;
+        padding: 5vw;
+        box-sizing: border-box;
+        transition: opacity 1s linear, left 500ms;
+        &.profile{left: 0; top: 0;}
+        &.contect{left: 100%; top: 0;}
+    }
+    &.p{
+        .profile{left: 0; top: 0;}
+        .contect{left: 100%; top: 0;}
+    }
+    &.c{
+        .profile{left: -100%; top: 0;}
+        .contect{left: 0; top: 0;}
+    }
+    .profile{
+        h2{
+            float: left;
+            width: 30%;
+            height: 100%;
+            figure{
+                overflow: hidden;
+                width: 22vh;
+                height: 22vh;
+                margin: 2vh auto;
+                border-radius: 50%;
+            }
+            ul{
+                padding-top: 20px;
+                li{
+                    font-size: 16px;
+                    line-height: 2;
+                }
+            }
+        }
+        h3{ 
+            position: relative;
+            float: left;
+            overflow: hidden;
+            width: 70%;
+            height: 50px;
+            margin: calc(7vh - 25px) 0;
+            ul{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 70%;
+                height: 100%;
+                font-size: 24px;
+                li{
+                    height: 50px;
+                    line-height: 50px;
+                }
+                animation: h3Ani 20s infinite linear;
+            }
+            p{
+                float: left;
+                width: 100%;
+                height: 100%;
+                padding-left: 70%;
+                line-height: 50px;
+                box-sizing: border-box;
+                font-size: 24px;
+                text-align: left;
+            }
+            @keyframes h3Ani {
+                0%{top : 0px;}
+                4.999%{top : -250px;}
+                5%{top: 0;}
+                9%{top : -200px;}
+                20%{top : -200px;}
+                20.999%{top : -250px;}
+                21%{top: 0;}
+                25.999%{top : -250px;}
+                26%{top : 0;}
+                29%{top : -150px;}
+                40%{top : -150px;}
+                41.999%{top : -250px;}
+                42%{top: 0;}
+                46.999%{top : -250px;}
+                47%{top : 0;}
+                49%{top : -100px;}
+                60%{top : -100px;}
+                62.999%{top : -250px;}
+                63%{top: 0;}
+                67.999%{top : -300px;}
+                68%{top : 0;}
+                69%{top : -50px;}
+                80%{top : -50px;}
+                83.999%{top : -250px;}
+                84%{top: 0;}
+                88.999%{top : -250px;}
+                89%{top : 0;}
+                100%{top : 0;}
+            }
+        }
+        div{
+            float: left;
+            width: 70%;
+            height: 80%;
+            background-color: #f00a;
+        }
+        .next{
+            cursor: pointer;
+            display: block; width: 30px; height: 70px;
+            position: absolute;
+            right: 0;
+            top: calc(50% - 35px);
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 50px;
+        }
+    }
     .contect{
-        position: absolute; top: 0; left: 0;
-        height: 100%; width: 100%;
         h3{
             height: 20vh;
             padding-top: 10vh;
@@ -67,6 +181,17 @@
                     .emoji_mouth{animation: angry-mouth 2s ease-in infinite;}
                 }
             }
+        }
+        .prev{
+            cursor: pointer;
+            display: block; width: 30px; height: 70px;
+            position: absolute;
+            left: 0;
+            top: calc(50% - 35px);
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 50px;
         }
     }
     
