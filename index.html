@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Chae's Portfolio</title>
     <meta name="viewport" content="user-scalable=no">
     <link rel="stylesheet" href="css/style.css">
-    <script src="./portfolio.js"></script>
+    <script src="./js/portfolio.js"></script>
 </head>
 <body>
-    <p>0.10.01</p>
+    <p>0.5.1</p>
     <div id="load">
         <img src="./img/cloud.png" alt="구름" class="cloud c1"/>
         <img src="./img/cloud.png" alt="구름" class="cloud c2"/>
@@ -18,7 +18,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" style="fill:none;stroke:#707070;stroke-linecap:round;stroke-miterlimit:10;stroke-width:4px"/></svg>
             Loading
         </span>
-        <section>
+        <section class="before_start">
             <h1>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 916.57 197.02">
                     <defs>
@@ -62,15 +62,150 @@
                     </svg>
             </h1>
             <ul>
-                <li><button type="button" class="start">START</button></li>
-                <li><button type="button" class="cheat">CHEAT MOD</button></li>
+                <li><button type="button" class="start"><span>START</span></button></li>
+                <li><button type="button" class="cheat"><span>CHEAT MOD</span></button></li>
             </ul>
+        </section>
+    </div>
+    <div class="explain">
+        <h3>조작방법</h3>
+        <section class="ex-pc">
+            <img class="pc" src="./img/pc.png" alt="pc플레이화면" />
+            <p>전체 화면에서 진행하는 것을 추천합니다!<br />(1920*1080에 최적화 되어있습니다.)</p>
+            <figure>
+                <figcaption>이동방법</figcaption>
+                <img src="./img/wasd.png" alt="키보드 w,a,s,d" />
+                <span>or</span>
+                <img src="./img/rudder.png" alt="키보드 방향키" />
+            </figure>
+            <figure>
+                <figcaption>알 줍기, 거위 잡기 방법</figcaption>
+                <img src="./img/f.png" alt="키보드 f" />
+                <span>or</span>
+                <img src="./img/space_bar.png" alt="키보드 space bar"/><br />
+                <span>or</span>
+                <img class="smallerimg" src="./img/active.png" alt="액티브버튼" />
+                <span>or</span>
+                <img class="smallerimg" src="./img/egg.png" alt="황금알" />
+            </figure>
+        </section>
+        <section class="ex-mt">
+            <img class="tablet" src="./img/tablet.png" alt="pc플레이화면" />
+            <p>가로모드에서 진행하는 것을 추천합니다!<br />(모바일은 추천하지 않습니다)</p>
+            <figure>
+                <figcaption>이동방법</figcaption>
+                <p>터치 & 드래그</p>
+            </figure>
+            <figure>
+                <figcaption>알 줍기, 거위 잡기 방법</figcaption>
+                <img class="smallerimg" src="./img/active.png" alt="액티브버튼" />
+                <span>or</span>
+                <img class="smallerimg" src="./img/egg.png" alt="황금알" />
+                <p>touch</p>
+            </figure>
+        </section>
+        <button type="button" class="close">X</button>
+    </div>
+    <div class="ending">
+        <section class="profile clearfix">
+            <h2>
+                <figure>
+                    <img src="./img/profile.jpg" alt="">
+                </figure>
+                <ul>
+                    <li>채수민</li>
+                    <li>Chae Sumin</li>
+                    <li>1997.10.21</li>
+                    <li>Front-end Engineer</li>
+                </ul>
+            </h2>
+            <h3>
+                <ul>
+                    <li>최적의 결과를 내는</li>
+                    <li>끊임없이 노력하는</li>
+                    <li>꼼꼼히 관찰하는</li>
+                    <li>배우고 활용하는</li> 
+                    <li>황금알을 낳는</li> <!--첫번째 노출, 위 방향으로 노출-->
+                    <li>최적의 결과를 내는</li> <!--첫번째랑 같은 것(순환용)-->
+                </ul>
+                <p>개발자</p>
+            </h3>
+            <div class="skill">
+                <ul class="clearfix">
+                    <li>
+                        <h4>HTML</h4>
+                        <span class="graph"><span class="status">90</span>/100</span>
+                    </li>
+                    <li>
+                        <h4>CSS</h4>
+                        <span class="graph"><span class="status">90</span>/100</span>
+                    </li>
+                    <li>
+                        <h4>JavaScript</h4>
+                        <span class="graph"><span class="status">90</span>/100</span>
+                    </li>
+                    <li>
+                        <h4>React</h4>
+                        <span class="graph"><span class="status">65</span>/100</span>
+                    </li>
+                    <li>
+                        <h4>PhotoShop</h4>
+                        <span class="graph"><span class="status">55</span>/100</span>
+                    </li>
+                    <li>
+                        <h4>Illustrator</h4>
+                        <span class="graph"><span class="status">70</span>/100</span>
+                    </li>
+                </ul>
+                <div class="else">GitHub, Scss, XD</div>
+            </div>
+            <button type="button" class="next">&gt;</button>
+            <button type="button" class="close">X</button>
+        </section>
+        <section class="contect">
+            <h3>CONTECT ME</h2>
+            <p>E-mail : cotnmin@gmail.com<br />
+            Tel : 010 - 8311 - 8853</p>
+            <ul class="emoji_list">
+                <li><button type="button" class="emoji emoji_like">
+                    <div class="emoji_hand">
+                        <div class="emoji_thumb"></div>
+                    </div>
+                </button></li>
+                <li><button type="button" class="emoji emoji_love">
+                    <div class="emoji_heart">
+                    </div>
+                </button></li>
+                <li><button type="button" class="emoji emoji_haha">
+                    <div class="emoji_face">
+                        <div class="emoji_eyes"></div>
+                        <div class="emoji_mouth">
+                            <div class="emoji_tougue"></div>
+                        </div>
+                    </div>
+                </button></li>
+                <li><button type="button" class="emoji emoji_yay">
+                    <div class="emoji_face">
+                        <div class="emoji_eyebrows"></div>
+                        <div class="emoji_mouth"></div>
+                    </div>
+                </button></li>
+                <li><button type="button" class="emoji emoji_wow">
+                    <div class="emoji_face">
+                        <div class="emoji_eyebrows"></div>
+                        <div class="emoji_eyes"></div>
+                        <div class="emoji_tougue"></div>
+                    </div>
+                </button></li>
+            </ul>
+            <button type="button" class="prev">&lt;</button>
+            <button type="button" class="close">X</button>
         </section>
     </div>
     <div id="field">
         <img src="./img/limits.png" alt="limit img" id="limit_img" />
         <div id="object">
-            <div id="char"></div>
+            <div id="char"><span class="ment"></span></div>
             <div id="goose"></div>
             <div class="home">
                 <span class="flower"></span>
@@ -97,6 +232,12 @@
                         <li class="col1"></li>
                         <li class="col2"></li>
                     </ul>
+                    <ul class="geese">
+                        <li class="goose"></li>
+                        <li class="goose"></li>
+                        <li class="goose"></li>
+                        <li class="goose"></li>
+                    </ul>
                 </div>
                 <div class="pigsCage">
                     <ul class="cage">
@@ -105,6 +246,12 @@
                         <li class="col1"></li>
                         <li class="col2"></li>
                     </ul>
+                    <ul class="pigs">
+                        <li class="pig"></li>
+                        <li class="pig"></li>
+                        <li class="pig"></li>
+                        <li class="pig"></li>
+                    </ul>
                 </div>
                 <div class="cowCage">
                     <ul class="cage">
@@ -112,6 +259,14 @@
                         <li class="row2"></li>
                         <li class="col1"></li>
                         <li class="col2"></li>
+                    </ul>
+                    <ul class="cows">
+                        <li class="cow"></li>
+                        <li class="cow"></li>
+                    </ul>
+                    <ul class="babycows">
+                        <li class="cow"></li>
+                        <li class="cow"></li>
                     </ul>
                 </div>
                 <div class="sheepCage">

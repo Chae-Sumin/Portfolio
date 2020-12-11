@@ -3,7 +3,13 @@
 @import 'character.scss';
 @import 'object.scss';
 @import 'load.scss';
-
+@import 'ending.scss';
+@font-face {
+    font-family: 'CookieRun-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 // 기본 맵 스타일 및 컨트롤러 스타일입니다
 $fieldW: 6000px;
 $fieldH: 5000px;
@@ -13,7 +19,8 @@ $fieldH: 5000px;
     top: $y;
 }
 body, html{overflow: hidden; width: 100%; height: 100%; }
-body{position: relative;}
+body{position: relative; font-family: "CookieRun-Regular";}
+body *{font-family: inherit;}
 body>p{display: none;}
 #field{ // 메인 맵
     @include posA; 
@@ -44,19 +51,15 @@ body>p{display: none;}
     #active{
         position: absolute;
         margin: 0;
-        left: 10vh;
-        top: 80vh;
+        left: calc(90vw - 53px);
+        top: calc(85vh - 53px);
         width: 53px; 
         height: 53px; 
         border: none; 
         outline: none; 
         cursor: pointer; 
         float: right; 
-        margin: 65px 0 50px 30px;
         background: url(../img/active.png) 50% 50% / cover no-repeat;
-        &.btnOn{
-            background-image: url(../img/active-on.png);
-        }
     }
     .touch{
         display: block;

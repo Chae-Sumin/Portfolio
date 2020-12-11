@@ -1,21 +1,21 @@
 @charset "utf-8";
 
-//load 관련 스타일입니다
+//load 관련 스타일입니다 + 설명페이지
 #load{
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
-    transition: z-index 0s 3s;
+    z-index: 6000;
     background: #ffff;
+    transition: background 1s;
     .cloud{ //구름 장막
         max-width: unset;
         max-height: 150%;
         display: block;
         position: absolute;
-        transition: all 3s linear, opacity 2s 500ms linear;
+        transition: all 2000ms linear, opacity 1s 500ms linear;
         &.c1{
             left: -23%;
             top: -23%;
@@ -32,9 +32,8 @@
             left: 23%;
             top: 23%;
         }
-        
     }
-    span{ // 로딩 중 표시
+    >span{ // 로딩 중 표시
         display: block;
         position: absolute;
         left: 50%;
@@ -62,11 +61,16 @@
         }
         &.on{opacity: 0;}
     }
-    section{
+    .before_start{
         opacity: 0;
+        display: block;
+        position: absolute; left: 10vw; top: 10vh; z-index: 1;
+        width: 80vw; height: 80vh;
+        background: #fffe;
+        box-shadow: 0 0 30px 30px #fffe;
         transition: opacity 1s linear;
         h1{
-            width: 80%; height: 50%;
+            width: 70%; height: 50%;
             margin: 0 auto;
             svg{
                 padding-top: 10%;
@@ -97,13 +101,76 @@
                 }
             }
         }
+        ul{
+            display: flex; 
+            width: 100%; height: 50%;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            li{
+                button{
+                    position: relative;
+                    width: 140px;
+                    height: 200px;
+                    cursor: pointer;
+                    background: url(../img/character.png) 0 -200px no-repeat;
+                    border: none;
+                    outline: none;
+                    border-radius: 10px;
+                    span{
+                        position: absolute;
+                        display: block;
+                        bottom: -50px;
+                        width: 100%;
+                        height: 40px;
+                        text-align: center;
+                        text-indent: 10px;
+                    }
+                    &:hover{
+                        animation: frontAni 1000ms 0s infinite step-start;
+                    }
+                    &.cheat{
+                        width: 150px;
+                        height: 150px;
+                        margin-top: 40px;
+                        background: url(../img/goose.png) 0 0 no-repeat;
+                        span{
+                            text-indent: 0;
+                        }
+                    }
+                    &.cheat:hover{
+                        animation: goosefrontAni 1s infinite step-start;
+                    }
+                    &::after{
+                        position: absolute;
+                        top: -30px;
+                        right: -80px;
+                        display: block;
+                        width: 160px;
+                        height: 40px;
+                        background: #fffa;
+                        border: 2px solid #000;
+                        border-radius: 10px;
+                        transform-origin: 90% bottom;
+                        transform: scale(0) rotate(0);
+                        transition: 300ms;
+                    }
+                    &:hover::after{
+                        transform: scale(1) rotate(10deg);
+                    }
+                    &.start::after{
+                        line-height: 36px;
+                        content: "처음이라면 클릭하세요!";
+                    }
+                    &.cheat::after{
+                        content: "작업물을 빠르게 확인하고 싶다면 클릭하세요";
+                    }
+                }
+            }
+        }
         &.on{
             opacity: 1;
-            display: block;
-            position: absolute; left: 10vw; top: 10vh; z-index: 1;
-            width: 80vw; height: 80vh;
-            background: #fffe;
-            box-shadow: 0 0 30px 30px #fffe;
+            z-index: 1;
             h1{
                 svg{
                     g:nth-of-type(1){animation: h1svg1 linear 800ms 500ms forwards;stroke-dasharray: 1168; stroke-dashoffset: 1168;}
@@ -114,60 +181,18 @@
                     g:nth-of-type(6){animation: h1svg6 linear 150ms 3450ms forwards;stroke-dasharray: 36; stroke-dashoffset: 36;}
                 }
             }
-            ul{
-                display: flex; 
-                width: 100%; height: 50%;
-                flex-direction: column;
-                justify-content: space-evenly;
-                align-items: center;
-                li{
-                    button{
-                        position: relative;
-                        width: 200px;
-                        height: 50px;
-                        cursor: pointer;
-                        background-color: #fff;
-                        border: 2px solid #000;
-                        border-radius: 10px;
-                        &:hover{
-                            background-color: #eee;
-                        }
-                        &::after{
-                            position: absolute;
-                            top: -30px;
-                            right: -80px;
-                            display: block;
-                            width: 160px;
-                            height: 40px;
-                            background: #fffa;
-                            border: 2px solid #000;
-                            border-radius: 10px;
-                            transform-origin: 90% bottom;
-                            transform: scale(0) rotate(0);
-                            transition: 300ms;
-                        }
-                        &:hover::after{
-                            transform: scale(1) rotate(10deg);
-                        }
-                        &.start::after{
-                            line-height: 36px;
-                            content: "처음이라면 클릭하세요!";
-                        }
-                        &.cheat::after{
-                            content: "작업물을 빠르게 확인하고 싶다면 클릭하세요";
-                        }
-                    }
-                }
-            }
-            
         }
         &.off{
             z-index: -1;
         }
     }
     &.load{ // 로딩 완료
-        z-index: -1;
         background: #fff0;
+        animation: zIndex 0s 3s forwards;
+        @keyframes zIndex {
+            from{z-index: 6000;}
+            to{z-index: -1;}
+        }
         .cloud{
             opacity: 0;
             &.c1{
@@ -189,7 +214,75 @@
         }
     }
 }
+.explain{
+    opacity: 1;
+    z-index: -1;
+    display: block;
+    position: absolute; left: 10vw; top: 10vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px;
+    width: 80vw; height: 80vh;
+    background: #fffe;
+    box-shadow: 0 0 30px 30px #fffe;
+    transition: opacity 1s linear, left 500ms;
+    h3{
+        font-size: 40px;
+        width: 100%;
+        height: 30px;
+        text-align: center;
+    }
+    >section{
+        position: absolute;
+        width: 50%;
+        padding: 5vh;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 24px;
+        &.ex-mt{margin-left: 45%;}
+        .pc{margin-top: 10px;}
+        .smallerimg{width: auto; height: 60px;}
+        figure{
+            margin-top: 25px;
+            line-height: 70px;
+            figcaption{
+                padding-bottom: 5px;
+                line-height: 1.5;
+            }
+            p{
+                font-size: 32px;
+            }
+        }
+        .close{
+            cursor: pointer;
+            display: block; 
+            position: absolute;
+            right: 3%;
+            top: 0;
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 50px;
+            font-family: inherit;
+        }
 
+    }
+    &.on{
+        z-index: 3000;
+    }
+    .close{
+        cursor: pointer;
+        display: block; 
+        position: absolute;
+        right: 3%;
+        top: 3%;
+        background: none;
+        border: none;
+        outline: none;
+        font-size: 50px;
+        font-family: inherit;
+    }
+}
 @for $i from 1 to 100{
     @keyframes load#{$i}Ani{
         0%{transform: scale(#{$i / 100});}
