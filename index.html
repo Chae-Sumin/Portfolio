@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Chae's Portfolio</title>
     <meta name="viewport" content="user-scalable=no">
     <link rel="stylesheet" href="css/style.css">
     <script src="./js/portfolio.js"></script>
 </head>
 <body>
-    <p>0.2.1</p>
+    <p>0.5.1</p>
     <div id="load">
         <img src="./img/cloud.png" alt="구름" class="cloud c1"/>
         <img src="./img/cloud.png" alt="구름" class="cloud c2"/>
@@ -68,36 +68,43 @@
         </section>
     </div>
     <div class="explain">
+        <h3>조작방법</h3>
         <section class="ex-pc">
-            <h3>조작방법<small> - PC</small></h3>
-            <p>전체 화면에서 진행하는 것을 추천합니다!</p>
-            <img src="./img/keyboard_move.png" alt="키보드 자판 WASD, 방향키" />
-            <p>키보드의 WASD 또는 방향키로 이동할 수 있습니다.</p>
-            <img src="./img/keyboard_active.png" alt="키보드 자판 F, space bar" /><img src="./img/active.png" alt="활성화 버튼" width="50" height="50" />
-            <p>알을 주울 때, 거위를 잡을 때 F키나 Space bar를 눌러 활성화할 수 있습니다.</p>
-            <p>활성화 버튼을 클릭하거나 직접 클릭하는 것도 가능합니다</p>
-            <button type="button" class="next">&gt;</button>
+            <img class="pc" src="./img/pc.png" alt="pc플레이화면" />
+            <p>전체 화면에서 진행하는 것을 추천합니다!<br />(1920*1080에 최적화 되어있습니다.)</p>
+            <figure>
+                <figcaption>이동방법</figcaption>
+                <img src="./img/wasd.png" alt="키보드 w,a,s,d" />
+                <span>or</span>
+                <img src="./img/rudder.png" alt="키보드 방향키" />
+            </figure>
+            <figure>
+                <figcaption>알 줍기, 거위 잡기 방법</figcaption>
+                <img src="./img/f.png" alt="키보드 f" />
+                <span>or</span>
+                <img src="./img/space_bar.png" alt="키보드 space bar"/><br />
+                <span>or</span>
+                <img class="smallerimg" src="./img/active.png" alt="액티브버튼" />
+                <span>or</span>
+                <img class="smallerimg" src="./img/egg.png" alt="황금알" />
+            </figure>
         </section>
         <section class="ex-mt">
-            <h3>조작방법<small> - Mobile / Tablet</small></h3>
-            <p>가로모드에서 진행하는 것을 추천합니다!<br />모바일 기기는 화면이 작아 불편할 수 있습니다.</p>
-            <p>화면 어디든 터치하면 조이스틱이 생깁니다.<br />터치 후 때지 않고 움직여 캐릭터를 움직일 수 있습니다</p>
-            <img src="./img/active.png" alt="활성화 버튼" width="50" height="50" />
-            <p>알을 주울 때, 거위를 잡을 때 활성화 버튼을 눌러 활성화할 수 있습니다.</p>
-            <p>직접 터치하는 것도 가능합니다</p>
-            <button type="button" class="prev">&lt;</button>
-            <button type="button" class="next">&gt;</button>
+            <img class="tablet" src="./img/tablet.png" alt="pc플레이화면" />
+            <p>가로모드에서 진행하는 것을 추천합니다!<br />(모바일은 추천하지 않습니다)</p>
+            <figure>
+                <figcaption>이동방법</figcaption>
+                <p>터치 & 드래그</p>
+            </figure>
+            <figure>
+                <figcaption>알 줍기, 거위 잡기 방법</figcaption>
+                <img class="smallerimg" src="./img/active.png" alt="액티브버튼" />
+                <span>or</span>
+                <img class="smallerimg" src="./img/egg.png" alt="황금알" />
+                <p>touch</p>
+            </figure>
         </section>
-        <section class="story">
-            <h3>스토리</h3>
-            <p>
-                거위 한마리가 도망쳤어ㅠㅠㅠㅠㅠㅠ<br />
-                어...? 거위가 황금알을 낳잖아!<br />
-                멀리 도망치기 전에 얼른 잡아보자!!!!<br />
-            </p>
-            <button type="button" class="prev">&lt;</button>
-            <button type="button" class="close">x</button>
-        </section>
+        <button type="button" class="close">X</button>
     </div>
     <div class="ending">
         <section class="profile clearfix">
@@ -124,7 +131,7 @@
                 <p>개발자</p>
             </h3>
             <div class="skill">
-                <ul>
+                <ul class="clearfix">
                     <li>
                         <h4>HTML</h4>
                         <span class="graph"><span class="status">90</span>/100</span>
@@ -139,12 +146,21 @@
                     </li>
                     <li>
                         <h4>React</h4>
+                        <span class="graph"><span class="status">65</span>/100</span>
+                    </li>
+                    <li>
+                        <h4>PhotoShop</h4>
+                        <span class="graph"><span class="status">55</span>/100</span>
+                    </li>
+                    <li>
+                        <h4>Illustrator</h4>
                         <span class="graph"><span class="status">70</span>/100</span>
                     </li>
                 </ul>
-                <div class="else"></div>
+                <div class="else">GitHub, Scss, XD</div>
             </div>
             <button type="button" class="next">&gt;</button>
+            <button type="button" class="close">X</button>
         </section>
         <section class="contect">
             <h3>CONTECT ME</h2>
@@ -183,12 +199,13 @@
                 </button></li>
             </ul>
             <button type="button" class="prev">&lt;</button>
+            <button type="button" class="close">X</button>
         </section>
     </div>
     <div id="field">
         <img src="./img/limits.png" alt="limit img" id="limit_img" />
         <div id="object">
-            <div id="char"></div>
+            <div id="char"><span class="ment"></span></div>
             <div id="goose"></div>
             <div class="home">
                 <span class="flower"></span>

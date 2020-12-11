@@ -1,14 +1,13 @@
 @charset "utf-8";
-@for $i from 1 to 100{ //앤딩 애니메이션
-    @keyframes end#{$i}Ani{
-        70%{transform: scale(#{$i / 100});}
-        100%{transform: scale(#{$i / 100});}
-    }
-}
+
+$color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
+
+
 .ending{
     opacity: 0;
     z-index: -1;
-    display: none;
+    display: block;
+    transition: opacity 1s 2s;
     position: absolute; left: 10vw; top: 10vh; z-index: 1;
     overflow: hidden;
     width: 80vw; height: 80vh;
@@ -23,6 +22,18 @@
         transition: opacity 1s linear, left 500ms;
         &.profile{left: 0; top: 0;}
         &.contect{left: 100%; top: 0;}
+        .close{
+            cursor: pointer;
+            display: block; 
+            position: absolute;
+            right: 3%;
+            top: 3%;
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 50px;
+            font-family: inherit;
+        }
     }
     &.p{
         .profile{left: 0; top: 0;}
@@ -47,7 +58,7 @@
             ul{
                 padding-top: 20px;
                 li{
-                    font-size: 16px;
+                    font-size: 20px;
                     line-height: 2;
                 }
             }
@@ -113,11 +124,53 @@
                 100%{top : 0;}
             }
         }
-        div{
+        .skill{
             float: left;
             width: 70%;
             height: 80%;
-            background-color: #f00a;
+            >ul{
+                width: 100%;
+                height: 80%;
+                >li{
+                    float: left;
+                    width: 50%;
+                    height: calc(100% / 3);
+                    h4{
+                        font-size: 24px;
+                        line-height: 50px;
+                    }
+                    .graph{
+                        display: block;
+                        position: relative;
+                        overflow: hidden;
+                        width: 80%;
+                        height: 20px;
+                        margin: 0 auto;
+                        border: 2px solid #000;
+                        background: #fff;
+                        font-size: 0;
+                        text-indent: -9999px;
+                        .status{
+                            display: block;
+                            position: absolute;
+                            width: 0%;
+                            height: 20px;
+                        }
+                    }
+                    @for $i from 1 through 6{
+                        &:nth-child(#{$i}){
+                            .status{
+                                background: nth($color,$i);
+                                box-shadow: 0 0 20px 20px nth($color,$i);
+                            }
+                        }
+                    }
+                }
+            }
+            .else{
+                font-size: 20px;
+                word-spacing: 10px;
+            }
         }
         .next{
             cursor: pointer;
@@ -198,7 +251,13 @@
     &.on{
         opacity: 1;
         z-index: 9000;
-        display: block;
+        .status{
+            animation: statusAni 2200ms 2000ms 1 linear;
+            @keyframes statusAni {
+                0%{width: 100%;}
+                50%{width: 0%;}
+            }
+        }
     }
 }
 .emoji_list{

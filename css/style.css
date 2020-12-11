@@ -141,6 +141,60 @@
     background-position: 0 -400px; }
   #char.__12 {
     background-position: 0 -400px; }
+  #char .ment {
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    bottom: 80%;
+    left: 100%;
+    width: 0;
+    height: 0;
+    background: url(../img/bubble.png) 0 0/100% 127px no-repeat;
+    transition: width 300ms, height 300ms; }
+    #char .ment.move {
+      width: 201px;
+      height: 127px;
+      background: url(../img/bubble_move.png) 0 0 no-repeat;
+      animation: bubbleMove 300ms alternate infinite; }
+
+@keyframes bubbleMove {
+  from {
+    background: url(../img/bubble_move.png) 0 0 no-repeat; }
+  to {
+    background: url(../img/bubble_move_.png) 0 0 no-repeat; } }
+    #char .ment.get {
+      width: 201px;
+      height: 127px;
+      background: url(../img/bubble_get.png) 0 0 no-repeat;
+      animation: bubbleGet 300ms alternate infinite; }
+
+@keyframes bubbleGet {
+  from {
+    background: url(../img/bubble_get.png) 0 0 no-repeat; }
+  to {
+    background: url(../img/bubble_get_.png) 0 0 no-repeat; } }
+    #char .ment.ex {
+      width: 127px;
+      height: 127px;
+      background: url(../img/bubble_ex.png) 0 0 no-repeat; }
+    #char .ment.ment1 {
+      width: 250px;
+      height: 127px;
+      font-size: 20px;
+      line-height: 120px;
+      text-align: center; }
+    #char .ment.ment2 {
+      width: 200px;
+      height: 127px;
+      font-size: 20px;
+      line-height: 120px;
+      text-align: center; }
+    #char .ment.ment3 {
+      width: 300px;
+      height: 127px;
+      font-size: 20px;
+      line-height: 120px;
+      text-align: center; }
 
 #goose, .geese > li {
   position: absolute;
@@ -364,31 +418,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 708px;
+        top: 710px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.53697s infinite alternate; }
+        animation: flower1Ani 3s 0.05674s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 703px;
+        top: 710px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.20321s infinite alternate; }
+        animation: flower2Ani 3s 0.39515s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 704px;
+        top: 716px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.39329s infinite alternate; }
+        animation: flower3Ani 3s 0.04125s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 714px;
+        top: 720px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.53246s infinite alternate; }
+        animation: flower4Ani 3s 0.75594s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -1224,12 +1278,20 @@
       #controller .eggPlate li .goldenEgg:hover {
         text-decoration: none;
         box-shadow: 0 0 30px 10px rgba(255, 211, 50, 0.76), 0 0 30px 10px inset rgba(255, 211, 50, 0.5); }
+      #controller .eggPlate li .goldenEgg.blink {
+        animation: eggBlinkAni 500ms alternate infinite; }
 
 @keyframes eggAni {
   from {
     transform: scale(0); }
   to {
     transform: scale(1); } }
+
+@keyframes eggBlinkAni {
+  from {
+    box-shadow: 0 0 30px 10px rgba(255, 211, 50, 0.76), 0 0 30px 10px inset rgba(255, 211, 50, 0.5); }
+  to {
+    box-shadow: 0 0 0 0 rgba(255, 211, 50, 0.76), 0 0 0 0 inset rgba(255, 211, 50, 0.5); } }
 
 #load {
   position: fixed;
@@ -1239,13 +1301,13 @@
   height: 100%;
   z-index: 6000;
   background: #ffff;
-  transition: background 3s; }
+  transition: background 1s; }
   #load .cloud {
     max-width: unset;
     max-height: 150%;
     display: block;
     position: absolute;
-    transition: all 3s linear, opacity 2s 500ms linear; }
+    transition: all 2000ms linear, opacity 1s 500ms linear; }
     #load .cloud.c1 {
       left: -23%;
       top: -23%; }
@@ -1468,51 +1530,41 @@
   position: absolute;
   left: 10vw;
   top: 10vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 20px;
   width: 80vw;
   height: 80vh;
   background: #fffe;
   box-shadow: 0 0 30px 30px #fffe;
   transition: opacity 1s linear, left 500ms; }
+  .explain h3 {
+    font-size: 40px;
+    width: 100%;
+    height: 30px;
+    text-align: center; }
   .explain > section {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 50%;
     padding: 5vh;
-    box-sizing: border-box; }
-    .explain > section h3 {
-      font-size: 40px; }
-      .explain > section h3 small {
-        font-size: 0.6em; }
-    .explain > section img {
-      padding: 5vh 1% 0 3vh; }
-    .explain > section p {
-      font-size: 24px;
-      padding: 2% 0 0 3vh; }
-    .explain > section .prev {
-      cursor: pointer;
-      display: block;
-      width: 30px;
-      height: 70px;
-      position: absolute;
-      left: 0;
-      top: calc(50% - 35px);
-      background: none;
-      border: none;
-      outline: none;
-      font-size: 50px; }
-    .explain > section .next {
-      cursor: pointer;
-      display: block;
-      width: 30px;
-      height: 70px;
-      position: absolute;
-      right: 0;
-      top: calc(50% - 35px);
-      background: none;
-      border: none;
-      outline: none;
-      font-size: 50px; }
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 24px; }
+    .explain > section.ex-mt {
+      margin-left: 45%; }
+    .explain > section .pc {
+      margin-top: 10px; }
+    .explain > section .smallerimg {
+      width: auto;
+      height: 60px; }
+    .explain > section figure {
+      margin-top: 25px;
+      line-height: 70px; }
+      .explain > section figure figcaption {
+        padding-bottom: 5px;
+        line-height: 1.5; }
+      .explain > section figure p {
+        font-size: 32px; }
     .explain > section .close {
       cursor: pointer;
       display: block;
@@ -1524,45 +1576,19 @@
       outline: none;
       font-size: 50px;
       font-family: inherit; }
-  .explain .ex-pc {
-    left: 0;
-    top: 0; }
-  .explain .ex-mt {
-    left: 100%;
-    top: 0; }
-    .explain .ex-mt p:first-of-type {
-      padding-bottom: 5%; }
-  .explain .story {
-    left: 200%;
-    top: 0; }
-    .explain .story p {
-      text-align: center;
-      padding: 10%;
-      line-height: 40px; }
-  .explain.on1 {
+  .explain.on {
     z-index: 3000; }
-    .explain.on1 .ex-pc {
-      left: 0%; }
-    .explain.on1 .ex-mt {
-      left: 100%; }
-    .explain.on1 .story {
-      left: 200%; }
-  .explain.on2 {
-    z-index: 3000; }
-    .explain.on2 .ex-pc {
-      left: -100%; }
-    .explain.on2 .ex-mt {
-      left: 0; }
-    .explain.on2 .story {
-      left: 100%; }
-  .explain.on3 {
-    z-index: 3000; }
-    .explain.on3 .ex-pc {
-      left: -200%; }
-    .explain.on3 .ex-mt {
-      left: -100%; }
-    .explain.on3 .story {
-      left: 0%; }
+  .explain .close {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 3%;
+    top: 3%;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 50px;
+    font-family: inherit; }
 
 @keyframes load1Ani {
   0% {
@@ -2158,604 +2184,11 @@
   30% {
     transform: scale(0.99); } }
 
-@keyframes end1Ani {
-  70% {
-    transform: scale(0.01); }
-  100% {
-    transform: scale(0.01); } }
-
-@keyframes end2Ani {
-  70% {
-    transform: scale(0.02); }
-  100% {
-    transform: scale(0.02); } }
-
-@keyframes end3Ani {
-  70% {
-    transform: scale(0.03); }
-  100% {
-    transform: scale(0.03); } }
-
-@keyframes end4Ani {
-  70% {
-    transform: scale(0.04); }
-  100% {
-    transform: scale(0.04); } }
-
-@keyframes end5Ani {
-  70% {
-    transform: scale(0.05); }
-  100% {
-    transform: scale(0.05); } }
-
-@keyframes end6Ani {
-  70% {
-    transform: scale(0.06); }
-  100% {
-    transform: scale(0.06); } }
-
-@keyframes end7Ani {
-  70% {
-    transform: scale(0.07); }
-  100% {
-    transform: scale(0.07); } }
-
-@keyframes end8Ani {
-  70% {
-    transform: scale(0.08); }
-  100% {
-    transform: scale(0.08); } }
-
-@keyframes end9Ani {
-  70% {
-    transform: scale(0.09); }
-  100% {
-    transform: scale(0.09); } }
-
-@keyframes end10Ani {
-  70% {
-    transform: scale(0.1); }
-  100% {
-    transform: scale(0.1); } }
-
-@keyframes end11Ani {
-  70% {
-    transform: scale(0.11); }
-  100% {
-    transform: scale(0.11); } }
-
-@keyframes end12Ani {
-  70% {
-    transform: scale(0.12); }
-  100% {
-    transform: scale(0.12); } }
-
-@keyframes end13Ani {
-  70% {
-    transform: scale(0.13); }
-  100% {
-    transform: scale(0.13); } }
-
-@keyframes end14Ani {
-  70% {
-    transform: scale(0.14); }
-  100% {
-    transform: scale(0.14); } }
-
-@keyframes end15Ani {
-  70% {
-    transform: scale(0.15); }
-  100% {
-    transform: scale(0.15); } }
-
-@keyframes end16Ani {
-  70% {
-    transform: scale(0.16); }
-  100% {
-    transform: scale(0.16); } }
-
-@keyframes end17Ani {
-  70% {
-    transform: scale(0.17); }
-  100% {
-    transform: scale(0.17); } }
-
-@keyframes end18Ani {
-  70% {
-    transform: scale(0.18); }
-  100% {
-    transform: scale(0.18); } }
-
-@keyframes end19Ani {
-  70% {
-    transform: scale(0.19); }
-  100% {
-    transform: scale(0.19); } }
-
-@keyframes end20Ani {
-  70% {
-    transform: scale(0.2); }
-  100% {
-    transform: scale(0.2); } }
-
-@keyframes end21Ani {
-  70% {
-    transform: scale(0.21); }
-  100% {
-    transform: scale(0.21); } }
-
-@keyframes end22Ani {
-  70% {
-    transform: scale(0.22); }
-  100% {
-    transform: scale(0.22); } }
-
-@keyframes end23Ani {
-  70% {
-    transform: scale(0.23); }
-  100% {
-    transform: scale(0.23); } }
-
-@keyframes end24Ani {
-  70% {
-    transform: scale(0.24); }
-  100% {
-    transform: scale(0.24); } }
-
-@keyframes end25Ani {
-  70% {
-    transform: scale(0.25); }
-  100% {
-    transform: scale(0.25); } }
-
-@keyframes end26Ani {
-  70% {
-    transform: scale(0.26); }
-  100% {
-    transform: scale(0.26); } }
-
-@keyframes end27Ani {
-  70% {
-    transform: scale(0.27); }
-  100% {
-    transform: scale(0.27); } }
-
-@keyframes end28Ani {
-  70% {
-    transform: scale(0.28); }
-  100% {
-    transform: scale(0.28); } }
-
-@keyframes end29Ani {
-  70% {
-    transform: scale(0.29); }
-  100% {
-    transform: scale(0.29); } }
-
-@keyframes end30Ani {
-  70% {
-    transform: scale(0.3); }
-  100% {
-    transform: scale(0.3); } }
-
-@keyframes end31Ani {
-  70% {
-    transform: scale(0.31); }
-  100% {
-    transform: scale(0.31); } }
-
-@keyframes end32Ani {
-  70% {
-    transform: scale(0.32); }
-  100% {
-    transform: scale(0.32); } }
-
-@keyframes end33Ani {
-  70% {
-    transform: scale(0.33); }
-  100% {
-    transform: scale(0.33); } }
-
-@keyframes end34Ani {
-  70% {
-    transform: scale(0.34); }
-  100% {
-    transform: scale(0.34); } }
-
-@keyframes end35Ani {
-  70% {
-    transform: scale(0.35); }
-  100% {
-    transform: scale(0.35); } }
-
-@keyframes end36Ani {
-  70% {
-    transform: scale(0.36); }
-  100% {
-    transform: scale(0.36); } }
-
-@keyframes end37Ani {
-  70% {
-    transform: scale(0.37); }
-  100% {
-    transform: scale(0.37); } }
-
-@keyframes end38Ani {
-  70% {
-    transform: scale(0.38); }
-  100% {
-    transform: scale(0.38); } }
-
-@keyframes end39Ani {
-  70% {
-    transform: scale(0.39); }
-  100% {
-    transform: scale(0.39); } }
-
-@keyframes end40Ani {
-  70% {
-    transform: scale(0.4); }
-  100% {
-    transform: scale(0.4); } }
-
-@keyframes end41Ani {
-  70% {
-    transform: scale(0.41); }
-  100% {
-    transform: scale(0.41); } }
-
-@keyframes end42Ani {
-  70% {
-    transform: scale(0.42); }
-  100% {
-    transform: scale(0.42); } }
-
-@keyframes end43Ani {
-  70% {
-    transform: scale(0.43); }
-  100% {
-    transform: scale(0.43); } }
-
-@keyframes end44Ani {
-  70% {
-    transform: scale(0.44); }
-  100% {
-    transform: scale(0.44); } }
-
-@keyframes end45Ani {
-  70% {
-    transform: scale(0.45); }
-  100% {
-    transform: scale(0.45); } }
-
-@keyframes end46Ani {
-  70% {
-    transform: scale(0.46); }
-  100% {
-    transform: scale(0.46); } }
-
-@keyframes end47Ani {
-  70% {
-    transform: scale(0.47); }
-  100% {
-    transform: scale(0.47); } }
-
-@keyframes end48Ani {
-  70% {
-    transform: scale(0.48); }
-  100% {
-    transform: scale(0.48); } }
-
-@keyframes end49Ani {
-  70% {
-    transform: scale(0.49); }
-  100% {
-    transform: scale(0.49); } }
-
-@keyframes end50Ani {
-  70% {
-    transform: scale(0.5); }
-  100% {
-    transform: scale(0.5); } }
-
-@keyframes end51Ani {
-  70% {
-    transform: scale(0.51); }
-  100% {
-    transform: scale(0.51); } }
-
-@keyframes end52Ani {
-  70% {
-    transform: scale(0.52); }
-  100% {
-    transform: scale(0.52); } }
-
-@keyframes end53Ani {
-  70% {
-    transform: scale(0.53); }
-  100% {
-    transform: scale(0.53); } }
-
-@keyframes end54Ani {
-  70% {
-    transform: scale(0.54); }
-  100% {
-    transform: scale(0.54); } }
-
-@keyframes end55Ani {
-  70% {
-    transform: scale(0.55); }
-  100% {
-    transform: scale(0.55); } }
-
-@keyframes end56Ani {
-  70% {
-    transform: scale(0.56); }
-  100% {
-    transform: scale(0.56); } }
-
-@keyframes end57Ani {
-  70% {
-    transform: scale(0.57); }
-  100% {
-    transform: scale(0.57); } }
-
-@keyframes end58Ani {
-  70% {
-    transform: scale(0.58); }
-  100% {
-    transform: scale(0.58); } }
-
-@keyframes end59Ani {
-  70% {
-    transform: scale(0.59); }
-  100% {
-    transform: scale(0.59); } }
-
-@keyframes end60Ani {
-  70% {
-    transform: scale(0.6); }
-  100% {
-    transform: scale(0.6); } }
-
-@keyframes end61Ani {
-  70% {
-    transform: scale(0.61); }
-  100% {
-    transform: scale(0.61); } }
-
-@keyframes end62Ani {
-  70% {
-    transform: scale(0.62); }
-  100% {
-    transform: scale(0.62); } }
-
-@keyframes end63Ani {
-  70% {
-    transform: scale(0.63); }
-  100% {
-    transform: scale(0.63); } }
-
-@keyframes end64Ani {
-  70% {
-    transform: scale(0.64); }
-  100% {
-    transform: scale(0.64); } }
-
-@keyframes end65Ani {
-  70% {
-    transform: scale(0.65); }
-  100% {
-    transform: scale(0.65); } }
-
-@keyframes end66Ani {
-  70% {
-    transform: scale(0.66); }
-  100% {
-    transform: scale(0.66); } }
-
-@keyframes end67Ani {
-  70% {
-    transform: scale(0.67); }
-  100% {
-    transform: scale(0.67); } }
-
-@keyframes end68Ani {
-  70% {
-    transform: scale(0.68); }
-  100% {
-    transform: scale(0.68); } }
-
-@keyframes end69Ani {
-  70% {
-    transform: scale(0.69); }
-  100% {
-    transform: scale(0.69); } }
-
-@keyframes end70Ani {
-  70% {
-    transform: scale(0.7); }
-  100% {
-    transform: scale(0.7); } }
-
-@keyframes end71Ani {
-  70% {
-    transform: scale(0.71); }
-  100% {
-    transform: scale(0.71); } }
-
-@keyframes end72Ani {
-  70% {
-    transform: scale(0.72); }
-  100% {
-    transform: scale(0.72); } }
-
-@keyframes end73Ani {
-  70% {
-    transform: scale(0.73); }
-  100% {
-    transform: scale(0.73); } }
-
-@keyframes end74Ani {
-  70% {
-    transform: scale(0.74); }
-  100% {
-    transform: scale(0.74); } }
-
-@keyframes end75Ani {
-  70% {
-    transform: scale(0.75); }
-  100% {
-    transform: scale(0.75); } }
-
-@keyframes end76Ani {
-  70% {
-    transform: scale(0.76); }
-  100% {
-    transform: scale(0.76); } }
-
-@keyframes end77Ani {
-  70% {
-    transform: scale(0.77); }
-  100% {
-    transform: scale(0.77); } }
-
-@keyframes end78Ani {
-  70% {
-    transform: scale(0.78); }
-  100% {
-    transform: scale(0.78); } }
-
-@keyframes end79Ani {
-  70% {
-    transform: scale(0.79); }
-  100% {
-    transform: scale(0.79); } }
-
-@keyframes end80Ani {
-  70% {
-    transform: scale(0.8); }
-  100% {
-    transform: scale(0.8); } }
-
-@keyframes end81Ani {
-  70% {
-    transform: scale(0.81); }
-  100% {
-    transform: scale(0.81); } }
-
-@keyframes end82Ani {
-  70% {
-    transform: scale(0.82); }
-  100% {
-    transform: scale(0.82); } }
-
-@keyframes end83Ani {
-  70% {
-    transform: scale(0.83); }
-  100% {
-    transform: scale(0.83); } }
-
-@keyframes end84Ani {
-  70% {
-    transform: scale(0.84); }
-  100% {
-    transform: scale(0.84); } }
-
-@keyframes end85Ani {
-  70% {
-    transform: scale(0.85); }
-  100% {
-    transform: scale(0.85); } }
-
-@keyframes end86Ani {
-  70% {
-    transform: scale(0.86); }
-  100% {
-    transform: scale(0.86); } }
-
-@keyframes end87Ani {
-  70% {
-    transform: scale(0.87); }
-  100% {
-    transform: scale(0.87); } }
-
-@keyframes end88Ani {
-  70% {
-    transform: scale(0.88); }
-  100% {
-    transform: scale(0.88); } }
-
-@keyframes end89Ani {
-  70% {
-    transform: scale(0.89); }
-  100% {
-    transform: scale(0.89); } }
-
-@keyframes end90Ani {
-  70% {
-    transform: scale(0.9); }
-  100% {
-    transform: scale(0.9); } }
-
-@keyframes end91Ani {
-  70% {
-    transform: scale(0.91); }
-  100% {
-    transform: scale(0.91); } }
-
-@keyframes end92Ani {
-  70% {
-    transform: scale(0.92); }
-  100% {
-    transform: scale(0.92); } }
-
-@keyframes end93Ani {
-  70% {
-    transform: scale(0.93); }
-  100% {
-    transform: scale(0.93); } }
-
-@keyframes end94Ani {
-  70% {
-    transform: scale(0.94); }
-  100% {
-    transform: scale(0.94); } }
-
-@keyframes end95Ani {
-  70% {
-    transform: scale(0.95); }
-  100% {
-    transform: scale(0.95); } }
-
-@keyframes end96Ani {
-  70% {
-    transform: scale(0.96); }
-  100% {
-    transform: scale(0.96); } }
-
-@keyframes end97Ani {
-  70% {
-    transform: scale(0.97); }
-  100% {
-    transform: scale(0.97); } }
-
-@keyframes end98Ani {
-  70% {
-    transform: scale(0.98); }
-  100% {
-    transform: scale(0.98); } }
-
-@keyframes end99Ani {
-  70% {
-    transform: scale(0.99); }
-  100% {
-    transform: scale(0.99); } }
-
 .ending {
   opacity: 0;
   z-index: -1;
-  display: none;
+  display: block;
+  transition: opacity 1s 2s;
   position: absolute;
   left: 10vw;
   top: 10vh;
@@ -2779,6 +2212,17 @@
     .ending > section.contect {
       left: 100%;
       top: 0; }
+    .ending > section .close {
+      cursor: pointer;
+      display: block;
+      position: absolute;
+      right: 3%;
+      top: 3%;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 50px;
+      font-family: inherit; }
   .ending.p .profile {
     left: 0;
     top: 0; }
@@ -2804,7 +2248,7 @@
     .ending .profile h2 ul {
       padding-top: 20px; }
       .ending .profile h2 ul li {
-        font-size: 16px;
+        font-size: 20px;
         line-height: 2; }
   .ending .profile h3 {
     position: relative;
@@ -2891,11 +2335,57 @@
     top: 0; }
   100% {
     top: 0; } }
-  .ending .profile div {
+  .ending .profile .skill {
     float: left;
     width: 70%;
-    height: 80%;
-    background-color: #f00a; }
+    height: 80%; }
+    .ending .profile .skill > ul {
+      width: 100%;
+      height: 80%; }
+      .ending .profile .skill > ul > li {
+        float: left;
+        width: 50%;
+        height: calc(100% / 3); }
+        .ending .profile .skill > ul > li h4 {
+          font-size: 24px;
+          line-height: 50px; }
+        .ending .profile .skill > ul > li .graph {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          width: 80%;
+          height: 20px;
+          margin: 0 auto;
+          border: 2px solid #000;
+          background: #fff;
+          font-size: 0;
+          text-indent: -9999px; }
+          .ending .profile .skill > ul > li .graph .status {
+            display: block;
+            position: absolute;
+            width: 0%;
+            height: 20px; }
+        .ending .profile .skill > ul > li:nth-child(1) .status {
+          background: #EF6026;
+          box-shadow: 0 0 20px 20px #EF6026; }
+        .ending .profile .skill > ul > li:nth-child(2) .status {
+          background: #25A1E1;
+          box-shadow: 0 0 20px 20px #25A1E1; }
+        .ending .profile .skill > ul > li:nth-child(3) .status {
+          background: #F7DF1E;
+          box-shadow: 0 0 20px 20px #F7DF1E; }
+        .ending .profile .skill > ul > li:nth-child(4) .status {
+          background: #4AD5FF;
+          box-shadow: 0 0 20px 20px #4AD5FF; }
+        .ending .profile .skill > ul > li:nth-child(5) .status {
+          background: #2C5CA8;
+          box-shadow: 0 0 20px 20px #2C5CA8; }
+        .ending .profile .skill > ul > li:nth-child(6) .status {
+          background: #FF7F18;
+          box-shadow: 0 0 20px 20px #FF7F18; }
+    .ending .profile .skill .else {
+      font-size: 20px;
+      word-spacing: 10px; }
   .ending .profile .next {
     cursor: pointer;
     display: block;
@@ -2975,8 +2465,15 @@
     font-size: 50px; }
   .ending.on {
     opacity: 1;
-    z-index: 9000;
-    display: block; }
+    z-index: 9000; }
+    .ending.on .status {
+      animation: statusAni 2200ms 2000ms 1 linear; }
+
+@keyframes statusAni {
+  0% {
+    width: 100%; }
+  50% {
+    width: 0%; } }
 
 .emoji_list {
   /* 1. like */
@@ -3585,8 +3082,8 @@ body > p {
   #controller #active {
     position: absolute;
     margin: 0;
-    left: 10vh;
-    top: calc(90vh - 53px);
+    left: calc(90vw - 53px);
+    top: calc(85vh - 53px);
     width: 53px;
     height: 53px;
     border: none;

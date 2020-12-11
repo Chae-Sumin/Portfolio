@@ -99,4 +99,62 @@ $left3: -280px -600px;
     &.__6{@include lastDir(left);}
     &.__9{@include lastDir(right);}
     &.__12{@include lastDir(right);}
+
+    .ment{
+        position: absolute;
+        display: block;
+        overflow: hidden;
+        bottom: 80%;
+        left: 100%;
+        width: 0;
+        height: 0;
+        background: url(../img/bubble.png) 0 0 / 100% 127px no-repeat;
+        transition: width 300ms, height 300ms;
+        &.move{
+            width: 201px;
+            height: 127px;
+            background: url(../img/bubble_move.png) 0 0 no-repeat;
+            animation: bubbleMove 300ms alternate infinite;
+            @keyframes bubbleMove {
+                from{background: url(../img/bubble_move.png) 0 0 no-repeat;}
+                to{background: url(../img/bubble_move_.png) 0 0 no-repeat;}
+            }
+        }
+        &.get{
+            width: 201px;
+            height: 127px;
+            background: url(../img/bubble_get.png) 0 0 no-repeat;
+            animation: bubbleGet 300ms alternate infinite;
+            @keyframes bubbleGet {
+                from{background: url(../img/bubble_get.png) 0 0 no-repeat;}
+                to{background: url(../img/bubble_get_.png) 0 0 no-repeat;}
+            }
+        }
+        &.ex{
+            width: 127px;
+            height: 127px;
+            background: url(../img/bubble_ex.png) 0 0 no-repeat;
+        }
+        &.ment1{ //거위가 도망쳤잖아!
+            width: 250px;
+            height: 127px;
+            font-size: 20px;
+            line-height: 120px;
+            text-align: center;
+        }
+        &.ment2{ // 황금알이다!!
+            width: 200px;
+            height: 127px;
+            font-size: 20px;
+            line-height: 120px;
+            text-align: center;
+        }
+        &.ment3{ // 알을 주워가며 계속 쫓아 가보자
+            width: 300px;
+            height: 127px;
+            font-size: 20px;
+            line-height: 120px;
+            text-align: center;
+        }
+    }
 }

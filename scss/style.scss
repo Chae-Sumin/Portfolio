@@ -51,8 +51,8 @@ body>p{display: none;}
     #active{
         position: absolute;
         margin: 0;
-        left: 10vh;
-        top: calc(90vh - 53px);
+        left: calc(90vw - 53px);
+        top: calc(85vh - 53px);
         width: 53px; 
         height: 53px; 
         border: none; 

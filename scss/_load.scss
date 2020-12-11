@@ -9,13 +9,13 @@
     height: 100%;
     z-index: 6000;
     background: #ffff;
-    transition: background 3s;
+    transition: background 1s;
     .cloud{ //구름 장막
         max-width: unset;
         max-height: 150%;
         display: block;
         position: absolute;
-        transition: all 3s linear, opacity 2s 500ms linear;
+        transition: all 2000ms linear, opacity 1s 500ms linear;
         &.c1{
             left: -23%;
             top: -23%;
@@ -219,48 +219,39 @@
     z-index: -1;
     display: block;
     position: absolute; left: 10vw; top: 10vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px;
     width: 80vw; height: 80vh;
     background: #fffe;
     box-shadow: 0 0 30px 30px #fffe;
     transition: opacity 1s linear, left 500ms;
+    h3{
+        font-size: 40px;
+        width: 100%;
+        height: 30px;
+        text-align: center;
+    }
     >section{
         position: absolute;
-        width: 100%; height: 100%;
+        width: 50%;
         padding: 5vh;
         box-sizing: border-box;
-        h3{
-            font-size: 40px;
-            small{
-                font-size: 0.6em;
+        text-align: center;
+        font-size: 24px;
+        &.ex-mt{margin-left: 45%;}
+        .pc{margin-top: 10px;}
+        .smallerimg{width: auto; height: 60px;}
+        figure{
+            margin-top: 25px;
+            line-height: 70px;
+            figcaption{
+                padding-bottom: 5px;
+                line-height: 1.5;
             }
-        }
-        img{padding: 5vh 1% 0 3vh;}
-        p{
-            font-size: 24px;
-            padding: 2% 0 0 3vh;
-        }
-        .prev{
-            cursor: pointer;
-            display: block; width: 30px; height: 70px;
-            position: absolute;
-            left: 0;
-            top: calc(50% - 35px);
-            background: none;
-            border: none;
-            outline: none;
-            font-size: 50px;
-        }
-        .next{
-            cursor: pointer;
-            display: block; width: 30px; height: 70px;
-            position: absolute;
-            right: 0;
-            top: calc(50% - 35px);
-            background: none;
-            border: none;
-            outline: none;
-            font-size: 50px;
+            p{
+                font-size: 32px;
+            }
         }
         .close{
             cursor: pointer;
@@ -274,41 +265,22 @@
             font-size: 50px;
             font-family: inherit;
         }
+
     }
-    .ex-pc{
-        left: 0; top: 0;
-    }
-    .ex-mt{
-        left: 100%; top: 0;
-        p:first-of-type{
-            padding-bottom: 5%;
-        }
-    }
-    .story{
-        left: 200%; top: 0;
-        p{
-            text-align: center;
-            padding: 10%;
-            line-height: 40px;
-        };
-    }
-    &.on1{
+    &.on{
         z-index: 3000;
-        .ex-pc{left: 0%;}
-        .ex-mt{left: 100%;}
-        .story{left: 200%;}
     }
-    &.on2{
-        z-index: 3000;
-        .ex-pc{left: -100%;}
-        .ex-mt{left: 0;}
-        .story{left: 100%;}
-    }
-    &.on3{
-        z-index: 3000;
-        .ex-pc{left: -200%;}
-        .ex-mt{left: -100%;}
-        .story{left: 0%;}
+    .close{
+        cursor: pointer;
+        display: block; 
+        position: absolute;
+        right: 3%;
+        top: 3%;
+        background: none;
+        border: none;
+        outline: none;
+        font-size: 50px;
+        font-family: inherit;
     }
 }
 @for $i from 1 to 100{

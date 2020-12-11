@@ -372,7 +372,7 @@ $dir : (front, back, left, right);
             &.r2{left: 4870px; top: 3450px; z-index: 3450;}
         }
     }
-    .eggs{
+    .eggs{ // 필드에 있는 계란
         @include box(0,0,100%,100%); 
         .goldenEgg{
             @include box(0,0,48px,66px);
@@ -395,7 +395,7 @@ $dir : (front, back, left, right);
     }
 }
 #controller{
-    .eggPlate{
+    .eggPlate{ // 링크걸린 계란
         @include box(0,0,100vw,100px); 
         display: flex;
         align-items: center;
@@ -425,9 +425,16 @@ $dir : (front, back, left, right);
                     text-decoration: none;
                     box-shadow: 0 0 30px 10px rgba(255,211,50,0.76),0 0 30px 10px inset rgba(255,211,50,0.5);
                 }
+                &.blink{
+                    animation: eggBlinkAni 500ms alternate infinite;
+                }
                 @keyframes eggAni {
                     from{transform: scale(0);}
                     to{transform: scale(1);}
+                }
+                @keyframes eggBlinkAni {
+                    from{box-shadow: 0 0 30px 10px rgba(255,211,50,0.76),0 0 30px 10px inset rgba(255,211,50,0.5);}
+                    to{box-shadow: 0 0 0 0 rgba(255,211,50,0.76),0 0 0 0 inset rgba(255,211,50,0.5);}
                 }
             }
         }

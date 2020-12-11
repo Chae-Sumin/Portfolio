@@ -2,6 +2,7 @@ window.onload = function(){
     // --------------------돔 구조--------------------
     const MAP = document.getElementById("field"); //전체 맵
     const CHAR = document.getElementById("char"); //캐릭터
+    const MENT = CHAR.getElementsByClassName("ment")[0];
     const GOOSE = document.getElementById("goose"); //메인거위
     const TREE = document.querySelector("#object>.trees"); //나무들
     const EGGS = document.querySelector("#object>.eggs"); //필드 달걀
@@ -9,7 +10,7 @@ window.onload = function(){
     const ctrlActive = document.getElementById("active");
     const ctrlTouch = document.querySelector("#controller>.touch");
     const loadSection = document.querySelector("#load>.before_start");
-    const explainSection = document.querySelectorAll(".explain>section");
+    const explainDiv = document.getElementsByClassName("explain")[0];
     const endingSection = document.querySelector(".ending");
     // -------------------- 상수 --------------------
     const CHAR_WIDTH = 150; // 캐릭터 너비
@@ -21,7 +22,7 @@ window.onload = function(){
     const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
     const GOOSE_MOVE_FPS = 60; //max(300) 
     const GOOSE_MOVE_PX = 11;
-    const ANI_MOVE_PX = 8;
+    const ANI_MOVE_PX = 6;
     const MAP_RATIO = 0.8; // 맵 비율
     const key = keyFuncs();
     const move = moveFuncs();
@@ -44,6 +45,7 @@ window.onload = function(){
     }
     const touch = touchFunc();
     const egg = eggFunc();
+    const ment = mentFunc();
     // -------------------- 변수 --------------------
     let screenWidth = window.innerWidth; // 스크린 너비
     let screenHeight = window.innerHeight; // 스크린 높이
@@ -99,6 +101,10 @@ window.onload = function(){
             key.flagFalse();
         }
     }
+    const clickActive = function(){
+        egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
+        goose.gooseActive(CHAR.offsetLeft,CHAR.offsetTop);
+    }
     const touchstart = function (e) {
         if(e.target === ctrlActive){
             egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
@@ -124,7 +130,11 @@ window.onload = function(){
             let _x = e.targetTouches[0].clientX - x;
             let _y = e.targetTouches[0].clientY - y;
             let dir = {x : Math.cos(Math.atan2(_y,_x)), y : Math.sin(Math.atan2(_y,_x)), deg : Math.atan2(_y,_x) * 180 / Math.PI};
-            touch.move(dir);
+            touch.setMoveInfo(dir);
+            if(!touch.getTouching()){
+                touch.move();
+                touch.setTouching(true);
+            }
         }
     }
     const touchend = function (e) {
@@ -136,6 +146,7 @@ window.onload = function(){
             touch.setFlag(false);
             touch.setTouch(0,0,null);
             ctrlTouch.classList.remove("on");
+            touch.setTouching(false);
         } else if(e.touches[0].identifier !== id){
             ctrlTouch.children[0].style.left = 0;
             ctrlTouch.children[0].style.top = 0;
@@ -144,6 +155,7 @@ window.onload = function(){
             touch.setFlag(false);
             touch.setTouch(0,0,null);
             ctrlTouch.classList.remove("on");
+            touch.setTouching(false);
         }
     }
     // --------------------로딩중...--------------------
@@ -191,6 +203,9 @@ window.onload = function(){
         }
     }
     function cheatMod(){
+        goose.cheat();
+        goose.end();
+        GOOSE.classList.add("click");
         loadSection.classList.remove("on");
         loadSection.classList.add("off");
         let ratioW = screenWidth / MAP_WIDTH
@@ -205,13 +220,11 @@ window.onload = function(){
             afterLoad(); //로딩이 끝난 뒤 호출할 함수
             MAP.style.transition = "none";
             clearTimeout(aniTime);
-            clearTimeout(loadTime);
-            goose.level();
-            goose.end();
+            clearTimeout(loadTime);;
         },2000);
     }
     function load(){
-        explain();
+        explain(); // x를 누르면 afterLoad();호출
         loadSection.classList.remove("on");
         loadSection.classList.add("off");
         let ratioW = screenWidth / MAP_WIDTH
@@ -222,7 +235,6 @@ window.onload = function(){
             screenFocus();
         },3000);
         let loadTime = setTimeout(function(){
-            afterLoad(); //로딩이 끝난 뒤 호출할 함수
             MAP.style.transition = "none";
             clearTimeout(aniTime);
             clearTimeout(loadTime);
@@ -232,11 +244,13 @@ window.onload = function(){
 
         document.addEventListener("keydown",keydown,false);
         document.addEventListener("keyup", keyup,false);
+        ctrlActive.addEventListener("click",clickActive,false);
         
         document.addEventListener("touchstart",touchstart,false);
         document.addEventListener("touchmove",tocuhmove,false);
         document.addEventListener("touchend",touchend,false);
         document.addEventListener("touchcancel",touchend,false);
+
     }
 
     function isEntryPossible(x,y){ // 이동 가능구역인지 확인
@@ -419,10 +433,27 @@ window.onload = function(){
                 switch (gooseLevel){
                     case  0 : //스타트
                         this.moveTo(1100,700,true);
+                        startMent1();
+                        function startMent1(){
+                            CHAR.setAttribute("class","__8");
+                            let setTime = setTimeout(ment.ex,1300);
+                            setTime = setTimeout(ment.ment1,2500);
+                            setTime = setTimeout(function(){
+                                ment.move();
+                                clearTimeout(setTime);
+                            },5000);
+                        }
                         break;
                     case  1 : //스타트 -> 다리 앞
                         this.moveTo(1250,1300,false);
                         egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,1);
+                        startMent2();
+                        function startMent2(){
+                            ment.ex();
+                            let setTime = setTimeout(ment.ment2,1200);
+                            setTime = setTimeout(ment.get,3500);
+                            setTime = setTimeout(function(){clearTimeout(setTime)},3600);
+                        }
                         break;
                     case  2 : //다리 건너기
                         this.moveTo(1250,2000,false);
@@ -466,14 +497,22 @@ window.onload = function(){
                         break;
                     case  14 : //엔딩 포인트
                         this.moveTo(5000,500,true);
+                        break;
+                    case 15 :
                         this.end();
+                        startMent3();
+                        function startMent3(){
+                            ment.ment4();
+                            let setTime = setTimeout(ment.get,2500);
+                            setTime = setTimeout(function(){clearTimeout(setTime)},2700);
+                        }
                         break;
                     default : break;
                 }
                 gooseLevel++;
             },
             end : function () {
-                gooseLevel = 15;
+                gooseLevel = 16;
                 let that = this;
                 animalElement.classList.add("click");
                 animalElement.addEventListener("click",function() {
@@ -481,11 +520,15 @@ window.onload = function(){
                 },false);   
                 isEnd = true;
             },
+            cheat: function(){
+                this.moveTo(1100,700,true);
+            },
             gooseActive : function (x,y) {
                 if(isEnd){
                     let box = [animalElement.offsetLeft - CHAR.offsetWidth, animalElement.offsetLeft + animalElement.offsetWidth, animalElement.offsetTop - CHAR.offsetHeight, animalElement.offsetTop + animalElement.offsetHeight]
                     if(x > box[0] && x < box[1] && y > box[2] && y < box[3]){
                         ending();
+                        if(ment.getGet()){ment.mentEnd();}
                         document.getElementById("load").classList.remove("load");
                         document.removeEventListener("keydown",keydown);
                         document.removeEventListener("keyup", keyup);
@@ -493,8 +536,7 @@ window.onload = function(){
                         document.removeEventListener("touchmove",tocuhmove);
                         document.removeEventListener("touchend",touchend);
                         document.removeEventListener("touchcancel",touchend);
-                        MAP.style.left = 0;
-                        MAP.style.top = 0;
+                        ctrlActive.removeEventListener("click",clickActive);
                         MAP.style.animation = "end" + parseInt((screenWidth / MAP_WIDTH) * 100 + 1) + "Ani 3000ms ease";
                     }
                 }
@@ -553,6 +595,7 @@ window.onload = function(){
             let newEgg = document.createElement("a");
             newEgg.classList.add("goldenEgg");
             newEgg.classList.add("egg"+eggs[$id - 1].$id);
+            newEgg.classList.add("blink");
             newEgg.setAttribute("href",eggs[$id - 1].url);
             newEgg.setAttribute("target","_blank");
             newEgg.setAttribute("rel","noreferrer noopener");
@@ -561,6 +604,7 @@ window.onload = function(){
             if(eggPlate.children[$id - 1].childElementCount === 0){
                 eggPlate.children[$id - 1].appendChild(newEgg);
             } else {newEgg.remove()}
+            newEgg.addEventListener("click",function(){newEgg.classList.remove("blink");},false);
         }
         return{
             fieldGen : function(x,y,id){
@@ -592,6 +636,7 @@ window.onload = function(){
                             clearTimeout(show);
                         },1500); 
                         eggs[i].classList.add("disapear");
+                        if(ment.getGet()){ment.ment3();}
                     }
                 }
             },
@@ -645,24 +690,33 @@ window.onload = function(){
         let y = 0;
         let touchStart = false;
         let moveTimeout = null;
+        let isTouching = false;
+        let moveInfo ={ x : 0, y : 0, deg : 0};
         return{
             setFlag : function(set){touchStart = set;},
             getFlag : function(){return touchStart},
+            setTouching : function(set){isTouching = set;},
+            getTouching : function(){return isTouching},
             setTouch : function(_x,_y,id){x = _x; y = _y; touchId = id;},
             getTouch : function(){return {x: x, y: y, id : touchId}},
-            move : function({x,y,deg}){
+            setMoveInfo : function({x,y,deg}){
+                moveInfo.x = x;
+                moveInfo.y = y;
+                moveInfo.deg = deg;
+            },
+            move : function(){
                 clearTimeout(moveTimeout);
                 moveTimeout = setTimeout(repeatMove,0);
                 function repeatMove(){
-                    move.moveTo(x*CHAR_MOVE_PX/2,y*CHAR_MOVE_PX/2);
-                    ctrlTouch.children[0].style.left = x*20 + "px";
-                    ctrlTouch.children[0].style.top = y*20 + "px";
-                    moveTimeout = setTimeout(repeatMove,500 / CHAR_MOVE_FPS);
-                    if(deg + 180 >= 45 && deg + 180 < 135){
+                    move.moveTo(moveInfo.x*CHAR_MOVE_PX,moveInfo.y*CHAR_MOVE_PX);
+                    ctrlTouch.children[0].style.left = moveInfo.x*20 + "px";
+                    ctrlTouch.children[0].style.top = moveInfo.y*20 + "px";
+                    moveTimeout = setTimeout(repeatMove,1000 / CHAR_MOVE_FPS);
+                    if(moveInfo.deg + 180 >= 45 && moveInfo.deg + 180 < 135){
                         CHAR.setAttribute("class","_1");
-                    } else if(deg + 180 >= 135 && deg + 180 < 225){
+                    } else if(moveInfo.deg + 180 >= 135 && moveInfo.deg + 180 < 225){
                         CHAR.setAttribute("class","_8");
-                    } else if(deg + 180 >= 225 && deg + 180 < 315){
+                    } else if(moveInfo.deg + 180 >= 225 && moveInfo.deg + 180 < 315){
                         CHAR.setAttribute("class","_4");
                     } else {
                         CHAR.setAttribute("class","_2");
@@ -689,32 +743,106 @@ window.onload = function(){
         return false
     }
     function explain(){
-        console.log(explainSection[0].getElementsByTagName("button")[0]);
-        explainSection[0].parentNode.setAttribute("class","explain on1");
-        explainSection[0].getElementsByTagName("button")[0].addEventListener("click",function(){
-            explainSection[0].parentNode.setAttribute("class","explain on2");
-        },false);
-        explainSection[1].getElementsByTagName("button")[0].addEventListener("click",function(){
-            explainSection[0].parentNode.setAttribute("class","explain on1");
-        },false);
-        explainSection[1].getElementsByTagName("button")[1].addEventListener("click",function(){
-            explainSection[0].parentNode.setAttribute("class","explain on3");
-        },false);
-        explainSection[2].getElementsByTagName("button")[0].addEventListener("click",function(){
-            explainSection[0].parentNode.setAttribute("class","explain on2");
-        },false);
-        explainSection[2].getElementsByTagName("button")[1].addEventListener("click",function(){
-            explainSection[0].parentNode.setAttribute("class","explain off");
+        explainDiv.setAttribute("class","explain on");
+        explainDiv.getElementsByClassName("close")[0].addEventListener("click",function(){
+            explainDiv.setAttribute("class","explain off");
             goose.level();
+            afterLoad();
         },false);
     }
     function ending(){
         endingSection.classList.add("on"); 
-        endingSection.getElementsByClassName("next")[0].addEventListener("click",function(){
+            endingSection.getElementsByClassName("next")[0].addEventListener("click",function(){
             endingSection.setAttribute("class","ending on c");
         },false);
         endingSection.getElementsByClassName("prev")[0].addEventListener("click",function(){
             endingSection.setAttribute("class","ending on p");
         },false);
+        endingSection.getElementsByClassName("close")[0].addEventListener("click",backToMap,false);
+        endingSection.getElementsByClassName("close")[1].addEventListener("click",backToMap,false);
+        function backToMap(){
+            endingSection.setAttribute("class","ending");
+            document.getElementById("load").classList.add("load");
+            afterLoad();
+        }
+
+    }
+    function mentFunc(){
+        let mentTimer = null;
+        let get = false;
+        let right = false;
+        return{
+            ment1 : function(){
+                MENT.setAttribute("class","ment ment1");
+                MENT.textContent = "거위가 도망쳤잖아!";
+                mentTimer = setTimeout(function(){
+                    MENT.setAttribute("class","ment");
+                    MENT.textContent = "";
+                    clearTimeout(mentTimer);
+                },2000);
+            },
+            ment2 : function(){
+                MENT.setAttribute("class","ment ment2");
+                MENT.textContent = "황금알이다!!";
+                mentTimer = setTimeout(function(){
+                    MENT.setAttribute("class","ment");
+                    MENT.textContent = "";
+                    clearTimeout(mentTimer);
+                },2000);
+            },
+            ment3 : function(){
+                MENT.setAttribute("class","ment ment3");
+                MENT.textContent = "알을 주워가며 계속 쫓아 가보자";
+                mentTimer = setTimeout(function(){
+                    MENT.setAttribute("class","ment");
+                    MENT.textContent = "";
+                    clearTimeout(mentTimer);
+                    get = false;
+                },2000);
+            },
+            ment4 : function(){
+                MENT.setAttribute("class","ment ment1");
+                MENT.textContent = "드디어 잡았다!!!";
+                mentTimer = setTimeout(function(){
+                    MENT.setAttribute("class","ment");
+                    MENT.textContent = "";
+                    clearTimeout(mentTimer);
+                },3000);
+            },
+            ex : function(){
+                MENT.textContent = "";
+                MENT.setAttribute("class","ment ex");
+                mentTimer = setTimeout(function(){
+                    MENT.setAttribute("class","ment");
+                    clearTimeout(mentTimer);
+                },1000);
+            },
+            get : function(){
+                MENT.textContent = "";
+                MENT.setAttribute("class","ment get");
+                get = true;
+            },
+            move : function(){
+                MENT.textContent = "";
+                MENT.setAttribute("class","ment move");
+                right = true;
+            },
+            mentEnd : function(){
+                MENT.textContent = "";
+                MENT.setAttribute("class","ment");
+            },
+            getGet :function(){return get;}
+        }
+    }
+    skillGraph();
+    function skillGraph(){
+        let timer = setTimeout(function(){
+            const status = document.querySelectorAll(".skill .status");
+            for(let i = 0; i < 6; i++){
+                let statW = status[i].textContent;
+                status[i].style.width = statW - 5 + "%";
+            }
+            clearTimeout(timer);
+        },4300);
     }
 }
