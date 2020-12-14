@@ -229,7 +229,7 @@ $dir : (front, back, left, right);
                 }
             }
         }
-        .cowCage{
+        .cowsCage{
             @include box(5200px,2000px,800px,700px);
             @include cageZIndex(2000);
             .cows{
@@ -265,8 +265,8 @@ $dir : (front, back, left, right);
             .babycows{
                 li{
                     z-index: 100;
-                    @include box(0,0, 100px, 100px);
-                    background: url(../img/cow.png) 0 0 / 300px 400px no-repeat;
+                    @include box(0,0, 120px, 120px);
+                    background: url(../img/cow.png) 0 0 / 360px 480px no-repeat;
                     &:nth-child(1){
                         left: 60%;
                         top : calc(50% - 75px);
@@ -277,17 +277,17 @@ $dir : (front, back, left, right);
                     }
                     @for $i from 1 through 4{
                         @keyframes babycow#{nth($dir,$i)}Ani {
-                            0%{background-position: 0 -#{100*($i - 1)}px;}
-                            25%{background-position: -100px -#{100*($i - 1)}px;}
-                            50%{background-position: 0 -#{100*($i - 1)}px;}
-                            75%{background-position: -200px -#{100*($i - 1)}px;}
-                            100%{background-position: 0 -#{100*($i - 1)}px;}
+                            0%{background-position: 0 -#{120*($i - 1)}px;}
+                            25%{background-position: -120px -#{120*($i - 1)}px;}
+                            50%{background-position: 0 -#{120*($i - 1)}px;}
+                            75%{background-position: -240px -#{120*($i - 1)}px;}
+                            100%{background-position: 0 -#{120*($i - 1)}px;}
                         }
                         &.#{nth($dir,$i)}{
                             animation: babycow#{nth($dir,$i)}Ani 1s infinite step-start;
                         }
                         &._#{nth($dir,$i)}{
-                            background-position: 0 -#{100*($i - 1)}px;
+                            background-position: 0 -#{120*($i - 1)}px;
                         }
                     }
                 }
@@ -296,6 +296,32 @@ $dir : (front, back, left, right);
         .sheepCage{
             @include box(5200px,1200px,800px,700px);
             @include cageZIndex(1200);
+            .sheep{
+                li{
+                    z-index: 100;
+                    @include box(0,0, 190px, 180px);
+                    background: url(../img/sheep.png) 0 0 no-repeat;
+                    @for $i from 1 through 4{
+                        &:nth-child(#{$i}){
+                            left: #{5% + $i * 15%};
+                            top : calc(50% - 75px);
+                        }
+                        @keyframes sheep#{nth($dir,$i)}Ani {
+                            0%{background-position: 0 -#{180*($i - 1)}px;}
+                            25%{background-position: -190px -#{180*($i - 1)}px;}
+                            50%{background-position: 0 -#{180*($i - 1)}px;}
+                            75%{background-position: -380px -#{180*($i - 1)}px;}
+                            100%{background-position: 0 -#{180*($i - 1)}px;}
+                        }
+                        &.#{nth($dir,$i)}{
+                            animation: sheep#{nth($dir,$i)}Ani 1s infinite step-start;
+                        }
+                        &._#{nth($dir,$i)}{
+                            background-position: 0 -#{180*($i - 1)}px;
+                        }
+                    }
+                }
+            }
         }
     }
     .trees{ //나무들
@@ -426,7 +452,16 @@ $dir : (front, back, left, right);
                     box-shadow: 0 0 30px 10px rgba(255,211,50,0.76),0 0 30px 10px inset rgba(255,211,50,0.5);
                 }
                 &.blink{
+                    position: relative;
                     animation: eggBlinkAni 500ms alternate infinite;
+                    &:after{
+                        content: "Open it!";
+                        display: block; width: 100px; height: 50px;
+                        position: absolute; left: 50%; top: 100%;
+                        background: url(../img/egg_bubble.png) 0 0 no-repeat;
+                        text-align: center; line-height: 60px;
+                        font-size: 16px;
+                    }
                 }
                 @keyframes eggAni {
                     from{transform: scale(0);}

@@ -21,8 +21,8 @@ window.onload = function(){
     const CHAR_MOVE_PX = 9; // max(9) (CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
     const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
     const GOOSE_MOVE_FPS = 60; //max(300) 
-    const GOOSE_MOVE_PX = 11;
-    const ANI_MOVE_PX = 6;
+    const GOOSE_MOVE_PX = 10.5;
+    const ANI_MOVE_PX = 5;
     const MAP_RATIO = 0.8; // 맵 비율
     const key = keyFuncs();
     const move = moveFuncs();
@@ -31,11 +31,14 @@ window.onload = function(){
     const pigs = Array(4);
     const cows = Array(2);
     const babycows = Array(2);
+    const sheep = Array(4);
     for(let i = 0; i < 4; i++){
         geese[i] = animalFunc(document.querySelectorAll(".geese>li")[i],ANI_MOVE_PX);
         geese[i].creatureMove(1200,700);
         pigs[i] = animalFunc(document.querySelectorAll(".pigs>li")[i],ANI_MOVE_PX);
         pigs[i].creatureMove(800,700);
+        sheep[i] = animalFunc(document.querySelectorAll(".sheep>li")[i],ANI_MOVE_PX);
+        sheep[i].creatureMove(800,700);
     }
     for(let i = 0; i < 2; i++){
         cows[i] = animalFunc(document.querySelectorAll(".cows>li")[i],ANI_MOVE_PX);
@@ -423,8 +426,7 @@ window.onload = function(){
                 posX = animalElement.offsetLeft;
                 posY = animalElement.offsetTop;
                 posBox = [posX - senserLength,posX + senserLength, posY - senserLength, posY + senserLength];
-                if(isMoving){return false;}
-                if( posBox[0] < x && posBox[1] > x && posBox[2] < y && posBox[3] > y){
+                if( posBox[0] < x && posBox[1] > x && posBox[2] < y && posBox[3] > y && !isMoving){
                     this.level();
                     return true;
                 } else return false;
@@ -503,8 +505,10 @@ window.onload = function(){
                         startMent3();
                         function startMent3(){
                             ment.ment4();
-                            let setTime = setTimeout(ment.get,2500);
-                            setTime = setTimeout(function(){clearTimeout(setTime)},2700);
+                            let setTime = setTimeout(function(){
+                                ment.get();
+                                clearTimeout(setTime);
+                            },2500);
                         }
                         break;
                     default : break;
@@ -770,9 +774,9 @@ window.onload = function(){
     function mentFunc(){
         let mentTimer = null;
         let get = false;
-        let right = false;
         return{
             ment1 : function(){
+                get = false;
                 MENT.setAttribute("class","ment ment1");
                 MENT.textContent = "거위가 도망쳤잖아!";
                 mentTimer = setTimeout(function(){
@@ -782,6 +786,7 @@ window.onload = function(){
                 },2000);
             },
             ment2 : function(){
+                get = false;
                 MENT.setAttribute("class","ment ment2");
                 MENT.textContent = "황금알이다!!";
                 mentTimer = setTimeout(function(){
@@ -791,6 +796,7 @@ window.onload = function(){
                 },2000);
             },
             ment3 : function(){
+                get = false;
                 MENT.setAttribute("class","ment ment3");
                 MENT.textContent = "알을 주워가며 계속 쫓아 가보자";
                 mentTimer = setTimeout(function(){
@@ -801,6 +807,7 @@ window.onload = function(){
                 },2000);
             },
             ment4 : function(){
+                get = false;
                 MENT.setAttribute("class","ment ment1");
                 MENT.textContent = "드디어 잡았다!!!";
                 mentTimer = setTimeout(function(){
@@ -810,12 +817,13 @@ window.onload = function(){
                 },3000);
             },
             ex : function(){
+                get = false;
                 MENT.textContent = "";
                 MENT.setAttribute("class","ment ex");
                 mentTimer = setTimeout(function(){
                     MENT.setAttribute("class","ment");
                     clearTimeout(mentTimer);
-                },1000);
+            },1000);
             },
             get : function(){
                 MENT.textContent = "";
@@ -823,11 +831,13 @@ window.onload = function(){
                 get = true;
             },
             move : function(){
+                get = false;
                 MENT.textContent = "";
                 MENT.setAttribute("class","ment move");
                 right = true;
             },
             mentEnd : function(){
+                get = false;
                 MENT.textContent = "";
                 MENT.setAttribute("class","ment");
             },
