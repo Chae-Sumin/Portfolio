@@ -418,31 +418,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 721px;
+        top: 728px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.94818s infinite alternate; }
+        animation: flower1Ani 3s 0.41531s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 704px;
+        top: 722px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.65664s infinite alternate; }
+        animation: flower2Ani 3s 0.86166s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 718px;
+        top: 730px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.33733s infinite alternate; }
+        animation: flower3Ani 3s 0.80542s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 727px;
+        top: 724px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.40483s infinite alternate; }
+        animation: flower4Ani 3s 0.04187s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -2532,36 +2532,36 @@
       transform-origin: center center;
       transform: scale(0.7);
       outline: none; }
-    .ending .contect .emoji_list button:hover.emoji_like .emoji_hand {
-      animation: hands-up 2s linear infinite; }
-      .ending .contect .emoji_list button:hover.emoji_like .emoji_hand .emoji_thumb {
-        animation: thumbs-up 2s linear infinite; }
-    .ending .contect .emoji_list button:hover.emoji_love .emoji_heart {
-      animation: heart-beat 2s linear infinite alternate; }
-    .ending .contect .emoji_list button:hover.emoji_haha .emoji_face {
-      animation: haha-face 2s linear infinite; }
-    .ending .contect .emoji_list button:hover.emoji_haha .emoji_mouth {
-      animation: haha-mouth 2s linear infinite; }
-    .ending .contect .emoji_list button:hover.emoji_yay .emoji_face {
-      animation: yay-face 1s linear infinite alternate; }
-    .ending .contect .emoji_list button:hover.emoji_wow .emoji_face {
-      animation: wow-face 3s linear infinite; }
-    .ending .contect .emoji_list button:hover.emoji_wow .emoji_eyebrows {
-      animation: wow-brow 3s linear infinite; }
-    .ending .contect .emoji_list button:hover.emoji_wow .emoji_tougue {
-      animation: wow-tongue 3s infinite linear; }
-    .ending .contect .emoji_list button:hover.emoji_sad .emoji_face {
-      animation: sad-face 2s ease-in infinite; }
-    .ending .contect .emoji_list button:hover.emoji_sad .emoji_eyes:after {
-      animation: tear-drop 2s ease-in infinite; }
-    .ending .contect .emoji_list button:hover.emoji_sad .emoji_mouth {
-      animation: sad-mouth 2s ease-in infinite; }
-    .ending .contect .emoji_list button:hover.emoji_angry {
-      animation: angry 2s ease-in infinite; }
-      .ending .contect .emoji_list button:hover.emoji_angry .emoji_face {
-        animation: angry-face 2s ease-in infinite; }
-      .ending .contect .emoji_list button:hover.emoji_angry .emoji_mouth {
-        animation: angry-mouth 2s ease-in infinite; }
+      .ending .contect .emoji_list button.emoji_like .emoji_hand {
+        animation: hands-up 2s linear infinite; }
+        .ending .contect .emoji_list button.emoji_like .emoji_hand .emoji_thumb {
+          animation: thumbs-up 2s linear infinite; }
+      .ending .contect .emoji_list button.emoji_love .emoji_heart {
+        animation: heart-beat 2s linear infinite alternate; }
+      .ending .contect .emoji_list button.emoji_haha .emoji_face {
+        animation: haha-face 2s linear infinite; }
+      .ending .contect .emoji_list button.emoji_haha .emoji_mouth {
+        animation: haha-mouth 2s linear infinite; }
+      .ending .contect .emoji_list button.emoji_yay .emoji_face {
+        animation: yay-face 1s linear infinite alternate; }
+      .ending .contect .emoji_list button.emoji_wow .emoji_face {
+        animation: wow-face 3s linear infinite; }
+      .ending .contect .emoji_list button.emoji_wow .emoji_eyebrows {
+        animation: wow-brow 3s linear infinite; }
+      .ending .contect .emoji_list button.emoji_wow .emoji_tougue {
+        animation: wow-tongue 3s infinite linear; }
+      .ending .contect .emoji_list button.emoji_sad .emoji_face {
+        animation: sad-face 2s ease-in infinite; }
+      .ending .contect .emoji_list button.emoji_sad .emoji_eyes:after {
+        animation: tear-drop 2s ease-in infinite; }
+      .ending .contect .emoji_list button.emoji_sad .emoji_mouth {
+        animation: sad-mouth 2s ease-in infinite; }
+      .ending .contect .emoji_list button.emoji_angry {
+        animation: angry 2s ease-in infinite; }
+        .ending .contect .emoji_list button.emoji_angry .emoji_face {
+          animation: angry-face 2s ease-in infinite; }
+        .ending .contect .emoji_list button.emoji_angry .emoji_mouth {
+          animation: angry-mouth 2s ease-in infinite; }
   .ending .contect .prev {
     cursor: pointer;
     display: block;
