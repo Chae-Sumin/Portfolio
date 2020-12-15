@@ -418,31 +418,31 @@
       #object .home .flower:nth-child(1) {
         position: absolute;
         left: 150px;
-        top: 724px;
+        top: 721px;
         width: 120px;
         height: 137px;
-        animation: flower1Ani 3s 0.57995s infinite alternate; }
+        animation: flower1Ani 3s 0.94818s infinite alternate; }
       #object .home .flower:nth-child(2) {
         position: absolute;
         left: 80px;
-        top: 702px;
+        top: 704px;
         width: 120px;
         height: 137px;
-        animation: flower2Ani 3s 0.9581s infinite alternate; }
+        animation: flower2Ani 3s 0.65664s infinite alternate; }
       #object .home .flower:nth-child(3) {
         position: absolute;
         left: 610px;
-        top: 708px;
+        top: 718px;
         width: 120px;
         height: 137px;
-        animation: flower3Ani 3s 0.16665s infinite alternate; }
+        animation: flower3Ani 3s 0.33733s infinite alternate; }
       #object .home .flower:nth-child(4) {
         position: absolute;
         left: 540px;
-        top: 717px;
+        top: 727px;
         width: 120px;
         height: 137px;
-        animation: flower4Ani 3s 0.24089s infinite alternate; }
+        animation: flower4Ani 3s 0.40483s infinite alternate; }
   #object .crops {
     position: absolute;
     left: 0;
@@ -1338,17 +1338,18 @@
   margin-top: 20px; }
   #controller .eggPlate li {
     position: relative;
-    width: 72px;
+    width: 20%;
     height: 99px; }
     #controller .eggPlate li:not(:first-child) .goldenEgg {
       line-height: 40px; }
     #controller .eggPlate li .goldenEgg {
       animation: eggAni 500ms 0s 1 forwards;
       position: absolute;
-      left: 0;
+      left: 50%;
       top: 0;
       width: 72px;
       height: 59px;
+      margin-left: -36px;
       display: block;
       outline: none;
       border: none;
@@ -1397,7 +1398,7 @@
   width: 100%;
   height: 100%;
   z-index: 6000;
-  background: #ffff;
+  background: white;
   transition: background 1s; }
   #load .cloud {
     max-width: unset;
@@ -1454,8 +1455,8 @@
     z-index: 1;
     width: 80vw;
     height: 80vh;
-    background: #fffe;
-    box-shadow: 0 0 30px 30px #fffe;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.85);
     transition: opacity 1s linear; }
     #load .before_start h1 {
       width: 70%;
@@ -1519,54 +1520,58 @@
       flex-direction: row;
       justify-content: space-evenly;
       align-items: center; }
-      #load .before_start ul li button {
-        position: relative;
-        width: 140px;
-        height: 200px;
-        cursor: pointer;
-        background: url(../img/character.png) 0 -200px no-repeat;
-        border: none;
-        outline: none;
-        border-radius: 10px; }
-        #load .before_start ul li button span {
-          position: absolute;
+      #load .before_start ul li {
+        width: 50%; }
+        #load .before_start ul li button {
+          position: relative;
           display: block;
-          bottom: -50px;
-          width: 100%;
-          height: 40px;
-          text-align: center;
-          text-indent: 10px; }
-        #load .before_start ul li button:hover {
-          animation: frontAni 1000ms 0s infinite step-start; }
-        #load .before_start ul li button.cheat {
-          width: 150px;
-          height: 150px;
-          margin-top: 40px;
-          background: url(../img/goose.png) 0 0 no-repeat; }
-          #load .before_start ul li button.cheat span {
-            text-indent: 0; }
-        #load .before_start ul li button.cheat:hover {
-          animation: goosefrontAni 1s infinite step-start; }
-        #load .before_start ul li button::after {
-          position: absolute;
-          top: -30px;
-          right: -80px;
-          display: block;
-          width: 160px;
-          height: 40px;
-          background: #fffa;
-          border: 2px solid #000;
-          border-radius: 10px;
-          transform-origin: 90% bottom;
-          transform: scale(0) rotate(0);
-          transition: 300ms; }
-        #load .before_start ul li button:hover::after {
-          transform: scale(1) rotate(10deg); }
-        #load .before_start ul li button.start::after {
-          line-height: 36px;
-          content: "처음이라면 클릭하세요!"; }
-        #load .before_start ul li button.cheat::after {
-          content: "작업물을 빠르게 확인하고 싶다면 클릭하세요"; }
+          width: 140px;
+          height: 200px;
+          margin: 0 auto;
+          cursor: pointer;
+          background: url(../img/character.png) 0 -200px no-repeat;
+          border: none;
+          outline: none;
+          border-radius: 10px; }
+          #load .before_start ul li button span {
+            position: absolute;
+            display: block;
+            bottom: -50px;
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            text-indent: 10px; }
+          #load .before_start ul li button:hover {
+            animation: frontAni 1000ms 0s infinite step-start; }
+          #load .before_start ul li button.cheat {
+            width: 150px;
+            height: 150px;
+            margin-top: 40px;
+            background: url(../img/goose.png) 0 0 no-repeat; }
+            #load .before_start ul li button.cheat span {
+              text-indent: 0; }
+          #load .before_start ul li button.cheat:hover {
+            animation: goosefrontAni 1s infinite step-start; }
+          #load .before_start ul li button::after {
+            position: absolute;
+            top: -30px;
+            right: -80px;
+            display: block;
+            width: 160px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid #000;
+            border-radius: 10px;
+            transform-origin: 90% bottom;
+            transform: scale(0) rotate(0);
+            transition: 300ms; }
+          #load .before_start ul li button:hover::after {
+            transform: scale(1) rotate(10deg); }
+          #load .before_start ul li button.start::after {
+            line-height: 36px;
+            content: "처음이라면 클릭하세요!"; }
+          #load .before_start ul li button.cheat::after {
+            content: "작업물을 빠르게 확인하고 싶다면 클릭하세요"; }
     #load .before_start.on {
       opacity: 1;
       z-index: 1; }
@@ -1597,7 +1602,7 @@
     #load .before_start.off {
       z-index: -1; }
   #load.load {
-    background: #fff0;
+    background: rgba(255, 255, 255, 0);
     animation: zIndex 0s 3s forwards; }
 
 @keyframes zIndex {
@@ -1632,13 +1637,18 @@
   padding: 20px;
   width: 80vw;
   height: 80vh;
-  background: #fffe;
-  box-shadow: 0 0 30px 30px #fffe;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.85);
   transition: opacity 1s linear, left 500ms; }
   .explain h3 {
     font-size: 40px;
     width: 100%;
     height: 30px;
+    text-align: center; }
+  .explain > p {
+    font-size: 16px;
+    width: 100%;
+    margin-top: 30px;
     text-align: center; }
   .explain > section {
     position: absolute;
@@ -1660,8 +1670,12 @@
       .explain > section figure figcaption {
         padding-bottom: 5px;
         line-height: 1.5; }
-      .explain > section figure p {
-        font-size: 32px; }
+      .explain > section figure:first-of-type img {
+        width: 150px;
+        height: auto; }
+      .explain > section figure:nth-of-type(2) img {
+        width: auto;
+        height: 50px; }
     .explain > section .close {
       cursor: pointer;
       display: block;

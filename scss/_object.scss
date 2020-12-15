@@ -429,14 +429,15 @@ $dir : (front, back, left, right);
         margin-top: 20px;
         li{
             position: relative;
-            width: 72px;
+            width: 20%;
             height: 99px;
             &:not(:first-child) .goldenEgg{
                 line-height: 40px;
             }
             .goldenEgg{
                 animation: eggAni 500ms 0s 1 forwards;
-                @include box(0,0,72px,59px);
+                @include box(50%,0,72px,59px);
+                margin-left: -36px;
                 display: block;
                 outline: none;
                 border: none;
