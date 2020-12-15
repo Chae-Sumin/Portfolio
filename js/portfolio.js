@@ -2,7 +2,7 @@ window.onload = function(){
     // --------------------돔 구조--------------------
     const MAP = document.getElementById("field"); //전체 맵
     const CHAR = document.getElementById("char"); //캐릭터
-    const MENT = CHAR.getElementsByClassName("ment")[0];
+    const MENTION = CHAR.getElementsByClassName("ment")[0];
     const GOOSE = document.getElementById("goose"); //메인거위
     const TREE = document.querySelector("#object>.trees"); //나무들
     const EGGS = document.querySelector("#object>.eggs"); //필드 달걀
@@ -48,7 +48,7 @@ window.onload = function(){
     }
     const touch = touchFunc();
     const egg = eggFunc();
-    const ment = mentFunc();
+    const mention = mentionFunc();
     // -------------------- 변수 --------------------
     let screenWidth = window.innerWidth; // 스크린 너비
     let screenHeight = window.innerHeight; // 스크린 높이
@@ -126,7 +126,7 @@ window.onload = function(){
             touch.setTouch(e.targetTouches[0].clientX,e.targetTouches[0].clientY,e.targetTouches[0].identifier);
         }
     }
-    const tocuhmove = function(e){
+    const touchmove = function(e){
         if(e.cancelable) e.preventDefault();
         let {x,y,id} = touch.getTouch();
         if(e.targetTouches[0].identifier === id){
@@ -250,7 +250,7 @@ window.onload = function(){
         ctrlActive.addEventListener("click",clickActive,false);
         
         document.addEventListener("touchstart",touchstart,false);
-        document.addEventListener("touchmove",tocuhmove,false);
+        document.addEventListener("touchmove",touchmove,false);
         document.addEventListener("touchend",touchend,false);
         document.addEventListener("touchcancel",touchend,false);
 
@@ -438,10 +438,10 @@ window.onload = function(){
                         startMent1();
                         function startMent1(){
                             CHAR.setAttribute("class","__8");
-                            let setTime = setTimeout(ment.ex,1300);
-                            setTime = setTimeout(ment.ment1,2500);
+                            let setTime = setTimeout(mention.ex,1300);
+                            setTime = setTimeout(mention.mention1,2500);
                             setTime = setTimeout(function(){
-                                ment.move();
+                                mention.move();
                                 clearTimeout(setTime);
                             },5000);
                         }
@@ -451,9 +451,9 @@ window.onload = function(){
                         egg.fieldGen(animalElement.offsetLeft + 51,animalElement.offsetTop + 84,1);
                         startMent2();
                         function startMent2(){
-                            ment.ex();
-                            let setTime = setTimeout(ment.ment2,1200);
-                            setTime = setTimeout(ment.get,3500);
+                            mention.ex();
+                            let setTime = setTimeout(mention.mention2,1200);
+                            setTime = setTimeout(mention.get,3500);
                             setTime = setTimeout(function(){clearTimeout(setTime)},3600);
                         }
                         break;
@@ -504,9 +504,9 @@ window.onload = function(){
                         this.end();
                         startMent3();
                         function startMent3(){
-                            ment.ment4();
+                            mention.mention4();
                             let setTime = setTimeout(function(){
-                                ment.get();
+                                mention.get();
                                 clearTimeout(setTime);
                             },2500);
                         }
@@ -532,12 +532,12 @@ window.onload = function(){
                     let box = [animalElement.offsetLeft - CHAR.offsetWidth, animalElement.offsetLeft + animalElement.offsetWidth, animalElement.offsetTop - CHAR.offsetHeight, animalElement.offsetTop + animalElement.offsetHeight]
                     if(x > box[0] && x < box[1] && y > box[2] && y < box[3]){
                         ending();
-                        if(ment.getGet()){ment.mentEnd();}
+                        if(mention.getGet()){mention.mentionEnd();}
                         document.getElementById("load").classList.remove("load");
                         document.removeEventListener("keydown",keydown);
                         document.removeEventListener("keyup", keyup);
                         document.removeEventListener("touchstart",touchstart);
-                        document.removeEventListener("touchmove",tocuhmove);
+                        document.removeEventListener("touchmove",touchmove);
                         document.removeEventListener("touchend",touchend);
                         document.removeEventListener("touchcancel",touchend);
                         ctrlActive.removeEventListener("click",clickActive);
@@ -640,7 +640,7 @@ window.onload = function(){
                             clearTimeout(show);
                         },1500); 
                         eggs[i].classList.add("disapear");
-                        if(ment.getGet()){ment.ment3();}
+                        if(mention.getGet()){mention.mention3();}
                     }
                 }
             },
@@ -771,75 +771,75 @@ window.onload = function(){
         }
 
     }
-    function mentFunc(){
-        let mentTimer = null;
+    function mentionFunc(){
+        let mentionTimer = null;
         let get = false;
         return{
-            ment1 : function(){
+            mention1 : function(){
                 get = false;
-                MENT.setAttribute("class","ment ment1");
-                MENT.textContent = "거위가 도망쳤잖아!";
-                mentTimer = setTimeout(function(){
-                    MENT.setAttribute("class","ment");
-                    MENT.textContent = "";
-                    clearTimeout(mentTimer);
+                MENTION.setAttribute("class","ment ment1");
+                MENTION.textContent = "거위가 도망쳤잖아!";
+                mentionTimer = setTimeout(function(){
+                    MENTION.setAttribute("class","ment");
+                    MENTION.textContent = "";
+                    clearTimeout(mentionTimer);
                 },2000);
             },
-            ment2 : function(){
+            mention2 : function(){
                 get = false;
-                MENT.setAttribute("class","ment ment2");
-                MENT.textContent = "황금알이다!!";
-                mentTimer = setTimeout(function(){
-                    MENT.setAttribute("class","ment");
-                    MENT.textContent = "";
-                    clearTimeout(mentTimer);
+                MENTION.setAttribute("class","ment ment2");
+                MENTION.textContent = "황금알이다!!";
+                mentionTimer = setTimeout(function(){
+                    MENTION.setAttribute("class","ment");
+                    MENTION.textContent = "";
+                    clearTimeout(mentionTimer);
                 },2000);
             },
-            ment3 : function(){
+            mention3 : function(){
                 get = false;
-                MENT.setAttribute("class","ment ment3");
-                MENT.textContent = "알을 주워가며 계속 쫓아 가보자";
-                mentTimer = setTimeout(function(){
-                    MENT.setAttribute("class","ment");
-                    MENT.textContent = "";
-                    clearTimeout(mentTimer);
+                MENTION.setAttribute("class","ment ment3");
+                MENTION.textContent = "알을 주워가며 계속 쫓아 가보자";
+                mentionTimer = setTimeout(function(){
+                    MENTION.setAttribute("class","ment");
+                    MENTION.textContent = "";
+                    clearTimeout(mentionTimer);
                     get = false;
                 },2000);
             },
-            ment4 : function(){
+            mention4 : function(){
                 get = false;
-                MENT.setAttribute("class","ment ment1");
-                MENT.textContent = "드디어 잡았다!!!";
-                mentTimer = setTimeout(function(){
-                    MENT.setAttribute("class","ment");
-                    MENT.textContent = "";
-                    clearTimeout(mentTimer);
+                MENTION.setAttribute("class","ment ment1");
+                MENTION.textContent = "드디어 잡았다!!!";
+                mentionTimer = setTimeout(function(){
+                    MENTION.setAttribute("class","ment");
+                    MENTION.textContent = "";
+                    clearTimeout(mentionTimer);
                 },3000);
             },
             ex : function(){
                 get = false;
-                MENT.textContent = "";
-                MENT.setAttribute("class","ment ex");
-                mentTimer = setTimeout(function(){
-                    MENT.setAttribute("class","ment");
-                    clearTimeout(mentTimer);
+                MENTION.textContent = "";
+                MENTION.setAttribute("class","ment ex");
+                mentionTimer = setTimeout(function(){
+                    MENTION.setAttribute("class","ment");
+                    clearTimeout(mentionTimer);
             },1000);
             },
             get : function(){
-                MENT.textContent = "";
-                MENT.setAttribute("class","ment get");
+                MENTION.textContent = "";
+                MENTION.setAttribute("class","ment get");
                 get = true;
             },
             move : function(){
                 get = false;
-                MENT.textContent = "";
-                MENT.setAttribute("class","ment move");
+                MENTION.textContent = "";
+                MENTION.setAttribute("class","ment move");
                 right = true;
             },
-            mentEnd : function(){
+            mentionEnd : function(){
                 get = false;
-                MENT.textContent = "";
-                MENT.setAttribute("class","ment");
+                MENTION.textContent = "";
+                MENTION.setAttribute("class","ment");
             },
             getGet :function(){return get;}
         }

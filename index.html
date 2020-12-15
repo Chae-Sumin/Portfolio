@@ -8,17 +8,17 @@
     <script src="./js/portfolio.js"></script>
 </head>
 <body>
-    <p>0.5.1</p>
+    <p>1.0.0</p>
     <div id="load">
-        <img src="./img/cloud.png" alt="구름" class="cloud c1"/>
+        <img src="./img/cloud.png" alt="구름" class="cloud c1"/> <!-- 구름 장막 -->
         <img src="./img/cloud.png" alt="구름" class="cloud c2"/>
         <img src="./img/cloud.png" alt="구름" class="cloud c3"/>
         <img src="./img/cloud.png" alt="구름" class="cloud c4"/>
-        <span>
+        <span> <!--  로딩마크 -->
             <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 32 32"><circle cx="16" cy="16" r="14" style="fill:none;stroke:#707070;stroke-linecap:round;stroke-miterlimit:10;stroke-width:4px"/></svg>
             Loading
         </span>
-        <section class="before_start">
+        <section class="before_start"> <!-- 포폴게임 시작 전 -->
             <h1>
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 916.57 197.02">
                     <defs>
@@ -67,7 +67,7 @@
             </ul>
         </section>
     </div>
-    <div class="explain">
+    <div class="explain"> <!-- 조작방법 -->
         <h3>조작방법</h3>
         <p>최신버전의 크롬, 오페라, 엣지, 사파리, 웨일 브라우저를 권장합니다.</p>
         <section class="ex-pc">
@@ -81,10 +81,11 @@
             </figure>
             <figure>
                 <figcaption>알 줍기, 거위 잡기 방법</figcaption>
+                <span>Press</span>
                 <img src="./img/f.png" alt="키보드 f" />
                 <span>or</span>
                 <img src="./img/space_bar.png" alt="키보드 space bar"/><br />
-                <span>Click</span>
+                <span>or Click</span>
                 <img class="smallerimg" src="./img/active.png" alt="액티브버튼" />
                 <span>or</span>
                 <img class="smallerimg" src="./img/egg.png" alt="황금알" />
@@ -99,7 +100,7 @@
             </figure>
             <figure>
                 <figcaption>알 줍기, 거위 잡기 방법</figcaption>
-                <span>touch</span>
+                <span>Touch</span>
                 <img class="smallerimg" src="./img/active.png" alt="액티브버튼" />
                 <span>or</span>
                 <img class="smallerimg" src="./img/egg.png" alt="황금알" />
@@ -107,7 +108,7 @@
         </section>
         <button type="button" class="close">X</button>
     </div>
-    <div class="ending">
+    <div class="ending"> <!-- 엔딩 페이지 -->
         <section class="profile clearfix">
             <h2>
                 <figure>
@@ -158,7 +159,7 @@
                         <span class="graph"><span class="status">70</span>/100</span>
                     </li>
                 </ul>
-                <div class="else">이외 가능한 프로그램 및 언어 : GitHub, Scss, XD , C</div>
+                <div class="else">이외 가능한 프로그램 및 언어 : GitHub, Scss, XD, C</div>
             </div>
             <button type="button" class="next">&gt;</button>
             <button type="button" class="close">X</button>
@@ -203,18 +204,18 @@
             <button type="button" class="close">X</button>
         </section>
     </div>
-    <div id="field">
-        <img src="./img/limits.png" alt="limit img" id="limit_img" />
-        <div id="object">
-            <div id="char"><span class="ment"></span></div>
-            <div id="goose"></div>
-            <div class="home">
+    <div id="field"> <!-- 게임 화면 -->
+        <img src="./img/limits.png" alt="limit img" id="limit_img" /> <!-- 이동제한구역 -->
+        <div id="object"> <!-- 게임 내 오브젝트 -->
+            <div id="char"><span class="ment"></span></div> <!-- 메인캐릭터와 말풍선 -->
+            <div id="goose"></div> <!-- 메인 거위 -->
+            <div class="home"> <!-- 시작포인트 집 -->
                 <span class="flower"></span>
                 <span class="flower"></span>
                 <span class="flower"></span>
                 <span class="flower"></span>
             </div>
-            <div class="crops">
+            <div class="crops"> <!-- 작물들 -->
                 <ul class="carrot">
                     <li class="obj"></li><li class="obj"></li><li class="obj"></li><li class="obj"></li>
                 </ul>
@@ -225,7 +226,7 @@
                     <li class="obj"></li><li class="obj"></li><li class="obj"></li><li class="obj"></li>
                 </ul>
             </div>
-            <div class="animals">
+            <div class="animals"> <!-- 동물들 -->
                 <div class="geeseCage">
                     <ul class="cage">
                         <li class="row1"></li>
@@ -285,9 +286,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="trees">
+            <div class="trees"> <!-- 나무들 스크립트로 생성 -->
             </div>
-            <div class="bridges">
+            <div class="bridges"> <!--  다리 3개 -->
                 <div class="lake">
                     <div class="bridge"></div>
                     <div class="railing"></div>
@@ -297,13 +298,13 @@
                 <div class="river r1"></div>
                 <div class="river r2"></div>
             </div>
-            <div class="eggs"></div>
+            <div class="eggs"></div> <!-- 달걀들(필드 위) 스크립트로 생성 -->
         </div>
     </div>
     <div id="controller">
-        <button type="button" id="active"></button>
+        <button type="button" id="active"></button> <!-- 액티브 버튼 -->
         <span class="touch"><span></span></span>
-        <ul class="eggPlate">
+        <ul class="eggPlate"> <!-- 달걀들(링크 연결) 스크립트로 생성 -->
             <li></li>
             <li></li>
             <li></li>

@@ -206,8 +206,8 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
             justify-content: space-between;
             align-items: center;
             li{width: calc(100% / 5);}
-            button{transform-origin: center center; transform: scale(0.7); outline: none;}
-            button:hover{
+            button{
+                transform-origin: center center; transform: scale(0.7); outline: none;
                 &.emoji_like .emoji_hand{
                     animation: hands-up 2s linear infinite;
                     .emoji_thumb{animation: thumbs-up 2s linear infinite;}
