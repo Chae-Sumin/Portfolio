@@ -1,0 +1,13 @@
+{
+	"include": [
+		"src/*.ts"
+	],
+	"compilerOptions": {
+		"module": "es6",
+		"rootDir": "src",
+		"outDir": "dist",
+		"target": "es5",
+		"newLine": "lf",
+		"declaration": true,
+	},
+}
