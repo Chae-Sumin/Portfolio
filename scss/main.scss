@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+body, html {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+#field {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 6000px;
+	height: 5000px;
+	transform-origin: 0 0;
+	transition: 100ms;
+	z-index: 1;
+	transform: scale(0.8);
+}
+#mapImg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 6000px;
+	height: 5000px;
+	z-index: 1;
+}
+
+@import './scss/controller.scss';
+@import './scss/stuff.scss';
+@import './scss/charactor.scss';

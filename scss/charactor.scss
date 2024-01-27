@@ -1,0 +1,120 @@
+// 게임 캐릭터 관련 스타일
+
+// background-position
+$front1: 0 0;
+$front2: 50% 0;
+$front3: 100% 0;
+$back1: 0 33.33%;
+$back2: 50% 33.33%;
+$back3: 100% 33.33%;
+$left1: 0 66.66%;
+$left2: 50% 66.66%;
+$left3: 100% 66.66%;
+$right1: 0 100%;
+$right2: 50% 100%;
+$right3: 100% 100%;
+
+@mixin charDefualt { // 캐릭터 기본설정
+	position: absolute;
+	background-repeat: no-repeat;
+	background-position: $front1;
+	background-size: 300% 400%;
+	overflow: hidden;
+	z-index: 10;
+	left: -999px;
+	top: -999px;
+}
+
+// 기본 움직임 keyframes
+@keyframes frontAni {
+	0%{background-position: $front1;}
+	25%{background-position: $front2;}
+	50%{background-position: $front1;}
+	75%{background-position: $front3;}
+	100%{background-position: $front1;}
+}
+@keyframes backAni {
+	0%{background-position: $back1;}
+	25%{background-position: $back2;}
+	50%{background-position: $back1;}
+	75%{background-position: $back3;}
+	100%{background-position: $back1;}
+}
+@keyframes leftAni {
+	0%{background-position: $left1;}
+	25%{background-position: $left2;}
+	50%{background-position: $left1;}
+	75%{background-position: $left3;}
+	100%{background-position: $left1;}
+}
+@keyframes rightAni {
+	0%{background-position: $right1;}
+	25%{background-position: $right2;}
+	50%{background-position: $right1;}
+	75%{background-position: $right3;}
+	100%{background-position: $right1;}
+}
+
+@keyframes backFlyAni {
+	0%{background-position: 0 0;}
+	50%{background-position: 100% 0;}
+	100%{background-position: 0 0;}
+}
+@keyframes leftFlyAni {
+	0%{background-position: 0 50%;}
+	50%{background-position: 100% 50%;}
+	100%{background-position: 0 50%;}
+}
+@keyframes rightFlyAni {
+	0%{background-position: 0 100%;}
+	50%{background-position: 100% 100%;}
+	100%{background-position: 0 100%;}
+}
+
+@mixin move($dir){ // 움직임 설정
+	animation: #{$dir}Ani 1000ms 0s infinite step-start;
+}
+@mixin fly($dir){ // 움직임 설정
+	animation: #{$dir}FlyAni 500ms 0s infinite step-start;
+}
+@mixin stop($dir) { // 이동 멈춤 시 모습
+	@if $dir == back {
+		background-position: $back1;
+	} @else if $dir == front {
+		background-position: $front1;
+	} @else if $dir == left {
+		background-position: $left1;
+	} @else if $dir == right {
+		background-position: $right1;
+	}
+}
+.character {
+	@include charDefualt;
+	//정지
+	&.front{@include stop(front);}
+	&.back{@include stop(back);}
+	&.left{@include stop(left);}
+	&.right{@include stop(right);}
+
+	//동작
+	&:not(.goose.fly) {
+		&.move.front{@include move(front);}
+		&.move.back{@include move(back);}
+		&.move.left{@include move(left);}
+		&.move.right{@include move(right);}
+	}
+
+	// 거위 나는 모션
+	// [TODO]: 전면 모션 추가
+	&:not(.front).goose.fly {
+		background-image: url(../assets/characters/goose-fly.png) !important;
+		background-size: 200% 300%;
+
+		&.back{@include fly(back);}
+		&.left{@include fly(left);}
+		&.right{@include fly(right);}
+	}
+	&.front.goose.fly {
+		&.move.front{@include move(front);}
+	}
+}

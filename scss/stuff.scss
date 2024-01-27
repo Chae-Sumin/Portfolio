@@ -1,0 +1,84 @@
+// 물건 관련 스타일
+.stuff {
+	position: absolute;
+	background-size: 100% 100%;
+}
+// 과일
+.fruit {
+	background-size: 100% 500%;
+	@keyframes fruitAni {
+		0%{transform: rotateZ(0deg);}
+		25%{transform: rotateZ(5deg);}
+		50%{transform: rotateZ(0deg);}
+		75%{transform: rotateZ(-5deg);}
+		100%{transform: rotateZ(0deg);}
+	}
+	&:nth-child(1) {
+		animation: fruitAni 5s linear infinite;
+	}
+	&:nth-child(2) {
+		animation: fruitAni 4s 1s linear infinite;
+	}
+	&:nth-child(3) {
+		animation: fruitAni 4.5s 2s linear infinite;
+	}
+}
+.apple .fruit {
+	background-position-y: 0;
+}
+.blueberry .fruit {
+	background-position-y: -84px;
+}
+.peach .fruit {
+	background-position-y: -168px;
+}
+.orange .fruit {
+	background-position-y: -252px;
+}
+.lemon .fruit {
+	background-position-y: -336px;
+}
+
+// 작물
+.crops {
+	background-size: auto 300%;
+	@keyframes cropsAni {
+		$marginL : 20px;
+		0%{background-position-x: $marginL;}
+		25%{background-position-x: $marginL - 125px;}
+		50%{background-position-x: $marginL;}
+		75%{background-position-x: $marginL - 250px;}
+		100%{background-position-x: $marginL;}
+	}
+	animation: cropsAni 5s step-start infinite;
+}
+.carrot .crops {
+	background-position-y: 0;
+}
+.corn .crops {
+	background-position-y: -150px;
+}
+.tomato .crops {
+	background-position-y: -300px;
+}
+
+// 울타리(전면)
+.fence_f {
+	background-size: auto 100%;
+}
+
+
+// 필드 계란
+.stuff.egg {
+	border: 0 none;
+	width: 100%;
+	height: 100%;
+	background: url(../assets/egg.png) center / 100% auto no-repeat;
+	text-align: center;
+	@keyframes eggAni {
+		0%{filter: drop-shadow(0 0 0px #FFE300);}
+		75%{filter: drop-shadow(0 0 20px #FFE300);}
+		100%{filter: drop-shadow(0 0 0 #FFE300);}
+	}
+	animation: eggAni 3s linear infinite;
+}

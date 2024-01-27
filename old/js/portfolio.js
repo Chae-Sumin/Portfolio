@@ -18,9 +18,9 @@ window.onload = function(){
     const MAP_WIDTH = 6000; // 맵 전체 너비
     const MAP_HEIGHT = 5000; // 맵 전체 높이
     const CHAR_MOVE_FPS = 60; //max(300) 초당 n회
-    const CHAR_MOVE_PX = 9; // max(9) (CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
-    const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
-    const GOOSE_MOVE_FPS = 60; //max(300) 
+    const CHAR_SPEED = 9; // max(9) (CHAR_SPEED * CHAR_MOVE_SPEED px/s)
+    const CHAR_CROSS_PX = CHAR_SPEED / Math.sqrt(2); //대각선 이동 속도
+    const GOOSE_MOVE_FPS = 60; //max(300)
     const GOOSE_MOVE_PX = 10.5;
     const ANI_MOVE_PX = 5;
     const MAP_RATIO = 0.8; // 맵 비율
@@ -54,7 +54,7 @@ window.onload = function(){
     let screenHeight = window.innerHeight; // 스크린 높이
     let focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2); // 초점 X값(음수)
     let focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2); //초점 Y값(음수)
-    
+
     // --------------------제한구역 이미지 설정--------------------
     let limitImg = document.getElementById('limit_img');
     let limitCanvas = document.createElement("canvas");
@@ -116,7 +116,7 @@ window.onload = function(){
         else if(ElementIndex(EGGS.children,e.target)){
             egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
             goose.gooseActive(CHAR.offsetLeft,CHAR.offsetTop);
-            
+
         }
         else if(!touch.getFlag()){
             touch.setFlag(true);
@@ -189,7 +189,7 @@ window.onload = function(){
                     break;
                 default: // 그냥 나무
                     break;
-            } 
+            }
             TREE.appendChild(tree);
         }
         const mapImg = document.createElement("img"); // 메인 배경
@@ -248,7 +248,7 @@ window.onload = function(){
         document.addEventListener("keydown",keydown,false);
         document.addEventListener("keyup", keyup,false);
         ctrlActive.addEventListener("click",clickActive,false);
-        
+
         document.addEventListener("touchstart",touchstart,false);
         document.addEventListener("touchmove",touchmove,false);
         document.addEventListener("touchend",touchend,false);
@@ -262,7 +262,7 @@ window.onload = function(){
             return !(limitCanvas.getContext('2d').getImageData(x,y,1,1).data[3])
         }else return false
     }
-    window.addEventListener("resize", function(){ // 창 크기 변경시 
+    window.addEventListener("resize", function(){ // 창 크기 변경시
         screenWidth = window.innerWidth;
         screenHeight = window.innerHeight;
         screenFocus();
@@ -295,14 +295,14 @@ window.onload = function(){
             move : function(index){ return index === -1 ? -1 : move[index] },
             length : function(){return moveKeyCodes.length},
             flag : function(){return keyFlag},
-            flagFalse : function(){keyFlag = false; 
+            flagFalse : function(){keyFlag = false;
                 return keyFlag},
-            flagTrue : function(){keyFlag = true; 
+            flagTrue : function(){keyFlag = true;
                 return keyFlag},
             active : function(){return active},
-            activeFalse : function(){active = false; 
+            activeFalse : function(){active = false;
                 return active},
-            activeTrue : function(){active = true; 
+            activeTrue : function(){active = true;
                 return active},
             setKeyTimer: function(func,time){
                 keyTimer = setTimeout(func,time);
@@ -334,11 +334,11 @@ window.onload = function(){
                 while (isBlock && count < 5) { // 막힐 때 부드러운 움직임
                     count += 2;
                     isBlock = this.moveSmooth(x,y,count);
-                } 
+                }
                 screenFocus();
                 goose.sensor(moveX,moveY); //거위센서 온
             },
-            moveSmooth : function(x,y,count){ // 방해물에 막혔을 때 
+            moveSmooth : function(x,y,count){ // 방해물에 막혔을 때
                 let dir = [];
                 if(x === 0){
                     dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 - CHAR_CROSS_PX * count,moveY +  CHAR_HEIGHT + y));
@@ -521,7 +521,7 @@ window.onload = function(){
                 animalElement.classList.add("click");
                 animalElement.addEventListener("click",function() {
                     that.gooseActive(animalElement.offsetLeft,animalElement.offsetTop);
-                },false);   
+                },false);
                 isEnd = true;
             },
             cheat: function(){
@@ -624,7 +624,7 @@ window.onload = function(){
                     let show = setTimeout(function(){
                         plateGen(id);
                         clearTimeout(show);
-                    },1000); 
+                    },1000);
                     newEgg.classList.add("disapear");
                 });
                 EGGS.appendChild(newEgg);
@@ -638,7 +638,7 @@ window.onload = function(){
                         let show = setTimeout(function(){
                             plateGen(id);
                             clearTimeout(show);
-                        },1500); 
+                        },1500);
                         eggs[i].classList.add("disapear");
                         if(mention.getGet()){mention.mention3();}
                     }
@@ -655,16 +655,16 @@ window.onload = function(){
         key.flagTrue();
         switch (key.keyCode()) {
             case 1: //up
-                move.moveTo(0,-CHAR_MOVE_PX);
+                move.moveTo(0,-CHAR_SPEED);
                 break;
             case 2: //left
-                move.moveTo(-CHAR_MOVE_PX,0);
+                move.moveTo(-CHAR_SPEED,0);
                 break;
             case 4: //down
-                move.moveTo(0,CHAR_MOVE_PX);
+                move.moveTo(0,CHAR_SPEED);
                 break;
             case 8: //right
-                move.moveTo(CHAR_MOVE_PX,0);
+                move.moveTo(CHAR_SPEED,0);
                 break;
             case 3: //left up
                 move.moveTo(-CHAR_CROSS_PX,-CHAR_CROSS_PX);
@@ -712,7 +712,7 @@ window.onload = function(){
                 clearTimeout(moveTimeout);
                 moveTimeout = setTimeout(repeatMove,0);
                 function repeatMove(){
-                    move.moveTo(moveInfo.x*CHAR_MOVE_PX,moveInfo.y*CHAR_MOVE_PX);
+                    move.moveTo(moveInfo.x*CHAR_SPEED,moveInfo.y*CHAR_SPEED);
                     ctrlTouch.children[0].style.left = moveInfo.x*20 + "px";
                     ctrlTouch.children[0].style.top = moveInfo.y*20 + "px";
                     moveTimeout = setTimeout(repeatMove,1000 / CHAR_MOVE_FPS);
@@ -755,7 +755,7 @@ window.onload = function(){
         },false);
     }
     function ending(){
-        endingSection.classList.add("on"); 
+        endingSection.classList.add("on");
             endingSection.getElementsByClassName("next")[0].addEventListener("click",function(){
             endingSection.setAttribute("class","ending on c");
         },false);
