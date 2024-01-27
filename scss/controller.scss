@@ -1,0 +1,40 @@
+// 게임 인터페이스 관련 스타일
+
+#controller {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1px;
+	height: 1px;
+	background: url(../images/controller.png) no-repeat;
+	background-size: 100% 100%;
+	z-index: 2;
+}
+// 주운 계란 표시
+.eggPlate {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	width: 100vw;
+	height: 100px;
+	.eggHolder {
+		flex: 1 0 0;
+		display: flex;
+		justify-content: center;
+		height: 100px;
+		padding-top: 20px;
+	}
+	.egg {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-sizing: border-box;
+		padding-top: 10px;
+		width: 100px;
+		height: 100px;
+		background: url(../assets/egg.png) center / 72px 99px no-repeat;
+		z-index: 10000;
+		text-align: center;
+	}
+}
