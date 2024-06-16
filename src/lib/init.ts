@@ -1,6 +1,6 @@
 import Stuff from "../stuff/stuff";
 import Tree from "../stuff/tree";
-import type {fruits} from "../stuff/tree";
+import type { fruits } from "../stuff/tree";
 import Cage from "../stuff/cage";
 import Goose from '../characters/goose';
 import Cow from '../characters/cow';

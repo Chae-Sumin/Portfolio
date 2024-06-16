@@ -10,6 +10,12 @@
 	background-size: 100% 100%;
 	z-index: 2;
 }
+#indicator {
+	position: absolute;
+	padding: 10px;
+	background-color: #0008;
+	color: #fff;
+}
 // 주운 계란 표시
 .eggPlate {
 	position: fixed;

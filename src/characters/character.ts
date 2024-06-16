@@ -1,8 +1,9 @@
 // 캐릭터 기본 클래스
 
-import { FEILD, characters } from '../global';
+import { FEILD, characters, fps } from '../global';
 import checkPos from '../lib/checkPos';
 import Stuff from '../stuff/stuff';
+import { STANDARD_FPS, AUTOMOVE_OPTIONS } from '../constant';
 
 interface CharacterProps {
 	id?: string,
@@ -30,21 +31,8 @@ class Character {
 	private _deg = 0;
 	private _isMove = false;
 	private _isAutoMove = false;
-	private _autoOptions: {
-		degLatency: number, // frame
-		degStack: number, // frame
-		degProbability: number, // 0 ~ 1
-		isMoveLatency: number, // frame
-		isMoveStack: number, // frame
-		isMoveProbability: number, // 0 ~ 1
-	} = {
-		degLatency: 200,
-		degStack: 0,
-		degProbability: 0.5,
-		isMoveLatency: 200,
-		isMoveStack: 0,
-		isMoveProbability: 0.5,
-	}
+	private _degStack = 0; // Tick
+	private _isMoveStack = 0; // Tick
 	private _canFly = false;
 	private _fly = false;
 	private _isMoveSmooth = false;
@@ -76,8 +64,6 @@ class Character {
 
 		if (props.isAutoMove) {
 			this._isAutoMove = Boolean(props.isAutoMove);
-			this.changeDeg();
-			this.changeIsMove();
 		}
 		if (props.canFly) {
 			this._canFly = true;
@@ -185,8 +171,9 @@ class Character {
 		if (this._isAutoMove) return this._moveTo = {x: null, y: null};
 		const dx = Math.floor(Math.abs(x - this.x));
 		const dy = Math.floor(Math.abs(y - this.y));
+		const speed = this.speed * STANDARD_FPS / fps.get();
 
-		if (dx < this.speed && dy < this.speed) {
+		if (dx < speed && dy < speed) {
 			this._moveTo = {x: null, y: null};
 			this.isMove = false;
 			return;
@@ -209,7 +196,8 @@ class Character {
 	}
 	private movement(deg = this.deg) {
 		const rad = deg * Math.PI / 180;
-		return [Math.floor(Math.cos(rad) * this.speed), Math.floor(Math.sin(rad) * this.speed)];
+		const speed = this.speed * STANDARD_FPS / fps.get();
+		return [Math.floor(Math.cos(rad) * speed), Math.floor(Math.sin(rad) * speed)];
 	}
 	private move(x: number, y: number) {
 		if (!checkPos(x, y, this)) {
@@ -220,8 +208,10 @@ class Character {
 		this.y = y;
 		return true;
 	}
+	// 부드럽게 이동가능한 위치로 계산
 	private moveSmooth(x: number, y: number, maxCount = 30, dDeg = 5) {
 		let count = 0;
+		// dDeg씩 위아래로 각도를 조절하며 이동가능한 위치를 찾음
 		while (!checkPos(x, y, this) && count < maxCount) {
 			count++;
 			const n = Math.floor(count / 2) * (count % 2 ? 1 : -1);
@@ -233,24 +223,24 @@ class Character {
 		this.move(x, y);
 	}
 	private autoMove() {
-		const {degLatency: dl, degStack: ds, degProbability: dp, isMoveLatency: ml, isMoveStack: ms, isMoveProbability: mp} = this._autoOptions;
+		const {DEG_LATENCY: dl, DEG_PROBABILITY: dp, IS_MOVE_LATENCY: ml, IS_MOVE_PROBABILITY: mp} = AUTOMOVE_OPTIONS;
 		const R = Math.random();
-		if (dl > ds) this._autoOptions.degStack++;
+		if (dl > this._degStack) this._degStack++;
 		else if (R < dp) {
 			this.changeDeg();
-			this._autoOptions.degStack = 0;
+			this._degStack = 0;
 		}
-		if (ml > ms) this._autoOptions.isMoveStack++;
+		if (ml > this._isMoveStack) this._isMoveStack++;
 		else if (R < mp) {
 			this.changeIsMove();
-			this._autoOptions.isMoveStack = 0;
+			this._isMoveStack = 0;
 		}
 	}
 	private changeDeg() {
 		this.deg = Math.floor(Math.random() * 360);
 	}
 	private changeIsMove() {
-		this.isMove = !this.isMove;
+		this.isMove = Math.random() < 0.2 ? this.isMove : !this.isMove;
 	}
 }
 

@@ -4,7 +4,7 @@ import init from './lib/init';
 import getMove from './lib/getMove';
 import Player from './characters/player';
 import Goose from './characters/goose';
-import { FEILD, characters, checkKey, fieldEggs } from './global';
+import { FEILD, CONTROLLER, characters, fps, checkKey, fieldEggs } from './global';
 import screenFocus from './lib/screenFocus';
 import Scenario from './lib/scenario';
 
@@ -16,9 +16,21 @@ const player = new Player({x: 600, y: 700});
 const scenario = new Scenario(player, goose);
 
 const main = () => {
-	let time = 0;
-	const loop = () => {
-		time++;
+	let time = performance.now();
+
+	// 테스트용 인디케이터
+	const indicator = document.createElement("pre");
+	indicator.id = "indicator";
+	CONTROLLER?.appendChild(indicator);
+
+	const loop = (ts: number) => {
+		// 시간 간격 계산
+		fps.set(1000 / (ts - time));
+		time = ts;
+
+		// 테스트용 인디케이터
+		indicator.textContent = `FPS: ${fps.get().toFixed(4)}\nplayer: ${player.x}, ${player.y}\nGoose: ${goose.x}, ${goose.y}`;
+
 		// 플레이어 움직임 설정
 		const {isMove, deg} = getMove();
 		player.isMove = isMove;
@@ -30,7 +42,7 @@ const main = () => {
 		// 액티브 버튼 체크
 		if (checkKey(' ', 'F', 'f', 'ㄹ')) {
 			fieldEggs.forEach(egg => {
-				// 필드 달걀 클릭
+				// 필드 계란 클릭
 				const dist = player.getDistance(egg);
 				if (dist < 100) egg.ele.click();
 			});
@@ -44,7 +56,11 @@ const main = () => {
 		characters.forEach(character => character.update());
 
 		// 화면 포커스 설정
-		screenFocus(player);
+		if (checkKey('g', 'G', 'ㅎ')) {
+			screenFocus(goose);
+		} else {
+			screenFocus(player);
+		}
 
 		// 루프 재귀
 		requestAnimationFrame(loop);
@@ -61,6 +77,6 @@ mapImg.setAttribute("id", "mapImg");
 
 // 최초 설정 함수
 init();
-FEILD?.appendChild(mapImg);
+FEILD?.prepend(mapImg);
 // 메인 배경 로딩 완료 후 메인 함수 실행
 mapImg.onload = main;
