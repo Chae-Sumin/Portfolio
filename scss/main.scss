@@ -12,9 +12,8 @@ body, html {
 	width: 6000px;
 	height: 5000px;
 	transform-origin: 0 0;
-	transition: 100ms;
 	z-index: 1;
-	transform: scale(0.7);
+	transition: transform 1200ms 300ms ease-in;
 }
 #mapImg {
 	position: absolute;
@@ -28,3 +27,4 @@ body, html {
 @import './scss/controller.scss';
 @import './scss/stuff.scss';
 @import './scss/charactor.scss';
+@import './scss/intro.scss';

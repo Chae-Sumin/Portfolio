@@ -1,6 +1,6 @@
 // 제한 영역 설정
 
-import { MAP_WIDTH, MAP_HEIGHT } from '../constant';
+import { MAP_WIDTH, MAP_HEIGHT, MAP_PADDING, CAGE_PADDING } from '../constant';
 import type Character from '../characters/character';
 
 const limitPos = new Set();
@@ -17,13 +17,15 @@ img.onload = () => {
 }
 document.body.appendChild(img);
 
-const MAP_PADDING = 50;
 function checkPos(x: number, y: number, character: Character){ // 이동 가능구역인지 확인
 	const cX = x + character.width / 2;
 	const cY = y + character.height;
 	if (character.cage) {
-		if (x < 50 || x > character.cage.width - character.width - 50 || y < 50 || y > character.cage.height - character.height - 50) return false;
-		return true;
+		const left = x < CAGE_PADDING;
+		const right = x > character.cage.width - character.width - CAGE_PADDING;
+		const top = y < CAGE_PADDING;
+		const bottom = y > character.cage.height - character.height - CAGE_PADDING;
+		return !(left || right || top || bottom);
 	}
 	if (x > MAP_PADDING && x + character.width < MAP_WIDTH - MAP_PADDING && y > MAP_PADDING && y + character.height < MAP_HEIGHT - MAP_PADDING) {
 		if (limitPos.has(`${cX},${cY}`)) return false;

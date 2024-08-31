@@ -1,6 +1,7 @@
 // 돼지 클래스
 
 import Character, {type CharacterProps} from "./character";
+import pigImg from '../../assets/characters/pig.png';
 
 class Pig extends Character {
 	constructor(props: CharacterProps = {}) {
@@ -8,7 +9,7 @@ class Pig extends Character {
 		if (props.baby) {
 			[w, h] = [150, 125];
 		}
-		super('./assets/characters/pig.png', w, h, {speed: 4, isAutoMove: true, ...props});
+		super(pigImg, w, h, {speed: 4, isAutoMove: true, ...props});
 	}
 }
 

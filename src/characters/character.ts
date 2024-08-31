@@ -1,9 +1,9 @@
 // 캐릭터 기본 클래스
 
-import { FEILD, characters, fps } from '../global';
+import { FEILD, characters, Fps } from '../global';
 import checkPos from '../lib/checkPos';
 import Stuff from '../stuff/stuff';
-import { STANDARD_FPS, AUTOMOVE_OPTIONS } from '../constant';
+import { STANDARD_FPS, AUTOMOVE_OPTIONS, CAGE_PADDING } from '../constant';
 
 interface CharacterProps {
 	id?: string,
@@ -54,8 +54,10 @@ class Character {
 		if (props.id) this.ele.id = props.id;
 		if (props.cage) {
 			this.cage = props.cage;
-			if (!props.x) props.x = this.cage.width / 2;
-			if (!props.y) props.y = this.cage.height / 2;
+			const {width: w, height: h} = this.cage;
+			const {width: cw, height: ch} = this;
+			if (!props.x) props.x = Math.floor(Math.random() * (w - cw - CAGE_PADDING * 2)) + CAGE_PADDING;
+			if (!props.y) props.y = Math.floor(Math.random() * (h - ch - CAGE_PADDING * 2)) + CAGE_PADDING;
 		}
 		if (props.x) this.x = props.x;
 		if (props.y) this.y = props.y;
@@ -64,6 +66,8 @@ class Character {
 
 		if (props.isAutoMove) {
 			this._isAutoMove = Boolean(props.isAutoMove);
+			this.isMove = Math.random() < 0.3;
+			this.deg = Math.floor(Math.random() * 360);
 		}
 		if (props.canFly) {
 			this._canFly = true;
@@ -75,7 +79,7 @@ class Character {
 			this._isMoveSmooth = true;
 		}
 		if (this.cage) this.cage.ele.appendChild(this.ele);
-		else FEILD?.appendChild(this.ele);
+		else FEILD.appendChild(this.ele);
 		characters.set(this.id, this);
 	}
 
@@ -152,6 +156,7 @@ class Character {
 		if (this._isAutoMove) this.autoMove();
 		if (this._moveTo.x !== null && this._moveTo.y !== null) this.moveTo(this._moveTo.x, this._moveTo.y);
 		if (!this.isMove) return;
+		// 이동 중이면 현제 각도로 이동거리 계산
 		const [dx, dy] = this.movement();
 
 		if (!dx && !dy) return;
@@ -171,7 +176,7 @@ class Character {
 		if (this._isAutoMove) return this._moveTo = {x: null, y: null};
 		const dx = Math.floor(Math.abs(x - this.x));
 		const dy = Math.floor(Math.abs(y - this.y));
-		const speed = this.speed * STANDARD_FPS / fps.get();
+		const speed = this.speed * STANDARD_FPS / Fps.get();
 
 		if (dx < speed && dy < speed) {
 			this._moveTo = {x: null, y: null};
@@ -194,11 +199,13 @@ class Character {
 		const dy = baseY - thisY;
 		return Math.sqrt(dx * dx + dy * dy);
 	}
+	// 각도에 따른 이동거리 반환
 	private movement(deg = this.deg) {
 		const rad = deg * Math.PI / 180;
-		const speed = this.speed * STANDARD_FPS / fps.get();
+		const speed = this.speed * STANDARD_FPS / Fps.get();
 		return [Math.floor(Math.cos(rad) * speed), Math.floor(Math.sin(rad) * speed)];
 	}
+	// 이동가능한 위치로 이동
 	private move(x: number, y: number) {
 		if (!checkPos(x, y, this)) {
 			if (!this._canFly) return false;
@@ -222,25 +229,36 @@ class Character {
 		if (count >= maxCount) return;
 		this.move(x, y);
 	}
+	// 자동 이동 설정
 	private autoMove() {
-		const {DEG_LATENCY: dl, DEG_PROBABILITY: dp, IS_MOVE_LATENCY: ml, IS_MOVE_PROBABILITY: mp} = AUTOMOVE_OPTIONS;
+		const {DEG_LATENCY: dl, DEG_PROBABILITY: dp, MOVE_LATENCY: ml, MOVE_PROBABILITY: mp, STOP_LATENCY: sl, STOP_PROBABILITY: sp} = AUTOMOVE_OPTIONS;
 		const R = Math.random();
+		// 스택이 쌓이면 상태 변경
 		if (dl > this._degStack) this._degStack++;
 		else if (R < dp) {
 			this.changeDeg();
 			this._degStack = 0;
 		}
-		if (ml > this._isMoveStack) this._isMoveStack++;
-		else if (R < mp) {
-			this.changeIsMove();
-			this._isMoveStack = 0;
+		// 상태에 따라 이동확률과 주기를 다르게 설정
+		if (this.isMove) {
+			if (ml > this._isMoveStack) this._isMoveStack++;
+			else if (R < mp) {
+				this.changeIsMove();
+				this._isMoveStack = 0;
+			}
+		} else {
+			if (sl > this._isMoveStack) this._isMoveStack++;
+			else if (R < sp) {
+				this.changeIsMove();
+				this._isMoveStack = 0;
+			}
 		}
 	}
 	private changeDeg() {
 		this.deg = Math.floor(Math.random() * 360);
 	}
 	private changeIsMove() {
-		this.isMove = Math.random() < 0.2 ? this.isMove : !this.isMove;
+		this.isMove = !this.isMove;
 	}
 }
 

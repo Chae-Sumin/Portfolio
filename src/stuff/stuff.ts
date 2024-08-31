@@ -47,7 +47,7 @@ class Stuff {
 
 
 		if (this.parent) this.parent.ele.appendChild(this.ele);
-		else FEILD?.appendChild(this.ele);
+		else FEILD.appendChild(this.ele);
 	}
 
 	set width(width: number) {

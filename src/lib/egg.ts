@@ -33,16 +33,11 @@ class Eggs {
 			text: 'blog',
 			href: 'https://cotnmin.dev',
 		},
-		// {
-		// 	level: 5,
-		// 	text: 'vue-numeric-keypad',
-		// 	href: 'https://github.com/Chae-Sumin/vue-numeric-keypad',
-		// },
 	];
 	constructor() {
 		this.ele = document.createElement('div');
 		this.ele.classList.add('eggPlate');
-		CONTROLLER?.appendChild(this.ele);
+		CONTROLLER.appendChild(this.ele);
 
 		for (let i = 0; i < this.eggInfo.length; i++) {
 			const holder = document.createElement('div');

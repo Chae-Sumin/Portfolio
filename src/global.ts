@@ -2,10 +2,27 @@
 
 import Character from "./characters/character";
 import Egg from "./stuff/egg";
+import { MAP_WIDTH, MAP_HEIGHT } from "./constant";
 
-const APP = document.getElementById("app"); //앱
-const FEILD = document.getElementById("field"); //전체 맵
-const CONTROLLER = document.getElementById("controller"); //조작부
+const APP = document.createElement('div'); //앱
+APP.id = 'app';
+document.body.appendChild(APP);
+const FEILD = document.createElement('div'); //필드
+FEILD.id = 'field';
+APP.appendChild(FEILD);
+const CONTROLLER = document.createElement('div'); //조작부
+CONTROLLER.id = 'controller';
+APP.appendChild(CONTROLLER);
+const INTRO = document.createElement('div'); //인트로
+INTRO.id = 'intro';
+APP.appendChild(INTRO);
+
+const options = {
+	indicator: true,
+};
+window.addEventListener("keydown", ({key, ctrlKey}) => {
+	if (['I', 'i', 'ㅑ'].includes(key) && ctrlKey) return options.indicator = !options.indicator;
+});
 
 const keyboard = new Set();
 window.addEventListener("keydown", ({key}) => keyboard.add(key));
@@ -28,7 +45,25 @@ window.addEventListener("resize", () => {
 	screenHeight = window.innerHeight;
 });
 
-let fps = (() => {
+
+let Scale = (() => {
+	let scale = Math.max(screenWidth / MAP_WIDTH, screenHeight / MAP_HEIGHT) * 1.8;
+	if (FEILD) {
+		FEILD.style.transform = `scale(${scale})`;
+	}
+	return {
+		get: () => scale,
+		set: (value: number) => {
+			value = value < 0.3 ? 0.3 : value;
+			value = value > 0.8 ? 0.8 : value;
+			scale = value;
+			if (FEILD) {
+				FEILD.style.transform = `scale(${scale})`;
+			}
+		},
+	}
+})(); // 화면 비율
+let Fps = (() => {
 	let fps = 0;
 	return {
 		get: () => fps,
@@ -39,4 +74,4 @@ let fps = (() => {
 const characters: Map<symbol, Character> = new Map();
 const fieldEggs: Set<Egg> = new Set();
 
-export { APP, FEILD, CONTROLLER, keyboard, checkKey, screenWidth, screenHeight, fps, characters, fieldEggs };
+export { APP, FEILD, CONTROLLER, INTRO, options, keyboard, checkKey, screenWidth, screenHeight, Scale, Fps, characters, fieldEggs };

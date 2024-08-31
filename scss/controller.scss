@@ -15,6 +15,9 @@
 	padding: 10px;
 	background-color: #0008;
 	color: #fff;
+	&.hide {
+		display: none;
+	}
 }
 // 주운 계란 표시
 .eggPlate {
@@ -38,9 +41,11 @@
 		box-sizing: border-box;
 		padding-top: 10px;
 		width: 100px;
+		max-width: 20vw;
 		height: 100px;
-		background: url(../assets/egg.png) center / 72px 99px no-repeat;
-		z-index: 10000;
+		background: url(../assets/egg.png) center / contain no-repeat;
+		z-index: 100;
 		text-align: center;
+		font-size: max(min(3.5vw, 12px), 10px);
 	}
 }
