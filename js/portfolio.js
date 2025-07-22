@@ -20,7 +20,7 @@ window.onload = function(){
     const CHAR_MOVE_FPS = 60; //max(300) 초당 n회
     const CHAR_MOVE_PX = 9; // max(9) (CHAR_MOVE_PX * CHAR_MOVE_SPEED px/s)
     const CHAR_CROSS_PX = CHAR_MOVE_PX / Math.sqrt(2); //대각선 이동 속도
-    const GOOSE_MOVE_FPS = 60; //max(300) 
+    const GOOSE_MOVE_FPS = 60; //max(300)
     const GOOSE_MOVE_PX = 10.5;
     const ANI_MOVE_PX = 5;
     const MAP_RATIO = 0.8; // 맵 비율
@@ -54,7 +54,7 @@ window.onload = function(){
     let screenHeight = window.innerHeight; // 스크린 높이
     let focusX = screenWidth / 2 - CHAR.offsetLeft - (CHAR_WIDTH / 2); // 초점 X값(음수)
     let focusY = screenHeight / 2 - CHAR.offsetTop - (CHAR_HEIGHT / 2); //초점 Y값(음수)
-    
+
     // --------------------제한구역 이미지 설정--------------------
     let limitImg = document.getElementById('limit_img');
     let limitCanvas = document.createElement("canvas");
@@ -116,7 +116,7 @@ window.onload = function(){
         else if(ElementIndex(EGGS.children,e.target)){
             egg.eggActive(CHAR.offsetLeft,CHAR.offsetTop);
             goose.gooseActive(CHAR.offsetLeft,CHAR.offsetTop);
-            
+
         }
         else if(!touch.getFlag()){
             touch.setFlag(true);
@@ -189,7 +189,7 @@ window.onload = function(){
                     break;
                 default: // 그냥 나무
                     break;
-            } 
+            }
             TREE.appendChild(tree);
         }
         const mapImg = document.createElement("img"); // 메인 배경
@@ -248,7 +248,7 @@ window.onload = function(){
         document.addEventListener("keydown",keydown,false);
         document.addEventListener("keyup", keyup,false);
         ctrlActive.addEventListener("click",clickActive,false);
-        
+
         document.addEventListener("touchstart",touchstart,false);
         document.addEventListener("touchmove",touchmove,false);
         document.addEventListener("touchend",touchend,false);
@@ -262,7 +262,7 @@ window.onload = function(){
             return !(limitCanvas.getContext('2d').getImageData(x,y,1,1).data[3])
         }else return false
     }
-    window.addEventListener("resize", function(){ // 창 크기 변경시 
+    window.addEventListener("resize", function(){ // 창 크기 변경시
         screenWidth = window.innerWidth;
         screenHeight = window.innerHeight;
         screenFocus();
@@ -295,14 +295,14 @@ window.onload = function(){
             move : function(index){ return index === -1 ? -1 : move[index] },
             length : function(){return moveKeyCodes.length},
             flag : function(){return keyFlag},
-            flagFalse : function(){keyFlag = false; 
+            flagFalse : function(){keyFlag = false;
                 return keyFlag},
-            flagTrue : function(){keyFlag = true; 
+            flagTrue : function(){keyFlag = true;
                 return keyFlag},
             active : function(){return active},
-            activeFalse : function(){active = false; 
+            activeFalse : function(){active = false;
                 return active},
-            activeTrue : function(){active = true; 
+            activeTrue : function(){active = true;
                 return active},
             setKeyTimer: function(func,time){
                 keyTimer = setTimeout(func,time);
@@ -334,11 +334,11 @@ window.onload = function(){
                 while (isBlock && count < 5) { // 막힐 때 부드러운 움직임
                     count += 2;
                     isBlock = this.moveSmooth(x,y,count);
-                } 
+                }
                 screenFocus();
                 goose.sensor(moveX,moveY); //거위센서 온
             },
-            moveSmooth : function(x,y,count){ // 방해물에 막혔을 때 
+            moveSmooth : function(x,y,count){ // 방해물에 막혔을 때
                 let dir = [];
                 if(x === 0){
                     dir.push(isEntryPossible(moveX + CHAR_WIDTH / 2 - CHAR_CROSS_PX * count,moveY +  CHAR_HEIGHT + y));
@@ -521,7 +521,7 @@ window.onload = function(){
                 animalElement.classList.add("click");
                 animalElement.addEventListener("click",function() {
                     that.gooseActive(animalElement.offsetLeft,animalElement.offsetTop);
-                },false);   
+                },false);
                 isEnd = true;
             },
             cheat: function(){
@@ -566,45 +566,47 @@ window.onload = function(){
         let eggs = [ // 알 정보들!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             {
                 id : 1,
-                title : "웹 표준, 접근성, 호환성 준수 새창에서 열기",
-                text : "Samsung E.M.",
-                url : "http://cotnmin.com/subpage/samsungE.html"
+                title : "뮤직카우 새 창에서 열기",
+                text : "뮤직카우",
+                url : "https://www.musicow.com"
             },
             {
                 id : 2,
-                title : "반응형 웹 마크업 &amp; 코딩 새창에서 열기",
-                text : "CJ One",
-                url : "http://cotnmin.com/subpage/cjone.html"
+                title : "Art Bloom 새 창에서 열기",
+                text : "Art Bloom",
+                url : "https://www.artbloom.co.kr"
             },
             {
                 id : 3,
-                title : "반응형 웹 디자인 새창에서 열기",
-                text : "Valve",
-                url : "http://cotnmin.com/subpage/valve.html"
+                title : "Vue Numeric Keypad 새 창에서 열기",
+                text : "Vue\nNumeric\nKeypad",
+                url : "https://www.npmjs.com/package/vue-numeric-keypad"
             },
             {
                 id : 4,
-                title : "웹앱 디자인 &amp; 코딩 새창에서 열기",
-                text : "Do-Bit",
-                url : "http://cotnmin.com/subpage/dobit.html"
+                title : "Advanced Ellipsis 새 창에서 열기",
+                text : "Advanced\nEllipsis",
+                url : "https://www.npmjs.com/package/advanced-ellipsis"
             },
             {
                 id : 5,
-                title : "React웹앱 코딩 새창에서 열기",
-                text : "KaKao",
-                url : "http://cotnmin.com/subpage/react.html"
-            }
+                title : "Othello 새 창에서 열기",
+                text : "Othello",
+                url : "https://chae-sumin.github.io/Othello"
+            },
         ]
         function plateGen($id){
-            let newEgg = document.createElement("a");
+            const newEgg = document.createElement("a");
             newEgg.classList.add("goldenEgg");
-            newEgg.classList.add("egg"+eggs[$id - 1].$id);
+            newEgg.classList.add("egg"+eggs[$id - 1].id);
             newEgg.classList.add("blink");
             newEgg.setAttribute("href",eggs[$id - 1].url);
             newEgg.setAttribute("target","_blank");
             newEgg.setAttribute("rel","noreferrer noopener");
             newEgg.setAttribute("title",eggs[$id - 1].title);
-            newEgg.textContent = eggs[$id - 1].text;
+            const newEggText = document.createElement("span");
+            newEggText.textContent = eggs[$id - 1].text;
+            newEgg.appendChild(newEggText);
             if(eggPlate.children[$id - 1].childElementCount === 0){
                 eggPlate.children[$id - 1].appendChild(newEgg);
             } else {newEgg.remove()}
@@ -624,7 +626,7 @@ window.onload = function(){
                     let show = setTimeout(function(){
                         plateGen(id);
                         clearTimeout(show);
-                    },1000); 
+                    },1000);
                     newEgg.classList.add("disapear");
                 });
                 EGGS.appendChild(newEgg);
@@ -638,7 +640,7 @@ window.onload = function(){
                         let show = setTimeout(function(){
                             plateGen(id);
                             clearTimeout(show);
-                        },1500); 
+                        },1500);
                         eggs[i].classList.add("disapear");
                         if(mention.getGet()){mention.mention3();}
                     }
@@ -755,7 +757,7 @@ window.onload = function(){
         },false);
     }
     function ending(){
-        endingSection.classList.add("on"); 
+        endingSection.classList.add("on");
             endingSection.getElementsByClassName("next")[0].addEventListener("click",function(){
             endingSection.setAttribute("class","ending on c");
         },false);
@@ -844,15 +846,15 @@ window.onload = function(){
             getGet :function(){return get;}
         }
     }
-    skillGraph();
-    function skillGraph(){
-        let timer = setTimeout(function(){
-            const status = document.querySelectorAll(".skill .status");
-            for(let i = 0; i < 6; i++){
-                let statW = status[i].textContent;
-                status[i].style.width = statW - 5 + "%";
-            }
-            clearTimeout(timer);
-        },4300);
-    }
+    // skillGraph();
+    // function skillGraph(){
+    //     let timer = setTimeout(function(){
+    //         const status = document.querySelectorAll(".skill .status");
+    //         for(let i = 0; i < 6; i++){
+    //             let statW = status[i].textContent;
+    //             status[i].style.width = statW - 5 + "%";
+    //         }
+    //         clearTimeout(timer);
+    //     },4300);
+    // }
 }

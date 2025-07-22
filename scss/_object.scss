@@ -67,13 +67,13 @@ $dir : (front, back, left, right);
 }
 
 #object{ // 기타 오브젝트
-    @include box(0,0); 
+    @include box(0,0);
     right: 0; bottom: 0;
     img{
         width: 100%; height: auto;
     }
     .home{ // 집
-        @include box(250px,-100px,800px,900px); 
+        @include box(250px,-100px,800px,900px);
         z-index: 300;
         background: url(../img/houseF.png) 50% 50% / cover no-repeat;
         .flower{
@@ -107,9 +107,9 @@ $dir : (front, back, left, right);
     }
     .crops{ // 작물들
         $cropsH : 150;
-        @include box(0,0,100%,100%); 
+        @include box(0,0,100%,100%);
         .carrot{
-            @include box(0,2080px,1000px,600px); 
+            @include box(0,2080px,1000px,600px);
             @for $i from 1 through 4{
                 li:nth-child(#{$i}){
                     background: url(../img/crops.png) 20px 0 repeat-x;
@@ -118,7 +118,7 @@ $dir : (front, back, left, right);
                     animation: cropsAni 5s step-start infinite;
                 }
             }
-            @keyframes cropsAni{ // 
+            @keyframes cropsAni{ //
                 $marginL : 20px;
                 0%{background-position-x: $marginL;}
                 25%{background-position-x: $marginL - 125px;}
@@ -128,7 +128,7 @@ $dir : (front, back, left, right);
             }
         }
         .corn{
-            @include box(0,2910px,1000px,600px); 
+            @include box(0,2910px,1000px,600px);
             @for $i from 1 through 4{
                 li:nth-child(#{$i}){
                     background: url(../img/crops.png) 20px -#{$cropsH}px repeat-x;
@@ -139,7 +139,7 @@ $dir : (front, back, left, right);
             }
         }
         .tomato{
-            @include box(0,3760px,1000px,600px); 
+            @include box(0,3760px,1000px,600px);
             @for $i from 1 through 4{
                 li:nth-child(#{$i}){
                     background: url(../img/crops.png) 20px -#{$cropsH * 2}px repeat-x;
@@ -328,7 +328,7 @@ $dir : (front, back, left, right);
         $treeZ : 300;
         $treeX : (-15 190 1690 2015 274 1570 1865 1570 2525 3529 4242 3567 3221 3571 3282 3549 3167 4273 3904 2060 2365 2615 2727 2969 3464 4579 3255 3082 3392 3797 4188 4458 3617 3935 4279 3879 3639 4543 3969 4327 3729 4144 4494);
         $treeY : (210 828 843 623 4341 2364 2794 3660 3500 3757 3931 -15 143 383 536 835 946 988 1043 1576 1840 1576 1976 1556 1216 1220 1496 2006 1910 1336 1496 1620 1686 1750 2000 2116 2260 2166 2457 2481 2740 2860 2844);
-        @include box(0,0,100%,100%); 
+        @include box(0,0,100%,100%);
         .tree{
             $fruit : (apple blueberry lemon orange peach);
             @include box(0,0,350px,480px);
@@ -373,7 +373,7 @@ $dir : (front, back, left, right);
         }
     }
     .bridges{ // 다리
-        @include box(0,0,100%,100%); 
+        @include box(0,0,100%,100%);
         .lake{
             @include box(2260px,4150px,1401px,844px);
             .bridge{
@@ -399,7 +399,7 @@ $dir : (front, back, left, right);
         }
     }
     .eggs{ // 필드에 있는 계란
-        @include box(0,0,100%,100%); 
+        @include box(0,0,100%,100%);
         .goldenEgg{
             @include box(0,0,48px,66px);
             display: block;
@@ -422,7 +422,7 @@ $dir : (front, back, left, right);
 }
 #controller{
     .eggPlate{ // 링크걸린 계란
-        @include box(0,0,100vw,100px); 
+        @include box(0,0,100vw,100px);
         display: flex;
         align-items: center;
         justify-content: space-evenly;
@@ -431,21 +431,21 @@ $dir : (front, back, left, right);
             position: relative;
             width: 20%;
             height: 99px;
-            &:not(:first-child) .goldenEgg{
-                line-height: 40px;
-            }
+            white-space: pre;
             .goldenEgg{
                 animation: eggAni 500ms 0s 1 forwards;
-                @include box(50%,0,72px,59px);
+                @include box(50%,0,72px,79px);
                 margin-left: -36px;
-                display: block;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 outline: none;
                 border: none;
                 background: url(../img/egg.png) 50% 0 no-repeat;
                 cursor: pointer;
                 border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
                 text-align: center;
-                padding-top: 40px;
+                padding-top: 20px;
                 font-weight: bold;
                 transition: box-shadow 300ms;
                 &:hover{

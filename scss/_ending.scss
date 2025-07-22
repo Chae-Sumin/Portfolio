@@ -24,7 +24,7 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
         &.contect{left: 100%; top: 0;}
         .close{
             cursor: pointer;
-            display: block; 
+            display: block;
             position: absolute;
             right: 3%;
             top: 3%;
@@ -63,7 +63,7 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
                 }
             }
         }
-        h3{ 
+        h3{
             position: relative;
             float: left;
             overflow: hidden;
@@ -128,49 +128,56 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
             float: left;
             width: 70%;
             height: 80%;
-            >ul{
-                width: 100%;
-                height: 80%;
-                >li{
-                    float: left;
-                    width: 50%;
-                    height: calc(100% / 3);
-                    h4{
-                        font-size: 24px;
-                        line-height: 50px;
-                    }
-                    .graph{
-                        display: block;
-                        position: relative;
-                        overflow: hidden;
-                        width: 80%;
-                        height: 20px;
-                        margin: 0 auto;
-                        border: 2px solid #000;
-                        background: #fff;
-                        font-size: 0;
-                        text-indent: -9999px;
-                        .status{
-                            display: block;
-                            position: absolute;
-                            width: 0%;
-                            height: 20px;
-                        }
-                    }
-                    @for $i from 1 through 6{
-                        &:nth-child(#{$i}){
-                            .status{
-                                background: nth($color,$i);
-                                box-shadow: 0 0 20px 20px nth($color,$i);
-                            }
-                        }
-                    }
-                }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            > a {
+                font-size: 24px;
+                text-decoration: underline;
             }
-            .else{
-                font-size: 20px;
-                word-spacing: 10px;
-            }
+            // >ul{
+            //     width: 100%;
+            //     height: 80%;
+            //     >li{
+            //         float: left;
+            //         width: 50%;
+            //         height: calc(100% / 3);
+            //         h4{
+            //             font-size: 24px;
+            //             line-height: 50px;
+            //         }
+            //         .graph{
+            //             display: block;
+            //             position: relative;
+            //             overflow: hidden;
+            //             width: 80%;
+            //             height: 20px;
+            //             margin: 0 auto;
+            //             border: 2px solid #000;
+            //             background: #fff;
+            //             font-size: 0;
+            //             text-indent: -9999px;
+            //             .status{
+            //                 display: block;
+            //                 position: absolute;
+            //                 width: 0%;
+            //                 height: 20px;
+            //             }
+            //         }
+            //         @for $i from 1 through 6{
+            //             &:nth-child(#{$i}){
+            //                 .status{
+            //                     background: nth($color,$i);
+            //                     box-shadow: 0 0 20px 20px nth($color,$i);
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            // .else{
+            //     font-size: 20px;
+            //     word-spacing: 10px;
+            // }
         }
         .next{
             cursor: pointer;
@@ -195,7 +202,7 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
             height: 40%;
             font-size: 30px;
         }
-    
+
         .emoji_list{
             position: absolute;
             left: 0;
@@ -217,7 +224,7 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
                     .emoji_face{animation: haha-face 2s linear infinite;}
                     .emoji_mouth{animation: haha-mouth 2s linear infinite;}
                 }
-                &.emoji_yay .emoji_face{animation: yay-face 1s linear infinite alternate;} 
+                &.emoji_yay .emoji_face{animation: yay-face 1s linear infinite alternate;}
                 &.emoji_wow{
                     .emoji_face{animation: wow-face 3s linear infinite;}
                     .emoji_eyebrows{animation: wow-brow 3s linear infinite;}
@@ -247,7 +254,7 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
             font-size: 50px;
         }
     }
-    
+
     &.on{
         opacity: 1;
         z-index: 9000;
@@ -262,7 +269,7 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
 }
 .emoji_list{
     .emoji{position: relative; display: inline-block; width: 120px; height: 120px; margin: 15px 15px 40px; border-radius: 50%; border: none; background: #ffda6a;}
-    .emoji:after{content: ""; position: absolute; bottom: -40px; left: calc(50% - 30px); width: 60px; font-size: 18px; color: #8a8a8a;}  
+    .emoji:after{content: ""; position: absolute; bottom: -40px; left: calc(50% - 30px); width: 60px; font-size: 18px; color: #8a8a8a;}
     /* 1. like */
     .emoji_like{background-color: #548dff;}
     .emoji_like:after{content: "Like";}
@@ -309,7 +316,7 @@ $color : (#EF6026 #25A1E1 #F7DF1E #4AD5FF #2C5CA8 #FF7F18);
         box-shadow: -25px 5px 0 0 #000, 25px -5px 0 0 #000; transform: rotate(20deg);}
     .emoji_haha .emoji_eyes:after{content: ""; position: absolute; left: 0; top: 0; width: 26px; height: 6px; border-radius: 2px;
         box-shadow: -25px -5px 0 0 #000, 25px 5px 0 0 #000; transform: rotate(-40deg);}
-    .emoji_haha .emoji_mouth{position: absolute; left: 50%; top: 50%; width: 80px; height: 40px; margin-left: -40px; background-color: #000; border-radius: 0 0 40px 40px; overflow: hidden;} 
+    .emoji_haha .emoji_mouth{position: absolute; left: 50%; top: 50%; width: 80px; height: 40px; margin-left: -40px; background-color: #000; border-radius: 0 0 40px 40px; overflow: hidden;}
     @keyframes haha-mouth {
         10%{transform: scale(0.6); top: 45%;}
         20%{transform: scale(0.8); top: 45%;}
